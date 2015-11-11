@@ -9,6 +9,64 @@ angular.module('myApp.user', ['ngRoute'])
         });
     }])
 
-    .controller('UserCtrl', [function() {
+    .controller('UserCtrl', ['$http', '$scope', function($http, $scope) {
+
+        $scope.user =  [
+            {
+                id: "sdhfu309",
+                name: "Max Mustermann",
+                gender: "MALE",
+                email: "Maxmustermann@tum.de",
+                tel: "012378495",
+                mobil: "0723843434",
+                notes: "Some notes",
+                role: "helper",
+                avalability: {
+                    mo: {morning: true, afternoon: false, evening: false},
+                    tu: {morning: true, afternoon: false, evening: false},
+                    we: {morning: true, afternoon: false, evening: false},
+                    th: {morning: true, afternoon: false, evening: false},
+                    fr: {morning: true, afternoon: false, evening: false},
+                    sa: {morning: true, afternoon: false, evening: false},
+                    su: {morning: true, afternoon: false, evening: true}
+                },
+                events:[]
+            },
+            {
+                id: "sdhddfu309",
+                    name: "Max Mustermann",
+                gender: "MALE",
+                    email: "Maxmustermann@tum.de",
+                tel: "012378495",
+                mobil: "0723843434",
+                notes: "Some notes",
+                role: "organisator",
+                avalability: {
+                    mo: {morning: true, afternoon: false, evening: false},
+                    tu: {morning: true, afternoon: false, evening: false},
+                    we: {morning: true, afternoon: false, evening: false},
+                    th: {morning: true, afternoon: false, evening: false},
+                    fr: {morning: true, afternoon: false, evening: false},
+                    sa: {morning: true, afternoon: false, evening: false},
+                    su: {morning: true, afternoon: false, evening: true}
+                },
+                events:[]
+            }
+        ];
+
+/*
+$http.get('/views/user/user.json', {}).then(function(data) {
+
+},function(){});
+/*
+$http.get('/views/user/user.json').success(function(user){
+    //console.log(JSON.stringify(user));
+    JSON.parse(user);
+});
+*/
+//        var User = $resource('/views/user/user.json',{});
+  //      var user = User.get().than(function(data){
+      //      console.log(JSON.stringify(user));
+    //    });
 
     }]);

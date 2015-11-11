@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.user', ['ngRoute'])
+angular.module('myApp.event', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/user', {

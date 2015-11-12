@@ -9,13 +9,13 @@
     "notes": "Some notes",
     "role": "helper",
     "avalability": {
-      "mo": {"morning": true, "afternoon": false: "evening": false},
-      "tu": {"morning": true, "afternoon": false: "evening": false},
-      "we": {"morning": true, "afternoon": false: "evening": false},
-      "th": {"morning": true, "afternoon": false: "evening": false},
-      "fr": {"morning": true, "afternoon": false: "evening": false},
-      "sa": {"morning": true, "afternoon": false: "evening": false},
-      "su": {"morning": true, "afternoon": false: "evening": true}
+      "mo": {"morning": true, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": false, "evening": false},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
     },
     "events":[]
   },
@@ -29,13 +29,13 @@
     "notes": "Some notes",
     "role": "organisator",
     "avalability": {
-      "mo": {"morning": true, "afternoon": false: "evening": false},
-      "tu": {"morning": true, "afternoon": false: "evening": false},
-      "we": {"morning": true, "afternoon": false: "evening": false},
-      "th": {"morning": true, "afternoon": false: "evening": false},
-      "fr": {"morning": true, "afternoon": false: "evening": false},
-      "sa": {"morning": true, "afternoon": false: "evening": false},
-      "su": {"morning": true, "afternoon": false: "evening": true}
+      "mo": {"morning": true, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": false, "evening": false},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
     },
     "events":[]
   }

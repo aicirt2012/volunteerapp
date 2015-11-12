@@ -9,7 +9,7 @@ angular.module('myApp.user', ['ngRoute'])
         });
     }])
 
-    .controller('UserCtrl', ['$http', '$scope', function($http, $scope) {
+    .controller('UserCtrl', ['$http', '$scope', '$resource', 'User', function($http, $scope, $resource, User) {
 
         $scope.selectedRole = 'HELPER';
         $scope.setSelectedRole = function(role){
@@ -32,6 +32,9 @@ angular.module('myApp.user', ['ngRoute'])
             console.log(JSON.stringify($scope.selectedUser));
         }
 
+        User.query(function(data){
+            console.log(JSON.stringify(data));
+        });
 
 
         $scope.user =  [
@@ -76,20 +79,8 @@ angular.module('myApp.user', ['ngRoute'])
                 events:[]
             }
         ];
+    }])
 
-/*
-$http.get('/views/user/user.json', {}).then(function(data) {
-
-},function(){});
-/*
-$http.get('/views/user/user.json').success(function(user){
-    //console.log(JSON.stringify(user));
-    JSON.parse(user);
-});
-*/
-//        var User = $resource('/views/user/user.json',{});
-  //      var user = User.get().than(function(data){
-      //      console.log(JSON.stringify(user));
-    //    });
-
-    }]);
+    .factory('User', function($resource) {
+        return $resource('/views/user/user.json',  {'get':  {method:'GET', isArray:true}});
+    });

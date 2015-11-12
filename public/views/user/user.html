@@ -1,25 +1,78 @@
 
 
 <div ng-click="setSelectedRole('HELPER')">Helfer</div>
-<div ng-click="setSelectedRole('HELPER')">Team</div>
-<div ng-click="setSelectedRole('HELPER')">Organisatoren</div>
+<div ng-click="setSelectedRole('TEAM')">Team</div>
+<div ng-click="setSelectedRole('ORGANIZER')">Organisatoren</div>
 <br/>
-<div ng-repeat="u in user | filter: isSelectedRole">{{u.name}}</div>
+<div ng-repeat="u in user | filter: isSelectedRole" ng-click="selectUser(u)">{{u.name}}</div>
 <div></div>
 
 <button ng-click="">Helfer Hinzufügen</button>
 <br/>
 <br/>
 <br/>
-<div>Persönliche Daten</div>
-<div>Verfügbarkeit</div>
-<div>Events</div>
+<div ng-click="tab='data'">Persönliche Daten</div>
+<div ng-click="tab='availability'">Verfügbarkeit</div>
+<div ng-click="tab='events'">Events</div>
 <br/>
-Name: <input type="text" placeholder="Vor- Nachname" ><br/>
-Email: <input type="text" placeholder="Email" ><br/>
-Tel: <input type="text" placeholder="+49 08783" ><br/>
-Mobil: <input type="text" placeholder="+49 08783" ><br/>
-Notiz: <textarea>
 
-</textarea><br/>
-<button>Speichern</button><button>Löschen</button>
+
+
+<div ng-if="tab=='data'">
+    Name: <input type="text" placeholder="Vor- Nachname" ><br/>
+    Email: <input type="text" placeholder="Email" ><br/>
+    Tel: <input type="text" placeholder="+49 08783" ><br/>
+    Mobil: <input type="text" placeholder="+49 08783" ><br/>
+    Notiz: <textarea></textarea><br/>
+    <button>Speichern</button><button>Löschen</button>
+</div>
+
+<div ng-if="tab=='availability'">
+    <table>
+        <tr>
+            <td></td>
+            <td>Montag</td>
+            <td>Dienstag</td>
+            <td>Mittwoch</td>
+            <td>Donnerstag</td>
+            <td>Freitag</td>
+            <td>Samstag</td>
+            <td>Sonntag</td>
+        </tr>
+        <tr>
+            <td>Vormittag</td>
+            <td><input type="checkbox" ng-model="m"/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+        </tr>
+        <tr>
+            <td>Nachmittag</td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+        </tr>
+        <tr>
+            <td>Abend</td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model=""/></td>
+        </tr>
+    </table>
+</div>
+
+<div ng-if="tab=='events'">
+
+</div>
+

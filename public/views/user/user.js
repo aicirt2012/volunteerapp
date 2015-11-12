@@ -11,6 +11,15 @@ angular.module('myApp.user', ['ngRoute'])
 
     .controller('UserCtrl', ['$http', '$scope', function($http, $scope) {
 
+        $scope.selectedRole = 'HELPER';
+        $scope.setSelectedRole = function(role){
+            $scope.selectedRole = role;
+        }
+
+        $scope.isSelectedRole = function(user){
+           return user.role == $scope.selectedRole;
+        }
+
         $scope.user =  [
             {
                 id: "sdhfu309",
@@ -20,7 +29,7 @@ angular.module('myApp.user', ['ngRoute'])
                 tel: "012378495",
                 mobil: "0723843434",
                 notes: "Some notes",
-                role: "helper",
+                role: "HELPER",
                 avalability: {
                     mo: {morning: true, afternoon: false, evening: false},
                     tu: {morning: true, afternoon: false, evening: false},
@@ -40,7 +49,7 @@ angular.module('myApp.user', ['ngRoute'])
                 tel: "012378495",
                 mobil: "0723843434",
                 notes: "Some notes",
-                role: "organisator",
+                role: "ORGA",
                 avalability: {
                     mo: {morning: true, afternoon: false, evening: false},
                     tu: {morning: true, afternoon: false, evening: false},

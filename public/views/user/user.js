@@ -24,7 +24,16 @@ angular.module('myApp.user', ['ngRoute'])
             $scope.selectedUser = user;
         }
 
-            $scope.m = true;
+        $scope.submitPersonalData = function(){
+
+        }
+
+        $scope.submitAvailability = function(){
+            console.log(JSON.stringify($scope.selectedUser));
+        }
+
+
+
         $scope.user =  [
             {
                 id: "sdhfu309",
@@ -35,7 +44,7 @@ angular.module('myApp.user', ['ngRoute'])
                 mobil: "0723843434",
                 notes: "Some notes",
                 role: "HELPER",
-                avalability: {
+                availability: {
                     mo: {morning: true, afternoon: false, evening: false},
                     tu: {morning: true, afternoon: false, evening: false},
                     we: {morning: true, afternoon: false, evening: false},
@@ -55,7 +64,7 @@ angular.module('myApp.user', ['ngRoute'])
                 mobil: "0723843434",
                 notes: "Some notes",
                 role: "ORGANIZER",
-                avalability: {
+                availability: {
                     mo: {morning: true, afternoon: false, evening: false},
                     tu: {morning: true, afternoon: false, evening: false},
                     we: {morning: true, afternoon: false, evening: false},

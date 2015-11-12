@@ -12,7 +12,8 @@ angular.module('myApp.login', ['ngRoute'])
     .controller('LoginCtrl', ['$scope', function($scope) {
 
         $scope.login = function(){
-            console.log('hallo');
+            console.log('login with: '+ $scope.email+" "+$scope.pw);
+
         };
 
     }]);

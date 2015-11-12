@@ -1,8 +1,8 @@
 
 
-<div ng-click="setSelectedRole('HELPER')">Helfer</div>
-<div ng-click="setSelectedRole('TEAM')">Team</div>
-<div ng-click="setSelectedRole('ORGANIZER')">Organisatoren</div>
+<span ng-click="setSelectedRole('HELPER')">Helfer</span>
+<span ng-click="setSelectedRole('TEAM')">Team</span>
+<span ng-click="setSelectedRole('ORGANIZER')">Organisatoren</span>
 <br/>
 <div ng-repeat="u in user | filter: isSelectedRole" ng-click="selectUser(u)">{{u.name}}</div>
 <div></div>
@@ -11,9 +11,9 @@
 <br/>
 <br/>
 <br/>
-<div ng-click="tab='data'">Persönliche Daten</div>
-<div ng-click="tab='availability'">Verfügbarkeit</div>
-<div ng-click="tab='events'">Events</div>
+<span ng-click="tab='data'">Persönliche Daten</span>
+<span ng-click="tab='availability'">Verfügbarkeit</span>
+<span ng-click="tab='events'">Events</span>
 <br/>
 
 
@@ -41,35 +41,36 @@
         </tr>
         <tr>
             <td>Vormittag</td>
-            <td><input type="checkbox" ng-model="m"/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.mo.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.tu.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.we.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.th.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.fr.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.sa.morning"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.su.morning"/></td>
         </tr>
         <tr>
             <td>Nachmittag</td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.mo.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.tu.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.we.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.th.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.fr.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.sa.afternoon"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.su.afternoon"/></td>
         </tr>
         <tr>
             <td>Abend</td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
-            <td><input type="checkbox" ng-model=""/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.mo.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.tu.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.we.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.th.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.fr.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.sa.evening"/></td>
+            <td><input type="checkbox" ng-model="selectedUser.availability.su.evening"/></td>
         </tr>
     </table>
+    <button ng-click="submitAvailability()">Änderungen übernehmen</button><button>Änderungen verwerfen</button>
 </div>
 
 <div ng-if="tab=='events'">

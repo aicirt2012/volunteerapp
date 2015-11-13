@@ -2,8 +2,9 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
+    'ngMaterial',
     'ngResource',
-  'ngRoute',
+    'ngRoute',
   'myApp.event',
   'myApp.login',
   'myApp.user',

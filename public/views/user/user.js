@@ -34,16 +34,69 @@ angular.module('myApp.user', ['ngRoute'])
         }
 
 
-        User.query(function(users){
-            console.log(JSON.stringify(users));
-            me.users = users;
-            me.users =    me.$apply;
+        var u = User.query(function(users){
+            me.users = u.$re
+            console.log(u);
+                        /*
+            me.users =  [
+                {
+                    id: "sdhfu309",
+                    name: "Max Mustermann",
+                    gender: "MALE",
+                    email: "Maxmustermann@tum.de",
+                    tel: "012378495",
+                    mobil: "0723843434",
+                    notes: "Some notes",
+                    role: "HELPER",
+                    availability: {
+                        mo: {morning: true, afternoon: false, evening: false},
+                        tu: {morning: true, afternoon: false, evening: false},
+                        we: {morning: true, afternoon: false, evening: false},
+                        th: {morning: true, afternoon: false, evening: false},
+                        fr: {morning: true, afternoon: false, evening: false},
+                        sa: {morning: true, afternoon: false, evening: false},
+                        su: {morning: true, afternoon: false, evening: true}
+                    },
+                    events:[]
+                },
+                {
+                    id: "sdhddfu309",
+                    name: "Max Mustermann",
+                    gender: "MALE",
+                    email: "Maxmustermann@tum.de",
+                    tel: "012378495",
+                    mobil: "0723843434",
+                    notes: "Some notes",
+                    role: "ORGANIZER",
+                    availability: {
+                        mo: {morning: true, afternoon: false, evening: false},
+                        tu: {morning: true, afternoon: false, evening: false},
+                        we: {morning: true, afternoon: false, evening: false},
+                        th: {morning: true, afternoon: false, evening: false},
+                        fr: {morning: true, afternoon: false, evening: false},
+                        sa: {morning: true, afternoon: false, evening: false},
+                        su: {morning: true, afternoon: false, evening: true}
+                    },
+                    events:[]
+                }
+            ];*/
         });
+
+
+
+
+        /*
+        var u = User.query().then(function(users){
+            console.log(users);
+        },function(r){
+
+        });
+*/
 
 
 
     }])
 
     .factory('User', function($resource) {
-        return $resource('/api/user/list',  {});
+        return $resource('/api/user/list');
     });

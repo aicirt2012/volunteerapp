@@ -32,6 +32,7 @@ angular.module('myApp.user', ['ngRoute'])
             console.log(JSON.stringify($scope.selectedUser));
         }
 
+        
         User.query(function(data){
             console.log(JSON.stringify(data));
         });

@@ -4,7 +4,8 @@
 <span ng-click="setSelectedRole('TEAM')">Team</span>
 <span ng-click="setSelectedRole('ORGANIZER')">Organisatoren</span>
 <br/>
-<div ng-repeat="u in user | filter: isSelectedRole" ng-click="selectUser(u)">{{u.name}}</div>
+
+<div ng-repeat="u in users | filter: isSelectedRole" ng-click="selectUser(u)">{{u.name}}</div>
 <div></div>
 
 <button ng-click="">Helfer Hinzufügen</button>

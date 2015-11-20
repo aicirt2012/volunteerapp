@@ -13,8 +13,35 @@
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
   <link rel="stylesheet" href="app.css">
 </head>
-<body>
-  <ul class="menu">
+<body ng-controller="">
+
+
+
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings">
+      <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+    </md-button>
+    <h2>
+      <span>Personen</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="Personen">
+      <ng-md-icon icon="account_circle" style="fill:white;" size="32"></ng-md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="Events">
+      <ng-md-icon icon="event" style="fill:white;" size="32"></ng-md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="More">
+      <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-subheader class="md-primary">Personal Verwaltung</md-subheader>
+
+
+
+<ul class="menu">
     <li><a href="#/event">Events</a></li>
     <li><a href="#/user">Personen</a></li>
     <li><a href="#/login">login</a></li>
@@ -43,7 +70,7 @@
 
   <!-- Angular Material Javascript now available via Google CDN; version 0.9.4 used here -->
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
 
   <script src="app.js"></script>
   <script src="/views/event/event.js"></script>

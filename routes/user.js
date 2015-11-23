@@ -7,13 +7,17 @@ router.get('/list', function(req, res, next) {
     res.json(JSON.parse(fs.readFileSync('routes/user.json')));
 });
 
+router.get('/me', function(req, res, next) {
+    console.log('me user');
+    res.send();
+});
+
 router.put('/', function(req, res, next) {
     console.log('update user');
     res.send();
 });
 
 router.get('/test2', function(req, res, next) {
-
     mailer.send({
         to: 'felix.michel@tum.de',
         subject: 'Hello ?',
@@ -26,8 +30,5 @@ router.get('/test2', function(req, res, next) {
     });
     res.send();
 });
-
-
-
 
 module.exports = router;

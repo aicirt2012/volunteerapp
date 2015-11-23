@@ -34,15 +34,9 @@ router.get('/test2', function(req, res, next) {
 
 
 router.get('/test3', function(req, res, next) {
-
-    console.log('hallo test3');
     request('http://www.google.com', function (error, response, body) {
-        console.log('hier');
-        console.log(error);
-        console.log(response);
-        console.log(body)
         if (!error && response.statusCode == 200) {
-            console.log(body) // Show the HTML for the Google homepage.
+            console.log(body)
         }
         res.send('end');
     })

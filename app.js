@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var authenticate = require('./server/routes/authenticate/authenticate');
 var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
+app.use('/api/authenticate', authenticate);
 app.use('/api',function (req, res, next) {
  /*
   var auth = req.headers['authorization'];

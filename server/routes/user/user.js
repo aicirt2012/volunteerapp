@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var mailer = require('../util/mailer');
+var mailer = require('../../util/mailer');
 
 router.get('/list', function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync('routes/user.json')));
+    res.json(JSON.parse(fs.readFileSync('routes/user.list.json')));
 });
 
 router.get('/me', function(req, res, next) {

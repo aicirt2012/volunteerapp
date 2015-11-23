@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var user = require('./server/routes/user/user.js');
+var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
 
 var app = express();
@@ -19,14 +19,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/api',function (req, res, next) {
+ /*
   var auth = req.headers['authorization'];
   var token = null;
   if (auth)
     token = auth.split(" ")[1];
   if (token) {
    // request sc to verify user; home,
+    next();
   } else
     return res.status(403).send();
+    */
+  next();
 });
 
 app.use('/api/user', user);

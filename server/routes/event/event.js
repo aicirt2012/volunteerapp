@@ -3,7 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 
 router.get('/list', function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync('routes/event.list.json')));
+    res.json(JSON.parse(fs.readFileSync('server/routes/event/event.list.json')));
 });
 
 router.put('/', function(req, res, next) {

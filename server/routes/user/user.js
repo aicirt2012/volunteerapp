@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
+var request = require('request');
 
 router.get('/list', function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync('routes/user.list.json')));
+    res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
 });
 
 router.get('/me', function(req, res, next) {
@@ -29,6 +30,22 @@ router.get('/test2', function(req, res, next) {
         console.log('Message sent: ' + info.response);
     });
     res.send();
+});
+
+
+router.get('/test3', function(req, res, next) {
+
+    console.log('hallo test3');
+    request('http://www.google.com', function (error, response, body) {
+        console.log('hier');
+        console.log(error);
+        console.log(response);
+        console.log(body)
+        if (!error && response.statusCode == 200) {
+            console.log(body) // Show the HTML for the Google homepage.
+        }
+        res.send('end');
+    })
 });
 
 module.exports = router;

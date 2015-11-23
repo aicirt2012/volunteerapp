@@ -17,6 +17,11 @@ router.post('/', function(req, res, next) {
     res.send();
 });
 
+router.post('/:id/register', function(req, res, next) {
+    console.log('register for event');
+    res.send();
+});
+
 
 
 

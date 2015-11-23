@@ -34,11 +34,14 @@ router.get('/test2', function(req, res, next) {
 
 
 router.get('/test3', function(req, res, next) {
-    request('http://www.google.com', function (error, response, body) {
+    request('http://localhost:3000/api/user/list', function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body)
+            console.log(body);
+            res.send(body);
+        }else{
+            res.send('err');
         }
-        res.send('end');
+
     })
 });
 

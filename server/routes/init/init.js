@@ -10,8 +10,6 @@ router.get('/', function(req, res, next) {
         if (!error && response.statusCode == 200) {
             res.send(JSON.parse(body));
         }else{
-            console.log(error);
-            console.log(response.statusCode, response.statusMessage);
             res.send('err');
         }
     });

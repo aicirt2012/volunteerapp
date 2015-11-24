@@ -38,9 +38,9 @@ router.put('/', function(req, res, next) {
 router.get('/test2', function(req, res, next) {
     mailer.send({
         to: 'felix.michel@tum.de',
-        subject: 'Hello ?',
-        text: 'Hello world ?',
-        html: '<b>Hello world ?</b>'
+        subject: 'Hello ✔',
+        text: 'Hello world ✔',
+        html: '<b>Hello world ✔</b>'
     },function(error, info){
         if(error)
             return console.log(error);

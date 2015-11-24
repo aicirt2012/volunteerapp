@@ -7,9 +7,17 @@ var http = require('../../util/http');
 
 /** list all users */
 router.get('/list', function(req, res, next) {
-    http.get('/users', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.json(JSON.parse(body));
+    http.get('/users', function (err, response) {
+        if (!err) {
+            var list = [];
+            response.body.forEach(function(u){
+                list.push({
+                    id: u.id,
+                    name: u.name,
+                    email: u.email
+                });
+            });
+            res.json(list);
         }else{
             res.json('err');
         }
@@ -21,7 +29,7 @@ router.get('/list', function(req, res, next) {
 router.get('/me', function(req, res, next) {
     http.get('/users/me', function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            res.send(JSON.parse(response.body));
+            res.send(JSON.parse(body));
         }else{
             res.send('err');
         }

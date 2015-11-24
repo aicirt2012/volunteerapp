@@ -14,7 +14,7 @@ module.exports = {
             if (!err && res.statusCode == 200) {
                 res.body = JSON.parse(body);
                 cb(false, res);
-            }else {
+            }else{
                 cb(true, res);
             }
         });

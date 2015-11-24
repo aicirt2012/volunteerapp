@@ -27,23 +27,38 @@ router.get('/list', function(req, res, next) {
 
 /** returns session user */
 router.get('/me', function(req, res, next) {
-    http.get('/users/me', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.send(JSON.parse(body));
+    http.get('/users/me', function (err, response) {
+        if (!err) {
+            var u = response.body;
+            res.json({
+                id: u.id,
+                name: u.name,
+                email: u.email
+            });
         }else{
-            res.send('err');
+            res.json('err');
         }
     });
 });
 
+/** create new user*/
+router.post('/', function(req, res, next) {
+
+});
+
 /** update user */
-router.put('/', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     console.log('update user');
     res.send();
 });
 
+/** reset userpw */
+router.put('/resetpw', function(req, res, next) {
+    console.log('update user');
+    res.send();
+});
 
-router.get('/test2', function(req, res, next) {
+router.get('/sendmailtest', function(req, res, next) {
     mailer.send({
         to: 'felix.michel@tum.de',
         subject: 'Hello ✔',
@@ -55,20 +70,6 @@ router.get('/test2', function(req, res, next) {
         console.log('Message sent: ' + info.response);
     });
     res.send();
-});
-
-
-
-/** create new user*/
-router.get('/test4', function(req, res, next) {
-    http.get('/users', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.send(JSON.parse(body));
-        }else{
-            res.send('err');
-        }
-    });
-
 });
 
 module.exports = router;

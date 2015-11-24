@@ -4,7 +4,6 @@ var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 
-var config = require('../../../config')
 
 /** list all users */
 router.get('/list', function(req, res, next) {
@@ -13,8 +12,13 @@ router.get('/list', function(req, res, next) {
 
 /** returns session user */
 router.get('/me', function(req, res, next) {
-    console.log('me user');
-    res.send();
+    http.get('/users/me', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.send(JSON.parse(body));
+        }else{
+            res.send('err');
+        }
+    });
 });
 
 /** update user */
@@ -39,25 +43,11 @@ router.get('/test2', function(req, res, next) {
 });
 
 
-router.get('/test3', function(req, res, next) {
-
-    request(config.apiurl+'/users', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            console.log(body);
-            res.send(JSON.parse(body));
-        }else{
-            res.send('err');
-        }
-    });
-});
 
 /** create new user*/
 router.get('/test4', function(req, res, next) {
-
     http.get('/users', function (error, response, body) {
-        console.log(error);
         if (!error && response.statusCode == 200) {
-            console.log(body);
             res.send(JSON.parse(body));
         }else{
             res.send('err');

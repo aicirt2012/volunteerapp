@@ -1,5 +1,6 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
+var config = require('../../config');
 
 
 module.exports = {
@@ -10,8 +11,8 @@ module.exports = {
             service: 'Gmail',
             debug: true,
             auth: {
-                user: 'muc.refugees',
-                pass: 'FD37hZJL8z3eyBUbBcho'
+                user: config.email.user,
+                pass: config.email.pass
             }
         });
 

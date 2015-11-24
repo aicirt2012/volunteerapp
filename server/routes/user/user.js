@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
-var request = require('request');
+var http = require('../../util/http');
+
 var config = require('../../../config')
 
 /** list all users */
@@ -53,17 +54,7 @@ router.get('/test3', function(req, res, next) {
 /** create new user*/
 router.get('/test4', function(req, res, next) {
 
-
-    var auth = new Buffer(config.sc.user + ':' + config.sc.pass).toString('base64');
-    var req = {
-        url: 'http://vmmatthes21.informatik.tu-muenchen.de/api/0.1/users',
-        headers: {
-            'Authorization': 'Basic ' + auth,
-            'Content-Type': 'application/json'
-        }
-    };
-     console.log('request prepared', JSON.stringify(req));
-    request(req, function (error, response, body) {
+    http.get('/users', function (error, response, body) {
         console.log(error);
         if (!error && response.statusCode == 200) {
             console.log(body);

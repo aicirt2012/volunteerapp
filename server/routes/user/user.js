@@ -14,7 +14,7 @@ router.get('/list', function(req, res, next) {
 router.get('/me', function(req, res, next) {
     http.get('/users/me', function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            res.send(JSON.parse(body));
+            res.send(JSON.parse(response.body));
         }else{
             res.send('err');
         }

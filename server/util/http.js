@@ -13,7 +13,13 @@ module.exports = {
         request.get({url: config.sc.url + path, headers: headers}, cb);
     },
     post: function(path, cb){
-        request.post({url: config.sc.url + path, headers: headers}, cb);
+        request.post({
+            url: config.sc.url + path,
+            headers: headers,
+            json: {
+                name: "testworkspace"
+            }
+        }, cb);
     }
 };
 

@@ -7,7 +7,14 @@ var http = require('../../util/http');
 
 /** list all users */
 router.get('/list', function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
+    http.get('/users', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.json(JSON.parse(body));
+        }else{
+            res.json('err');
+        }
+    });
+    //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
 });
 
 /** returns session user */

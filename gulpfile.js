@@ -1,6 +1,5 @@
 
 var gulp = require('gulp'),
-    webserver = require('gulp-webserver'),
     mainBowerFiles = require('main-bower-files'),
     gulpFilter   = require('gulp-filter'),
     del = require('del'),
@@ -91,7 +90,7 @@ gulp.task('inject', ['bower'], function() {
 gulp.task('build', ['inject', 'angular']);
 
 
-// configure which files to watch and what tasks to use on file changes
+
 gulp.task('watch', function() {
     gulp.watch('./bower_components/**/*.*', ['inject']);
     // gulp.watch('./src/components/**/*.*', ['build']);

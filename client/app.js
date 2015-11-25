@@ -2,16 +2,13 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-    /*
     'ngMaterial',
-    'ngMdIcons',*/
+    'ngMdIcons',
     'ngResource',
     'ngRoute',
   'myApp.event',
   'myApp.login',
-  'myApp.user',
-  'myApp.version',
-    'myApp.index'
+  'myApp.user'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/login'});

@@ -1,90 +1,153 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="StarterApp">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Refugee App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
-  <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body ng-controller="">
-
-
-
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Settings">
-      <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+<body layout="row" ng-controller="AppCtrl">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-tall md-hue-2">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+            <user-avatar></user-avatar>
+            <span></span>
+            <div>Firstname Lastname</div>
+            <div>email@domainname.com</div>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-item ng-repeat="item in menu">
+            <a>
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{item.title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+        <md-divider></md-divider>
+        <md-subheader>Management</md-subheader>
+        <md-item ng-repeat="item in admin">
+            <a>
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{item.title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+    </md-list>
+</md-sidenav>
+<div layout="column" class="relative" layout-fill role="main">
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
     </md-button>
-    <h2>
-      <span>Personen</span>
-    </h2>
-    <span flex></span>
-    <md-button class="md-icon-button" aria-label="Personen">
-      <ng-md-icon icon="account_circle" style="fill:white;" size="32"></ng-md-icon>
-    </md-button>
-    <md-button class="md-icon-button" aria-label="Events">
-      <ng-md-icon icon="event" style="fill:white;" size="32"></ng-md-icon>
-    </md-button>
-    <md-button class="md-icon-button" aria-label="More">
-      <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-    </md-button>
-  </div>
-</md-toolbar>
-<md-subheader class="md-primary">Personal Verwaltung</md-subheader>
+    <ng-include src="'shared/toolbar/toolbar.html'"></ng-include>
+    <md-content flex md-scroll-y>
+        <ui-view layout="column" layout-fill layout-padding>
+            <div class="inset" hide-sm></div>
+            <ng-switch on="data.selectedIndex" class="tabpanel-container">
+                <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+                    <md-tab id="tab1" aria-controls="tab1-content">
+                        Latest
+                    </md-tab>
+                    <md-tab id="tab2" aria-controls="tab2-content">
+                        Favorites
+                    </md-tab>
+                </md-tabs>
+                <div role="tabpanel"
+                     id="tab1-content"
+                     aria-labelledby="tab1"
+                     ng-switch-when="0"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+                    <md-card flex-gt-sm="90" flex-gt-md="80">
 
+                        <md-card-content>
 
+                            <h2>Activity</h2>
+                            <md-list>
+                                <md-item ng-repeat="item in activity | filter:search">
+                                    <md-item-content>
+                                        <div class="md-tile-left inset" hide-sm>
+                                            <user-avatar></user-avatar>
+                                        </div>
+                                        <div class="md-tile-content">
+                                            <h3>{{item.what}}</h3>
+                                            <h4>{{item.who}}</h4>
+                                            <p>
+                                                {{item.notes}}
+                                            </p>
+                                        </div>
+                                    </md-item-content>
+                                    <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
+                                    <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                                </md-item>
+                                <md-divider></md-divider>
+                                <md-item layout class="inset">
+                                    <md-button layout layout-align="start center" flex class="md-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
+                                    </md-button>
+                                </md-item>
+                            </md-list>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div role="tabpanel"
+                     id="tab2-content"
+                     aria-labelledby="tab2"
+                     ng-switch-when="1"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+                    <md-card flex-gt-sm="90" flex-gt-md="80">
+                        <md-card-content>
+                            <h2>Favorites</h2>
+                            <md-list>
+                                <md-item ng-repeat="item in activity | filter:search | orderBy:'-what'">
+                                    <md-item-content>
+                                        <div class="md-tile-left inset" hide-sm>
+                                            <user-avatar></user-avatar>
+                                        </div>
+                                        <div class="md-tile-content">
+                                            <h3>{{item.what}}</h3>
+                                            <h4>{{item.who}}</h4>
+                                            <p>
+                                                {{item.notes}}
+                                            </p>
+                                        </div>
+                                    </md-item-content>
+                                    <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
+                                    <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                                </md-item>
+                                <md-divider></md-divider>
+                                <md-item layout class="inset">
+                                    <md-button layout layout-align="start center" flex class="md-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
+                                    </md-button>
+                                </md-item>
+                            </md-list>
+                        </md-card-content>
+                    </md-card>
+                </div>
 
-<ul class="menu">
-    <li><a href="#/event">Events</a></li>
-    <li><a href="#/user">Personen</a></li>
-    <li><a href="#/login">login</a></li>
-    <li><a href="#/settings">Settings</a></li>
-  </ul>
+            </ng-switch>
 
-  <div ng-view></div>
+        </ui-view>
+    </md-content>
+</div>
+<!-- Angular Material Dependencies -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-aria.min.js"></script>
 
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
 
-
-<!-- <script src="/lib/angular.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
-
- <script src="/node_modules/angular/angular.js"></script>
- <script src="/node_modules/angular-aria/angular-aria.js"></script>
- <script src="/node_modules/angular-animate/angular-animate.js"></script>
- <script src="/node_modules/angular-material/angular-material.js"></script>-->
-
-  <!-- Angular Material Dependencies -->
- <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>-->
- <!-- <script src="/lib/angular-route.min.js"></script>
-  <script src="/lib/angular-resource.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>-->
-
-  <!-- Angular Material Javascript now available via Google CDN; version 0.9.4 used here
-  <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
-  <script src="angular-material.min.js"></script>-->
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
-<script src="/lib/angular-resource.min.js"></script>
-
-  <script src="app.js"></script>
-  <script src="/views/event/event.js"></script>
-  <script src="/views/login/login.js"></script>
-  <script src="/views/user/user.js"></script>
+<script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>

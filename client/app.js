@@ -8,23 +8,27 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
         {
             link : '',
             title: 'Events',
-            icon: 'dashboard'
+            icon: 'event'
         },
         {
-            link : '',
-            title: 'Persoenen',
+            link : 'openView("user")',
+            title: 'Personalverwaltung',
             icon: 'group'
+        },
+        {
+            link : 'openView("user")',
+            title: 'Einrichtung',
+            icon: 'home'
         }
     ];
+    $scope.openView = function(url){
+        console.log('open view');
+        window.location.href = '#/'+url;
+    };
     $scope.admin = [
         {
-            link : '',
-            title: 'Trash',
-            icon: 'delete'
-        },
-        {
             link : 'showListBottomSheet($event)',
-            title: 'Settings',
+            title: 'Meine Daten',
             icon: 'settings'
         }
     ];
@@ -119,19 +123,4 @@ app.directive('userAvatar', function() {
     };
 });
 
-app.config(function($mdThemingProvider) {
-    var customBlueMap = 		$mdThemingProvider.extendPalette('light-blue', {
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': ['50'],
-        '50': 'ffffff'
-    });
-    $mdThemingProvider.definePalette('customBlue', customBlueMap);
-    $mdThemingProvider.theme('default')
-        .primaryPalette('customBlue', {
-            'default': '500',
-            'hue-1': '50'
-        })
-        .accentPalette('pink');
-    $mdThemingProvider.theme('input', 'default')
-        .primaryPalette('grey')
-});
+

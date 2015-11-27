@@ -1,0 +1,103 @@
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+    <ng-md-icon icon="add"></ng-md-icon>
+</md-button>
+<toolbar title="Personalverwaltung"></toolbar>
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="inset" hide-sm></div>
+        <md-card flex-gt-sm="90" flex-gt-md="80">
+
+
+            <ng-switch on="data.selectedIndex" class="tabpanel-container">
+                <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+                    <md-tab id="tab1" aria-controls="tab1-content">
+                        Helfer
+                    </md-tab>
+                    <md-tab id="tab2" aria-controls="tab2-content">
+                        Team
+                    </md-tab>
+                    <md-tab id="tab2" aria-controls="tab2-content">
+                        Organisatoren
+                    </md-tab>
+                </md-tabs>
+                <md-card-content>
+                    <div role="tabpanel"
+                         id="tab1-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <md-list>
+                            <md-item ng-repeat="item in activity | filter:search">
+                                <md-item-content>
+                                    <div class="md-tile-left inset" hide-sm>
+                                        <user-avatar></user-avatar>
+                                    </div>
+                                    <div class="md-tile-content">
+                                        <h3>{{item.what}}</h3>
+                                        <h4>{{item.who}}</h4>
+                                        <p>
+                                            {{item.notes}}
+                                        </p>
+                                    </div>
+                                </md-item-content>
+                                <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
+                                <md-divider hide-gt-sm ng-if="!$last"></md-divider>
+                            </md-item>
+                        </md-list>
+                    </div>
+                </md-card-content>
+            </ng-switch>
+        </md-card>
+
+
+
+        <md-card flex-gt-sm="90" flex-gt-md="80">
+            <md-card-content>
+
+                    <form name="userForm">
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Company </label>
+                                <input ng-model="user.company">
+                            </md-input-container>
+                            <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date"></md-datepicker>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>First name</label>
+                                <input ng-model="user.firstName">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Last Name</label>
+                                <input ng-model="theMax">
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Address</label>
+                            <input ng-model="user.address">
+                        </md-input-container>
+
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>City</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>State</label>
+                                <md-select ng-model="user.state">
+                                    <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                        {{state.abbrev}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                        </div>
+
+                    </form>
+            </md-card-content>
+        </md-card>
+
+    </ui-view>
+</md-content>

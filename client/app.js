@@ -1,25 +1,19 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons']);
+var app = angular.module('RefugeeApp', ['ngMaterial', 'ngMdIcons', 'ngRoute']);
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog){
     $scope.toggleSidenav = function(menuId) {
-        console.log('hallo');
         $mdSidenav(menuId).toggle();
     };
     $scope.menu = [
         {
             link : '',
-            title: 'Dashboard',
+            title: 'Events',
             icon: 'dashboard'
         },
         {
             link : '',
-            title: 'Friends',
+            title: 'Persoenen',
             icon: 'group'
-        },
-        {
-            link : '',
-            title: 'Messages',
-            icon: 'message'
         }
     ];
     $scope.admin = [

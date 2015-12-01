@@ -2,21 +2,24 @@
     <ng-md-icon icon="add"></ng-md-icon>
 </md-button>
 <toolbar title="Personalverwaltung"></toolbar>
+
 <md-content flex md-scroll-y>
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
         <md-card flex-gt-sm="90" flex-gt-md="80">
 
 
+
             <ng-switch on="data.selectedIndex" class="tabpanel-container">
+                <!--ng-click="selectRole('helper')"-->{{data.selectedIndex}}
                 <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-                    <md-tab id="tab1" aria-controls="tab1-content">
+                    <md-tab id="tab1" aria-controls="tab1-content" ng-click="selectRole('helper')">
                         Helfer
                     </md-tab>
-                    <md-tab id="tab2" aria-controls="tab2-content">
+                    <md-tab id="tab2" aria-controls="tab2-content" ng-click="selectRole('team')">
                         Team
                     </md-tab>
-                    <md-tab id="tab2" aria-controls="tab2-content">
+                    <md-tab id="tab2" aria-controls="tab2-content" ng-click="selectRole('organisator')">
                         Organisatoren
                     </md-tab>
                 </md-tabs>
@@ -96,6 +99,7 @@
                         </div>
 
                     </form>
+
             </md-card-content>
         </md-card>
 

@@ -6,23 +6,22 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
     };
     $scope.menu = [
         {
-            link : '',
+            link : 'event',
             title: 'Events',
             icon: 'event'
         },
         {
-            link : 'openView("user")',
+            link : 'user',
             title: 'Personalverwaltung',
             icon: 'group'
         },
         {
-            link : 'openView("user")',
+            link : 'organisatzion',
             title: 'Einrichtung',
             icon: 'home'
         }
     ];
     $scope.openView = function(url){
-        console.log('open view');
         window.location.href = '#/'+url;
     };
     $scope.admin = [

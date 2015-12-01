@@ -15,7 +15,7 @@
         </div>
     </md-toolbar>
     <md-list>
-        <md-item ng-repeat="item in menu">
+        <md-item ng-repeat="item in menu" ng-click="openView(item.link)">
             <a>
                 <md-item-content md-ink-ripple layout="row" layout-align="start center">
                     <div class="inset">
@@ -157,6 +157,7 @@
 <script src="/app.js"></script>
 <script src="/config.js"></script>
 <script src="/shared/toolbar/toolbar.directive.js"></script>
+<script src="/views/user/user.js"></script>
 
 </body>
 </html>

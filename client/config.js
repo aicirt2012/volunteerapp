@@ -5,9 +5,10 @@ app.config(['$routeProvider', function($routeProvider) {
                 templateUrl: 'views/event/event.html'
                 //controller: 'EventCtrl'
             })
-            .when('/user', {
-                templateUrl: 'views/user/user.html'
-                //controller: 'EventCtrl'
+            .when('/user/', {redirectTo: '/user/helper'})
+            .when('/user/:role', {
+                templateUrl: 'views/user/user.html',
+                controller: 'UserCtrl'
             })
             .otherwise({
                 redirectTo: '/login'

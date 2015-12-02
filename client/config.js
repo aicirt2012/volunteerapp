@@ -2,8 +2,8 @@ app.config(['$routeProvider', function($routeProvider) {
 
         $routeProvider
             .when('/event', {
-                templateUrl: 'views/event/event.html'
-                //controller: 'EventCtrl'
+                templateUrl: 'views/event/event.html',
+                controller: 'EventCtrl'
             })
             .when('/user/', {redirectTo: '/user/helper'})
             .when('/user/:role', {

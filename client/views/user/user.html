@@ -1,17 +1,14 @@
 <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
     <ng-md-icon icon="add"></ng-md-icon>
 </md-button>
-<toolbar title="Personalverwaltung"></toolbar>
+<toolbar title="Personalverwaltung > {{selectedRole}}"></toolbar>
 
 <md-content flex md-scroll-y>
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
-        <md-card flex-gt-sm="90" flex-gt-md="80">
 
-
-
+        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'listview'">
             <ng-switch on="selectedRoleTab" class="tabpanel-container">
-
                 <md-tabs md-stretch-tabs class="md-primary" md-selected="selectedRoleTab">
                     <md-tab id="tab1" aria-controls="tab1-content">
                         Helfer
@@ -32,7 +29,22 @@
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
                         <md-list>
-                            <md-item ng-repeat="item in activity | filter:search">
+                            <md-list-item ng-repeat="item in activity" ng-click="alert('hllo');">
+                                <md-item-content>
+                                    <div class="md-tile-left inset" hide-sm>
+                                        <user-avatar></user-avatar>
+                                    </div>
+                                    <div class="md-tile-content">
+                                        <h3>{{item.what}}</h3>
+                                        <h4>{{item.who}}</h4>
+                                        <p>
+                                            {{item.notes}}
+                                        </p>
+                                    </div>
+                                </md-item-content>
+                            </md-list-item>
+                            <!--
+                            <md-item ng-repeat="item in activity | filter:search" ng-click="userview = detailview">
                                 <md-item-content>
                                     <div class="md-tile-left inset" hide-sm>
                                         <user-avatar></user-avatar>
@@ -47,7 +59,7 @@
                                 </md-item-content>
                                 <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
                                 <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                            </md-item>
+                            </md-item>-->
                         </md-list>
                     </div>
                 </md-card-content>
@@ -56,9 +68,12 @@
 
 
 
-        <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
             <md-card-content>
-
+                <md-input-container flex>
+                    <label>First name</label>
+                    <input ng-model="user.firstName">
+                </md-input-container>
                     <form name="userForm">
                         <div layout layout-sm="column">
                             <md-input-container flex>

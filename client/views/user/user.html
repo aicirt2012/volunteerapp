@@ -70,34 +70,71 @@
 
         <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
             <md-card-content>
-                <md-input-container flex>
-                    <label>First name</label>
-                    <input ng-model="user.firstName">
-                </md-input-container>
+
                     <form name="userForm">
                         <div layout layout-sm="column">
                             <md-input-container flex>
-                                <label>Company </label>
-                                <input ng-model="user.company">
+                                <label>Anrede</label>
+                                <md-select ng-model="user.state">
+                                    <md-option ng-repeat="g in gender" value="{{g.id}}">
+                                        {{g.label}}
+                                    </md-option>
+                                </md-select>
                             </md-input-container>
-                            <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date"></md-datepicker>
+                            <md-input-container flex>
+                                <label>Name</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
                         </div>
                         <div layout layout-sm="column">
                             <md-input-container flex>
-                                <label>First name</label>
-                                <input ng-model="user.firstName">
+                                <label>Email</label>
+                                <input ng-model="user.city">
                             </md-input-container>
-                            <md-input-container flex>
-                                <label>Last Name</label>
-                                <input ng-model="theMax">
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
-                        <md-input-container class="md-block">
-                            <label>Address</label>
-                            <input ng-model="user.address">
-                        </md-input-container>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Tel</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Mobil</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+
+
+
+<!--
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Name</label>
+                                <input ng-model="name">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Name</label>
+                                <input ng-model="name">
+                            </md-input-container>
+
+                        </div>
 
                         <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>City</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
                             <md-input-container flex>
                                 <label>City</label>
                                 <input ng-model="user.city">
@@ -112,7 +149,7 @@
                             </md-input-container>
 
                         </div>
-
+-->
                     </form>
 
             </md-card-content>

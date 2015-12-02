@@ -6,6 +6,8 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', function($http, $sco
     me.selectedRoleTab = 1;
     me.userview = 'listview';
 
+    me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
+
 
     me.$watch('selectedRoleTab', function(newValue, oldValue) {
         switch (newValue){

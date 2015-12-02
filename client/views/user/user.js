@@ -17,6 +17,10 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', function($http, $sco
       // $location.path("/user/org", false);
     });
 
+    me.hello = function(){
+        me.userview = 'detailview';
+    }
+
 
 
 

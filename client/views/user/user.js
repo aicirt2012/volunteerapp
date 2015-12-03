@@ -28,17 +28,22 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', functio
 
 
     me.load = function(){
-        console.log('load');
-        var User = $resource('/user/:userId', {userId:'@id'});
+/*
+        var User = $resource('api/user/:userId', {userId:'@id'});
         var user = User.get({userId:123}, function() {
-            console.log('loaded');
             user.abc = true;
+        });
+*/
+
+        var User = $resource('api/user/list');
+        var user = User.query(function() {
+            console.log('loaded');
+            console.log(JSON.stringify(user));
         });
     }
 
     me.load();
 
 
-
-
 }]);
+

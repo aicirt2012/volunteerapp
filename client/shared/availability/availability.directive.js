@@ -1,7 +1,7 @@
 app.directive('availability', function() {
     return {
         scope: {
-            title: '@'
+            data: '='
         },
         replace: true,
         templateUrl: '/shared/availability/availability.html'

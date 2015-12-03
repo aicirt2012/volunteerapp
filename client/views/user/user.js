@@ -3,7 +3,6 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserLi
 
     var me = $scope;
     me.userlist = UserList.query(function() {
-        console.log('loaded');
         console.log(JSON.stringify(me.userlist));
     });
 

@@ -50,6 +50,109 @@
         </md-card>
 
 
+        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
+            <ng-switch on="selectedRoleTab" class="tabpanel-container">
+                <md-tabs md-stretch-tabs class="md-primary" md-selected="selectedRoleTab">
+                    <md-tab id="tab1" aria-controls="tab1-content">
+                        Persönliche Daten
+                    </md-tab>
+                    <md-tab id="tab2" aria-controls="tab2-content">
+                        Verfügbarkeit
+                    </md-tab>
+                    <md-tab id="tab3" aria-controls="tab3-content">
+                        Events
+                    </md-tab>
+                </md-tabs>
+                <md-card-content>
+                    <div role="tabpanel"
+                         id="tab1-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <form name="userForm">
+                            <div layout layout-sm="column">
+                                <md-input-container flex>
+                                    <label>Anrede</label>
+                                    <md-select ng-model="user.state">
+                                        <md-option ng-repeat="g in gender" value="{{g.id}}">
+                                            {{g.label}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Name</label>
+                                    <input ng-model="user.city">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>&nbsp;</label>
+                                    <md-select ng-model="unknown"/>
+                                </md-input-container>
+                            </div>
+                            <div layout layout-sm="column">
+                                <md-input-container flex>
+                                    <label>Email</label>
+                                    <input ng-model="user.city">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>&nbsp;</label>
+                                    <md-select ng-model="unknown"/>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-sm="column">
+                                <md-input-container flex>
+                                    <label>Tel</label>
+                                    <input ng-model="user.city">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Mobil</label>
+                                    <input ng-model="user.city">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>&nbsp;</label>
+                                    <md-select ng-model="unknown"/>
+                                </md-input-container>
+                            </div>
+                            <div layout layout-sm="column">
+                                <md-input-container flex>
+                                    <label>Notizen</label>
+                                    <textarea ng-model="user.city" columns="3" md-maxlength="150" rows="5"></textarea>
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>&nbsp;</label>
+                                    <md-select ng-model="unknown"/>
+                                </md-input-container>
+                            </div>
+                            <br/><br/>
+                            <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                                <md-button class="md-raised">Abbrechen</md-button>&nbsp;
+                                <md-button class="md-raised md-primary">Speichern</md-button>
+                            </section>
+                        </form>
+                    </div>
+                    <div role="tabpanel"
+                         id="tab2-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="1"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <form name="userForm">
+
+
+                            <availability data=""></availability>
+                            <br/><br/>
+                            <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                                <md-button class="md-raised">Abbrechen</md-button>&nbsp;
+                                <md-button class="md-raised md-primary">Speichern</md-button>
+                            </section>
+                        </form>
+                    </div>
+                </md-card-content>
+            </ng-switch>
+        </md-card>
+
 
         <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
             <md-card-content>
@@ -83,7 +186,7 @@
                                 <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
-                        <div layout layout-sm="column">
+                        <div layout="row" layout-sm="column">
                             <md-input-container flex>
                                 <label>Tel</label>
                                 <input ng-model="user.city">
@@ -92,7 +195,7 @@
                                 <label>Mobil</label>
                                 <input ng-model="user.city">
                             </md-input-container>
-                            <md-input-container>
+                           <md-input-container>
                                 <label>&nbsp;</label>
                                 <md-select ng-model="unknown"/>
                             </md-input-container>
@@ -112,45 +215,10 @@
                             <md-button class="md-raised">Abbrechen</md-button>&nbsp;
                             <md-button class="md-raised md-primary">Speichern</md-button>
                         </section>
-
-
-
-<!--
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Name</label>
-                                <input ng-model="name">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Name</label>
-                                <input ng-model="name">
-                            </md-input-container>
-
-                        </div>
-
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>City</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>City</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>State</label>
-                                <md-select ng-model="user.state">
-                                    <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                        {{state.abbrev}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-
-                        </div>
--->
                     </form>
 
             </md-card-content>
+
         </md-card>
 
     </ui-view>

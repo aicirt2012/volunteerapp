@@ -8,7 +8,7 @@
     "mobil": "0723843434",
     "notes": "Some notes",
     "role": "helper",
-    "avalability": {
+    "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},
       "we": {"morning": true, "afternoon": false, "evening": false},
@@ -28,7 +28,7 @@
     "mobil": "0723843434",
     "notes": "Some notes",
     "role": "organisator",
-    "avalability": {
+    "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},
       "we": {"morning": true, "afternoon": false, "evening": false},

@@ -1,10 +1,13 @@
-app.controller('UserCtrl', ['$http', '$scope', '$location', function($http, $scope, $location) {
+app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', function($http, $scope, $location, $resource) {
 
 
 
     var me = $scope;
     me.selectedRoleTab = 1;
     me.userview = 'listview';
+
+
+
 
     me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
@@ -24,7 +27,16 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', function($http, $sco
     }
 
 
+    me.load = function(){
+        console.log('load');
+        var User = $resource('/user/:userId', {userId:'@id'});
+        var user = User.get({userId:123}, function() {
+            console.log('loaded');
+            user.abc = true;
+        });
+    }
 
+    me.load();
 
 
 

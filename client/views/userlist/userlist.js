@@ -1,6 +1,6 @@
-app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserList', function($http, $scope, $location, $resource, UserList) {
+app.controller('UserlistCtrl', ['$http', '$scope', '$location', '$resource', 'UserList', function($http, $scope, $location, $resource, UserList) {
 
-    console.log('user');
+    console.log('userlist');
     var me = $scope;
     me.userlist = UserList.query(function() {
         console.log(JSON.stringify(me.userlist));
@@ -8,7 +8,6 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserLi
 
 
     me.selectedRoleTab = 1;
-
 
 
 
@@ -22,9 +21,14 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserLi
             case 2: me.selectedRole = 'Organisator'; break;
         }
         console.log('Role: '+me.selectedRole);
+      // $location.path("/user/org", false);
     });
 
-
+    me.hello = function(){
+        me.userview = 'detailview';
+       // $location.path("/user/heler/id", false);
+        window.location.href = '#/user/helper/id';
+    }
 
 
     me.load = function(){

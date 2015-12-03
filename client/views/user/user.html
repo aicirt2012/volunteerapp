@@ -7,40 +7,7 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'listview'">
-            <md-tabs md-stretch-tabs class="md-primary" md-selected="selectedRoleTab">
-                <md-tab id="tab1" aria-controls="tab1-content">
-                    Helfer
-                </md-tab>
-                <md-tab id="tab2" aria-controls="tab2-content">
-                    Team
-                </md-tab>
-                <md-tab id="tab3" aria-controls="tab3-content">
-                    Organisatoren
-                </md-tab>
-            </md-tabs>
-            <md-card-content>
-                <md-list>
-                    <md-list-item ng-repeat="user in userlist" ng-click="hello()">
-                        <md-item-content>
-                            <div class="md-tile-left inset" hide-sm>
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-tile-content">
-                                <h3>{{user.name}}</h3>
-                                <h4>{{user.email}}</h4>
-                                <p>
-                                    {{user.tel}}
-                                </p>
-                            </div>
-                        </md-item-content>
-                    </md-list-item>
-                </md-list>
-            </md-card-content>
-        </md-card>
-
-
-        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
+        <md-card flex-gt-sm="90" flex-gt-md="80">
             <ng-switch on="selectedRoleTab" class="tabpanel-container">
                 <md-tabs md-stretch-tabs class="md-primary" md-selected="selectedRoleTab">
                     <md-tab id="tab1" aria-controls="tab1-content">
@@ -143,73 +110,6 @@
             </ng-switch>
         </md-card>
 
-
-        <md-card flex-gt-sm="90" flex-gt-md="80" ng-show="userview == 'detailview'">
-            <md-card-content>
-
-                    <form name="userForm">
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Anrede</label>
-                                <md-select ng-model="user.state">
-                                    <md-option ng-repeat="g in gender" value="{{g.id}}">
-                                        {{g.label}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Name</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
-                        </div>
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Email</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
-                        </div>
-                        <div layout="row" layout-sm="column">
-                            <md-input-container flex>
-                                <label>Tel</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Mobil</label>
-                                <input ng-model="user.city">
-                            </md-input-container>
-                           <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
-                        </div>
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Notizen</label>
-                                <textarea ng-model="user.city" columns="3" md-maxlength="150" rows="5"></textarea>
-                            </md-input-container>
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
-                        </div>
-                        <br/><br/>
-                        <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                            <md-button class="md-raised">Abbrechen</md-button>&nbsp;
-                            <md-button class="md-raised md-primary">Speichern</md-button>
-                        </section>
-                    </form>
-
-            </md-card-content>
-
-        </md-card>
 
     </ui-view>
 </md-content>

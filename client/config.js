@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider) {
 
             })
             .when('/user/:role', {
+                templateUrl: 'views/userlist/userlist.html',
+                controller: 'UserlistCtrl'
+            })
+            .when('/user/:role/:id', {
                 templateUrl: 'views/user/user.html',
                 controller: 'UserCtrl'
             })

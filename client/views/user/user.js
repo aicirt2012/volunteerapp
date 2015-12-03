@@ -1,8 +1,13 @@
-app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', function($http, $scope, $location, $resource) {
-
+app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserList', function($http, $scope, $location, $resource, UserList) {
 
 
     var me = $scope;
+    me.userlist = UserList.query(function() {
+        console.log('loaded');
+        console.log(JSON.stringify(me.userlist));
+    });
+
+
     me.selectedRoleTab = 1;
     me.userview = 'listview';
 
@@ -35,15 +40,13 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', functio
         });
 */
 
-        var User = $resource('api/user/list');
-        var user = User.query(function() {
-            console.log('loaded');
-            console.log(JSON.stringify(user));
-        });
+
     }
 
-    me.load();
 
 
 }]);
 
+app.factory('UserList', function($resource) {
+    return $resource('/api/user/list');
+});

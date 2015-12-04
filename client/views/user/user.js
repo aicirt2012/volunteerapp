@@ -1,42 +1,32 @@
-app.controller('UserCtrl', ['$scope', '$resource', 'User', function($scope, $resource, User) {
+app.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
 
 
     var me = $scope;
-    me.userlist = User.get(function() {
-        console.log(JSON.stringify(me.userlist));
+    me.user = User.get({id: 'dd'}, function() {
+        console.log(JSON.stringify(me.user));
     });
 
-
-    me.selectedRoleTab = 1;
 
     me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
+    me.tabs = [
+        {id: 'data', label: 'Persönliche Daten'},
+        {id: 'availability', label: 'Verfügbarkeit'},
+        {id: 'events', label: 'Events'}
+    ];
+    me.selectedTabNr = 1;
 
-    me.$watch('selectedRoleTab', function(newValue, oldValue) {
-        switch (newValue){
-            case 0: me.selectedRole = 'Helfer'; break;
-            case 1: me.selectedRole = 'Team'; break;
-            case 2: me.selectedRole = 'Organisator'; break;
-        }
+
+
+
+    me.$watch('selectedTabNr', function(newValue) {
+
         console.log('Role: '+me.selectedRole);
     });
-
-
-    me.load = function(){
-/*
-        var User = $resource('api/user/:userId', {userId:'@id'});
-        var user = User.get({userId:123}, function() {
-            user.abc = true;
-        });
-*/
-
-
-    }
-
 
 
 }]);
 
 app.service('User', function($resource) {
-    return $resource('/api/user');
+    return $resource('/api/user/:id');
 });

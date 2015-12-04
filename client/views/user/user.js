@@ -1,17 +1,13 @@
-app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserList', function($http, $scope, $location, $resource, UserList) {
+app.controller('UserCtrl', ['$scope', '$resource', 'User', function($scope, $resource, User) {
 
 
     var me = $scope;
-    me.userlist = UserList.query(function() {
+    me.userlist = User.get(function() {
         console.log(JSON.stringify(me.userlist));
     });
 
 
     me.selectedRoleTab = 1;
-    me.userview = 'listview';
-
-
-
 
     me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
@@ -23,13 +19,7 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserLi
             case 2: me.selectedRole = 'Organisator'; break;
         }
         console.log('Role: '+me.selectedRole);
-      // $location.path("/user/org", false);
     });
-
-    me.hello = function(){
-        me.userview = 'detailview';
-    }
-
 
 
     me.load = function(){
@@ -47,6 +37,6 @@ app.controller('UserCtrl', ['$http', '$scope', '$location', '$resource', 'UserLi
 
 }]);
 
-app.factory('UserList', function($resource) {
-    return $resource('/api/user/list');
+app.service('User', function($resource) {
+    return $resource('/api/user');
 });

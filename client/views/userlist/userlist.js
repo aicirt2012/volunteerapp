@@ -1,41 +1,27 @@
-app.controller('UserlistCtrl', ['$http', '$scope', '$location', '$resource', 'UserList', function($http, $scope, $location, $resource, UserList) {
+app.controller('UserlistCtrl', ['$scope', '$resource', 'UserList', function($scope, $resource, UserList) {
 
-    console.log('userlist');
+
     var me = $scope;
-    me.userlist = UserList.query(function() {
-        console.log(JSON.stringify(me.userlist));
-    });
 
+    me.userlist = UserList.query();
 
-    me.selectedRoleTab = 1;
-
-
-
-    me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
-
-
-    me.role = [
+    me.roles = [
         {id: 'helper', label: 'Helfer'},
         {id: 'team', label: 'Team'},
         {id: 'orga', label: 'Organisator'}
     ];
 
-    me.$watch('selectedRoleTab', function(newValue, oldValue) {
-        switch (newValue){
-            case 0: me.selectedRole = 'Helfer'; break;
-            case 1: me.selectedRole = 'Team'; break;
-            case 2: me.selectedRole = 'Organisator'; break;
-        }
-        console.log('Role: '+me.selectedRole);
+    me.selectedTabNr = 1;
+    me.$watch('selectedTabNr', function(newSelectedTabNr) {
+        me.selectedTabNr = newSelectedTabNr;
+        var role = me.roles[me.selectedTabNr];
+        me.breadcrumb = 'Personalverwaltung > '+ role.label;
     });
 
-
     me.selectUser = function(id){
-        window.location.href = '#/user/helper/'+id;
+        var role = me.roles[me.selectedTabNr].id;
+        window.location.href = '#/user/'+role+'/'+id;
     }
-
-
-
 }]);
 
 app.service('UserList', function($resource) {

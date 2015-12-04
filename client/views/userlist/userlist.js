@@ -1,4 +1,4 @@
-app.controller('UserlistCtrl', ['$scope', '$resource', 'UserList', function($scope, $resource, UserList) {
+app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList) {
 
 
     var me = $scope;

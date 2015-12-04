@@ -10,7 +10,7 @@ app.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
     me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
     me.tabs = [
-        {id: 'data', label: 'Persönliche Daten'},
+        {id: 'personaldata', label: 'Persönliche Daten'},
         {id: 'availability', label: 'Verfügbarkeit'},
         {id: 'events', label: 'Events'}
     ];
@@ -20,8 +20,7 @@ app.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
 
 
     me.$watch('selectedTabNr', function(newValue) {
-
-        console.log('Role: '+me.selectedRole);
+        console.log('Tab: '+me.selectedRole);
     });
 
 

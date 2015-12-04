@@ -12,8 +12,7 @@ app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList)
     ];
 
     me.selectedTabNr = 1;
-    me.$watch('selectedTabNr', function(newSelectedTabNr) {
-        me.selectedTabNr = newSelectedTabNr;
+    me.$watch('selectedTabNr', function(newValue) {
         var role = me.roles[me.selectedTabNr];
         me.breadcrumb = 'Personalverwaltung > '+ role.label;
     });

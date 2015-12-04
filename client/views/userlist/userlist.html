@@ -21,7 +21,7 @@
             </md-tabs>
             <md-card-content>
                 <md-list>
-                    <md-list-item ng-repeat="user in userlist" ng-click="hello()">
+                    <md-list-item ng-repeat="user in userlist" ng-click="selectUser(user.id)">
                         <md-item-content>
                             <div class="md-tile-left inset" hide-sm>
                                 <user-avatar></user-avatar>

@@ -14,6 +14,12 @@ app.controller('UserlistCtrl', ['$http', '$scope', '$location', '$resource', 'Us
     me.gender = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
 
+    me.role = [
+        {id: 'helper', label: 'Helfer'},
+        {id: 'team', label: 'Team'},
+        {id: 'orga', label: 'Organisator'}
+    ];
+
     me.$watch('selectedRoleTab', function(newValue, oldValue) {
         switch (newValue){
             case 0: me.selectedRole = 'Helfer'; break;
@@ -21,31 +27,17 @@ app.controller('UserlistCtrl', ['$http', '$scope', '$location', '$resource', 'Us
             case 2: me.selectedRole = 'Organisator'; break;
         }
         console.log('Role: '+me.selectedRole);
-      // $location.path("/user/org", false);
     });
 
-    me.hello = function(){
-        me.userview = 'detailview';
-       // $location.path("/user/heler/id", false);
-        window.location.href = '#/user/helper/id';
-    }
 
-
-    me.load = function(){
-/*
-        var User = $resource('api/user/:userId', {userId:'@id'});
-        var user = User.get({userId:123}, function() {
-            user.abc = true;
-        });
-*/
-
-
+    me.selectUser = function(id){
+        window.location.href = '#/user/helper/'+id;
     }
 
 
 
 }]);
 
-app.factory('UserList', function($resource) {
+app.service('UserList', function($resource) {
     return $resource('/api/user/list');
 });

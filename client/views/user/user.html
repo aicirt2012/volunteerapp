@@ -27,18 +27,19 @@
                          layout="row" layout-align="center center">
                         <form name="userForm">
                             <div layout layout-sm="column">
-                                <md-input-container flex>
+                                <md-select-container flex>
                                     <label>Anrede</label>
-                                    <md-select ng-model="user.state">
-                                        <md-option ng-repeat="g in gender" value="{{g.id}}">
-                                            {{g.label}}
+                                    <md-select ng-model="user.gender">
+                                        <md-option ng-repeat="gender in genders" value="{{gender.id}}">
+                                            {{gender.label}}
                                         </md-option>
                                     </md-select>
-                                </md-input-container>
+                                </md-select-container>
                                 <md-input-container flex>
                                     <label>Name</label>
                                     <input ng-model="user.name">
                                 </md-input-container>
+
                                 <md-input-container>
                                     <label>&nbsp;</label>
                                     <md-select ng-model="unknown"/>

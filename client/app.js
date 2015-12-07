@@ -27,7 +27,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog',
     };
     me.admin = [
         {
-            link : 'showListBottomSheet($event)',
+            link : 'mydata',
             title: 'Meine Daten',
             icon: 'settings'
         }

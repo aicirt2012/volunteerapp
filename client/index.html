@@ -29,7 +29,7 @@
         </md-item>
         <md-divider></md-divider>
         <md-subheader>Management</md-subheader>
-        <md-item ng-repeat="item in admin">
+        <md-item ng-repeat="item in admin" ng-click="openView(item.link)">
             <a>
                 <md-item-content md-ink-ripple layout="row" layout-align="start center">
                     <div class="inset">
@@ -167,6 +167,8 @@
 <script src="/views/user/user.js"></script>
 <script src="/views/event/event.js"></script>
 <script src="/views/login/login.js"></script>
+<script src="/views/mydata/mydata.js"></script>
+
 
 </body>
 </html>

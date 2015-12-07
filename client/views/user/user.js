@@ -7,6 +7,7 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
     });
 
     me.genders = User.genders;
+    me.roles = User.roles;
 
     for(var i = 0; i<User.roles.length; i++)
        if(User.roles[i].id == $routeParams.role)
@@ -34,6 +35,7 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
 
 app.service('User', function($resource) {
 
+    var Me = $resource('/api/user/me');
     var User = $resource('/api/user/:id');
     var genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
     var roles = [
@@ -45,6 +47,7 @@ app.service('User', function($resource) {
     return {
         genders: genders,
         roles: roles,
-        get: User.get
+        get: User.get,
+        me: Me.get
     }
 });

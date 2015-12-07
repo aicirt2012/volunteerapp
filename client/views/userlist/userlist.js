@@ -8,7 +8,7 @@ app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList)
     me.roles = [
         {id: 'helper', label: 'Helfer'},
         {id: 'team', label: 'Team'},
-        {id: 'orga', label: 'Organisator'}
+        {id: 'organizer', label: 'Organisator'}
     ];
 
     me.selectedTabNr = 1;

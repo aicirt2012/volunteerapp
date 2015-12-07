@@ -21,13 +21,13 @@
   },
   {
     "id": "sdhddfu309",
-    "name": "Max Mustermann",
-    "gender": "MALE",
+    "name": "Eva Hummel",
+    "gender": "FEMALE",
     "email": "Maxmustermann@tum.de",
     "tel": "012378495",
     "mobil": "0723843434",
     "notes": "Some notes",
-    "role": "organisator",
+    "role": "organizer",
     "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},

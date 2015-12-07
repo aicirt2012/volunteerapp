@@ -5,6 +5,10 @@ app.config(['$routeProvider', function($routeProvider) {
                 templateUrl: 'views/event/event.html',
                 controller: 'EventCtrl'
             })
+            .when('/adduser', {
+                templateUrl: 'views/adduser/adduser.html',
+                controller: 'AddUserCtrl'
+            })
             .when('/user/', {
                 redirectTo: '/user/helper'
 

@@ -25,6 +25,10 @@ app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList)
     me.selectUser = function(id){
         window.location.href = '#/user/'+me.selectedRole.id+'/'+id;
     }
+
+    me.addUser = function(){
+        window.location.href = '#/adduser';
+    }
 }]);
 
 app.service('UserList', function($resource) {

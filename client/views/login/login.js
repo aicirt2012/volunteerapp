@@ -5,6 +5,9 @@ app.controller('LoginCtrl', ['$scope', 'User', '$routeParams', '$mdSidenav', fun
     var me = $scope;
     console.log('login');
 
+    me.login = function(){
+        console.log(me.email+" "+me.pw);
+    }
 
 
 }]);

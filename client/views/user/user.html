@@ -69,6 +69,20 @@
                                     <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
+                            <div layout="row" layout-sm="column">
+                                <md-select-container flex>
+                                    <label>Rolle</label>
+                                    <md-select ng-model="user.role">
+                                        <md-option ng-repeat="role in roles" value="{{role.id}}">
+                                            {{role.label}}
+                                        </md-option>
+                                    </md-select>
+                                </md-select-container>
+                                <md-input-container>
+                                    <label>&nbsp;</label>
+                                    <md-select ng-model="unknown"/>
+                                </md-input-container>
+                            </div>
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Notizen</label>

@@ -6,6 +6,7 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
         console.log(JSON.stringify(me.user));
     });
 
+    me.genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
     me.roles = [
         {id: 'helper', label: 'Helfer'},
         {id: 'team', label: 'Team'},
@@ -15,11 +16,6 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
     for(var i = 0; i<me.roles.length; i++)
        if(me.roles[i].id == $routeParams.role)
            me.selectedRole = me.roles[i];
-
-
-
-
-    me.genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
 
     me.tabs = [
         {id: 'personaldata', label: 'Persönliche Daten'},

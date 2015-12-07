@@ -1,6 +1,10 @@
 app.config(['$routeProvider', function($routeProvider) {
 
         $routeProvider
+            .when('/login', {
+                templateUrl: 'views/login/login.html',
+                controller: 'LoginCtrl'
+            })
             .when('/event', {
                 templateUrl: 'views/event/event.html',
                 controller: 'EventCtrl'

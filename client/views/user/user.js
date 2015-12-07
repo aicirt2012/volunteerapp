@@ -17,8 +17,6 @@ app.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
     me.selectedTabNr = 1;
 
 
-
-
     me.$watch('selectedTabNr', function(newValue) {
         console.log('Tab: '+me.selectedRole);
     });

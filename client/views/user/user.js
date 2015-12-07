@@ -22,6 +22,7 @@ app.controller('UserCtrl', ['$scope', 'User', function($scope, User) {
     });
 
 
+
 }]);
 
 app.service('User', function($resource) {

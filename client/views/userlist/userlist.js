@@ -12,14 +12,18 @@ app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList)
     ];
 
     me.selectedTabNr = 1;
+   // me.selectedRole = me.roles[1];
     me.$watch('selectedTabNr', function(newValue) {
-        var role = me.roles[me.selectedTabNr];
-        me.breadcrumb = 'Personalverwaltung > '+ role.label;
+        me.selectedRole = me.roles[me.selectedTabNr];
+        me.breadcrumb = 'Personalverwaltung > '+ me.selectedRole.label;
     });
 
+    me.isSelectedRole = function(user){
+        return me.selectedRole.id == user.role;
+    }
+
     me.selectUser = function(id){
-        var role = me.roles[me.selectedTabNr].id;
-        window.location.href = '#/user/'+role+'/'+id;
+        window.location.href = '#/user/'+me.selectedRole.id+'/'+id;
     }
 }]);
 

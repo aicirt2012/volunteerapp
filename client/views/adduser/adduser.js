@@ -6,12 +6,7 @@ app.controller('AddUserCtrl', ['$scope', 'User', function($scope, User) {
         console.log(JSON.stringify(me.user));
     });
 
-    me.genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
-    me.roles = [
-        {id: 'helper', label: 'Helfer'},
-        {id: 'team', label: 'Team'},
-        {id: 'organizer', label: 'Organisator'}
-    ];
+
 
 
 

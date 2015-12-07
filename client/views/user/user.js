@@ -6,16 +6,11 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
         console.log(JSON.stringify(me.user));
     });
 
-    me.genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
-    me.roles = [
-        {id: 'helper', label: 'Helfer'},
-        {id: 'team', label: 'Team'},
-        {id: 'organizer', label: 'Organisator'}
-    ];
+    me.genders = User.genders;
 
-    for(var i = 0; i<me.roles.length; i++)
-       if(me.roles[i].id == $routeParams.role)
-           me.selectedRole = me.roles[i];
+    for(var i = 0; i<User.roles.length; i++)
+       if(User.roles[i].id == $routeParams.role)
+           me.selectedRole = User.roles[i];
 
     me.tabs = [
         {id: 'personaldata', label: 'Persönliche Daten'},
@@ -38,5 +33,18 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
 }]);
 
 app.service('User', function($resource) {
-    return $resource('/api/user/:id');
+
+    var User = $resource('/api/user/:id');
+    var genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
+    var roles = [
+        {id: 'helper', label: 'Helfer'},
+        {id: 'team', label: 'Team'},
+        {id: 'organizer', label: 'Organisator'}
+    ];
+
+    return {
+        genders: genders,
+        roles: roles,
+        get: User.get
+    }
 });

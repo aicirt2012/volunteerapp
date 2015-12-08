@@ -28,6 +28,7 @@ app.use('/api',function (req, res, next) {
        pw : 'ottto',
        email : 'mustermann@test.sc'
    };
+    next();
 });
 /*
 app.use('/api',function (req, res, next) {

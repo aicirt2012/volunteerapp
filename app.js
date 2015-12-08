@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/api/init', init);
 app.use('/api/login', login);
+/*
 app.use('/api',function (req, res, next) {
     var auth = req.headers['authorization'];
     var token = null;
@@ -45,6 +46,7 @@ app.use('/api',function (req, res, next) {
     } else
         return res.status(403).send();
 });
+*/
 
 app.use('/api/user', user);
 app.use('/api/event', event);

@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
+var scuser = require('../../sc/scuser');
 
 
 /** list all users */
@@ -28,6 +29,12 @@ router.get('/list', function(req, res, next) {
 
 /** returns session user */
 router.get('/me', function(req, res, next) {
+    var auth = {
+        pw : 'ottto',
+        email : 'mustermann@test.sc'
+    }
+    res.json(scuser.me(auth));
+    /*
     http.get('/users/me', function (err, response) {
         if (!err) {
             var u = response.body;
@@ -39,7 +46,7 @@ router.get('/me', function(req, res, next) {
         }else{
             res.json('err');
         }
-    });
+    });*/
 });
 
 /** create new user*/

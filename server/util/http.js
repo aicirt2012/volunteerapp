@@ -7,10 +7,18 @@ var headers = {
     'Content-Type': 'application/json'
 };
 
+var generateHeader = function(auth){
+    console.log('auth gen'+auth.email+" "+auth.pw);
+    return {
+        'Authorization': 'Basic ' + new Buffer(auth.email + ':' + auth.pw).toString('base64'),
+        'Content-Type': 'application/json'
+    }
+};
+
 module.exports = {
 
-    get: function(path, cb){
-        request.get({url: config.sc.url + path, headers: headers}, function (err, res, body){
+    get: function(path, auth, cb){
+        request.get({url: config.sc.url + path, headers: generateHeader(auth)}, function (err, res, body){
             if (!err && res.statusCode == 200) {
                 res.body = JSON.parse(body);
                 cb(false, res);

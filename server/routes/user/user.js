@@ -29,24 +29,12 @@ router.get('/list', function(req, res, next) {
 
 /** returns session user */
 router.get('/me', function(req, res, next) {
-    var auth = {
-        pw : 'ottto',
-        email : 'mustermann@test.sc'
-    }
-    res.json(scuser.me(auth));
-    /*
-    http.get('/users/me', function (err, response) {
-        if (!err) {
-            var u = response.body;
-            res.json({
-                id: u.id,
-                name: u.name,
-                email: u.email
-            });
-        }else{
-            res.json('err');
-        }
-    });*/
+    scuser.me(req.auth, function(err, data){
+        if(err)
+            res.status(403).send();
+        else
+            res.json(data);
+    });
 });
 
 /** create new user*/

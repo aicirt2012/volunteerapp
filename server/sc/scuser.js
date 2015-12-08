@@ -8,13 +8,13 @@ module.exports = {
         http.get('/users/me', auth, function (err, res) {
             if (!err) {
                 var u = res.body;
-                return {
+                return cb(false, {
                     id: u.id,
                     name: u.name,
                     email: u.email
-                };
+                });
             }else{
-                'err';
+                return cb(true, null);
             }
         });
     },

@@ -2,6 +2,7 @@ var express = require('express');
 var config = require('../../config');
 var request = require('request');
 
+//TODO remove header var
 var headers = {
     'Authorization': 'Basic ' + new Buffer(config.sc.user + ':' + config.sc.pass).toString('base64'),
     'Content-Type': 'application/json'

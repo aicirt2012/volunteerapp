@@ -4,7 +4,7 @@ module.exports = {
     },
     'sc' : {
         'url': 'http://localhost:8083/intern/tricia/api/v1',
-        'pass' : 'ottto',
+        'pass' : 'ottto', //TODO remove pass
         'user' : 'mustermann@test.sc'
     },
     'email':{

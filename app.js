@@ -4,9 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
 
 var init = require('./server/routes/init/init');
-var authenticate = require('./server/routes/authenticate/authenticate');
+var login = require('./server/routes/login/login');
 var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
 
@@ -21,20 +22,28 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/api/init', init);
-app.use('/api/authenticate', authenticate);
+app.use('/api/login', login);
 app.use('/api',function (req, res, next) {
- /*
-  var auth = req.headers['authorization'];
-  var token = null;
-  if (auth)
-    token = auth.split(" ")[1];
-  if (token) {
-   // request sc to verify user; home,
-    next();
-  } else
-    return res.status(403).send();
-    */
-  next();
+    var auth = req.headers['authorization'];
+    var token = null;
+    if (auth)
+        token = auth.split(" ")[1];
+    if (token) {
+        jwt.verify(token, config.secret, function (err, userid) {
+            if (err) {
+                return res.status(403).send();
+            } else {
+                User.findById(userid, function (err, user) {
+                    if(user && user.isactive) {
+                        req.user = user;
+                        next();
+                    } else
+                        return res.status(403).send();
+                });
+            }
+        });
+    } else
+        return res.status(403).send();
 });
 
 app.use('/api/user', user);

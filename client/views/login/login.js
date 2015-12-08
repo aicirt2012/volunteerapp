@@ -1,15 +1,17 @@
-app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, User, $mdSidenav) {
+app.controller('LoginCtrl', ['$scope', 'Login', '$mdSidenav', function($scope, Login, $mdSidenav) {
 
-    console.log($mdSidenav('left'));
-    $mdSidenav('left').toggle();
     var me = $scope;
-    console.log('login');
-    
 
     me.login = function(){
-        console.log(me.email+" "+me.pw);
+        Login.save({email: me.email, pw: me.pw}, function(data){
+            console.log('saved',data.hallo);
+        });
     }
 
 
 }]);
+
+app.service('Login', function($resource) {
+    return $resource('/api/login');
+});
 

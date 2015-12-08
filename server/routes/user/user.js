@@ -4,8 +4,15 @@ var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 //var scuser = require('../../sc/scuser');
+var schmea = require('../../sc/schema');
 
 router.get('/h', function(req, res, next){
+
+    console.log('schema craeat');
+    schmea.create(function(){
+        console.log('schema creaetd');
+    });
+    /*
     console.log('hallo');
     // create workspace
 
@@ -15,7 +22,7 @@ router.get('/h', function(req, res, next){
             console.log('fail');
         else {
             console.log('success');
-            http.post('/workspaces/refugeeApp/entityTypes/', {name:'Organization', namePlural: 'Organizations', id:'organization'}, function(err, res, body){
+            http.post('/workspaces/refugeeapp/entityTypes/', {name:'Organization', namePlural: 'Organizations', id:'organization'}, function(err, res, body){
                 if(err){
 
                 }else{

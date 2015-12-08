@@ -3,7 +3,48 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-var scuser = require('../../sc/scuser');
+//var scuser = require('../../sc/scuser');
+
+router.get('/h', function(req, res, next){
+    console.log('hallo');
+    // create workspace
+
+    http.post('/workspaces', {name:'RefuggeeApp', id:'refugeeapp'}, function(err, res, body){
+        //console.log(res);
+        if(err)
+            console.log('fail');
+        else {
+            console.log('success');
+            http.post('/workspaces/refugeeApp/entityTypes/', {name:'Organization', namePlural: 'Organizations', id:'organization'}, function(err, res, body){
+                if(err){
+
+                }else{
+                    http.post('/entityTypes/organization/attributeDefinitions', {name:'age', attributeType: 'Number', multiplicity: 'exactlyOne'}, function(err, res, body){
+                        if(!err)
+                            http.post('/entityTypes/organization/entities', {name:'HansEv', attributes: [{name:'age', values:[18]}]}, function(err, res, body){
+
+                            });
+                    });
+
+                }
+            });
+
+
+        }
+    });
+
+
+    // create type
+
+/*
+    // create entity
+    http.post('/entityTypes/', {name:'Organization'}, function(err, res, body){
+
+    });
+    */
+
+    res.json({hallo:1});
+});
 
 
 /** list all users */
@@ -41,17 +82,19 @@ router.get('/me', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
 });
-
+/*
 router.get('/:id', function(req, res, next) {
     res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json'))[0]);
 });
 /** update user */
+/*
 router.put('/:id', function(req, res, next) {
     console.log('update user');
     res.send();
 });
 
 /** reset userpw */
+/*
 router.put('/resetpw', function(req, res, next) {
     console.log('update user');
     res.send();
@@ -70,5 +113,8 @@ router.get('/sendmailtest', function(req, res, next) {
     });
     res.send();
 });
+*/
+
+
 
 module.exports = router;

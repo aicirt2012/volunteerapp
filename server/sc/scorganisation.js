@@ -21,7 +21,21 @@ module.exports = {
     create: function (data, auth, cb) {
         http.post('')
 
+    },
+    createType: function (data, auth, cb) {
+        // create workspace
+        http.post('/workspace', {name:'RefuggeeApp'}, function(err, res, body){
+
+        });
+
+        // create type
+        http.post('/entityTypes', {name:'Organization'}, function(err, res, body){
+
+        });
+
     }
+
+
 
 };
 

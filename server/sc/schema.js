@@ -35,6 +35,12 @@ function createEntityType(workspaceId, typeId, cb){
 }
 
 function createAttributeDefinition(workspaceId, typeId, name, type, multiplicity, cb) {
+    console.log('/entityTypes/'+typeId+'/attributeDefinitions');
+    console.log({
+        name: name,
+        attributeType: type,
+        multiplicity: multiplicity
+    });
     http.post('/entityTypes/'+typeId+'/attributeDefinitions', {
         name: name,
         attributeType: type,
@@ -76,7 +82,7 @@ module.exports = {
 
 
         var asyncTasks = [];
-        
+
         asyncTasks.push(function(cb){
             deleteWorkspace(workspaceId, cb);
         });
@@ -87,15 +93,59 @@ module.exports = {
         asyncTasks.push(function(cb){
             createEntityType(workspaceId, entityTypeId.organization, cb);
         });
-        /*
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.organization, 'name', types.string, multiplicity.exactlyOne, cb);
-        });*/
+            createAttributeDefinition(workspaceId, entityTypeId.organization, 'namex', types.number, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.organization, 'address', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.organization, 'email', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.organization, 'tel', types.string, multiplicity.exactlyOne, cb);
+        });
         asyncTasks.push(function(cb){
             createEntityType(workspaceId, entityTypeId.person, cb);
         });
         asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'gender', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'name', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'tel', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'email', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'pw', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'availability', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.person, 'role', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
             createEntityType(workspaceId, entityTypeId.event, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.event, 'title', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.event, 'nrOfHelpers', types.number, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.event, 'description', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.event, 'emails', types.string, multiplicity.exactlyOne, cb);
+        });
+        asyncTasks.push(function(cb){
+            createAttributeDefinition(workspaceId, entityTypeId.event, 'termin', types.string, multiplicity.exactlyOne, cb);
         });
         async.series(asyncTasks, function(err){
             cb();

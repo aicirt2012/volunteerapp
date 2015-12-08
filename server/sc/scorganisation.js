@@ -5,7 +5,7 @@ var http = require('../util/http');
 module.exports = {
 
     me: function(cb){
-        http.get('/users/me', function (err, res) {
+        http.get('/users/me', auth, function (err, res) {
             if (!err) {
                 var u = res.body;
                 return cb(false, {

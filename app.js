@@ -23,13 +23,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/api/init', init);
 app.use('/api/login', login);
-app.use('/api',function (req, res, next) {
-   req.auth = {
-       pw : 'ottto',
-       email : 'mustermann@test.sc'
-   };
-    next();
-});
+
 /*
 app.use('/api',function (req, res, next) {
     var auth = req.headers['authorization'];

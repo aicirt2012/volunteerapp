@@ -29,7 +29,7 @@ router.get('/list', function(req, res, next) {
 
 /** returns session user */
 router.get('/me', function(req, res, next) {
-    scuser.me(req.auth, function(err, data){
+    scuser.me(function(err, data){
         if(err)
             res.status(403).send();
         else

@@ -17,7 +17,7 @@ router.get('/h', function(req, res, next){
         Schmea.workspace.delete(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
-        Schmea.workspace.create(config.sc.workspaceId);
+        Schmea.workspace.create(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
         User.schema.create(cb);

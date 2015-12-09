@@ -2,7 +2,7 @@ var express = require('express');
 var http = require('../util/http');
 var async = require('async');
 var config = require('../../config');
-var schema = require('../sc/schema');
+var Schema = require('../sc/schema');
 
 /** Note: EntityTypeId is similar with EntityTypeName etc.  */
 
@@ -44,14 +44,14 @@ module.exports = {
                 create: function(cb){
                     var asyncTasks = [];
                     asyncTasks.push(function(cb){
-                        schema.createEntityType(config.sc.workspaceId, entityTypeId, cb);
+                        Schema.entityType.create(config.sc.workspaceId, entityTypeId, cb);
                     });
                     var names = Object.keys(attributes);
                     for(var i=0; i< names.length; i++){
                         var name = names[i];
                         var type = attributes[name];
                         asyncTasks.push(function(cb){
-                            schema.createAttributeDefinition(config.sc.workspaceId, entityTypeId, name, type, cb)
+                            Schema.entityType.create(config.sc.workspaceId, entityTypeId, name, type, cb)
                         });
                     }
                     async.series(asyncTasks, function(err){

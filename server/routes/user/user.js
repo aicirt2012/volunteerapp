@@ -3,27 +3,15 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-
+var User = require('../../sc/User');
 
 /** list all users */
 router.get('/list', function(req, res, next) {
-    /*
-    http.get('/users', function (err, response) {
-        if (!err) {
-            var list = [];
-            response.body.forEach(function(u){
-                list.push({
-                    id: u.id,
-                    name: u.name,
-                    email: u.email
-                });
-            });
-            res.json(list);
-        }else{
-            res.json('err');
-        }
-    });*/
-    res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
+
+    User.findAll(function(err, users){
+        res.json(users);
+    });
+    //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
 });
 
 /** returns session user */

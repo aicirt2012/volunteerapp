@@ -12,8 +12,22 @@ module.exports = {
             findById: function(id, cb){
                 console.log('find byid');
             },
-            findAll: function(id, cb){
+            findAll: function(cb){
                 console.log('find all');
+                SocioCortex.entity.find(entityTypeId, function(err, entities){
+                    var results = [];
+                    for(var i=0; i< entities.length; i++){
+                        var e = entities[i];
+                        var r = {};
+                        r.id = e.id;
+                        for(var j=0; j< e.attributes.length; j++) {
+                            var attribute = e.attributes[j];
+                            r[attribute.name] = attribute.values[0];
+                        }
+                        results.push(r);
+                    }
+                    cb(err, results);
+                });
             },
             find: function(query, cb){
                 var data = {expression: 'find '+entityTypeId+' .where('+query+')'};

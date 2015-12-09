@@ -79,6 +79,17 @@ function createEntity(entityTypeId, data, cb){
     });
 }
 
+function findEntities(entityTypeId, cb){
+    http.get('/entityTypes/'+entityTypeId+'/entities?attributes=name,role', function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error listing all Entities "' + entityTypeId + '"!');
+            console.error(body);
+        } else {
+            cb(err, JSON.parse(body));
+        }
+    });
+}
+
 module.exports = {
     workspace:{
         create: createWorkspace,
@@ -92,7 +103,8 @@ module.exports = {
         create: createAttributeDefinition
     },
     entity:{
-        create: createEntity
+        create: createEntity,
+        find: findEntities
     },
     attribute:{
 

@@ -5,11 +5,11 @@ var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 //var scuser = require('../../sc/scuser');
 var schmea = require('../../sc/schema');
-var scperson = require('../../sc/scperson');
+var User = require('../../sc/scuser');
 
 router.get('/h', function(req, res, next){
 
-    scperson.findById('id', function(){
+    User.findById('id', function(){
 
     });
 

@@ -22,17 +22,25 @@ module.exports = {
         });
     },
     post: function(path, data, cb){
-        request.post({
-            url: config.sc.url + path,
-            headers: headers,
-            json: data
-        }, cb);
+        //TODO Remove this hack
+        setTimeout(function(){
+            console.log('POST: '+ JSON.stringify({
+                url: config.sc.url + path,
+           //     headers: headers,
+                json: data
+            }));
+            request.post({
+                url: config.sc.url + path,
+                headers: headers,
+                json: data
+            }, cb);
+        }, 3000);
     },
     del: function(path, data, cb){
         request.del({
             url: config.sc.url + path,
             headers: headers,
-           // json: data
+            json: data
         }, cb);
     }
 };

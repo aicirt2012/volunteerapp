@@ -29,9 +29,10 @@ function createWorkspace(workspaceId, cb){
 }
 
 function createEntityType(workspaceId, typeId, cb){
-    http.post('/workspaces/'+workspaceId+'/entityTypes/', {name:typeId, namePlural: typeId, id:typeId}, function(err, res, body){
+    var data = {name: typeId, namePlural: typeId, id: typeId};
+    http.post('/workspaces/'+workspaceId+'/entityTypes/', data, function(err, res, body){
         if(err || res.statusCode != 200){
-            console.error('Error during creating Type "'+typeId+'" in workspace "'+workspaceId+'"!');
+            console.error('Error during creating EntityType "'+typeId+'" in workspace "'+workspaceId+'"!');
             console.error(body);
         }else{
             console.log('EntityType created');

@@ -21,6 +21,12 @@ User.genders = {
     FEMALE: 'FEMALE'
 }
 
+User.roles = {
+    HELPER: 'HELPER',
+    TEAM: 'TEAM',
+    ORGANIZER: 'ORGANIZER'
+}
+
 User.findAvailableUsers = function(availableOn, cb){
     console.log('find special person');
 }

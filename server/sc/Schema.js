@@ -57,11 +57,22 @@ function createAttributeDefinition(workspaceId, typeId, name, type, cb) {
     });
 }
 
+function mxlWorkspace(workspaceId, data, cb) {
+    http.post('/workspaces/' + workspaceId + '/mxlQuery', data, function (err, res, body) {
+        if (err) {
+            console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
+            cb(err, null);
+        } else {
+            cb(err, JSON.parse(body));
+        }
+    });
+}
 
 module.exports = {
     workspace:{
         create: createWorkspace,
-        delete: deleteWorkspace
+        delete: deleteWorkspace,
+        mxl: mxlWorkspace
     },
     entityType:{
         create: createEntityType

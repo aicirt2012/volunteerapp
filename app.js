@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 
+var setup = require('./server/routes/setup/setup');
 var init = require('./server/routes/init/init');
 var login = require('./server/routes/login/login');
 var user = require('./server/routes/user/user');
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
+app.use('/api/setup', setup);
 app.use('/api/init', init);
 app.use('/api/login', login);
 

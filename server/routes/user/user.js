@@ -3,30 +3,9 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-var Schmea = require('../../sc/schema');
-var User = require('../../sc/scuser');
-var config = require('../../../config');
-var async = require('async');
+
 
 router.get('/h', function(req, res, next){
-
-
-    var asyncTasks = [];
-
-    asyncTasks.push(function(cb){
-        Schmea.workspace.delete(config.sc.workspaceId, cb);
-    });
-    asyncTasks.push(function(cb){
-        Schmea.workspace.create(config.sc.workspaceId, cb);
-    });
-    asyncTasks.push(function(cb){
-        User.schema.create(cb);
-    });
-    async.series(asyncTasks, function(err){
-        cb();
-    });
-
-
 
 
 
@@ -48,30 +27,9 @@ router.get('/h', function(req, res, next){
         }
     });
 
-    User.findById('id', function(){
 
-    });
 
 */
-/*
-
-    console.log('schema create');
-    schmea.create(function(){
-        console.log('schema creaetd');
-    });
-
-*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -113,7 +71,6 @@ router.get('/h', function(req, res, next){
     });
     */
 
-    res.json({hallo:1});
 });
 
 

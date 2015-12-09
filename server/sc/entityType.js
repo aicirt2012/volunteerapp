@@ -36,15 +36,15 @@ module.exports = {
                     asyncTasks.push(function(cb){
                         SocioCortex.entityType.create(config.sc.workspaceId, entityTypeId, cb);
                     });
-                    var names = Object.keys(attributes);
-                    for(var i=0; i< names.length; i++){
-                        var name = (names[i]);
-                        var type = (attributes[name]);
-                        console.log(name+' '+type);
-                        asyncTasks.push(function(cb){
-                            SocioCortex.attributeDefinition.create(config.sc.workspaceId, entityTypeId, deepcopy(name), deepcopy(type), cb)
+                    asyncTasks.push(function(cb){
+                        var names = Object.keys(attributes);
+                        async.forEach(names, function(name, cb){
+                            var type = attributes[name];
+                            SocioCortex.attributeDefinition.create(config.sc.workspaceId, entityTypeId, name, type, cb)
+                        }, function(err){
+                            cb();
                         });
-                    }
+                    });
                     async.series(asyncTasks, function(err){
                         console.log('Schema "'+entityTypeId+'" successfully created!');
                         cb();

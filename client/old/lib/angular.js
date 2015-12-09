@@ -26850,7 +26850,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
  * ```html
  * <ng-pluralize count="personCount"
                  when="{'0': 'Nobody is viewing.',
- *                      'one': '1 person is viewing.',
+ *                      'one': '1 user is viewing.',
  *                      'other': '{} people are viewing.'}">
  * </ng-pluralize>
  *```
@@ -26881,17 +26881,17 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
  *               when="{'0': 'Nobody is viewing.',
  *                      '1': '{{person1}} is viewing.',
  *                      '2': '{{person1}} and {{person2}} are viewing.',
- *                      'one': '{{person1}}, {{person2}} and one other person are viewing.',
+ *                      'one': '{{person1}}, {{person2}} and one other user are viewing.',
  *                      'other': '{{person1}}, {{person2}} and {} other people are viewing.'}">
  * </ng-pluralize>
  * ```
  *
  * Notice that we are still using two plural categories(one, other), but we added
  * three explicit number rules 0, 1 and 2.
- * When one person, perhaps John, views the document, "John is viewing" will be shown.
+ * When one user, perhaps John, views the document, "John is viewing" will be shown.
  * When three people view the document, no explicit number rule is found, so
  * an offset of 2 is taken off 3, and Angular uses 1 to decide the plural category.
- * In this case, plural category 'one' is matched and "John, Mary and one other person are viewing"
+ * In this case, plural category 'one' is matched and "John, Mary and one other user are viewing"
  * is shown.
  *
  * Note that when you specify offsets, you must provide explicit number rules for
@@ -26923,7 +26923,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
           Without Offset:
           <ng-pluralize count="personCount"
                         when="{'0': 'Nobody is viewing.',
-                               'one': '1 person is viewing.',
+                               'one': '1 user is viewing.',
                                'other': '{} people are viewing.'}">
           </ng-pluralize><br>
 
@@ -26933,7 +26933,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
                         when="{'0': 'Nobody is viewing.',
                                '1': '{{person1}} is viewing.',
                                '2': '{{person1}} and {{person2}} are viewing.',
-                               'one': '{{person1}}, {{person2}} and one other person are viewing.',
+                               'one': '{{person1}}, {{person2}} and one other user are viewing.',
                                'other': '{{person1}}, {{person2}} and {} other people are viewing.'}">
           </ng-pluralize>
         </div>
@@ -26944,7 +26944,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
           var withOffset = element.all(by.css('ng-pluralize')).get(1);
           var countInput = element(by.model('personCount'));
 
-          expect(withoutOffset.getText()).toEqual('1 person is viewing.');
+          expect(withoutOffset.getText()).toEqual('1 user is viewing.');
           expect(withOffset.getText()).toEqual('Igor is viewing.');
 
           countInput.clear();
@@ -26963,7 +26963,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
           countInput.sendKeys('3');
 
           expect(withoutOffset.getText()).toEqual('3 people are viewing.');
-          expect(withOffset.getText()).toEqual('Igor, Misko and one other person are viewing.');
+          expect(withOffset.getText()).toEqual('Igor, Misko and one other user are viewing.');
 
           countInput.clear();
           countInput.sendKeys('4');
@@ -27274,7 +27274,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
  *
  * @example
  * This example initializes the scope to a list of names and
- * then uses `ngRepeat` to display every person:
+ * then uses `ngRepeat` to display every user:
   <example module="ngAnimate" deps="angular-animate.js" animations="true">
     <file name="index.html">
       <div ng-init="friends = [

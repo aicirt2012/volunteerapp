@@ -5,13 +5,35 @@ var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 //var scuser = require('../../sc/scuser');
 var schmea = require('../../sc/schema');
+var scperson = require('../../sc/scperson');
 
 router.get('/h', function(req, res, next){
 
+    scperson.findById('id', function(){
+
+    });
+
+    /*
     console.log('schema craeat');
     schmea.create(function(){
         console.log('schema creaetd');
     });
+
+
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*
     console.log('hallo');
     // create workspace

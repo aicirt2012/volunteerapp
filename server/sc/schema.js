@@ -55,7 +55,7 @@ function createAttributeDefinition(workspaceId, typeId, name, type, multiplicity
     });
 }
 
-function createAttribute(typeId){
+function createEnity(typeId){
     http.post('/entityTypes/'+typeId+'/entities', {
         name: 'HansEv',
         attributes: [{name: 'age', values: [18]}]
@@ -69,7 +69,7 @@ module.exports = {
         var workspaceId = 'refugeeapp';
         var entityTypeId = {
             organization: 'organization',
-            person: 'person',
+            user: 'user',
             event: 'event'
         };
         var types = {
@@ -106,28 +106,28 @@ module.exports = {
             createAttributeDefinition(workspaceId, entityTypeId.organization, 'tel', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createEntityType(workspaceId, entityTypeId.person, cb);
+            createEntityType(workspaceId, entityTypeId.user, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'gender', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'gender', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'name', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'name', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'tel', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'tel', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'email', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'email', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'pw', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'pw', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'availability', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'availability', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.person, 'role', types.string, multiplicity.exactlyOne, cb);
+            createAttributeDefinition(workspaceId, entityTypeId.user, 'role', types.string, multiplicity.exactlyOne, cb);
         });
         asyncTasks.push(function(cb){
             createEntityType(workspaceId, entityTypeId.event, cb);

@@ -34,7 +34,7 @@ module.exports = {
                 headers: headers,
                 json: data
             }, cb);
-        }, 3000);
+        }, 0);
     },
     del: function(path, data, cb){
         request.del({

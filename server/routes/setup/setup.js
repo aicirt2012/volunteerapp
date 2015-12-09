@@ -19,15 +19,17 @@ router.get('/', function(req, res, next) {
     asyncTasks.push(function(cb){
         User.schema.create(cb);
     });
+    /*
     asyncTasks.push(function(cb){
         Organization.schema.create(cb);
     });
     asyncTasks.push(function(cb){
         Event.schema.create(cb);
-    });
+    }); */
     async.series(asyncTasks, function(err){
         res.json({success:true});
     });
+
 });
 
 module.exports = router;

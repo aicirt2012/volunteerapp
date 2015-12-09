@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('../util/http');
 var async = require('async');
+var deepcopy = require('deepcopy');
 var config = require('../../config');
 var SocioCortex = require('../sc/SocioCortex');
 
@@ -37,10 +38,11 @@ module.exports = {
                     });
                     var names = Object.keys(attributes);
                     for(var i=0; i< names.length; i++){
-                        var name = names[i];
-                        var type = attributes[name];
+                        var name = (names[i]);
+                        var type = (attributes[name]);
+                        console.log(name+' '+type);
                         asyncTasks.push(function(cb){
-                            SocioCortex.entityType.create(config.sc.workspaceId, entityTypeId, name, type, cb)
+                            SocioCortex.attributeDefinition.create(config.sc.workspaceId, entityTypeId, deepcopy(name), deepcopy(type), cb)
                         });
                     }
                     async.series(asyncTasks, function(err){

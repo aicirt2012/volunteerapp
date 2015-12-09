@@ -3,7 +3,7 @@ var http = require('../util/http');
 var EntityType = require('../sc/EntityType');
 
 
-var Event = EntityType.model({
+var Event = EntityType.define({
     id: String,
     title: String,
     reqhelpers: Number,

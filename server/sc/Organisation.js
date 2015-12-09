@@ -9,7 +9,7 @@ var Organization = EntityType.define({
     address: 'Text',
     tel: 'Text',
     email: 'Text'
-}, 'scorganization');
+}, 'organization');
 
 
 

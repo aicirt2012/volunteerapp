@@ -9,7 +9,7 @@ var Event = EntityType.define({
     reqhelpers: 'Number',
     messagessend: 'Text',
     appointments: 'Text'
-}, 'scevent');
+}, 'event');
 
 
 

@@ -20,9 +20,16 @@ module.exports = {
                 SocioCortex.workspace.mxl(config.sc.workspaceId, data, cb);
             },
             save: function(attrs, cb){
+                var keys = Object.keys(attrs);
+                var formattedAttrs = [];
+                for(var i=0; i<keys.length; i++){
+                    var key = keys[i];
+                    var value = attrs[key];
+                    formattedAttrs.push({name: key, values: [value]});
+                }
                 var data = {
                     name: entityTypeId+'_'+new Date().getTime()+Math.random().toString(36),
-                    attributes: [{name: 'age', values: [18]}]
+                    attributes: formattedAttrs
                 };
 
                 SocioCortex.entity.create(entityTypeId, data, cb)

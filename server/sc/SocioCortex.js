@@ -59,7 +59,7 @@ function createAttributeDefinition(workspaceId, typeId, name, type, cb) {
 
 function mxlWorkspace(workspaceId, data, cb) {
     http.post('/workspaces/' + workspaceId + '/mxlQuery', data, function (err, res, body) {
-        if (err) {
+        if (err || res.statusCode != 200) {
             console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
             cb(err, null);
         } else {
@@ -70,7 +70,7 @@ function mxlWorkspace(workspaceId, data, cb) {
 
 function createEntity(entityTypeId, data, cb){
     http.post('/entityTypes/'+entityTypeId+'/entities', data, function (err, res, body) {
-        if (err) {
+        if (err || res.statusCode != 200) {
             console.error('Error during creating Entity "' + entityTypeId + '"!');
             cb(err, null);
         } else {

@@ -3,14 +3,36 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-var schmea = require('../../sc/schema');
+var Schmea = require('../../sc/schema');
 var User = require('../../sc/scuser');
+var config = require('../../../config');
+var async = require('async');
 
 router.get('/h', function(req, res, next){
 
-    schmea.create(function(){
 
+    var asyncTasks = [];
+
+    asyncTasks.push(function(cb){
+        Schmea.workspace.delete(config.sc.workspaceId, cb);
     });
+    asyncTasks.push(function(cb){
+        Schmea.workspace.create(config.sc.workspaceId);
+    });
+    asyncTasks.push(function(cb){
+        User.schema.create(cb);
+    });
+    async.series(asyncTasks, function(err){
+        cb();
+    });
+
+
+
+
+
+
+
+
 /*
 
     var workspaceId = 'refugeeapp';

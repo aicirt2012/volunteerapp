@@ -4,11 +4,11 @@ var sociocortex = require('../sc/sociocortex');
 
 
 var Organization = sociocortex.model({
-    id: String,
-    name: String,
-    address: String,
-    tel: String,
-    email: String
+    id: 'Text',
+    name: 'Text',
+    address: 'Text',
+    tel: 'Text',
+    email: 'Text'
 }, 'organization');
 
 

@@ -31,7 +31,7 @@ module.exports = {
     del: function(path, data, cb){
         request.del({
             url: config.sc.url + path,
-            headers: headers
+            headers: headers,
            // json: data
         }, cb);
     }

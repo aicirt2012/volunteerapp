@@ -14,7 +14,7 @@ var User = EntityType.define({
     notes: 'Text',
     role: 'Text',
     availability: 'Text'
-}, 'user');
+}, 'scuser');
 
 User.findAvailableUsers = function(availableOn, cb){
     console.log('find special person');

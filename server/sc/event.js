@@ -4,12 +4,12 @@ var EntityType = require('../sc/EntityType');
 
 
 var Event = EntityType.define({
-    id: String,
-    title: String,
-    reqhelpers: Number,
-    messagessend: String,
-    appointments: String
-}, 'event');
+    id: 'Text',
+    title: 'Text',
+    reqhelpers: 'Number',
+    messagessend: 'Text',
+    appointments: 'Text'
+}, 'scevent');
 
 
 

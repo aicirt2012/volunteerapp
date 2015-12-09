@@ -1,7 +1,6 @@
 var express = require('express');
 var http = require('../util/http');
 var async = require('async');
-var deepcopy = require('deepcopy');
 var config = require('../../config');
 var SocioCortex = require('../sc/SocioCortex');
 

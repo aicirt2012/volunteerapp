@@ -14,7 +14,7 @@ module.exports = {
             },
             findAll: function(cb){
                 console.log('find all');
-                SocioCortex.entity.find(entityTypeId, function(err, entities){
+                SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
                     var results = [];
                     for(var i=0; i< entities.length; i++){
                         var e = entities[i];

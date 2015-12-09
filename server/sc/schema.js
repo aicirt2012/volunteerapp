@@ -1,13 +1,16 @@
 var express = require('express');
 var http = require('../util/http');
 var async = require('async');
+var config = require('../../config');
 
 function deleteWorkspace(workspaceId, cb){
     http.del('/workspaces/'+workspaceId,{}, function(err, res, body){
-        if(err) {
+        if(err || res.statusCode != 200) {
             console.error('Error during deleting Workspace "' + workspaceId + '"!');
+            console.error(body);
             cb();
         }else {
+            console.log('Workspace Deleted');
             cb();
         }
     });
@@ -15,9 +18,11 @@ function deleteWorkspace(workspaceId, cb){
 
 function createWorkspace(workspaceId, cb){
     http.post('/workspaces', {name:workspaceId, id:workspaceId}, function(err, res, body){
-        if(err)
-            console.error('Error during creating Workspace "'+workspaceId+'"!');
-        else {
+        if(err || res.statusCode != 200) {
+            console.error('Error during creating Workspace "' + workspaceId + '"!');
+            console.error(body);
+        }else {
+            console.log('Workpsace Created');
             cb();
         }
     });
@@ -25,30 +30,28 @@ function createWorkspace(workspaceId, cb){
 
 function createEntityType(workspaceId, typeId, cb){
     http.post('/workspaces/'+workspaceId+'/entityTypes/', {name:typeId, namePlural: typeId, id:typeId}, function(err, res, body){
-        if(err){
+        if(err || res.statusCode != 200){
             console.error('Error during creating Type "'+typeId+'" in workspace "'+workspaceId+'"!');
+            console.error(body);
         }else{
-            console.log('entity Type created');
+            console.log('EntityType created');
             cb();
         }
     });
 }
 
 function createAttributeDefinition(workspaceId, typeId, name, type, multiplicity, cb) {
-    console.log('/entityTypes/'+typeId+'/attributeDefinitions');
-    console.log({
+    var data = {
         name: name,
         attributeType: type,
         multiplicity: multiplicity
-    });
-    http.post('/entityTypes/'+typeId+'/attributeDefinitions', {
-        name: name,
-        attributeType: type,
-        multiplicity: multiplicity
-    }, function (err, res, body) {
-        if(err){
+    };
+    http.post('/entityTypes/'+typeId+'/attributeDefinitions', data, function (err, res, body) {
+        if(err || res.statusCode != 200){
             console.error('Error during creating AttributeDefinition!');
+            console.error(body);
         }else{
+            console.log('AttributeDefinition Created');
             cb();
         }
 
@@ -56,24 +59,25 @@ function createAttributeDefinition(workspaceId, typeId, name, type, multiplicity
 }
 
 function createEnity(typeId){
-    http.post('/entityTypes/'+typeId+'/entities', {
+    var data = {
         name: 'HansEv',
         attributes: [{name: 'age', values: [18]}]
-    }, function (err, res, body) {
+    };
+    http.post('/entityTypes/'+typeId+'/entities', data, function (err, res, body) {
 
     });
 }
 
 module.exports = {
     create: function(cb){
-        var workspaceId = 'refugeeapp';
+        var workspaceId = config.sc.workspaceId;
         var entityTypeId = {
             organization: 'scorganization',
             user: 'scuser',
             event: 'scevent'
         };
         var types = {
-            string : 'Text',
+            text : 'Text',
             number: 'Number'
         }
         var multiplicity = {
@@ -93,12 +97,18 @@ module.exports = {
         asyncTasks.push(function(cb){
             createEntityType(workspaceId, entityTypeId.organization, cb);
         });
+
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.organization, 'namex', types.number, multiplicity.exactlyOne, cb);
+            setTimeout(function(){
+                createAttributeDefinition(workspaceId, entityTypeId.organization, 'name', types.number, multiplicity.exactlyOne, cb);
+            }, 3000);
         });
         asyncTasks.push(function(cb){
-            createAttributeDefinition(workspaceId, entityTypeId.organization, 'address', types.string, multiplicity.exactlyOne, cb);
+            setTimeout(function(){
+                createAttributeDefinition(workspaceId, entityTypeId.organization, 'address', types.text, multiplicity.exactlyOne, cb);
+            }, 3000);
         });
+        /*
         asyncTasks.push(function(cb){
             createAttributeDefinition(workspaceId, entityTypeId.organization, 'email', types.string, multiplicity.exactlyOne, cb);
         });
@@ -147,6 +157,7 @@ module.exports = {
         asyncTasks.push(function(cb){
             createAttributeDefinition(workspaceId, entityTypeId.event, 'termin', types.string, multiplicity.exactlyOne, cb);
         });
+        */
         async.series(asyncTasks, function(err){
             cb();
         });

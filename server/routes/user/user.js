@@ -8,9 +8,8 @@ var User = require('../../sc/scuser');
 
 router.get('/h', function(req, res, next){
 
-    console.log('schema create');
     schmea.create(function(){
-        console.log('schema creaetd');
+
     });
 /*
 

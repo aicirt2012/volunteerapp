@@ -5,7 +5,8 @@ module.exports = {
     'sc' : {
         'url': 'http://localhost:8083/intern/tricia/api/v1',
         'pass' : 'ottto',
-        'user' : 'mustermann@test.sc'
+        'user' : 'mustermann@test.sc',
+        'workspaceId' : 'refugeeapp'
     },
     'email':{
         'user': 'muc.refugees',

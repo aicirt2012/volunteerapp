@@ -1,9 +1,9 @@
 var express = require('express');
 var http = require('../util/http');
-var sociocortex = require('../sc/sociocortex');
+var EntityType = require('../sc/EntityType');
 
 
-var Event = sociocortex.model({
+var Event = EntityType.model({
     id: String,
     title: String,
     reqhelpers: Number,

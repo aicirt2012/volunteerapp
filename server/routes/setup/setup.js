@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var config = require('../../../config');
-var schema = require('../../sc/schema');
+var SocioCortex = require('../../sc/SocioCortex');
 var User = require('../../sc/User');
 var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
@@ -11,10 +11,10 @@ var Event = require('../../sc/Event');
 router.get('/', function(req, res, next) {
     var asyncTasks = [];
     asyncTasks.push(function(cb){
-        schema.workspace.delete(config.sc.workspaceId, cb);
+        SocioCortex.workspace.delete(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
-        schema.workspace.create(config.sc.workspaceId, cb);
+        SocioCortex.workspace.create(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
         User.schema.create(cb);

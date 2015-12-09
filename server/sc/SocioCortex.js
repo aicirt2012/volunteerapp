@@ -68,6 +68,17 @@ function mxlWorkspace(workspaceId, data, cb) {
     });
 }
 
+function createEntity(entityTypeId, data, cb){
+    http.post('/entityTypes/'+entityTypeId+'/entities', data, function (err, res, body) {
+        if (err) {
+            console.error('Error during creating Entity "' + entityTypeId + '"!');
+            cb(err, null);
+        } else {
+            cb(err, JSON.parse(body));
+        }
+    });
+}
+
 module.exports = {
     workspace:{
         create: createWorkspace,
@@ -79,6 +90,12 @@ module.exports = {
     },
     attributeDefinition:{
         create: createAttributeDefinition
+    },
+    entity:{
+        create: createEntity
+    },
+    attribute:{
+
     }
 };
 

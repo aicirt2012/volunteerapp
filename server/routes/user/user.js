@@ -3,24 +3,43 @@ var router = express.Router();
 var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-//var scuser = require('../../sc/scuser');
 var schmea = require('../../sc/schema');
 var User = require('../../sc/scuser');
 
 router.get('/h', function(req, res, next){
 
-    User.findById('id', function(){
-
-    });
-
-    /*
-    console.log('schema craeat');
+    console.log('schema create');
     schmea.create(function(){
         console.log('schema creaetd');
     });
 
 
-    */
+    var workspaceId = 'refugeeapp';
+    var query = 'gender = "male"';
+    var entityTypeName = "person";
+
+    var payload = {expression: 'find '+entityTypeName+' .where('+query+')'};
+    http.post('/workspaces/'+workspaceId+'/mxlQuery',payload, function(err, res, body){
+        if(err)
+            console.err('Error during mxl query "'+workspaceId+'"!');
+        else {
+           console.log(body);
+        }
+    });
+
+    User.findById('id', function(){
+
+    });
+
+
+
+    console.log('schema create');
+    schmea.create(function(){
+        console.log('schema creaetd');
+    });
+
+
+
 
 
 

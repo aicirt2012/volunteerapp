@@ -16,6 +16,14 @@ module.exports = {
             },
             find: function(query, cb){
                 console.log('find with query params');
+
+                http.post('/workspaces/'+workspaceId+'/mxlQuery', {name:workspaceId, id:workspaceId}, function(err, res, body){
+                    if(err)
+                        console.err('Error during creating Workspace "'+workspaceId+'"!');
+                    else {
+                        cb();
+                    }
+                });
             },
             save: function(attributs, cb){
                 console.log('create new instance');

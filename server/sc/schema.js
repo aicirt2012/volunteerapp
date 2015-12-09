@@ -68,12 +68,12 @@ module.exports = {
     create: function(cb){
         var workspaceId = 'refugeeapp';
         var entityTypeId = {
-            organization: 'organization',
-            user: 'user',
-            event: 'event'
+            organization: 'scorganization',
+            user: 'scuser',
+            event: 'scevent'
         };
         var types = {
-            string : 'String',
+            string : 'Text',
             number: 'Number'
         }
         var multiplicity = {

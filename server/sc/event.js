@@ -5,16 +5,11 @@ var sociocortex = require('../sc/sociocortex');
 
 var User = sociocortex.model({
     id: String,
-    gender: String,
-    name: String,
-    tel: String,
-    mobil: String,
-    email: String,
-    pw: String,
-    notes: String,
-    role: String,
-    availability: String
-}, 'user');
+    title: String,
+    reqhelpers: Number,
+    messagessend: String,
+    appointments: String
+}, 'event');
 
 User.findAvailableUsers = function(availableOn, cb){
     console.log('find special person');
@@ -30,5 +25,8 @@ User.setPw = function(pw, cb){
 }
 
 
-module.exports = User;
+module.exports = Person;
 
+/**
+ * Created by michelf on 09.12.2015.
+ */

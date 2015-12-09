@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var fs = require('fs');
 var config = require('../../../config');
 var SocioCortex = require('../../sc/SocioCortex');
 var User = require('../../sc/User');
@@ -25,36 +26,34 @@ router.get('/schema', function(req, res, next) {
     asyncTasks.push(function(cb){
         Event.schema.create(cb);
     });
-
-    asyncTasks.push(function(cb){
-        User.save({
-            gender: 'Text',
-            name: 'Text',
-            tel: 'Text',
-            mobil: 'Text',
-            email: 'Text',
-            pw: 'Text',
-            notes: 'Text',
-            role: 'Text',
-            availability: 'Text'
-        }, function(){
-            cb();
-        });
+    async.series(asyncTasks, function(err){
+        res.json({success:true});
     });
+});
+
+
+router.get('/init', function(req, res, next) {
+    var asyncTasks = [];
     asyncTasks.push(function(cb){
-        User.save({
-            gender: 'Text',
-            name: 'Text',
-            tel: 'Text',
-            mobil: 'Text',
-            email: 'Text',
-            pw: 'Text',
-            notes: 'Text',
-            role: 'Text',
-            availability: 'Text'
-        }, function(){
+        var users = JSON.parse(fs.readFileSync('server/routes/user/user.list.json'));
+        async.forEach(users, function(u, cb){
+            User.save({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email,
+                pw: u.pw,
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability
+            }, function(){
+                cb();
+            });
+        }, function(err){
             cb();
         });
+
     });
     async.series(asyncTasks, function(err){
         res.json({success:true});

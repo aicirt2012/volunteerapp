@@ -28,7 +28,7 @@ module.exports = {
                     formattedAttrs.push({name: key, values: [value]});
                 }
                 var data = {
-                    name: entityTypeId+'_'+new Date().getTime()+Math.random().toString(36),
+                    name: entityTypeId+'_'+new Date().getTime(),//+Math.random().toString(36),
                     attributes: formattedAttrs
                 };
 

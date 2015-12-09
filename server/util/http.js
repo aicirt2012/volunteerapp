@@ -22,7 +22,7 @@ module.exports = {
         });
     },
     post: function(path, data, cb){
-        //console.log('POST: '+ config.sc.url + path + " "+JSON.stringify(data));
+        console.log('POST: '+ config.sc.url + path + " "+JSON.stringify(data));
         request.post({
             url: config.sc.url + path,
             headers: headers,

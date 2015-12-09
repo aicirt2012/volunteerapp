@@ -16,6 +16,11 @@ var User = EntityType.define({
     availability: 'Text'
 }, 'user');
 
+User.genders = {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE'
+}
+
 User.findAvailableUsers = function(availableOn, cb){
     console.log('find special person');
 }

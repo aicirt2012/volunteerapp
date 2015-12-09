@@ -5,7 +5,7 @@ var async = require('async');
 function deleteWorkspace(workspaceId, cb){
     http.del('/workspaces/'+workspaceId,{}, function(err, res, body){
         if(err) {
-            console.err('Error during deleting Workspace "' + workspaceId + '"!');
+            console.error('Error during deleting Workspace "' + workspaceId + '"!');
             cb();
         }else {
             cb();
@@ -16,7 +16,7 @@ function deleteWorkspace(workspaceId, cb){
 function createWorkspace(workspaceId, cb){
     http.post('/workspaces', {name:workspaceId, id:workspaceId}, function(err, res, body){
         if(err)
-            console.err('Error during creating Workspace "'+workspaceId+'"!');
+            console.error('Error during creating Workspace "'+workspaceId+'"!');
         else {
             cb();
         }
@@ -26,7 +26,7 @@ function createWorkspace(workspaceId, cb){
 function createEntityType(workspaceId, typeId, cb){
     http.post('/workspaces/'+workspaceId+'/entityTypes/', {name:typeId, namePlural: typeId, id:typeId}, function(err, res, body){
         if(err){
-            console.err('Error during creating Type "'+typeId+'" in workspace "'+workspaceId+'"!');
+            console.error('Error during creating Type "'+typeId+'" in workspace "'+workspaceId+'"!');
         }else{
             console.log('entity Type created');
             cb();
@@ -47,7 +47,7 @@ function createAttributeDefinition(workspaceId, typeId, name, type, multiplicity
         multiplicity: multiplicity
     }, function (err, res, body) {
         if(err){
-            console.err('Error during creating AttributeDefinition!');
+            console.error('Error during creating AttributeDefinition!');
         }else{
             cb();
         }

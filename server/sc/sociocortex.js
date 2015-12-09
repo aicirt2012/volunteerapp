@@ -4,9 +4,9 @@ var async = require('async');
 
 
 module.exports = {
-    model: function (attibutes, modelName){
-        var entityTypeId = modelName;
-        return {
+    model: function (attibutes, typeId, workspaceId){
+
+         return {
             attributes: attibutes,
             findById: function(id, cb){
                 console.log('find byid');

@@ -12,11 +12,11 @@ router.get('/h', function(req, res, next){
     schmea.create(function(){
         console.log('schema creaetd');
     });
-
+/*
 
     var workspaceId = 'refugeeapp';
     var query = 'gender = "male"';
-    var entityTypeName = "person";
+    var entityTypeName = "user";
 
     var payload = {expression: 'find '+entityTypeName+' .where('+query+')'};
     http.post('/workspaces/'+workspaceId+'/mxlQuery',payload, function(err, res, body){
@@ -31,14 +31,15 @@ router.get('/h', function(req, res, next){
 
     });
 
-
+*/
+/*
 
     console.log('schema create');
     schmea.create(function(){
         console.log('schema creaetd');
     });
 
-
+*/
 
 
 

@@ -25,9 +25,26 @@ router.get('/', function(req, res, next) {
     asyncTasks.push(function(cb){
         Event.schema.create(cb);
     });
+    asyncTasks.push(function(cb){
+        User.save({
+            name: 'test'
+        }, function(){
+
+        });
+    });
+
+    asyncTasks.push(function(cb){
+        User.save({
+            name: 'tests'
+        }, function(){
+
+        });
+    });
     async.series(asyncTasks, function(err){
         res.json({success:true});
     });
+
+
 
 });
 

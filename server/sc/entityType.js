@@ -21,9 +21,10 @@ module.exports = {
             },
             save: function(attributes, cb){
                 var data = {
-                    name: 'HansEv',
+                    name: entityTypeId+'_'+new Date().getTime()+Math.random().toString(36),
                     attributes: [{name: 'age', values: [18]}]
                 };
+
                 SocioCortex.entity.create(entityTypeId, data, cb)
             },
             update: function(attributes, cb){

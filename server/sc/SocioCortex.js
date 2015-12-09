@@ -11,7 +11,7 @@ function deleteWorkspace(workspaceId, cb){
             cb();
         }else {
             console.log('Workspace Deleted');
-            cb(err, JSON.parse(body));
+            cb(err);
         }
     });
 }
@@ -23,7 +23,7 @@ function createWorkspace(workspaceId, cb){
             console.error(body);
         }else {
             console.log('Workpsace Created');
-            cb(err, JSON.parse(body));
+            cb(err);
         }
     });
 }
@@ -36,7 +36,7 @@ function createEntityType(workspaceId, typeId, cb){
             console.error(body);
         }else{
             console.log('EntityType created');
-            cb(err, JSON.parse(body));
+            cb(err);
         }
     });
 }
@@ -52,7 +52,7 @@ function createAttributeDefinition(workspaceId, typeId, name, type, cb) {
             console.error(body);
         }else{
             console.log('AttributeDefinition Created');
-            cb(err, JSON.parse(body));
+            cb(err);
         }
     });
 }
@@ -72,9 +72,9 @@ function createEntity(entityTypeId, data, cb){
     http.post('/entityTypes/'+entityTypeId+'/entities', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error during creating Entity "' + entityTypeId + '"!');
-            cb(err, null);
+            console.error(body);
         } else {
-            cb(err, JSON.parse(body));
+            cb(err);
         }
     });
 }

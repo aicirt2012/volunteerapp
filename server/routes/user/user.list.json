@@ -42,5 +42,28 @@
     },
     "events":[],
     "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
+  },
+  {
+    "id": "sdhddfu309",
+    "name": "Maria Freu",
+    "gender": "FEMALE",
+    "email": "Maxmustermann@tum.de",
+    "pw": "sdfhsdf",
+    "tel": "012378495",
+    "mobil": "0723843434",
+    "notes": "Some notes",
+    "role": "organizer",
+    "availability": {
+      "mo": {"morning": true, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": false, "evening": false},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
   }
+
 ]

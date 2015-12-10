@@ -64,4 +64,11 @@ router.get('/init', function(req, res, next) {
 
 });
 
+router.get('/find', function(req, res, next) {
+    var data = {expression: 'find user .where(availability.fr.afternoon)'};
+    SocioCortex.workspace.mxl(config.sc.workspaceId, data, function(err, data){
+       res.json(data)
+    });
+   // find user.where(availability.fr.afternoon)
+});
 module.exports = router;

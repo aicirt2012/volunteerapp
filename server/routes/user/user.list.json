@@ -14,7 +14,7 @@
       "tu": {"morning": true, "afternoon": false, "evening": false},
       "we": {"morning": true, "afternoon": false, "evening": false},
       "th": {"morning": true, "afternoon": false, "evening": false},
-      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": true, "evening": false},
       "sa": {"morning": true, "afternoon": false, "evening": false},
       "su": {"morning": true, "afternoon": false, "evening": true}
     },

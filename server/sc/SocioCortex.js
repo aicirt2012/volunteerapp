@@ -59,12 +59,13 @@ function createAttributeDefinition(workspaceId, typeId, name, definition, cb) {
 }
 
 function mxlWorkspace(workspaceId, data, cb) {
-    http.post('/workspaces/' + workspaceId + '/mxlQuery', data, function (err, res, body) {
+    http.post('/workspaces/' + workspaceId + '/mxlQuery?attributes=*&meta=', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
             cb(err, null);
         } else {
-            cb(err, JSON.parse(body));
+            //console.log(JSON.stringify(body));
+            cb(err, body);
         }
     });
 }

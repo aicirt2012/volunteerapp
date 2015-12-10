@@ -5,14 +5,9 @@ var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 
-/** list all users */
-router.get('/list', function(req, res, next) {
 
+router.get('/list', function(req, res, next) {
     User.findAll(function(err, users){
-        for(var i=0; i<users.length; i++){
-           // console.log(JSON.stringify(users[i]));
-            //users[i].availability = JSON.parse(users[i].availability.replace("/\\/", ""));
-        }
         res.json(users);
     });
     //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));

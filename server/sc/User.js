@@ -13,10 +13,8 @@ var User = EntityType.define({
     pw: {type:'Text'},
     notes: {type:'Text'},
     role: {type:'Text'},
-    availability: {type: 'json'}
-    //  'Structure<mo:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, tu:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, we:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>,  th:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, fr:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, sa:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, su:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, >'}},
-   // availability: {type: 'json', options: {jsonTypeDefinition:   'Structure<mo:Structure<morning:Boolean>'}},
-   // test: {type:'json', options: {jsonTypeDefinition:   'Structure<street:String,city:String>'}   }
+    availability: {type: 'json', options: {jsonTypeDefinition: 'Structure<mo:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, tu:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, we:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>,  th:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, fr:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, sa:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean>, su:Structure<morning:Boolean,afternoon:Boolean,evening:Boolean> >'}}
+
 }, 'user');
 
 User.genders = {

@@ -41,10 +41,11 @@ function createEntityType(workspaceId, typeId, cb){
     });
 }
 
-function createAttributeDefinition(workspaceId, typeId, name, type, cb) {
+function createAttributeDefinition(workspaceId, typeId, name, definition, cb) {
     var data = {
         name: name,
-        attributeType: type
+        attributeType: definition.type,
+        options: definition.options
     };
     http.post('/entityTypes/'+typeId+'/attributeDefinitions', data, function (err, res, body) {
         if(err || res.statusCode != 200){
@@ -80,16 +81,18 @@ function createEntity(entityTypeId, data, cb){
 }
 
 function findEntities(entityTypeId, attributes, cb){
+    /*
     var attrParam = "";
     var keys = Object.keys(attributes);
     for(var i=0; i<keys.length; i++){
         attrParam += keys[i]+",";
-    }
-    http.get('/entityTypes/'+entityTypeId+'/entities?attributes='+attrParam, function (err, res, body) {
+    }*/
+    http.get('/entityTypes/'+entityTypeId+'/entities?attributes=*', function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error listing all Entities "' + entityTypeId + '"!');
             console.error(body);
         } else {
+            //console.log('BODY', body);
             cb(err, JSON.parse(body));
         }
     });

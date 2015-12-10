@@ -10,8 +10,8 @@ router.get('/list', function(req, res, next) {
 
     User.findAll(function(err, users){
         for(var i=0; i<users.length; i++){
-            console.log(JSON.stringify(users[i]));
-            users[i].availability = JSON.parse(users[i].availability.replace("/\\/", ""));
+           // console.log(JSON.stringify(users[i]));
+            //users[i].availability = JSON.parse(users[i].availability.replace("/\\/", ""));
         }
         res.json(users);
     });

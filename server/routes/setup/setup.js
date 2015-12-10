@@ -46,7 +46,8 @@ router.get('/init', function(req, res, next) {
                 pw: u.pw,
                 notes: u.notes,
                 role: u.role,
-                availability: u.availability
+                availability: JSON.stringify(u.availability),
+                test: u.test
             }, function(){
                 cb();
             });

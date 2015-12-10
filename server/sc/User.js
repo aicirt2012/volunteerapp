@@ -4,16 +4,17 @@ var EntityType = require('../sc/EntityType');
 
 
 var User = EntityType.define({
-    id: 'Text',
-    gender: 'Text',
-    name: 'Text',
-    tel: 'Text',
-    mobil: 'Text',
-    email: 'Text',
-    pw: 'Text',
-    notes: 'Text',
-    role: 'Text',
-    availability: 'Text'
+    id: {type:'Text'},
+    gender: {type:'Text'},
+    name: {type:'Text'},
+    tel: {type:'Text'},
+    mobil: {type:'Text'},
+    email: {type:'Text'},
+    pw: {type:'Text'},
+    notes: {type:'Text'},
+    role: {type:'Text'},
+    availability: {type:'Text'},
+    test: {type:'json', options: {jsonTypeDefinition:   'Structure<street:String,city:String>'}   }
 }, 'user');
 
 User.genders = {

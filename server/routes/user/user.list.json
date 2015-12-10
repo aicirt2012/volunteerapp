@@ -18,7 +18,8 @@
       "sa": {"morning": true, "afternoon": false, "evening": false},
       "su": {"morning": true, "afternoon": false, "evening": true}
     },
-    "events":[]
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
   },
   {
     "id": "sdhddfu309",
@@ -39,6 +40,7 @@
       "sa": {"morning": true, "afternoon": false, "evening": false},
       "su": {"morning": true, "afternoon": false, "evening": true}
     },
-    "events":[]
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
   }
 ]

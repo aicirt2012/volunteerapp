@@ -16,7 +16,7 @@ module.exports = {
                 console.log('find all');
                 SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
                     var results = [];
-                    console.log(JSON.stringify(entities));
+                    //console.log(JSON.stringify(entities));
                     for(var i=0; i< entities.length; i++){
                         var e = entities[i];
                         var r = {};

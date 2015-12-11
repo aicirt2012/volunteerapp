@@ -82,18 +82,11 @@ function createEntity(entityTypeId, data, cb){
 }
 
 function findEntities(entityTypeId, attributes, cb){
-    /*
-    var attrParam = "";
-    var keys = Object.keys(attributes);
-    for(var i=0; i<keys.length; i++){
-        attrParam += keys[i]+",";
-    }*/
     http.get('/entityTypes/'+entityTypeId+'/entities?attributes=*', function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error listing all Entities "' + entityTypeId + '"!');
             console.error(body);
         } else {
-            //console.log('BODY', body);
             cb(err, JSON.parse(body));
         }
     });

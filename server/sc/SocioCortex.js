@@ -58,14 +58,15 @@ function createAttributeDefinition(workspaceId, typeId, name, definition, cb) {
     });
 }
 
-function mxlWorkspace(workspaceId, data, cb) {
+function mxlWorkspace(workspaceId, entityTypeId, attributes, query, cb) {
+    var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
     http.post('/workspaces/' + workspaceId + '/mxlQuery?attributes=*&meta=', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
             cb(err, null);
         } else {
             //console.log(JSON.stringify(body));
-            cb(err, body.value);
+            cb(err, convertEntitiesToFlatJSON(attributes, body.value));
         }
     });
 }

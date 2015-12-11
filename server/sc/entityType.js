@@ -34,10 +34,7 @@ module.exports = {
                 SocioCortex.entities.find(entityTypeId, attributes, cb);
             },
             find: function(query, cb){
-                var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
-                SocioCortex.mxl(config.sc.workspaceId, data, function(err, entities){
-                    cb(err, convertEntitiesToFlatJSON(attributes, entities));
-                });
+                SocioCortex.mxl(config.sc.workspaceId, entityTypeId, attributes, query, cb);
             },
             save: function(attrs, cb){
                 var keys = Object.keys(attrs);

@@ -28,14 +28,10 @@ module.exports = {
     define: function (attributes, entityTypeId){
          return {
             findById: function(entityId, cb){
-                SocioCortex.entity.findById(entityId, attributes, function(err, entity){
-                    cb(err, convertEntityToFlatJSON(attributes, entity));
-                });
+                SocioCortex.entity.findById(entityId, attributes, cb);
             },
             findAll: function(cb){
-                SocioCortex.entities.find(entityTypeId, attributes, function(err, entities){
-                    cb(err, convertEntitiesToFlatJSON(attributes, entities));
-                });
+                SocioCortex.entities.find(entityTypeId, attributes, cb);
             },
             find: function(query, cb){
                 var data = {expression: 'find '+entityTypeId+' .where('+query+')'};

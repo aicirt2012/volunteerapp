@@ -87,7 +87,7 @@ function findEntities(entityTypeId, attributes, cb){
             console.error('Error listing all Entities "' + entityTypeId + '"!');
             console.error(body);
         } else {
-            cb(err, JSON.parse(body));
+            cb(err, convertEntitiesToFlatJSON(attributes, JSON.parse(body)));
         }
     });
 }
@@ -97,11 +97,28 @@ function findEntityById(entityId, attributes, cb){
             console.error('Error finging Entity "' + entityId + '"!');
             console.error(body);
         } else {
-            cb(err, JSON.parse(body));
+            cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
         }
     });
 }
 
+function convertEntitiesToFlatJSON(attributes, entities){
+    var results = [];
+    for(var i=0; i< entities.length; i++)
+        results.push(convertEntityToFlatJSON(attributes, entities[i]));
+    return results;
+}
+
+function convertEntityToFlatJSON(attributes, entity){
+    var e = entity;
+    var r = {};
+    for(var j=0; j< e.attributes.length; j++) {
+        var attribute = e.attributes[j];
+        r[attribute.name] = attribute.values[0];
+    }
+    r.id = e.id;
+    return r;
+}
 
 module.exports = {
     workspace:{

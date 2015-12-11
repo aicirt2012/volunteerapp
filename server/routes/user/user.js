@@ -60,8 +60,8 @@ router.get('/sendmailtest', function(req, res, next) {
 
 
 router.get('/available', function(req, res, next) {
-    User.find( 'availability.fr.afternoon', function(err, data){
-        res.json(data)
+    User.find( 'availability.fr.afternoon', function(err, users){
+        res.json(users)
     });
 });
 

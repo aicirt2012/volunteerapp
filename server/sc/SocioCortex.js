@@ -106,8 +106,7 @@ function findEntity(entityId, attributes, cb){
 module.exports = {
     workspace:{
         create: createWorkspace,
-        delete: deleteWorkspace,
-        mxl: mxlWorkspace
+        delete: deleteWorkspace
     },
     entityType:{
         create: createEntityType
@@ -122,6 +121,7 @@ module.exports = {
     },
     attribute:{
 
-    }
+    },
+    mxl: mxlWorkspace
 };
 

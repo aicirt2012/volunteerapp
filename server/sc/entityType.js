@@ -39,7 +39,7 @@ module.exports = {
             },
             find: function(query, cb){
                 var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
-                SocioCortex.workspace.mxl(config.sc.workspaceId, data, function(err, entities){
+                SocioCortex.mxl(config.sc.workspaceId, data, function(err, entities){
                     cb(err, convertEntitiesToFlatJSON(attributes, entities));
                 });
             },

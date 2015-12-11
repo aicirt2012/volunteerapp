@@ -43,7 +43,7 @@ router.get('/init', function(req, res, next) {
                 tel: u.tel,
                 mobil: u.mobil,
                 email: u.email,
-                pw: u.pw,
+                pw: User.hashPw(u.pw),
                 notes: u.notes,
                 role: u.role,
                 availability: u.availability
@@ -65,7 +65,7 @@ router.get('/init', function(req, res, next) {
 
 router.get('/find', function(req, res, next) {
     var data = {expression: 'find user .where(availability.fr.afternoon)'};
-    SocioCortex.workspace.mxl(config.sc.workspaceId, data, function(err, data){
+    SocioCortex.mxl(config.sc.workspaceId, data, function(err, data){
        res.json(data)
     });
    // find user.where(availability.fr.afternoon)

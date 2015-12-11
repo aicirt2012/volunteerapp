@@ -13,11 +13,11 @@ router.post('/', function(req, res, next) {
     var email = req.body.email;
     var pw = req.body.pw;
 
-    User.canLogin(email, pw, function(err, users){
-        if(err || users.length != 1)
+    User.canLogin(email, pw, function(err, user){
+        if(err) {
+            console.log(err);
             return res.status(403).send();
-        else
-            var user = users[0];
+        }else
             return res.json({
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
                 userid: user.id

@@ -1,5 +1,6 @@
 var express = require('express');
 var http = require('../util/http');
+var bcrypt = require("bcrypt-nodejs");
 var EntityType = require('../sc/EntityType');
 
 
@@ -33,15 +34,28 @@ User.findAvailableUsers = function(availableOn, cb){
 }
 
 User.canLogin = function(email, plainPw, cb){
-    //TODO use bcyrpt with salt
-    User.find('email="'+email+'" and pw="'+plainPw+'"', function(err, results){
-        cb(err, results)
+    User.find('email="'+email.toLowerCase()+'"', function(err, users){
+        if(users && users.length == 1){
+            var user = users[0];
+            if(bcrypt.compareSync(plainPw, user.pw))
+                cb(false, user);
+             else
+                cb(new Error('Invalid Pw'), null);
+        }else
+            cb(new Error('User not found'), null);
     });
 }
 User.setPw = function(pw, cb){
     //TODO use bcyrpt with salt
     console.log('set pw');
 }
+
+User.hashPw = function(plainPw){
+    if (!plainPw) {
+        // TODO: node crash vermeiden ???
+    }
+    return bcrypt.hashSync(plainPw, bcrypt.genSaltSync(10), null);
+};
 
 
 module.exports = User;

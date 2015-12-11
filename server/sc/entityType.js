@@ -33,7 +33,7 @@ module.exports = {
                 });
             },
             findAll: function(cb){
-                SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
+                SocioCortex.entities.find(entityTypeId, attributes, function(err, entities){
                     cb(err, convertEntitiesToFlatJSON(attributes, entities));
                 });
             },

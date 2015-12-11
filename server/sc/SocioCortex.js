@@ -116,8 +116,10 @@ module.exports = {
     },
     entity:{
         create: createEntity,
-        find: findEntities,
         findById: findEntity
+    },
+    entities:{
+        find: findEntities
     },
     attribute:{
 

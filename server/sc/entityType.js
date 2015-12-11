@@ -29,7 +29,6 @@ module.exports = {
                 console.log('find byid');
             },
             findAll: function(cb){
-                console.log('find all');
                 SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
                     cb(err, convertToFlatJSON(attributes, entities));
                 });

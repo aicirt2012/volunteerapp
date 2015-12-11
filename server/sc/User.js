@@ -32,9 +32,12 @@ User.findAvailableUsers = function(availableOn, cb){
     console.log('find special person');
 }
 
-User.canLogin = function(email, pw, cb){
+User.canLogin = function(email, plainPw, cb){
     //TODO use bcyrpt with salt
     console.log('find special person');
+    User.find('email="'+email+'" and pw="'+plainPw+'"', function(err, results){
+        cb(results)
+    });
 }
 User.setPw = function(pw, cb){
     //TODO use bcyrpt with salt

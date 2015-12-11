@@ -47,7 +47,6 @@ router.get('/init', function(req, res, next) {
                 notes: u.notes,
                 role: u.role,
                 availability: u.availability
-               // test: u.test
             }, function(){
                 cb();
             });

@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../../sc/User');
 
 
 
 router.post('/', function(req, res, next) {
-    return res.status(403).send();
+
     console.log(req.body);
     if(!req.body || !req.body.email || !req.body.pw)
         return res.status(403).send();
@@ -13,8 +14,14 @@ router.post('/', function(req, res, next) {
     var pw = req.body.pw;
     var expiresInSeconds = 86400; //TODO change expire time
 
-    //console.log(email+" "+pw);
-    res.json({hallo:3});
+    console.log(email+" "+pw);
+    User.canLogin(email, pw, function(results){
+        console.log(results.value);
+        res.json({hallo:3});
+    });
+
+
+
 /*
     User.login(email, pw, function(err, user){
         if(!user) err = new Error("no result");

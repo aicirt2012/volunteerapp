@@ -64,3 +64,29 @@ app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $loc
         return original.apply($location, [path]);
     };
 }]);
+
+app.config(function Config($httpProvider, jwtInterceptorProvider) {
+    jwtInterceptorProvider.tokenGetter = function() {
+        return localStorage.getItem('JWT');
+    }
+    $httpProvider.interceptors.push('jwtInterceptor');
+});
+
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+}]);
+
+
+app.factory('authInterceptorService', ['$q','$location', function ($q, $location){
+    var responseError = function (rejection) {
+        if (rejection.status === 403) {
+            localStorage.removeItem("JWT");
+           //TODO set login path
+           /// / $location.path('login');
+        }
+        return $q.reject(rejection);
+    };
+    return {
+        responseError: responseError
+    };
+}]);

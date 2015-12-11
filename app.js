@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
+var config = require('./config')
 
 var setup = require('./server/routes/setup/setup');
 var init = require('./server/routes/init/init');
 var login = require('./server/routes/login/login');
 var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
+
+var User = require('./server/sc/User');
 
 var app = express();
 
@@ -26,19 +29,19 @@ app.use('/api/setup', setup);
 app.use('/api/init', init);
 app.use('/api/login', login);
 
-/*
+
 app.use('/api',function (req, res, next) {
     var auth = req.headers['authorization'];
     var token = null;
     if (auth)
         token = auth.split(" ")[1];
     if (token) {
-        jwt.verify(token, config.secret, function (err, userid) {
+        jwt.verify(token, config.jwt.secret, function (err, userid) {
             if (err) {
                 return res.status(403).send();
             } else {
                 User.findById(userid, function (err, user) {
-                    if(user && user.isactive) {
+                    if(user && !err) {
                         req.user = user;
                         next();
                     } else
@@ -49,7 +52,7 @@ app.use('/api',function (req, res, next) {
     } else
         return res.status(403).send();
 });
-*/
+
 
 app.use('/api/user', user);
 app.use('/api/event', event);

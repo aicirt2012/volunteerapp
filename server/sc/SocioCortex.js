@@ -91,6 +91,17 @@ function findEntities(entityTypeId, attributes, cb){
         }
     });
 }
+function findEntity(entityId, attributes, cb){
+    http.get('/entities/'+entityId+'?attributes=*', function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error finging Entity "' + entityId + '"!');
+            console.error(body);
+        } else {
+            cb(err, JSON.parse(body));
+        }
+    });
+}
+
 
 module.exports = {
     workspace:{
@@ -106,7 +117,8 @@ module.exports = {
     },
     entity:{
         create: createEntity,
-        find: findEntities
+        find: findEntities,
+        findById: findEntity
     },
     attribute:{
 

@@ -21,12 +21,25 @@ function convertToFlatJSON(attributes, entities){
     return results;
 }
 
+function convertEntityToFlatJSON(attributes, entity){
+    var e = entity;
+    var r = {};
+    for(var j=0; j< e.attributes.length; j++) {
+        var attribute = e.attributes[j];
+        r[attribute.name] = attribute.values[0];
+    }
+    r.id = e.id;
+    return r;
+}
+
 /** Note: EntityTypeId is similar with EntityTypeName etc.  */
 module.exports = {
     define: function (attributes, entityTypeId){
          return {
-            findById: function(id, cb){
-                console.log('find byid');
+            findById: function(entityId, cb){
+                SocioCortex.entity.findById(entityId, attributes, function(err, entity){
+                    cb(err, convertEntityToFlatJSON(attributes, entity));
+                });
             },
             findAll: function(cb){
                 SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){

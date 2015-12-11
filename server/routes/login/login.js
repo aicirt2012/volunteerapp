@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 var User = require('../../sc/User');
 var config = require('../../../config');
+var jwt = require('jsonwebtoken');
 
 
 
 router.post('/', function(req, res, next) {
-
-    console.log(req.body);
     if(!req.body || !req.body.email || !req.body.pw)
         return res.status(403).send();
 
@@ -15,7 +14,6 @@ router.post('/', function(req, res, next) {
     var pw = req.body.pw;
     var expiresInSeconds = 86400; //TODO change expire time
 
-    console.log(email+" "+pw);
     User.canLogin(email, pw, function(err, results){
         if(err || results.length != 1)
             return res.status(403).send();
@@ -25,8 +23,6 @@ router.post('/', function(req, res, next) {
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: expiresInSeconds}),
                 userid: user.id
             });
-        console.log(err, results);
-
     });
 
 

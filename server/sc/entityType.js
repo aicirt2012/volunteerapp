@@ -4,11 +4,10 @@ var async = require('async');
 var config = require('../../config');
 var SocioCortex = require('../sc/SocioCortex');
 
-/** Note: EntityTypeId is similar with EntityTypeName etc.  */
 
 function convertToFlatJSON(attributes, entities){
     var results = [];
-    console.log(JSON.stringify(entities));
+   // console.log(JSON.stringify(entities));
     for(var i=0; i< entities.length; i++){
         var e = entities[i];
         var r = {};
@@ -22,6 +21,7 @@ function convertToFlatJSON(attributes, entities){
     return results;
 }
 
+/** Note: EntityTypeId is similar with EntityTypeName etc.  */
 module.exports = {
     define: function (attributes, entityTypeId){
          return {

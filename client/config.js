@@ -27,7 +27,13 @@ app.config(['$routeProvider', function($routeProvider) {
             })
             .when('/user/:role/:id', {
                 templateUrl: 'views/user/user.html',
-                controller: 'UserCtrl'
+                controller: 'UserCtrl',
+                resolve: {
+                    user: function($route, User) {
+                        console.log($route.current.params.id);
+                        return User.get({id: $route.current.params.id});
+                    }
+                }
             })
             .otherwise({
                 redirectTo: '/login'

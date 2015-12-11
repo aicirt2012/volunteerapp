@@ -5,19 +5,10 @@ var config = require('../../config');
 var SocioCortex = require('../sc/SocioCortex');
 
 
-function convertToFlatJSON(attributes, entities){
+function convertEntitiesToFlatJSON(attributes, entities){
     var results = [];
-   // console.log(JSON.stringify(entities));
-    for(var i=0; i< entities.length; i++){
-        var e = entities[i];
-        var r = {};
-        for(var j=0; j< e.attributes.length; j++) {
-            var attribute = e.attributes[j];
-            r[attribute.name] = attribute.values[0];
-        }
-        r.id = e.id;
-        results.push(r);
-    }
+    for(var i=0; i< entities.length; i++)
+        results.push(convertEntityToFlatJSON(attributes, entities[i]));
     return results;
 }
 
@@ -43,13 +34,13 @@ module.exports = {
             },
             findAll: function(cb){
                 SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
-                    cb(err, convertToFlatJSON(attributes, entities));
+                    cb(err, convertEntitiesToFlatJSON(attributes, entities));
                 });
             },
             find: function(query, cb){
                 var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
                 SocioCortex.workspace.mxl(config.sc.workspaceId, data, function(err, entities){
-                    cb(err, convertToFlatJSON(attributes, entities));
+                    cb(err, convertEntitiesToFlatJSON(attributes, entities));
                 });
             },
             save: function(attrs, cb){

@@ -12,7 +12,6 @@ router.post('/', function(req, res, next) {
 
     var email = req.body.email;
     var pw = req.body.pw;
-    var expiresInSeconds = 86400; //TODO change expire time
 
     User.canLogin(email, pw, function(err, results){
         if(err || results.length != 1)
@@ -20,27 +19,10 @@ router.post('/', function(req, res, next) {
         else
             var user = results[0];
             return res.json({
-                token: jwt.sign(user.id, config.jwt.secret, {expiresIn: expiresInSeconds}),
+                token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
                 userid: user.id
             });
     });
-
-
-
-/*
-    User.login(email, pw, function(err, user){
-        if(!user) err = new Error("no result");
-        if(err) {
-            return res.status(403).send();
-        }else {
-            return res.json({
-                token: jwt.sign(user._id, config.secret, {expiresIn: expiresInSeconds}),
-                userid: user._id
-            });
-        }
-    });
-*/
-
 });
 
 module.exports = router;

@@ -2,9 +2,15 @@ app.controller('LoginCtrl', ['$scope', 'Authenticate', '$mdSidenav', function($s
 
     var me = $scope;
 
+    //TODO Remove only for simple testing
+    me.email = 'user1@tum.de';
+    me.pw = '123';
+
     me.login = function(){
-        Authenticate.login({email: me.email, pw: me.pw}, function(data){
-            console.log('saved',data);
+        Authenticate.login(me.email,me.pw).then(function(data){
+            console.log('logged in',data);
+        }, function(){
+            console.log('login failed');
         });
     }
 

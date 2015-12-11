@@ -22,7 +22,7 @@ function createWorkspace(workspaceId, cb){
             console.error('Error during creating Workspace "' + workspaceId + '"!');
             console.error(body);
         }else {
-            console.log('Workpsace Created');
+            console.log('Workspace Created');
             cb(err);
         }
     });

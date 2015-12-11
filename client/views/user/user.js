@@ -2,9 +2,11 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', function($scope, U
 
 
     var me = $scope;
-    me.user = User.get({id: 'dd'}, function() {
+
+    me.user = User.get({id: $routeParams.id}, function() {
         console.log(JSON.stringify(me.user));
-    });
+    })
+
 
     me.genders = User.genders;
     me.roles = User.roles;

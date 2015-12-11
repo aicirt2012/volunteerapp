@@ -10,7 +10,6 @@ router.get('/list', function(req, res, next) {
     User.findAll(function(err, users){
         res.json(users);
     });
-    //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
 });
 
 
@@ -27,7 +26,15 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json'))[0]);
+    var uId = req.query.id;
+    console.log(uId);
+    User.findById(uId, function(err, user){
+        if(err)
+            res.status(500).send();
+        else
+            res.json(user);
+    });
+    //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json'))[0]);
 });
 
 /** update user */

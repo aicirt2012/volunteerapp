@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
 
     console.log(email+" "+pw);
     User.canLogin(email, pw, function(results){
-        console.log(results.value);
+        console.log(results);
         res.json({hallo:3});
     });
 

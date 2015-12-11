@@ -65,7 +65,7 @@ function mxlWorkspace(workspaceId, data, cb) {
             cb(err, null);
         } else {
             //console.log(JSON.stringify(body));
-            cb(err, body);
+            cb(err, body.value);
         }
     });
 }

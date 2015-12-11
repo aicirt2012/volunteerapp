@@ -6,6 +6,22 @@ var SocioCortex = require('../sc/SocioCortex');
 
 /** Note: EntityTypeId is similar with EntityTypeName etc.  */
 
+function convertToFlatJSON(attributes, entities){
+    var results = [];
+    console.log(JSON.stringify(entities));
+    for(var i=0; i< entities.length; i++){
+        var e = entities[i];
+        var r = {};
+        for(var j=0; j< e.attributes.length; j++) {
+            var attribute = e.attributes[j];
+            r[attribute.name] = attribute.values[0];
+        }
+        r.id = e.id;
+        results.push(r);
+    }
+    return results;
+}
+
 module.exports = {
     define: function (attributes, entityTypeId){
          return {
@@ -15,24 +31,14 @@ module.exports = {
             findAll: function(cb){
                 console.log('find all');
                 SocioCortex.entity.find(entityTypeId, attributes, function(err, entities){
-                    var results = [];
-                    //console.log(JSON.stringify(entities));
-                    for(var i=0; i< entities.length; i++){
-                        var e = entities[i];
-                        var r = {};
-                        r.id = e.id;
-                        for(var j=0; j< e.attributes.length; j++) {
-                            var attribute = e.attributes[j];
-                            r[attribute.name] = attribute.values[0];
-                        }
-                        results.push(r);
-                    }
-                    cb(err, results);
+                    cb(err, convertToFlatJSON(attributes, entities));
                 });
             },
             find: function(query, cb){
                 var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
-                SocioCortex.workspace.mxl(config.sc.workspaceId, data, cb);
+                SocioCortex.workspace.mxl(config.sc.workspaceId, data, function(err, entities){
+                    cb(err, convertToFlatJSON(attributes, entities));
+                });
             },
             save: function(attrs, cb){
                 var keys = Object.keys(attrs);

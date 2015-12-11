@@ -92,6 +92,7 @@ function findEntities(entityTypeId, attributes, cb){
         }
     });
 }
+
 function findEntityById(entityId, attributes, cb){
     http.get('/entities/'+entityId+'?attributes=*', function (err, res, body) {
         if (err || res.statusCode != 200) {

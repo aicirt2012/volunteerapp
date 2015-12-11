@@ -57,6 +57,14 @@ User.hashPw = function(plainPw){
     return bcrypt.hashSync(plainPw, bcrypt.genSaltSync(10), null);
 };
 
+User.toMe = function(user){
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email
+    }
+}
+
 
 module.exports = User;
 

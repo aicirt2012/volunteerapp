@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
         }else
             return res.json({
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
-                userid: user.id
+                user: User.toMe(user)
             });
     });
 });

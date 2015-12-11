@@ -13,17 +13,15 @@ router.get('/list', function(req, res, next) {
     //res.json(JSON.parse(fs.readFileSync('server/routes/user/user.list.json')));
 });
 
-/** returns session user */
+
 router.get('/me', function(req, res, next) {
-    scuser.me(function(err, data){
-        if(err)
-            res.status(403).send();
-        else
-            res.json(data);
-    });
+    if(!req.user)
+        res.status(403).send();
+    else
+        res.json(User.toMe(req.user));
 });
 
-/** create new user*/
+
 router.post('/', function(req, res, next) {
 
 });

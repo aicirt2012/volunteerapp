@@ -30,7 +30,6 @@ app.config(['$routeProvider', function($routeProvider) {
                 controller: 'UserCtrl',
                 resolve: {
                     user: function($route, User) {
-                        console.log($route.current.params.id);
                         return User.get({id: $route.current.params.id});
                     }
                 }

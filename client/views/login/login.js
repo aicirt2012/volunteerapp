@@ -33,5 +33,9 @@ app.service('Authenticate', function($resource) {
         });
         return p;
     };
+
+    this.logout = function(){
+        localStorage.removeItem('JWT');
+    }
 });
 

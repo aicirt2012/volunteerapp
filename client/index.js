@@ -1,5 +1,5 @@
 
-app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'User', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, User){
+app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'User', 'Authenticate', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, User, Authenticate){
     var me = $scope;
 
 
@@ -30,10 +30,19 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog
             link : 'mydata',
             title: 'Meine Daten',
             icon: 'settings'
+        },
+        {
+            link: 'logout',
+            title: 'Logout',
+            icon: 'logout'
         }
     ];
     me.openView = function(url){
-        window.location.href = '#/'+url;
+        if(url == 'logout'){
+            Authenticate.logout();
+            window.location.href = '#/login';
+        }else
+            window.location.href = '#/'+url;
     };
     /*
      $scope.showListBottomSheet = function($event) {

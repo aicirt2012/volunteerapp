@@ -1,6 +1,10 @@
 
-app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog){
+app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'User', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, User){
     var me = $scope;
+
+
+    me.user = User.me();
+
     me.toggleSidenav = function(menuId) {
         $mdSidenav(menuId).toggle();
     };

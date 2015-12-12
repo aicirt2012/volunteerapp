@@ -60,8 +60,12 @@ User.hashPw = function(plainPw){
 User.toMe = function(user){
     return {
         id: user.id,
+        gender: user.gender,
         name: user.name,
-        email: user.email
+        tel: user.tel,
+        mobil: user.mobile,
+        email: user.email,
+        availability:  user.availability
     }
 }
 

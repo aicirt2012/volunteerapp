@@ -13,7 +13,12 @@ app.config(['$routeProvider', function($routeProvider) {
         })
         .when('/mydata', {
             templateUrl: 'views/mydata/mydata.html',
-            controller: 'MyDataCtrl'
+            controller: 'MyDataCtrl',
+            resolve: {
+                user: function(User){
+                    return User.me();
+                }
+            }
         })
         .when('/adduser', {
             templateUrl: 'views/adduser/adduser.html',

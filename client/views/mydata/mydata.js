@@ -1,7 +1,12 @@
-app.controller('MyDataCtrl', ['$scope', function($scope) {
+app.controller('MyDataCtrl', ['$scope', 'user', function($scope, user) {
+
 
     var me = $scope;
-    console.log('mydata');
+    me.user = user;
+
+    me.breadcrumb = function(){
+        return 'Meine Daten';
+    }
 
 
 

@@ -4,11 +4,11 @@ var EntityType = require('../sc/EntityType');
 
 
 var Organization = EntityType.define({
-    id: {type:'Text'},
-    name: {type:'Text'},
-    address: {type:'Text'},
-    tel: {type:'Text'},
-    email: {type:'Text'}
+    id: {type:'String'},
+    name: {type:'String'},
+    address: {type:'String'},
+    tel: {type:'String'},
+    email: {type:'String'}
 }, 'organization');
 
 

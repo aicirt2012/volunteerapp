@@ -86,8 +86,7 @@ app.factory('authInterceptorService', ['$q','$location', function ($q, $location
     var responseError = function (rejection) {
         if (rejection.status === 403) {
             localStorage.removeItem("JWT");
-           //TODO set login path
-           window.location.href = '#/login';
+            window.location.href = '#/login';
         }
         return $q.reject(rejection);
     };

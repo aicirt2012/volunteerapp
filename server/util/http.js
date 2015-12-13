@@ -26,6 +26,14 @@ module.exports = {
             json: data
         }, cb);
     },
+    put: function(path, data, cb){
+        console.log('PUT: '+ config.sc.url + path + " "+JSON.stringify(data));
+        request.post({
+            url: config.sc.url + path,
+            headers: headers,
+            json: data
+        }, cb);
+    },
     del: function(path, data, cb){
         request.del({
             url: config.sc.url + path,

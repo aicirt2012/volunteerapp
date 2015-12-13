@@ -82,6 +82,17 @@ function createEntity(entityTypeId, data, cb){
     });
 }
 
+function updateEntity(entityId, data, cb){
+    http.put('/entities/'+entityId+'?attributes=*', data, function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error updating Entity "' + entityId + '"!');
+            console.error(body);
+        } else {
+            cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
+        }
+    });
+}
+
 function findEntities(entityTypeId, attributes, cb){
     http.get('/entityTypes/'+entityTypeId+'/entities?attributes=*', function (err, res, body) {
         if (err || res.statusCode != 200) {
@@ -135,6 +146,7 @@ module.exports = {
     },
     entity:{
         create: createEntity,
+        update: updateEntity,
         findById: findEntityById
     },
     entities:{

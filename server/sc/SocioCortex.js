@@ -82,7 +82,7 @@ function createEntity(entityTypeId, data, cb){
     });
 }
 
-function updateEntity(entityId, data, cb){
+function updateEntity(entityId, attributes, data, cb){
     http.put('/entities/'+entityId+'?attributes=*', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error updating Entity "' + entityId + '"!');

@@ -48,6 +48,7 @@ app.service('User', function($resource) {
         genders: genders,
         roles: roles,
         get: User.get,
+        post: User.post,
         me: Me.get
     }
 });

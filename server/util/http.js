@@ -28,7 +28,7 @@ module.exports = {
     },
     put: function(path, data, cb){
         console.log('PUT: '+ config.sc.url + path + " "+JSON.stringify(data));
-        request.post({
+        request.put({
             url: config.sc.url + path,
             headers: headers,
             json: data

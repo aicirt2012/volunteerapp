@@ -32,7 +32,7 @@ module.exports = {
                 };
                 SocioCortex.entity.create(entityTypeId, data, cb)
             },
-            update: function(entityId, attrs, cb){
+            update: function(entityId, attributes, attrs, cb){
                 console.log('update instance');
                 var data = {
                     id: entityId,
@@ -45,7 +45,7 @@ module.exports = {
                     var value = attrs[key];
                     data.attributes.push({name: key, values: [value]});
                 }
-                SocioCortex.entity.update(entityId, data, cb)
+                SocioCortex.entity.update(entityId, attributes, data, cb)
             },
             schema:{
                 create: function(cb){

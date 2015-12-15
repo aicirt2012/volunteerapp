@@ -9,10 +9,19 @@ app.controller('MyDataCtrl', ['$scope', 'user', 'MyData', function($scope, user,
     }
 
     me.submitPersonalData = function(){
-        console.log(JSON.stringify(me.user.availability));
-        MyData.availability.update(me.user.availability);
+        MyData.personal.update({
+            gender: me.user.gender,
+            name: me.user.name,
+            tel: me.user.tel,
+            mobil: me.user.mobil,
+            email: me.user.email
+        });
     }
 
+
+    me.submitAvailability = function(){
+        MyData.availability.update(me.user.availability);
+    }
 
 
 

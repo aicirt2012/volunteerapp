@@ -37,7 +37,7 @@ app.service('User', function($resource) {
 
     var Me = $resource('/api/user/me');
     var User = $resource('/api/user/:id');
-    var genders = [{id: 'male', label: 'Herr'},{id: 'female', label: 'Frau'}];
+    var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
     var roles = [
         {id: 'helper', label: 'Helfer'},
         {id: 'team', label: 'Team'},

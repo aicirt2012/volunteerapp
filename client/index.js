@@ -11,7 +11,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog
     me.menu = [
         {
             link : 'event',
-            title: 'Events',
+            title: 'Eventverwaltung',
             icon: 'event'
         },
         {
@@ -21,7 +21,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog
         },
         {
             link : 'organisatzion',
-            title: 'Einrichtung',
+            title: 'Einrichtungsverwaltung',
             icon: 'home'
         }
     ];

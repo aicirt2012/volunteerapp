@@ -7,7 +7,7 @@ var SocioCortex = require('../../sc/SocioCortex');
 var User = require('../../sc/User');
 var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
-
+var EventHelper = require('../../sc/EventHelper');
 
 router.get('/schema', function(req, res, next) {
     var asyncTasks = [];
@@ -25,6 +25,9 @@ router.get('/schema', function(req, res, next) {
     });
     asyncTasks.push(function(cb){
         Event.schema.create(cb);
+    });
+    asyncTasks.push(function(cb){
+        EventHelper.schema.create(cb);
     });
     async.series(asyncTasks, function(err){
         res.json({success:true});

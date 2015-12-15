@@ -8,9 +8,11 @@ var Event = EntityType.define({
     title: {type:'String'},
     description: {type:'String'},
     nrhelpers: {type:'Number'},
-    helpers: {type: 'user'},
+    helpers: {type: 'String'},
     emails: {type:'String'},
+    starttime: {type: 'String'},
     startdate: {type:'String'},
+    endtime: {type:'String'},
     enddate: {type:'String'}
 }, 'event');
 

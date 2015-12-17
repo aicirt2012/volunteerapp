@@ -13,6 +13,7 @@ var login = require('./server/routes/login/login');
 var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
 var mydata = require('./server/routes/mydata/mydata');
+var organization = require('./server/routes/organization/organization');
 
 var User = require('./server/sc/User');
 
@@ -58,6 +59,7 @@ app.use('/api',function (req, res, next) {
 app.use('/api/user', user);
 app.use('/api/mydata', mydata);
 app.use('/api/event', event);
+app.use('/api/organization', organization);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

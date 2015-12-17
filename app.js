@@ -40,19 +40,24 @@ app.use('/api',function (req, res, next) {
     if (token) {
         jwt.verify(token, config.jwt.secret, function (err, userid) {
             if (err) {
+                console.error('JWT invalid');
                 return res.status(403).send();
             } else {
                 User.findById(userid, function (err, user) {
                     if(user && !err) {
                         req.user = user;
                         next();
-                    } else
+                    } else {
+                        console.error('JWT user not found in database!');
                         return res.status(403).send();
+                    }
                 });
             }
         });
-    } else
+    } else {
+        console.error('No Token provides with request');
         return res.status(403).send();
+    }
 });
 
 

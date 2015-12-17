@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Organization = require('../organization/organization');
+var Organization = require('../../sc/Organisation');
 
 
 

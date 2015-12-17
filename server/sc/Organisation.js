@@ -6,11 +6,12 @@ var EntityType = require('../sc/EntityType');
 var Organization = EntityType.define({
     id: {type:'String'},
     name: {type:'String'},
-    address: {type:'String'},
+    zip: {type: 'String'},
+    city: {type: 'String'},
+    street: {type:'String'},
     tel: {type:'String'},
     email: {type:'String'}
 }, 'organization');
-
 
 
 module.exports = Organization;

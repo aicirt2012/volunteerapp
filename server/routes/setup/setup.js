@@ -58,6 +58,23 @@ router.get('/init', function(req, res, next) {
         });
 
     });
+    asyncTasks.push(function(cb){
+        var organizations = JSON.parse(fs.readFileSync('server/routes/setup/organization.list.json'));
+        async.forEach(organizations, function(o, cb){
+            Organization.save({
+                name: o.name,
+                zip: o.city,
+                city: o.city,
+                street: o.street,
+                tel: o.tel,
+                email: o.email
+            }, function(){
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
     async.series(asyncTasks, function(err){
         res.json({success:true});
     });

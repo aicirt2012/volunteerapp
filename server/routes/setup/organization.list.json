@@ -1,0 +1,29 @@
+[
+  {
+    "id": "org00001",
+    "name": "Helper e.V.",
+    "zip": "80805",
+    "city": "München",
+    "street": "ocen dirive 67",
+    "tel": "012378495",
+    "email": "helper@com"
+  },
+  {
+    "id": "org00002",
+    "name": "Lebenshilfe e.V.",
+    "zip": "80805",
+    "city": "Schwabing",
+    "street": "Lincon 34",
+    "tel": "012378495",
+    "email": "helper@com"
+  },
+  {
+    "id": "org00003",
+    "name": "München Süd e.V.",
+    "zip": "82805",
+    "city": "München",
+    "street": "Holzstraße 33",
+    "tel": "012378495",
+    "email": "helper@com"
+  }
+]

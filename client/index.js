@@ -20,7 +20,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog
             icon: 'group'
         },
         {
-            link : 'organisatzion',
+            link : 'organization',
             title: 'Einrichtungsverwaltung',
             icon: 'home'
         }

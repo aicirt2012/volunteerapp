@@ -41,6 +41,16 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             }
         })
+        .when('/organization', {
+            templateUrl: 'views/organizationlist/organizationlist.html',
+            controller: 'OrganizationlistCtrl'
+            /*
+            resolve: {
+                user: function($route, User) {
+                    return User.get({id: $route.current.params.id});
+                }
+            }*/
+        })
         .otherwise({
             redirectTo: '/login'
         });

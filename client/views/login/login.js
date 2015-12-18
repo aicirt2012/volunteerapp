@@ -15,11 +15,16 @@ app.controller('LoginCtrl', ['$scope', 'Authenticate', '$mdSidenav', function($s
         });
     }
 
+    $mdSidenav('left')
+        .close();
+
+
 
 }]);
 
 app.service('Authenticate', function($resource) {
     var Login = $resource('/api/login');
+
 
     this.login = function(email, pw){
         var p = Login.save({

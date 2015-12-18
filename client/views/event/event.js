@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$http', '$scope', '$location', '$filter', function($http, $scope, $location, $filter) {
+app.controller('EventCtrl', ['$http', '$scope', '$mdSidenav', '$location', '$filter', function($http, $scope, $mdSidenav, $location, $filter) {
 
 
 
@@ -22,6 +22,9 @@ app.controller('EventCtrl', ['$http', '$scope', '$location', '$filter', function
         // that particular date here.
         return "<p></p>";
     };
+
+    $mdSidenav('left')
+        .open();
 
 
 

@@ -6,7 +6,7 @@
 </head>
 <body layout="row" ng-controller="IndexCtrl">
 
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="leftOpen" md-is-locked-open="leftOpen && $mdMedia('gt-md')">
     <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
@@ -73,7 +73,8 @@
 <script src="/views/event/event.js"></script>
 <script src="/views/login/login.js"></script>
 <script src="/views/mydata/mydata.js"></script>
-<script src="/views/organizationlist/organizationlist.js"></script>
+<script src="/views/organizationlist/orga
+nizationlist.js"></script>
 
 
 </body>

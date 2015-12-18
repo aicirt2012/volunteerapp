@@ -1,4 +1,4 @@
-app.controller('MyDataCtrl', ['$scope', 'user', 'MyData', function($scope, user, MyData) {
+app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'MyData', function($scope, $mdSidenav, user, MyData) {
 
 
     var me = $scope;
@@ -23,7 +23,8 @@ app.controller('MyDataCtrl', ['$scope', 'user', 'MyData', function($scope, user,
         MyData.availability.update(me.user.availability);
     }
 
-
+    $mdSidenav('left')
+        .open();
 
 }]);
 

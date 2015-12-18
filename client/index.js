@@ -1,13 +1,12 @@
 
-app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', 'User', 'Authenticate', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, User, Authenticate){
+app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil', '$mdDialog', 'User', 'Authenticate', function($scope, $mdBottomSheet, $mdSidenav, $mdUtil, $mdDialog, User, Authenticate){
     var me = $scope;
 
 
     me.user = User.me();
 
-    me.toggleSidenav = function(menuId) {
-        $mdSidenav(menuId).toggle();
-    };
+    $scope.leftOpen = true;
+
     me.menu = [
         {
             link : 'event',
@@ -41,8 +40,10 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog
         if(url == 'logout'){
             Authenticate.logout();
             window.location.href = '#/login';
+            $scope.leftOpen = false;
         }else
             window.location.href = '#/'+url;
+            $scope.leftOpen = true;
     };
     /*
      $scope.showListBottomSheet = function($event) {

@@ -1,4 +1,4 @@
-app.controller('AddUserCtrl', ['$scope', 'User', function($scope, User) {
+app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, $mdSidenav, User) {
 
 
     var me = $scope;
@@ -33,6 +33,9 @@ app.controller('AddUserCtrl', ['$scope', 'User', function($scope, User) {
             console.log('user created');
         })
     }
+
+    $mdSidenav('left')
+        .open();
 
 
 

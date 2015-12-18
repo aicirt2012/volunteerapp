@@ -1,4 +1,4 @@
-app.controller('UserCtrl', ['$scope', 'User', '$routeParams', 'user', function($scope, User, $routeParams, user) {
+app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'user', function($scope, $mdSidenav, User, $routeParams, user) {
 
 
     var me = $scope;
@@ -29,7 +29,11 @@ app.controller('UserCtrl', ['$scope', 'User', '$routeParams', 'user', function($
         return 'Personalverwaltung > '+me.selectedRole.label + ' > ' + me.user.name;
     }
 
+    $mdSidenav('left')
+        .toggle();
 
+    $mdSidenav('left')
+        .open();
 
 }]);
 

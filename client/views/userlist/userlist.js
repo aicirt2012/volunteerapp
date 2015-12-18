@@ -1,4 +1,4 @@
-app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList) {
+app.controller('UserlistCtrl', ['$scope', '$mdSidenav', 'UserList', function($scope, $mdSidenav, UserList) {
 
 
     var me = $scope;
@@ -29,6 +29,10 @@ app.controller('UserlistCtrl', ['$scope', 'UserList', function($scope, UserList)
     me.addUser = function(){
         window.location.href = '#/adduser';
     }
+
+    $mdSidenav('left')
+        .open();
+
 }]);
 
 app.service('UserList', function($resource) {

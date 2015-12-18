@@ -1,4 +1,4 @@
-app.controller('OrganizationlistCtrl', ['$scope', 'OrganizationList', function($scope, OrganizationList) {
+app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'OrganizationList', function($scope, $mdSidenav, OrganizationList) {
 
 
     var me = $scope;
@@ -15,6 +15,9 @@ app.controller('OrganizationlistCtrl', ['$scope', 'OrganizationList', function($
     me.addOrganization = function(){
         window.location.href = '#/addorganization';
     }
+
+    $mdSidenav('left')
+        .open();
 }]);
 
 app.service('OrganizationList', function($resource) {

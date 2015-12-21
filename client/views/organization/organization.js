@@ -4,7 +4,6 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
     var me = $scope;
     $routeParams.id
     me.organization = organization;
-    console.log(JSON.stringify(organization));
 
     me.breadcrumb = function(){
         return 'Einrichtungsverwaltung > ' + me.organization.name;

@@ -63,7 +63,7 @@ router.get('/init', function(req, res, next) {
         async.forEach(organizations, function(o, cb){
             Organization.save({
                 name: o.name,
-                zip: o.city,
+                zip: o.zip,
                 city: o.city,
                 street: o.street,
                 tel: o.tel,

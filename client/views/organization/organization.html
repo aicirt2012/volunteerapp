@@ -1,0 +1,33 @@
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="addOrganization()">
+    <ng-md-icon icon="add"></ng-md-icon>
+</md-button>
+<toolbar title="{{breadcrumb()}}"></toolbar>
+
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="inset" hide-sm></div>
+
+        <md-card flex-gt-sm="90" flex-gt-md="80">
+            <md-card-content>
+                <md-list>
+                    <md-list-item ng-repeat="organization in organizationlist" ng-click="selectOrganization(organization.id)">
+                        <md-item-content>
+                            <div class="md-tile-left inset" hide-sm>
+                                <user-avatar></user-avatar>
+                            </div>
+                            <div class="md-tile-content">
+                                <h3>{{organization.name}}</h3>
+                                <h4>{{organization.email}}</h4>
+                                <p>
+                                    {{organization.tel}}
+                                </p>
+                            </div>
+                        </md-item-content>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+
+
+    </ui-view>
+</md-content>

@@ -3,18 +3,19 @@ app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'OrganizationLis
 
     var me = $scope;
 
-    me.organizationlist = OrganizationList.query(function(err, data){
-        console.log(err);
-        console.log(data);
+    me.organizationlist = OrganizationList.query(function(data){
     });
 
     me.selectOrganization = function(id){
-        window.location.href = '#/organization/'+me.selectedRole.id+'/'+id;
+        window.location.href = '#/organization/'+id;
     }
 
     me.addOrganization = function(){
         window.location.href = '#/addorganization';
     }
+
+    me.breadcrumb = 'Einrichtungsverwaltung';
+
 
     $mdSidenav('left')
         .open();

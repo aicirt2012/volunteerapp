@@ -51,6 +51,15 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             }*/
         })
+        .when('/organization/:id', {
+            templateUrl: 'views/organization/organization.html',
+            controller: 'OrganizationCtrl',
+            resolve: {
+                organization: function($route, Organization) {
+                    return Organization.get({id: $route.current.params.id});
+                }
+            }
+        })
         .otherwise({
             redirectTo: '/login'
         });

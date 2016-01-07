@@ -1,0 +1,90 @@
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="addOrganization()">
+    <ng-md-icon icon="add"></ng-md-icon>
+</md-button>
+<toolbar title="{{breadcrumb()}}"></toolbar>
+
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="inset" hide-sm></div>
+
+        <md-card flex-gt-sm="90" flex-gt-md="80">
+            <!--
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Zurück</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>-->
+            <md-card-content>
+                <form name="userForm">
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Name</label>
+                            <input ng-model="organization.name">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>&nbsp;</label>
+                            <md-select ng-model="unknown"/>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>PLZ</label>
+                            <input ng-model="organization.zip">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Stadt</label>
+                            <input ng-model="organization.city">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>&nbsp;</label>
+                            <md-select ng-model="unknown"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Straße</label>
+                            <input ng-model="organization.street">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>&nbsp;</label>
+                            <md-select ng-model="unknown"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Email</label>
+                            <input ng-model="organization.email">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>&nbsp;</label>
+                            <md-select ng-model="unknown"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Tel</label>
+                            <input ng-model="organization.tel">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>&nbsp;</label>
+                            <md-select ng-model="unknown"/>
+                        </md-input-container>
+                    </div>
+                    <br/><br/>
+                    <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button class="md-raised">Abbrechen</md-button>&nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
+                    </section>
+                </form>
+            </md-card-content>
+        </md-card>
+
+
+    </ui-view>
+</md-content>

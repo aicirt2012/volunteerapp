@@ -38,7 +38,7 @@ router.get('/schema', function(req, res, next) {
 router.get('/init', function(req, res, next) {
     var asyncTasks = [];
     asyncTasks.push(function(cb){
-        var users = JSON.parse(fs.readFileSync('server/routes/user/user.list.json'));
+        var users = JSON.parse(fs.readFileSync('server/routes/setup/user.list.json'));
         async.forEach(users, function(u, cb){
             User.save({
                 gender: u.gender,
@@ -63,7 +63,7 @@ router.get('/init', function(req, res, next) {
         async.forEach(organizations, function(o, cb){
             Organization.save({
                 name: o.name,
-                zip: o.city,
+                zip: o.zip,
                 city: o.city,
                 street: o.street,
                 tel: o.tel,

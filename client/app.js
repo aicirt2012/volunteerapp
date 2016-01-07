@@ -11,6 +11,10 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/event/event.html',
             controller: 'EventCtrl'
         })
+        .when('/addevent', {
+            templateUrl: 'views/addevent/addevent.html',
+            controller: 'AddEventCtrl'
+        })
         .when('/mydata', {
             templateUrl: 'views/mydata/mydata.html',
             controller: 'MyDataCtrl',

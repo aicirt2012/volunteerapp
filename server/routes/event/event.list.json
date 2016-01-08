@@ -3,12 +3,25 @@
     "id": "dd",
     "title": "Kinoabend Ice Age 2",
     "place": "schleißheimerstraße 4",
-    "startdate": "TS",
-    "enddate": "TS",
-    "starttime": "TS",
-    "endtime": "TS",
+    "startdate": "01-22-2016",
+    "enddate": "01-22-2016",
+    "starttime": "18:00",
+    "endtime": "20:00",
     "anzhelper": 3,
     "description": "Wir planen eine Kinobesuch im Kino ...",
+    "important": false
+  },
+
+  {
+    "id": "ff",
+    "title": "Fussballtunier",
+    "place": "Alianz Arena",
+    "startdate": "01-08-2016",
+    "enddate": "01-08-2016",
+    "starttime": "15:00",
+    "endtime": "19:00",
+    "anzhelper": 6,
+    "description": "Wir planen ein Fussballtunier ...",
     "important": false
   }
 ]

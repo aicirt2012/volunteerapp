@@ -1,0 +1,85 @@
+<toolbar title="{{breadcrumb()}}"></toolbar>
+
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="insert" hide-sm></div>
+
+        <md-card flex-gt-sm="90" flex-gt-md="80">
+            <ng-switch on="selectedTabNr" class="tabpanel-container">
+                <md-card-content>
+
+                    <form name="userForm" class="md-padding">
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Titel</label>
+                                <input ng-model="event.title">
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-select flex>
+                                <label>Benötigte Helfer</label>
+                                <md-select ng-model="event.anzhelper">
+                                    <md-option ng-repeat="numb in numbers" value="{{numb}}">
+                                        {{numb}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-select>
+
+                            <md-input-container flex>
+                                <label>Ort</label>
+                                <input ng-model="event.place">
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+                        <div layout="row">
+                            <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
+
+                            <md-input-container>
+                                <label>Start time</label>
+                                <input type="time" ng-model="event.startTime"/>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row">
+                            <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
+
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>End time</label>
+                                <input type="time" ng-model="event.endTime"/>
+                            </md-input-container>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Beschreibung</label>
+                                <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+
+                    </form>
+
+                </md-card-content>
+                <md-card-footer>
+                    <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button class="md-raised">Abbrechen</md-button>&nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitAddUser()">Speichern</md-button>
+                    </section>
+                </md-card-footer>
+            </ng-switch>
+        </md-card>
+
+
+    </ui-view>
+</md-content>

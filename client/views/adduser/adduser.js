@@ -26,13 +26,13 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
 
     me.breadcrumb = function(){
         return 'Personalverwaltung > Benutzer Anlegen';
-    }
+    };
 
     me.submitAddUser = function(){
-        User.post(me.user, function(){
+        User.save(me.user, function(){
             console.log('user created');
         })
-    }
+    };
 
     $mdSidenav('left')
         .open();
@@ -40,5 +40,8 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
 
 
 }]);
+app.service('User', function($resource) {
+    return $resource('/api/user');
+});
 
 

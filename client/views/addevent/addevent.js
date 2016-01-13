@@ -15,7 +15,6 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', function($scope
     };
 
     me.submitAddEvent = function(){
-        console.log(JSON.stringify(me.event));
         Event.save(me.event, function(){
             console.log('event created');
         })

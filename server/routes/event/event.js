@@ -16,7 +16,7 @@ router.put('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    /*Event.save({
+    Event.save({
         title: req.body.title,
         place: req.body.place,
         startdate: req.body.startdate,
@@ -27,10 +27,8 @@ router.post('/', function(req, res, next) {
         description: req.body.description,
         important: req.body.important
     }, function(){
-        cb();
-    });*/
-    console.log('create event');
-    res.send();
+        res.send();
+    });
 
 });
 

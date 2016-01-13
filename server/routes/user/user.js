@@ -22,7 +22,19 @@ router.get('/me', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-
+    User.save({
+        gender: req.body.gender,
+        name: req.body.name,
+        tel: req.body.tel,
+        mobil: req.body.mobil,
+        email: req.body.email,
+        pw: req.body.pw,
+        notes: req.body.notes,
+        role: req.body.role,
+        availability: req.body.availability
+    }, function(){
+        res.send();
+    });
 });
 
 router.get('/:id', function(req, res, next) {

@@ -1,5 +1,7 @@
 <toolbar title="{{breadcrumb()}}"></toolbar>
 
+<script src="angular-material.min.js"></script>
+
 <md-content flex md-scroll-y>
     <ui-view layout="column" layout-fill layout-padding>
         <div class="insert" hide-sm></div>
@@ -21,14 +23,11 @@
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
-                            <md-input-select flex>
+                            <md-input-container class="md-block" flex-gt-xs>
                                 <label>Benötigte Helfer</label>
-                                <md-select ng-model="event.anzhelper">
-                                    <md-option ng-repeat="numb in numbers" value="{{numb}}">
-                                        {{numb}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-select>
+                                <input type="number" min="0" ng-model="event.anzhelper"/>
+                            </md-input-container>
+
 
                             <md-input-container flex>
                                 <label>Ort</label>
@@ -45,7 +44,12 @@
 
                             <md-input-container>
                                 <label>Start time</label>
-                                <input type="time" ng-model="event.startTime"/>
+                                <input type="time" ng-model="event.starttime"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
 
@@ -54,7 +58,12 @@
 
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>End time</label>
-                                <input type="time" ng-model="event.endTime"/>
+                                <input type="time" ng-model="event.endtime"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
@@ -73,8 +82,8 @@
                 </md-card-content>
                 <md-card-footer>
                     <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button class="md-raised">Abbrechen</md-button>&nbsp;
-                        <md-button class="md-raised md-primary" ng-click="submitAddUser()">Speichern</md-button>
+                        <md-button class="md-raised" ng-click="showCancel()">Abbrechen</md-button>&nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitAddEvent()">Speichern</md-button>
                     </section>
                 </md-card-footer>
             </ng-switch>

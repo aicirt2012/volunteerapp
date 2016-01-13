@@ -75,6 +75,26 @@ router.get('/init', function(req, res, next) {
             cb();
         });
     });
+    asyncTasks.push(function(cb){
+        var events = JSON.parse(fs.readFileSync('server/routes/event/event.list.json'));
+        async.forEach(events, function(e, cb){
+            Event.save({
+                title: e.title,
+                place: e.place,
+                startdate: e.startdate,
+                enddate: e.enddate,
+                starttime: e.starttime,
+                endtime: e.endtime,
+                anzhelper: e.anzhelper,
+                description: e.description,
+                important: e.important
+            }, function(){
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
     async.series(asyncTasks, function(err){
         res.json({success:true});
     });

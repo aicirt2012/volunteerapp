@@ -1,54 +1,91 @@
-<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd()">
-    <ng-md-icon icon="add"></ng-md-icon>
-</md-button>
-<ng-include src="'shared/toolbar/toolbar.html'"></ng-include>
+<toolbar title="{{breadcrumb()}}"></toolbar>
+
+<script src="angular-material.min.js"></script>
+
 <md-content flex md-scroll-y>
     <ui-view layout="column" layout-fill layout-padding>
-        <div class="inset" hide-sm></div>
+        <div class="insert" hide-sm></div>
 
         <md-card flex-gt-sm="90" flex-gt-md="80">
+            <ng-switch on="selectedTabNr" class="tabpanel-container">
+                <md-card-content>
 
-            <md-card-content class="event-calendar">
+                    <form name="userForm" class="md-padding">
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Titel</label>
+                                <input ng-model="event.title">
+                            </md-input-container>
 
-                <div>
-                    Here:   {{testDate}}
-                </div>
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Benötigte Helfer</label>
+                                <input type="number" min="0" ng-model="event.anzhelper"/>
+                            </md-input-container>
 
-                <md-list>
-                    <md-list-item ng-repeat="event in eventlist" >
-                        <md-item-content>
-                            <div class="md-tile-left inset" hide-sm>
-                            </div>
-                            <div class="md-tile-content">
-                                <h3>Title: {{event.title}}</h3>
-                                <h4>Description: {{event.description}}</h4>
-                                <p>
-                                    id: {{event.id}}
-                                </p>
-                                <p>
-                                    event: {{event}}
-                                </p>
-                            </div>
-                        </md-item-content>
-                    </md-list-item>
-                </md-list>
-                <calendar-md
-                 flex layout layout-fill
-                 calendar-direction="direction"
-                 on-prev-month="prevMonth"
-                 on-next-month="nextMonth"
-                 on-day-click="dayClick"
-                 title-format="'MMMM y'"
-                 ng-model='selectedDate'
-                 week-starts-on="firstDayOfWeek"
-                 tooltips="tooltips"
-                 day-format="dayFormat"
-                 day-label-format="'EEE'"
-                 day-label-tooltip-format="'EEEE'"
-                 day-tooltip-format="'fullDate'"
-                 day-content="setDayContent"
-                 disable-future-selection="false"> </calendar-md>
-            </md-card-content>
+
+                            <md-input-container flex>
+                                <label>Ort</label>
+                                <input ng-model="event.place">
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+                        <div layout="row">
+                            <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
+
+                            <md-input-container>
+                                <label>Start time</label>
+                                <input ng-model="event.starttime"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row">
+                            <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
+
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>End time</label>
+                                <input ng-model="event.endtime"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+                        <div layout layout-sm="column">
+                            <md-input-container flex>
+                                <label>Beschreibung</label>
+                                <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>&nbsp;</label>
+                                <md-select ng-model="unknown"/>
+                            </md-input-container>
+                        </div>
+
+                    </form>
+
+                </md-card-content>
+                <md-card-footer>
+                    <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button class="md-raised md-primary" ng-click="">Bearbeiten</md-button>
+                    </section>
+                </md-card-footer>
+            </ng-switch>
         </md-card>
 
 

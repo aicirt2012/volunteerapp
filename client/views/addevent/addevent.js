@@ -1,12 +1,12 @@
-app.controller('AddEventCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
+app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', function($scope, $mdSidenav, Event) {
 
 
     var me = $scope;
     me.event = {
         title: '',
         place: '',
-        startdate:'',
-        enddate:'',
+        startdate:'2016-01-13:12:00.000Z',
+        enddate:'2016-01-13T11:12:00.000Z',
         starttime:'',
         endtime:'',
         anzhelper:1,
@@ -15,13 +15,15 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', function($scope, $mdSide
     };
 
     me.submitAddEvent = function(){
-        Event.post(me.event, function(){
+        console.log(JSON.stringify(me.event));
+        Event.save(me.event, function(){
             console.log('event created');
         })
-    };
+    }
 
-
-    me.numbers = ('0 1 2 3 4 5 6 7 8 9 10').split(' ');
+    me.showCancel = function(){
+        window.location.href = '#/eventcalendar';
+    }
 
     me.myDate = new Date();
 
@@ -35,5 +37,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', function($scope, $mdSide
 
 
 }]);
-
+app.service('Event', function($resource) {
+    return $resource('/api/event');
+});
 

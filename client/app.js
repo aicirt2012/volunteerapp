@@ -7,9 +7,24 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/login/login.html',
             controller: 'LoginCtrl'
         })
-        .when('/event', {
+        .when('/eventcalendar', {
+            templateUrl: 'views/eventcalendar/eventcalendar.html',
+            controller: 'EventCalendarCtrl',
+            resolve: {
+                eventlist: function(EventList){
+                    return EventList.query().$promise;
+                }
+            }
+        })
+        .when('/event/:id', {
             templateUrl: 'views/event/event.html',
-            controller: 'EventCtrl'
+            controller: 'EventCtrl',
+            resolve: {
+                event: function($route, Event) {
+                    //return Event.get({id: $route.current.params.id});
+                    return Event.get({id: $route.current.params.id});
+                }
+            }
         })
         .when('/addevent', {
             templateUrl: 'views/addevent/addevent.html',

@@ -14,11 +14,6 @@
                                 <label>Titel</label>
                                 <input ng-model="event.title">
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
                         <div layout layout-sm="column">
                             <md-input-container class="md-block" flex-gt-xs>
@@ -31,11 +26,6 @@
                                 <label>Ort</label>
                                 <input ng-model="event.place">
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
                         <div layout="row">
                             <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
@@ -43,11 +33,6 @@
                             <md-input-container>
                                 <label>Start time</label>
                                 <input ng-model="event.starttime"/>
-                            </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
 
@@ -58,20 +43,11 @@
                                 <label>End time</label>
                                 <input ng-model="event.endtime"/>
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Beschreibung</label>
                                 <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
-                            </md-input-container>
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
 

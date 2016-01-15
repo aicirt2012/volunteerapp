@@ -76,7 +76,7 @@ router.get('/init', function(req, res, next) {
         });
     });
     asyncTasks.push(function(cb){
-        var events = JSON.parse(fs.readFileSync('server/routes/event/event.list.json'));
+        var events = JSON.parse(fs.readFileSync('server/routes/setup/event.list.json'));
         async.forEach(events, function(e, cb){
             Event.save({
                 title: e.title,

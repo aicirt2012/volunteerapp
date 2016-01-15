@@ -27,32 +27,23 @@
                          layout="row" layout-align="center center">
                         <form name="userForm">
                             <div layout layout-sm="column">
-                                <md-select-container flex>
+                                <md-input-container flex>
                                     <label>Anrede</label>
                                     <md-select ng-model="user.gender">
                                         <md-option ng-repeat="gender in genders" value="{{gender.id}}">
                                             {{gender.label}}
                                         </md-option>
                                     </md-select>
-                                </md-select-container>
+                                </md-input-container>
                                 <md-input-container flex>
                                     <label>Name</label>
                                     <input ng-model="user.name">
-                                </md-input-container>
-
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Email</label>
                                     <input ng-model="user.email">
-                                </md-input-container>
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
                             <div layout="row" layout-sm="column">
@@ -63,10 +54,6 @@
                                 <md-input-container flex>
                                     <label>Mobil</label>
                                     <input ng-model="user.mobil">
-                                </md-input-container>
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
                             <br/><br/>

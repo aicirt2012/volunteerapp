@@ -6,7 +6,7 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="insert" hide-sm></div>
 
-        <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card>
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-card-content>
 
@@ -16,54 +16,29 @@
                                 <label>Titel</label>
                                 <input ng-model="event.title">
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
                         <div layout layout-sm="column">
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Benötigte Helfer</label>
                                 <input type="number" min="0" ng-model="event.anzhelper"/>
                             </md-input-container>
-
-
                             <md-input-container flex>
                                 <label>Ort</label>
                                 <input ng-model="event.place">
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
                         <div layout="row">
                             <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
-
                             <md-input-container>
                                 <label>Start time</label>
                                 <input type="time" ng-model="event.starttime"/>
                             </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
-
                         <div layout="row">
                             <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
-
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>End time</label>
                                 <input type="time" ng-model="event.endtime"/>
-                            </md-input-container>
-
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
@@ -71,12 +46,7 @@
                                 <label>Beschreibung</label>
                                 <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
                             </md-input-container>
-                            <md-input-container>
-                                <label>&nbsp;</label>
-                                <md-select ng-model="unknown"/>
-                            </md-input-container>
                         </div>
-
                     </form>
 
                 </md-card-content>

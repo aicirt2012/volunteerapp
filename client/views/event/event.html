@@ -6,59 +6,54 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="insert" hide-sm></div>
 
-        <md-card flex-gt-sm="90" flex-gt-md="80">
-                <md-card-content>
-                    <form name="eventForm" layout-padding="">
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Titel</label>
-                                <input ng-model="event.title">
-                            </md-input-container>
-                        </div>
-                        <div layout layout-sm="column">
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Benötigte Helfer</label>
-                                <input type="number" min="0" ng-model="event.anzhelper"/>
-                            </md-input-container>
+        <md-card>
+            <md-card-content>
+                <form name="eventForm" layout-padding="">
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Titel</label>
+                            <input ng-model="event.title">
+                        </md-input-container>
+                    </div>
+                    <div layout layout-sm="column">
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label>Benötigte Helfer</label>
+                            <input type="number" min="0" ng-model="event.anzhelper"/>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Ort</label>
+                            <input ng-model="event.place">
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
+                        <md-input-container>
+                            <label>Start time</label>
+                            <input ng-model="event.starttime"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
+                        <md-input-container class="md-block">
+                            <label>End time</label>
+                            <input ng-model="event.endtime"/>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Beschreibung</label>
+                            <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
+                        </md-input-container>
+                    </div>
 
+                </form>
 
-                            <md-input-container flex>
-                                <label>Ort</label>
-                                <input ng-model="event.place">
-                            </md-input-container>
-                        </div>
-                        <div layout="row">
-                            <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
-
-                            <md-input-container>
-                                <label>Start time</label>
-                                <input ng-model="event.starttime"/>
-                            </md-input-container>
-                        </div>
-
-                        <div layout="row">
-                            <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
-
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>End time</label>
-                                <input ng-model="event.endtime"/>
-                            </md-input-container>
-                        </div>
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Beschreibung</label>
-                                <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
-                            </md-input-container>
-                        </div>
-
-                    </form>
-
-                </md-card-content>
-                <md-card-footer>
-                    <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button class="md-raised md-primary" ng-click="">Bearbeiten</md-button>
-                    </section>
-                </md-card-footer>
+            </md-card-content>
+            <md-card-footer>
+                <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                    <md-button class="md-raised md-primary" ng-click="">Bearbeiten</md-button>
+                </section>
+            </md-card-footer>
         </md-card>
 
     </ui-view>

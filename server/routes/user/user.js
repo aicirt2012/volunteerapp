@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
         tel: req.body.tel,
         mobil: req.body.mobil,
         email: req.body.email,
-        pw: req.body.pw,
+        pw: "userpw",
         notes: req.body.notes,
         role: req.body.role,
         availability: req.body.availability

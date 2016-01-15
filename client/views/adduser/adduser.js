@@ -2,6 +2,9 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
 
 
     var me = $scope;
+
+    me.genders = User.genders;
+
     me.user = {
         gender: '',
         name: '',
@@ -9,6 +12,7 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         mobil: '',
         email: '',
         notes: '',
+        role: 'helper',
         availability: {
             "mo": {"morning": false, "afternoon": false, "evening": false},
             "tu": {"morning": false, "afternoon": false, "evening": false},
@@ -21,15 +25,14 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
     };
 
 
-
-
-
     me.breadcrumb = function(){
         return 'Personalverwaltung > Benutzer Anlegen';
     };
 
     me.submitAddUser = function(){
+        console.log("Before save: " + JSON.stringify(me.user));
         User.save(me.user, function(){
+            console.log("After save: " + JSON.stringify(me.user));
             console.log('user created');
         })
     };
@@ -37,11 +40,6 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
     $mdSidenav('left')
         .open();
 
-
-
 }]);
-app.service('User', function($resource) {
-    return $resource('/api/user');
-});
 
 

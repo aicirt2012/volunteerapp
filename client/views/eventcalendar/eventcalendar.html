@@ -11,26 +11,6 @@
         <md-card>
 
             <md-card-content class="event-calendar">
-
-                <md-list>
-                    <md-list-item ng-repeat="event in eventList" >
-                        <md-item-content>
-                            <div class="md-tile-left inset" hide-sm>
-                            </div>
-                            <div class="md-tile-content">
-                                <h3>Title: {{event.title}}</h3>
-                                <h4>Description: {{event.description}}</h4>
-                                <p>
-                                    id: {{event.id}}
-                                </p>
-                                <p>
-                                    event: {{event}}
-                                </p>
-                            </div>
-                            <md-button class="md-raised md-primary" ng-click="selectEvent(event.id)">Anschauen</md-button>
-                        </md-item-content>
-                    </md-list-item>
-                </md-list>
                 <calendar-md
                  flex layout layout-fill
                  calendar-direction="direction"

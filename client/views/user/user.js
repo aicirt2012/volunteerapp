@@ -53,6 +53,7 @@ app.service('User', function($resource) {
         roles: roles,
         get: User.get,
         post: User.post,
-        me: Me.get
+        me: Me.get,
+        save: User.save
     }
 });

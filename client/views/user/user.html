@@ -4,9 +4,9 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card>
+        <md-card style="padding:0px">
             <ng-switch on="selectedTabNr" class="tabpanel-container">
-                <md-tabs md-stretch-tabs class="md-primary" md-selected="selectedTabNr">
+                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
                     <md-tab id="tab1" aria-controls="tab1-content">
                         Persönliche Daten
                     </md-tab>

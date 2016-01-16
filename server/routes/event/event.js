@@ -4,19 +4,18 @@ var router = express.Router();
 var Event = require('../../sc/Event');
 var EventHelper = require('../../sc/EventHelper');
 
-router.get('/list', function(req, res, next) {
-    //res.json(JSON.parse(fs.readFileSync('server/routes/event/event.list.json')));
+router.get('/list', function(req, res) {
     Event.findAll(function(err, events){
         res.json(events);
     });
 });
 
-router.put('/', function(req, res, next) {
+router.put('/', function(req, res) {
     console.log('update event');
     res.send();
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
     Event.save({
         title: req.body.title,
         place: req.body.place,
@@ -33,7 +32,7 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res) {
     var eId = req.params.id;
     Event.findById(eId, function(err, event){
         if(err)

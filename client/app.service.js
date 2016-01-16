@@ -61,3 +61,26 @@ app.service('User', function($resource) {
         save: User.save
     }
 });
+
+
+app.service('Authenticate', function($resource) {
+    var Login = $resource('/api/login');
+
+
+    this.login = function(email, pw){
+        var p = Login.save({
+            email : email,
+            pw: pw
+        }).$promise;
+        p.then(function(data){
+            localStorage.setItem('JWT', data.token);
+        },function(){
+            console.error("fail@loginUser");
+        });
+        return p;
+    };
+
+    this.logout = function(){
+        localStorage.removeItem('JWT');
+    }
+});

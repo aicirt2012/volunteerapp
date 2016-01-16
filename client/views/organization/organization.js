@@ -9,7 +9,6 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
     }
 
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 }]);
 

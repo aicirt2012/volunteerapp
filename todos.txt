@@ -1,0 +1,7 @@
+-Data Types
+-Associations init
+-Unique email?
+-input validation,
+-user pic uploaden
+-BUG: sidebar menue gets grey on every click
+-deployment

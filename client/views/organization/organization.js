@@ -13,6 +13,3 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
         .open();
 }]);
 
-app.service('Organization', function($resource) {
-    return $resource('/api/organization/:id');
-});

@@ -28,20 +28,3 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'MyData', function
 
 }]);
 
-app.service('MyData', function($resource) {
-
-    var Personal = $resource('/api/mydata/personal', null, {
-        'update': { method:'PUT' }
-    });
-
-    var Availability = $resource('/api/mydata/availability', null, {
-        'update': { method:'PUT' }
-    });
-
-
-
-    return {
-        personal: Personal,
-        availability: Availability
-    };
-});

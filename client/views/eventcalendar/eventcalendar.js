@@ -1,8 +1,9 @@
-app.controller('EventCalendarCtrl', ['$http', '$scope', '$mdSidenav', '$location', '$filter', '$http', '$q', 'eventlist', function($http, $scope, $mdSidenav, $location, $filter, $http, $q, eventlist) {
+app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', function($scope, $mdSidenav, eventlist) {
 
 
 
     var me = $scope;
+    me.eventList = eventlist;
 
     me.selectedDate = null;
     me.firstDayOfWeek = 0;
@@ -10,8 +11,6 @@ app.controller('EventCalendarCtrl', ['$http', '$scope', '$mdSidenav', '$location
     me.firstDayOfWeek = 0; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     me.tooltips = true;
 
-
-    me.eventList = eventlist;
 
     me.setDirection = function(direction) {
         me.direction = direction;

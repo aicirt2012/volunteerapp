@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'event', 'Event', '$routeParams', function($scope, $mdSidenav, event, Event, $routeParams) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'event', '$routeParams', function($scope, $mdSidenav, event, $routeParams) {
 
 
     var me = $scope;
@@ -21,10 +21,24 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'event', 'Event', '$routePa
         return date;
     }*/
 
+    me.register = function(){
+
+    };
+
+    me.unregister = function(){
+
+    };
+
     $mdSidenav('left')
         .open();
 }]);
 
 app.service('Event', function($resource) {
-    return $resource('/api/event/:id');
+    var Event = $resource('/api/event/:id');
+    var EventHelper = $resource('/api/event/:id/register');
+    return {
+        save: Event.save,
+        get: Event.get,
+        register: EventHelper.save
+    }
 });

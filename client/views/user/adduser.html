@@ -4,38 +4,29 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card flex-gt-sm="90" flex-gt-md="80">
+        <md-card>
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-card-content>
 
                         <form name="userForm" layout-padding="">
                             <div layout layout-sm="column">
-                                <md-select-container flex>
+                                <md-input-container flex>
                                     <label>Anrede</label>
                                     <md-select ng-model="user.gender">
                                         <md-option ng-repeat="gender in genders" value="{{gender.id}}">
                                             {{gender.label}}
                                         </md-option>
                                     </md-select>
-                                </md-select-container>
+                                </md-input-container>
                                 <md-input-container flex>
                                     <label>Name</label>
                                     <input ng-model="user.name">
-                                </md-input-container>
-
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Email</label>
                                     <input ng-model="user.email">
-                                </md-input-container>
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
                             <div layout="row" layout-sm="column">
@@ -47,19 +38,11 @@
                                     <label>Mobil</label>
                                     <input ng-model="user.mobil">
                                 </md-input-container>
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
-                                </md-input-container>
                             </div>
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Notizen</label>
                                     <textarea ng-model="user.notes" columns="3" md-maxlength="150" rows="5"></textarea>
-                                </md-input-container>
-                                <md-input-container>
-                                    <label>&nbsp;</label>
-                                    <md-select ng-model="unknown"/>
                                 </md-input-container>
                             </div>
 

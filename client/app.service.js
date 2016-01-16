@@ -13,7 +13,13 @@ app.service('Event', function($resource) {
 });
 
 app.service('Organization', function($resource) {
-    return $resource('/api/organization/:id');
+    var Organization = $resource('/api/organization/:id');
+    var OrganizationList = $resource('/api/organization/list');
+    return {
+        get: Organization.get,
+        save: Organization.save,
+        list: OrganizationList.query
+    }
 });
 
 
@@ -32,4 +38,26 @@ app.service('MyData', function($resource) {
         personal: Personal,
         availability: Availability
     };
+});
+
+
+app.service('User', function($resource) {
+
+    var Me = $resource('/api/user/me');
+    var User = $resource('/api/user/:id');
+    var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
+    var roles = [
+        {id: 'helper', label: 'Helfer'},
+        {id: 'team', label: 'Team'},
+        {id: 'organizer', label: 'Organisator'}
+    ];
+
+    return {
+        genders: genders,
+        roles: roles,
+        get: User.get,
+        post: User.post,
+        me: Me.get,
+        save: User.save
+    }
 });

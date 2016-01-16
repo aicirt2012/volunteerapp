@@ -37,23 +37,3 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
 
 }]);
 
-app.service('User', function($resource) {
-
-    var Me = $resource('/api/user/me');
-    var User = $resource('/api/user/:id');
-    var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
-    var roles = [
-        {id: 'helper', label: 'Helfer'},
-        {id: 'team', label: 'Team'},
-        {id: 'organizer', label: 'Organisator'}
-    ];
-
-    return {
-        genders: genders,
-        roles: roles,
-        get: User.get,
-        post: User.post,
-        me: Me.get,
-        save: User.save
-    }
-});

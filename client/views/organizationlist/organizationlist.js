@@ -1,10 +1,9 @@
-app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'OrganizationList', function($scope, $mdSidenav, OrganizationList) {
+app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'Organization', function($scope, $mdSidenav, Organization) {
 
 
     var me = $scope;
 
-    me.organizationlist = OrganizationList.query(function(data){
-    });
+    me.organizationlist = Organization.list(function(data){});
 
     me.selectOrganization = function(id){
         window.location.href = '#/organization/'+id;
@@ -17,10 +16,5 @@ app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'OrganizationLis
     me.breadcrumb = 'Einrichtungsverwaltung';
 
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 }]);
-
-app.service('OrganizationList', function($resource) {
-    return $resource('/api/organization/list');
-});

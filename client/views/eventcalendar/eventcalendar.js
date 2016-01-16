@@ -1,4 +1,4 @@
-app.controller('EventCalendarCtrl', ['$http', '$scope', '$mdSidenav', '$location', '$filter', '$http', '$q', 'EventList', 'eventlist', function($http, $scope, $mdSidenav, $location, $filter, $http, $q, EventList, eventlist) {
+app.controller('EventCalendarCtrl', ['$http', '$scope', '$mdSidenav', '$location', '$filter', '$http', '$q', 'eventlist', function($http, $scope, $mdSidenav, $location, $filter, $http, $q, eventlist) {
 
 
 

@@ -28,14 +28,3 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
 
     $mdSidenav('left').open();
 }]);
-
-app.service('Event', function($resource) {
-    var Event = $resource('/api/event/:id');
-    var EventHelper = $resource('/api/event/:id/register');
-    return {
-        save: Event.save,
-        get: Event.get,
-        register: EventHelper.save,
-        unregister: EventHelper.delete
-    }
-});

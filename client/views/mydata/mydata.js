@@ -1,8 +1,9 @@
-app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'MyData', function($scope, $mdSidenav, user, MyData) {
+app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', function($scope, $mdSidenav, user, User, MyData) {
 
 
     var me = $scope;
     me.user = user;
+    me.genders = User.genders;
 
     me.breadcrumb = function(){
         return 'Meine Daten';

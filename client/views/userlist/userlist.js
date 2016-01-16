@@ -42,6 +42,3 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', function($sc
 
 }]);
 
-app.service('UserList', function($resource) {
-    return $resource('/api/user/list');
-});

@@ -45,6 +45,7 @@ app.service('User', function($resource) {
 
     var Me = $resource('/api/user/me');
     var User = $resource('/api/user/:id');
+    var UserList = $resource('/api/user/list');
     var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
     var roles = [
         {id: 'helper', label: 'Helfer'},
@@ -53,6 +54,7 @@ app.service('User', function($resource) {
     ];
 
     return {
+        list: UserList.query,
         genders: genders,
         roles: roles,
         get: User.get,

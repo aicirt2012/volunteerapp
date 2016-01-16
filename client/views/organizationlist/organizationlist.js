@@ -3,7 +3,8 @@ app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', 
 
     var me = $scope;
 
-    me.organizationlist = Organization.list(function(data){});
+    me.organizationlist = Organization.list(function(data){
+    });
 
     me.selectOrganization = function(id){
         window.location.href = '#/organization/'+id;
@@ -16,5 +17,6 @@ app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', 
     me.breadcrumb = 'Einrichtungsverwaltung';
 
 
-    $mdSidenav('left').open();
+    $mdSidenav('left')
+        .open();
 }]);

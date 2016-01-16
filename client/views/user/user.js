@@ -36,4 +36,3 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         .open();
 
 }]);
-

@@ -48,8 +48,8 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/userlist/userlist.html',
             controller: 'UserListCtrl',
             resolve: {
-                userlist: function(UserList) {
-                    return UserList.query().$promise;
+                userlist: function(User) {
+                    return User.list().$promise;
                 }
             }
         })

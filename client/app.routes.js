@@ -37,7 +37,7 @@ app.config(['$routeProvider', function($routeProvider) {
             }
         })
         .when('/adduser', {
-            templateUrl: 'views/adduser/adduser.html',
+            templateUrl: 'views/user/adduser.html',
             controller: 'AddUserCtrl'
         })
         .when('/user/', {
@@ -45,7 +45,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
         })
         .when('/user/:role', {
-            templateUrl: 'views/userlist/userlist.html',
+            templateUrl: 'views/user/userlist.html',
             controller: 'UserListCtrl',
             resolve: {
                 userlist: function(User) {
@@ -63,7 +63,7 @@ app.config(['$routeProvider', function($routeProvider) {
             }
         })
         .when('/organization', {
-            templateUrl: 'views/organizationlist/organizationlist.html',
+            templateUrl: 'views/organization/organizationlist.html',
             controller: 'OrganizationListCtrl'
             /*
              resolve: {

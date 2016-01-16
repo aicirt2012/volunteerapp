@@ -37,8 +37,7 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', function($sc
         window.location.href = '#/adduser';
     }
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 
 }]);
 

@@ -29,10 +29,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         return 'Personalverwaltung > '+me.selectedRole.label + ' > ' + me.user.name;
     }
 
-    $mdSidenav('left')
-        .toggle();
+    $mdSidenav('left').toggle();
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 
 }]);

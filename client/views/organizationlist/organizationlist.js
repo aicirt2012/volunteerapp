@@ -17,6 +17,5 @@ app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', 
     me.breadcrumb = 'Einrichtungsverwaltung';
 
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 }]);

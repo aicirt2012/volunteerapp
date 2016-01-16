@@ -15,8 +15,7 @@ app.controller('LoginCtrl', ['$scope', 'Authenticate', '$mdSidenav', function($s
         });
     }
 
-    $mdSidenav('left')
-        .close();
+    $mdSidenav('left').close();
 
 
 

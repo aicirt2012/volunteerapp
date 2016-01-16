@@ -23,8 +23,7 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'MyData', function
         MyData.availability.update(me.user.availability);
     }
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 
 }]);
 

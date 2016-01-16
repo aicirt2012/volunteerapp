@@ -37,8 +37,7 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         })
     };
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 
 }]);
 

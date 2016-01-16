@@ -18,10 +18,10 @@ router.get('/schema', function(req, res, next) {
         SocioCortex.workspace.create(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
-        User.schema.create(cb);
+        Organization.schema.create(cb);
     });
     asyncTasks.push(function(cb){
-        Organization.schema.create(cb);
+        User.schema.create(cb);
     });
     asyncTasks.push(function(cb){
         Event.schema.create(cb);

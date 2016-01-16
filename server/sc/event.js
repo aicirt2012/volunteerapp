@@ -13,7 +13,8 @@ var Event = EntityType.define({
     starttime: {type: 'String'},
     startdate: {type:'String'},
     endtime: {type:'String'},
-    enddate: {type:'String'}
+    enddate: {type:'String'},
+    organization: {type: 'link', options:{entityType: {id:'organization'}} }
 }, 'event');
 
 

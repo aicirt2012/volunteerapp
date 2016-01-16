@@ -1,4 +1,4 @@
-app.controller('OrganizationlistCtrl', ['$scope', '$mdSidenav', 'Organization', function($scope, $mdSidenav, Organization) {
+app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', function($scope, $mdSidenav, Organization) {
 
 
     var me = $scope;

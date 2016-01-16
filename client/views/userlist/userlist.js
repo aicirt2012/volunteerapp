@@ -1,4 +1,4 @@
-app.controller('UserlistCtrl', ['$scope', '$mdSidenav', 'userlist', function($scope, $mdSidenav, userlist) {
+app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', function($scope, $mdSidenav, userlist) {
 
 
     var me = $scope;

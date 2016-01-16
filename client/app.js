@@ -21,7 +21,6 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'EventCtrl',
             resolve: {
                 event: function($route, Event) {
-                    //return Event.get({id: $route.current.params.id});
                     return Event.get({id: $route.current.params.id});
                 }
             }

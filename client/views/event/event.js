@@ -1,13 +1,10 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'event', '$routeParams', function($scope, $mdSidenav, event, $routeParams) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routeParams', function($scope, $mdSidenav, Event, event, $routeParams) {
 
 
     var me = $scope;
-    //$routeParams.id;
     me.currentId = $routeParams.id;
-    //rme.event = Event.get(me.currentId);
     me.event = event;
     console.log(JSON.stringify(event));
-    console.log($routeParams.id);
     //me.event.startTime = formatDate(me.event.startdate, me.event.starttime);
     //me.event.endTime = formatDate(me.event.enddate, me.event.endtime);
 
@@ -22,15 +19,14 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'event', '$routeParams', fu
     }*/
 
     me.register = function(){
-
+        Event.register({id: me.currentId}, {helperId:'c3ztqpdyu86k'});
     };
 
     me.unregister = function(){
-
+        Event.unregister({id: me.currentId}, {helperId:'c3ztqpdyu86k'});
     };
 
-    $mdSidenav('left')
-        .open();
+    $mdSidenav('left').open();
 }]);
 
 app.service('Event', function($resource) {
@@ -39,6 +35,7 @@ app.service('Event', function($resource) {
     return {
         save: Event.save,
         get: Event.get,
-        register: EventHelper.save
+        register: EventHelper.save,
+        unregister: EventHelper.delete
     }
 });

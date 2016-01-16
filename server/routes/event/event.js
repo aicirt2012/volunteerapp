@@ -56,16 +56,14 @@ router.post('/:id/register', function(req, res, next) {
     console.log('register for event');
     var eventId = req.params.id;
     var helperId = req.body.helperId;
-    var eventId = req.body.eventId;
-
+    console.log(eventId, helperId);
     EventHelper.save({
         helper: helperId,
-        event: eventId,
+        event: 'event_1452904446018',
         registered: new Date().toDateString()
     }, function(){
         res.send();
     });
-
 });
 
 router.post('/:id/unregister', function(req, res, next) {

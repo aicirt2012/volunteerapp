@@ -4,7 +4,6 @@ var EntityType = require('../sc/EntityType');
 
 
 var Organization = EntityType.define({
-    id: {type:'String'},
     name: {type:'String'},
     zip: {type: 'String'},
     city: {type: 'String'},

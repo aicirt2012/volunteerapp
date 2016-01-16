@@ -4,7 +4,6 @@ var EntityType = require('../sc/EntityType');
 
 
 var Event = EntityType.define({
-    id: {type:'String'},
     title: {type:'String'},
     description: {type:'String'},
     nrhelpers: {type:'Number'},

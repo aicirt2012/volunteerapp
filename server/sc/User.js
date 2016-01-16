@@ -5,7 +5,6 @@ var EntityType = require('../sc/EntityType');
 
 
 var User = EntityType.define({
-    id: {type:'String'},
     gender: {type:'String'},
     name: {type:'String'},
     tel: {type:'String'},

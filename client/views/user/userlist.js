@@ -1,18 +1,11 @@
-app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', function($scope, $mdSidenav, userlist) {
+app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', function($scope, $mdSidenav, userlist, User) {
 
 
     var me = $scope;
-
     me.userlist = userlist;
-
-    me.roles = [
-        {id: 'helper', label: 'Helfer'},
-        {id: 'team', label: 'Team'},
-        {id: 'organizer', label: 'Organisator'}
-    ];
+    me.roles = User.roles;
 
     me.selectedTabNr = 1;
-   // me.selectedRole = me.roles[1];
     me.$watch('selectedTabNr', function(newValue) {
         me.selectedRole = me.roles[me.selectedTabNr];
         me.breadcrumb = 'Personalverwaltung > '+ me.selectedRole.label;

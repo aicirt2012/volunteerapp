@@ -11,8 +11,8 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/eventcalendar/eventcalendar.html',
             controller: 'EventCalendarCtrl',
             resolve: {
-                eventlist: function(EventList){
-                    return EventList.query().$promise;
+                eventlist: function(Event){
+                    return Event.list().$promise;
                 }
             }
         })

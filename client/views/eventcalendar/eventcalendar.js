@@ -72,9 +72,4 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
             + date.getFullYear();
     }
 
-
 }]);
-
-app.service('EventList', function($resource) {
-    return $resource('/api/event/list');
-});

@@ -6,7 +6,7 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'LoginCtrl'
         })
         .when('/eventcalendar', {
-            templateUrl: 'views/eventcalendar/eventcalendar.html',
+            templateUrl: 'views/event/eventcalendar.html',
             controller: 'EventCalendarCtrl',
             resolve: {
                 eventlist: function(Event){
@@ -24,7 +24,7 @@ app.config(['$routeProvider', function($routeProvider) {
             }
         })
         .when('/addevent', {
-            templateUrl: 'views/addevent/addevent.html',
+            templateUrl: 'views/event/addevent.html',
             controller: 'AddEventCtrl'
         })
         .when('/mydata', {

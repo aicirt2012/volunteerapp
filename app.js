@@ -8,7 +8,6 @@ var jwt = require('jsonwebtoken');
 var config = require('./config')
 
 var setup = require('./server/routes/setup/setup');
-var init = require('./server/routes/init/init');
 var login = require('./server/routes/login/login');
 var user = require('./server/routes/user/user');
 var event = require('./server/routes/event/event');
@@ -27,8 +26,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.use('/api/setup', setup);
-app.use('/api/init', init);
+if (app.get('env') === 'development') {
+    app.use('/api/setup', setup);
+}
+
 app.use('/api/login', login);
 
 

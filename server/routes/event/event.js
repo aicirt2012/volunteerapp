@@ -52,7 +52,7 @@ router.get('/:id', function(req, res) {
 
 });
 
-router.post('/:id/register', function(req, res, next) {
+router.post('/:id/register', function(req, res) {
     console.log('register for event');
     var eventId = req.params.id;
     var helperId = req.body.helperId;
@@ -66,7 +66,7 @@ router.post('/:id/register', function(req, res, next) {
     });
 });
 
-router.post('/:id/unregister', function(req, res, next) {
+router.post('/:id/unregister', function(req, res) {
     console.log('unregister for event');
     res.send();
 });

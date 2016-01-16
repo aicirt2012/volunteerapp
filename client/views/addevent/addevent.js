@@ -1,6 +1,5 @@
 app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', function($scope, $mdSidenav, Event) {
 
-
     var me = $scope;
     me.event = {
         title: '',
@@ -36,7 +35,4 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', function($scope
 
 
 }]);
-app.service('Event', function($resource) {
-    return $resource('/api/event');
-});
 

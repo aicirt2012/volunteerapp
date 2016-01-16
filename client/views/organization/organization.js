@@ -1,8 +1,7 @@
-app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$routeParams', function($scope, $mdSidenav, organization, Organization, $routeParams) {
+app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', function($scope, $mdSidenav, organization, Organization) {
 
 
     var me = $scope;
-    $routeParams.id
     me.organization = organization;
 
     me.breadcrumb = function(){

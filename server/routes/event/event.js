@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //var fs = require('fs');
 var Event = require('../../sc/Event');
+var EventHelper = require('../../sc/EventHelper');
 
 router.get('/list', function(req, res, next) {
     //res.json(JSON.parse(fs.readFileSync('server/routes/event/event.list.json')));
@@ -45,7 +46,18 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/:id/register', function(req, res, next) {
     console.log('register for event');
-    res.send();
+    var eventId = req.params.id;
+    var helperId = req.body.helperId;
+    var eventId = req.body.eventId;
+
+    EventHelper.save({
+        helper: helperId,
+        event: eventId,
+        registered: new Date().toDateString()
+    }, function(){
+        res.send();
+    });
+
 });
 
 router.post('/:id/unregister', function(req, res, next) {

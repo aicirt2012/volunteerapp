@@ -1,9 +1,9 @@
-app.controller('UserlistCtrl', ['$scope', '$mdSidenav', 'UserList', function($scope, $mdSidenav, UserList) {
+app.controller('UserlistCtrl', ['$scope', '$mdSidenav', 'userlist', function($scope, $mdSidenav, userlist) {
 
 
     var me = $scope;
 
-    me.userlist = UserList.query();
+    me.userlist = userlist;
 
     me.roles = [
         {id: 'helper', label: 'Helfer'},
@@ -24,6 +24,13 @@ app.controller('UserlistCtrl', ['$scope', '$mdSidenav', 'UserList', function($sc
 
     me.selectUser = function(id){
         window.location.href = '#/user/'+me.selectedRole.id+'/'+id;
+    }
+
+    me.hasSelectedRole = function(){
+        for(var i=0; i<me.userlist.length; i++)
+            if (me.userlist[i].role == me.selectedRole.id)
+                return true;
+        return false;
     }
 
     me.addUser = function(){

@@ -49,7 +49,12 @@ app.config(['$routeProvider', function($routeProvider) {
         })
         .when('/user/:role', {
             templateUrl: 'views/userlist/userlist.html',
-            controller: 'UserlistCtrl'
+            controller: 'UserlistCtrl',
+            resolve: {
+                userlist: function(UserList) {
+                    return UserList.query().$promise;
+                }
+            }
         })
         .when('/user/:role/:id', {
             templateUrl: 'views/user/user.html',

@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-//var fs = require('fs');
+var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var EventHelper = require('../../sc/EventHelper');
+var mailer = require('../../util/mailer');
 
 router.get('/list', function(req, res) {
     Event.findAll(function(err, events){
@@ -27,6 +28,14 @@ router.post('/', function(req, res) {
         description: req.body.description,
         important: req.body.important
     }, function(){
+        //TODO implened query to find users
+        /*
+        User.findAvailableUsers(startdate, starttime, endtime, endate, function(users){
+            for(var i=0; i<users.length; i++){
+
+            }
+            mailer.send({to: '', subject: '', html: 'Hallo '});
+        });*/
         res.send();
     });
 

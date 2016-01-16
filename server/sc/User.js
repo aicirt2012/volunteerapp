@@ -28,7 +28,7 @@ User.roles = {
     ORGANIZER: 'ORGANIZER'
 }
 
-User.findAvailableUsers = function(availableOn, cb){
+User.findAvailableUsers = function(startdate, starttime, endtime, endate, cb){
     console.log('find special person');
 }
 

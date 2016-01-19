@@ -53,14 +53,13 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/:id/register', function(req, res) {
-    console.log('register for event');
     var eventId = req.params.id;
     var helperId = req.body.helperId;
     console.log(eventId, helperId);
     EventHelper.save({
-        helper: helperId,
-        event: 'event_1452904446018',
-        registered: new Date().toDateString()
+        helper: {id: helperId},
+        event: {id: eventId},
+        registered: new Date().toISOString()
     }, function(){
         res.send();
     });

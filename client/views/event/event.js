@@ -5,6 +5,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     me.currentId = $routeParams.id;
     me.event = event;
     console.log(JSON.stringify(event));
+    //TODO load this form backend
+    me.event.helpers = [
+        {name: 'Felix Michel', date: ''}, {name: 'Niklas', data: ''}, {name: 'albert', date: ''}
+    ]
+    console.log(JSON.stringify(event));
     //me.event.startTime = formatDate(me.event.startdate, me.event.starttime);
     //me.event.endTime = formatDate(me.event.enddate, me.event.endtime);
 
@@ -19,7 +24,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     }*/
 
     me.register = function(){
-        Event.register({id: me.currentId}, {helperId:'c3ztqpdyu86k'});
+        Event.register({id: me.currentId}, {
+            helperId:'e0d0z60fjjyh'
+        });
     };
 
     me.unregister = function(){

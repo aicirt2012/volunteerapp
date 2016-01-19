@@ -1,7 +1,10 @@
--Data Types
 -Associations init
 -Unique email?
 -input validation,
 -user pic uploaden
 -BUG: sidebar menue gets grey on every click
 -deployment
+
+
+https://de.wikipedia.org/wiki/ISO_8601
+-Deployment

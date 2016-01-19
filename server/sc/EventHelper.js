@@ -4,7 +4,7 @@ var EntityType = require('../sc/EntityType');
 
 
 var EventHelper = EntityType.define({
-    registered: {type:'String'},
+    registered: {type:'Date'},
     helper: {type: 'link', options:{entityType: {id:'user'}} },
     event: {type: 'link', options:{entityType: {id:'event'}} }
 }, 'eventhelper');

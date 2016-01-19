@@ -1,8 +1,8 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routeParams', function($scope, $mdSidenav, Event, event, $routeParams) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routeParams', 'User', function($scope, $mdSidenav, Event, event, $routeParams, User) {
 
 
     var me = $scope;
-    me.currentId = $routeParams.id;
+    me.eventId = $routeParams.id;
     me.event = event;
     console.log(JSON.stringify(event));
     //TODO load this form backend
@@ -24,13 +24,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     }*/
 
     me.register = function(){
-        Event.register({id: me.currentId}, {
-            helperId:'e0d0z60fjjyh'
+        Event.register({id: me.eventId}, {
+            helperId: User.getUserId()
         });
     };
 
     me.unregister = function(){
-        Event.unregister({id: me.currentId}, {helperId:'c3ztqpdyu86k'});
+        Event.unregister({id: me.eventId}, {helperId:'c3ztqpdyu86k'});
     };
 
     $mdSidenav('left').open();

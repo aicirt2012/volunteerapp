@@ -41,7 +41,7 @@ app.service('MyData', function($resource) {
 });
 
 
-app.service('User', function($resource) {
+app.service('User', function($resource, $base64) {
 
     var Me = $resource('/api/user/me');
     var User = $resource('/api/user/:id');
@@ -53,6 +53,18 @@ app.service('User', function($resource) {
         {id: 'organizer', label: 'Organisator'}
     ];
 
+    var getUserId = function(){
+        var jwt = localStorage.getItem('JWT');
+        if(jwt) {
+            var b64Id = jwt.split('.')[1];
+            //b64Id.
+            console.log($base64.decode(b64Id));
+            return $base64.decode(b64Id);
+        } else
+            return null;
+    }
+
+
     return {
         list: UserList.query,
         genders: genders,
@@ -60,7 +72,8 @@ app.service('User', function($resource) {
         get: User.get,
         post: User.post,
         me: Me.get,
-        save: User.save
+        save: User.save,
+        getUserId: getUserId
     }
 });
 
@@ -75,6 +88,7 @@ app.service('Authenticate', function($resource) {
             pw: pw
         }).$promise;
         p.then(function(data){
+            console.log('user',data);
             localStorage.setItem('JWT', data.token);
         },function(){
             console.error("fail@loginUser");
@@ -85,4 +99,6 @@ app.service('Authenticate', function($resource) {
     this.logout = function(){
         localStorage.removeItem('JWT');
     }
+
+
 });

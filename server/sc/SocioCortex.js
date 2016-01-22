@@ -163,6 +163,24 @@ function findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, cb){
     });
 }
 
+function createAttributeValue(entityId, attributeName, cb){
+    findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, value, function(err, attrId){
+        if(!err) {
+            var data = {value: value};
+            http.post('/attributes/' + attrId + '/values', data, function (err, res, body) {
+                if (err || res.statusCode != 200) {
+                    console.error('Error during creating Attribute Value "' + attrId + '"!');
+                    console.error(body);
+                    cb(err);
+                } else
+                    cb(err);
+            });
+        }else
+            cb(err);
+
+    });
+}
+
 function convertEntitiesToFlatJSON(attributes, entities){
     var results = [];
     for(var i=0; i< entities.length; i++)
@@ -201,6 +219,9 @@ module.exports = {
         find: findEntities
     },
     attribute:{
+        value:{
+            create: createAttributeValue
+        },
         findByEntity: findAttributesByEntityId,
         findByEntityAndAttributeName: findAttributeIdByEntityIdAndAttibuteName
     },

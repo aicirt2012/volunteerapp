@@ -128,6 +128,19 @@ function findEntityById(entityId, attributes, cb){
     });
 }
 
+function findAttributesByEntityId(entityId, cb){
+    http.get('/entities/'+entityId+'/attributes', function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error finging Attributes by Entity "' + entityId + '"!');
+            console.error(body);
+        } else {
+            console.log(JSON.stringify(JSON.parse(body)));
+            cb();
+           // cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
+        }
+    });
+}
+
 function convertEntitiesToFlatJSON(attributes, entities){
     var results = [];
     for(var i=0; i< entities.length; i++)
@@ -166,7 +179,7 @@ module.exports = {
         find: findEntities
     },
     attribute:{
-
+        findByEntity: findAttributesByEntityId
     },
     mxl: mxlWorkspace,
     mxl2: mxlWorkspace2

@@ -128,6 +128,7 @@ function findEntityById(entityId, attributes, cb){
     });
 }
 
+//ToDO Remove this method, not needed anymore
 function findAttributesByEntityId(entityId, cb){
     http.get('/entities/'+entityId+'/attributes', function (err, res, body) {
         if (err || res.statusCode != 200) {
@@ -137,6 +138,27 @@ function findAttributesByEntityId(entityId, cb){
             console.log(JSON.stringify(JSON.parse(body)));
             cb();
            // cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
+        }
+    });
+}
+
+function findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, cb){
+    http.get('/entities/'+entityId+'/attributes', function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error finging Attributes by Entity "' + entityId + '"!');
+            console.error(body);
+        } else {
+            var attributes = JSON.parse(body);
+            var attrId = null;
+            for(var i =0; i<attributes.length; i++)
+                if(attributes[i].name == attributeName) {
+                    attrId = attributes[i].id;
+                    break;
+                }
+            if(attrId != null)
+                cb(err, attrId);
+            else
+                cb(new Error('Attribute name not found!'), null);
         }
     });
 }
@@ -179,7 +201,8 @@ module.exports = {
         find: findEntities
     },
     attribute:{
-        findByEntity: findAttributesByEntityId
+        findByEntity: findAttributesByEntityId,
+        findByEntityAndAttributeName: findAttributeIdByEntityIdAndAttibuteName
     },
     mxl: mxlWorkspace,
     mxl2: mxlWorkspace2

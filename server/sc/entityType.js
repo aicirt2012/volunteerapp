@@ -18,6 +18,9 @@ module.exports = {
             find: function(query, cb){
                 SocioCortex.mxl(config.sc.workspaceId, entityTypeId, attributes, query, cb);
             },
+             find2: function(query, cb){
+                 SocioCortex.mxl2(config.sc.workspaceId, query, attributes, cb);
+             },
             save: function(attrs, cb){
                 var keys = Object.keys(attrs);
                 var formattedAttrs = [];

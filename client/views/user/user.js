@@ -17,6 +17,20 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
            me.selectedRole = User.roles[i];
 
 
+    me.onCancel = function(){
+        window.location.href = '#/user';
+    }
+
+    me.submitPersonalData = function(){
+        User.update(me.user, function(){
+            console.log('user updated');
+        })
+    }
+
+    me.submitAvailability = function(){
+
+    }
+
     me.breadcrumb = function(){
         return 'Personalverwaltung > '+me.selectedRole.label + ' > ' + me.user.name;
     }

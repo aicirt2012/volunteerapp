@@ -9,6 +9,10 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         return 'Meine Daten';
     }
 
+    me.onCancel = function(){
+        window.location.href = '#/user';
+    }
+
     me.submitPersonalData = function(){
         MyData.personal.update({
             gender: me.user.gender,
@@ -18,7 +22,6 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
             email: me.user.email
         });
     }
-
 
     me.submitAvailability = function(){
         MyData.availability.update(me.user.availability);

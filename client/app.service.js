@@ -70,6 +70,7 @@ app.service('User', function($resource, $base64) {
         post: User.post,
         me: Me.get,
         save: User.save,
+        update: User.update,
         getUserId: getUserId
     }
 });

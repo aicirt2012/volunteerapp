@@ -8,3 +8,9 @@
 
 https://de.wikipedia.org/wiki/ISO_8601
 -Deployment
+
+find("1simtcfyj1ksw")
+.get eventhelper whereis event
+.select(helper)
+
+even in sc "Event"

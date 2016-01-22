@@ -71,6 +71,19 @@ function mxlWorkspace(workspaceId, entityTypeId, attributes, query, cb) {
     });
 }
 
+function mxlWorkspace2(workspaceId, query, attributes, cb) {
+    var data = {expression: query};
+    http.post('/workspaces/' + workspaceId + '/mxlQuery?attributes=*&meta=', data, function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
+            cb(err, null);
+        } else {
+            console.log(JSON.stringify(body));
+            cb(err, convertEntitiesToFlatJSON(attributes, body.value));
+        }
+    });
+}
+
 function createEntity(entityTypeId, data, cb){
     http.post('/entityTypes/'+entityTypeId+'/entities', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
@@ -155,6 +168,7 @@ module.exports = {
     attribute:{
 
     },
-    mxl: mxlWorkspace
+    mxl: mxlWorkspace,
+    mxl2: mxlWorkspace2
 };
 

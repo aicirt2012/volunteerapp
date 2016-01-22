@@ -22,6 +22,7 @@ router.get('/me', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
+
     User.save({
         gender: req.body.gender,
         name: req.body.name,
@@ -50,13 +51,29 @@ router.get('/:id', function(req, res, next) {
 /** update user */
 router.put('/:id', function(req, res, next) {
     console.log('update user');
-    res.send();
+    var uId = req.params.id;
+    //use get und dann update
+    User.update( uId, {
+        gender: req.body.gender,
+        name: req.body.name,
+        tel: req.body.tel,
+        mobil: req.body.mobil,
+        email: req.body.email,
+        notes: req.body.notes,
+        role: req.body.role,
+        availability: req.body.availability
+    }, function(){
+        res.send();
+    });
 });
 
 /** reset userpw */
 router.put('/resetpw', function(req, res, next) {
-    console.log('update user');
-    res.send();
+    User.save({
+        pw: req.body.pw
+    }, function(){
+        res.send();
+    });
 });
 
 router.get('/sendmailtest', function(req, res, next) {

@@ -46,8 +46,34 @@ router.get('/:id', function(req, res) {
     Event.findById(eId, function(err, event){
         if(err)
             res.status(500).send();
-        else
+        else {
+            /*EventHelper.findByEvent(eId, function (err, eventhelpers) {
+                if (err)
+                    res.status(500).send();
+                else {
+                    var helpers = "[";
+                    //first element of json array
+                    if(eventhelpers[0] !== null) {
+                        helpers = helpers + "{id: " + eventhelpers[0].id
+                            + ", name: " + eventhelpers[0].helper.name
+                            + ", date: " + eventhelpers[0].registered + "}";
+                    }
+
+                    //following elements of json array, so they can be separated by comma
+                    for(var i = 1; i < eventhelpers.length; i++) {
+                        var help = eventhelpers[i];
+                        helpers = helpers
+                                + ",{id: "+ help.id
+                                + ", name: "+ help.helper.name
+                                + ", date: " + help.registered + "}";
+                    }
+                    helpers = helpers + ']';
+                    event.helpers = helpers;
+                }
+            });*/
+            event.helpers = [{name: 'Felix Michel', date: '20.01.2016'}, {name: 'Niklas', date: '21.01.2016'}, {name: 'Albert', date: '22.01.2016'}];
             res.json(event);
+        }
     });
 
 });

@@ -26,14 +26,14 @@
                         </md-input-container>
                     </div>
                     <div layout layout-sm="column">
-                        <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
+                        <md-datepicker ng-model="event.startdate" md-placeholder="From date"></md-datepicker>
                         <md-input-container>
                             <label>Start time</label>
                             <input ng-model="event.starttime"/>
                         </md-input-container>
                     </div>
                     <div layout layout-sm="column">
-                        <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
+                        <md-datepicker ng-model="event.enddate" md-placeholder="Until date"></md-datepicker>
                         <md-input-container class="md-block">
                             <label>End time</label>
                             <input ng-model="event.endtime"/>
@@ -47,12 +47,18 @@
                     </div>
 
                 </form>
-                {{event.helpers}}
-                <md-list-item ng-repeat="helper in event.helpers" ng-click="goToPerson(person.name, $event)">
-                    <img alt="{{ helper.name }}" ng-src="{{ person.img }}" class="md-avatar" />
-                    <p>{{ person.name }}</p>
-                    <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
-                </md-list-item>
+
+                <md-list>
+                    <md-subheader class="md-no-sticky">Helfer:</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="goToPerson(person.name, $event)">
+                        <user-avatar></user-avatar>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{helper.name}}</h3>
+                            <p>Registriert am {{helper.date}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+
             </md-card-content>
             <md-card-footer>
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>

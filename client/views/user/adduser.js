@@ -24,15 +24,16 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         }
     };
 
+    me.onCancel = function(){
+        window.location.href = '#/user';
+    }
 
     me.breadcrumb = function(){
         return 'Personalverwaltung > Benutzer Anlegen';
     };
 
     me.submitAddUser = function(){
-        console.log("Before save: " + JSON.stringify(me.user));
         User.save(me.user, function(){
-            console.log("After save: " + JSON.stringify(me.user));
             console.log('user created');
         })
     };

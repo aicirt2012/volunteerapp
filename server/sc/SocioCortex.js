@@ -163,13 +163,13 @@ function findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, cb){
     });
 }
 
-function createAttributeValue(entityId, attributeName, cb){
-    findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, value, function(err, attrId){
+function createAttributeValue(entityId, attributeName, value, cb){
+    findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, function(err, attrId){
         if(!err) {
-            var data = {value: value};
-            http.post('/attributes/' + attrId + '/values', data, function (err, res, body) {
+            console.log(attrId);
+            http.post('/attributes/' + attrId + '/values', value, function (err, res, body) {
                 if (err || res.statusCode != 200) {
-                    console.error('Error during creating Attribute Value "' + attrId + '"!');
+                    console.error('Error during creating Attribute '+attrId+' value "' + JSON.stringify(value)  + '"!');
                     console.error(body);
                     cb(err);
                 } else

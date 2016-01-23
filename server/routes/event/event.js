@@ -4,6 +4,21 @@ var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var EventHelper = require('../../sc/EventHelper');
 var mailer = require('../../util/mailer');
+var SocioCortex = require('../../sc/SocioCortex');
+
+router.get('/attibutes', function(req, res) {
+    /*
+    SocioCortex.attribute.findByEntityAndAttributeName('1xpbrfl4uqcs5', 'helpers', function(err, events){
+        console.log(events);
+        res.json(events);
+    });
+    */
+
+    SocioCortex.attribute.value.create('1xpbrfl4uqcs5', 'helpers', 'e0d0z60fjjyh', function(err){
+        //onsole.log(events);
+        res.json();
+    });
+});
 
 router.get('/list', function(req, res) {
     Event.findAll(function(err, events){

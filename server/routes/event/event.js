@@ -97,7 +97,7 @@ router.post('/:id/register', function(req, res) {
     var eventId = req.params.id;
     var helperId = req.body.helperId;
     console.log(eventId, helperId);
-    Event.pushAttributeValue(eventId, 'helpers', {helper: helperId, date: new Date().toISOString()}, function(err){
+    Event.addAttributeValue(eventId, 'helpers', {helper: helperId, date: new Date().toISOString()}, function(err){
         res.send();
     });
 });

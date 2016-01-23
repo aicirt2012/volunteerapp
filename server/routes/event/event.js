@@ -97,12 +97,9 @@ router.post('/:id/register', function(req, res) {
     var eventId = req.params.id;
     var helperId = req.body.helperId;
     console.log(eventId, helperId);
-
-    SocioCortex.attribute.value.create(eventId, 'helpers', helperId, function(err){
-        //onsole.log(events);
+    Event.pushAttributeValue(eventId, 'helpers', helperId, function(err){
         res.send();
     });
-
 });
 
 router.post('/:id/unregister', function(req, res) {

@@ -50,6 +50,9 @@ module.exports = {
                 }
                 SocioCortex.entity.update(entityId, attributes, data, cb)
             },
+            pushAttributeValue: function(entityId, attrName, value, cb){
+                SocioCortex.attribute.value.create(entityId, attrName, value, cb);
+            },
             schema:{
                 create: function(cb){
                     var asyncTasks = [];

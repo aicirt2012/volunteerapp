@@ -79,14 +79,12 @@ app.service('User', function($resource, $base64) {
 app.service('Authenticate', function($resource) {
     var Login = $resource('/api/login');
 
-
     this.login = function(email, pw){
         var p = Login.save({
             email : email,
             pw: pw
         }).$promise;
         p.then(function(data){
-            console.log('user',data);
             localStorage.setItem('JWT', data.token);
         },function(){
             console.error("fail@loginUser");

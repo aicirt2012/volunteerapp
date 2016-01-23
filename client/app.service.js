@@ -56,7 +56,7 @@ app.service('User', function($resource, $base64) {
     var getUserId = function(){
         var jwt = localStorage.getItem('JWT');
         if(jwt)
-            return $base64.decode(jwt.split('.')[1]);
+            return atob(jwt.split('.')[1]);
         else
             return null; //TODO implement error handling
     }

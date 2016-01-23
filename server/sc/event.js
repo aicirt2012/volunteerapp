@@ -7,7 +7,7 @@ var Event = EntityType.define({
     title: {type:'String'},
     description: {type:'String'},
     nrhelpers: {type:'Number'},
-    helpers: {type: 'String'},
+    helpers: {type: 'String'},//'json',  options: {jsonTypeDefinition: 'Structure<helper:String, date: Date>'}},
     emails: {type:'String'},
     starttime: {type: 'String'},
     startdate: {type:'String'},

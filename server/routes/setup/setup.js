@@ -86,6 +86,7 @@ router.get('/init', function(req, res, next) {
                 starttime: e.starttime,
                 endtime: e.endtime,
                 anzhelper: e.anzhelper,
+                helpers: {},
                 description: e.description,
                 important: e.important
             }, function(){

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var EventHelper = require('../../sc/EventHelper');
@@ -61,33 +62,23 @@ router.get('/:id', function(req, res) {
     Event.findById(eId, function(err, event){
         if(err)
             res.status(500).send();
-        else {
-            /*EventHelper.findByEvent(eId, function (err, eventhelpers) {
-                if (err)
-                    res.status(500).send();
-                else {
-                    var helpers = "[";
-                    //first element of json array
-                    if(eventhelpers[0] !== null) {
-                        helpers = helpers + "{id: " + eventhelpers[0].id
-                            + ", name: " + eventhelpers[0].helper.name
-                            + ", date: " + eventhelpers[0].registered + "}";
-                    }
+        else{
+            var helpers = [];
+            async.forEach(event.helpers, function(helper, cb){
+                if(helper && Object.keys(helper).length > 0)
+                    User.findById(helper.helper, function(err, user){
+                        helpers.push({
+                            id: user.id,
+                            name: user.name,
+                            date: helper.date
+                        });
+                        cb();
+                    });
+            }, function(err){
+                event.helpers = helpers;
+                res.json(event);
+            });
 
-                    //following elements of json array, so they can be separated by comma
-                    for(var i = 1; i < eventhelpers.length; i++) {
-                        var help = eventhelpers[i];
-                        helpers = helpers
-                                + ",{id: "+ help.id
-                                + ", name: "+ help.helper.name
-                                + ", date: " + help.registered + "}";
-                    }
-                    helpers = helpers + ']';
-                    event.helpers = helpers;
-                }
-            });*/
-            event.helpers = [{name: 'Felix Michel', date: '20.01.2016'}, {name: 'Niklas', date: '21.01.2016'}, {name: 'Albert', date: '22.01.2016'}];
-            res.json(event);
         }
     });
 

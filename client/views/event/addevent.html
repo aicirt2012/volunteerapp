@@ -20,7 +20,7 @@
                         <div layout layout-sm="column">
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Benötigte Helfer</label>
-                                <input type="number" min="0" ng-model="event.anzhelper"/>
+                                <input type="number" min="0" ng-model="event.nrhelpers"/>
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Ort</label>
@@ -28,17 +28,17 @@
                             </md-input-container>
                         </div>
                         <div layout="row">
-                            <md-datepicker ng-model="event.startDay" md-placeholder="From date"></md-datepicker>
+                            <md-datepicker ng-model="startDay" ng-change="saveStartDate(startDay)" md-placeholder="From date"></md-datepicker>
                             <md-input-container>
                                 <label>Start time</label>
-                                <input type="time" ng-model="event.starttime"/>
+                                <input type="time" ng-model="startTime" ng-change="saveStartTime(startTime)"/>
                             </md-input-container>
                         </div>
                         <div layout="row">
-                            <md-datepicker ng-model="event.endDay" md-placeholder="Until date"></md-datepicker>
+                            <md-datepicker ng-model="endDay" ng-change="saveEndDate(endDay)" md-placeholder="Until date"></md-datepicker>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>End time</label>
-                                <input type="time" ng-model="event.endtime"/>
+                                <input type="time" ng-model="endTime" ng-change="saveEndTime(endTime)"/>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">

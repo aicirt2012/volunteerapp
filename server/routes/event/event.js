@@ -38,9 +38,7 @@ router.post('/', function(req, res) {
         place: req.body.place,
         startdate: req.body.startdate,
         enddate: req.body.enddate,
-        starttime: req.body.starttime,
-        endtime: req.body.endtime,
-        anzhelper: req.body.anzhelper,
+        nrhelpers: req.body.nrhelpers,
         description: req.body.description,
         important: req.body.important
     }, function(){

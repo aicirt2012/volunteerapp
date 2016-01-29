@@ -25,18 +25,30 @@
                             <input ng-model="event.place">
                         </md-input-container>
                     </div>
-                    <div layout layout-sm="column">
-                        <md-datepicker ng-model="event.startdate" md-placeholder="From date"></md-datepicker>
-                        <md-input-container>
-                            <label>Start time</label>
-                            <input ng-model="event.starttime"/>
+                    <div layout="row">
+                        <md-input-container flex-gt-xs>
+                            <md-icon class="material-icons">today</md-icon>
+                            <label>Start Datum</label>
+                            <input type="date" ng-model="event.startdate" />
+                        </md-input-container>
+
+                        <md-input-container flex-gt-xs>
+                            <md-icon class="material-icons">access_time</md-icon>
+                            <label>Start Uhrzeit</label>
+                            <input type="time" ng-model="event.startdate"/>
                         </md-input-container>
                     </div>
-                    <div layout layout-sm="column">
-                        <md-datepicker ng-model="event.enddate" md-placeholder="Until date"></md-datepicker>
-                        <md-input-container class="md-block">
-                            <label>End time</label>
-                            <input ng-model="event.endtime"/>
+                    <div layout="row">
+                        <md-input-container flex-gt-xs>
+                            <md-icon class="material-icons">today</md-icon>
+                            <label>End Datum</label>
+                            <input type="date" ng-model="event.enddate" />
+                        </md-input-container>
+
+                        <md-input-container flex-gt-xs>
+                            <md-icon class="material-icons">access_time</md-icon>
+                            <label>End Uhrzeit</label>
+                            <input type="time" ng-model="event.enddate"/>
                         </md-input-container>
                     </div>
                     <div layout layout-sm="column">

@@ -20,6 +20,10 @@ router.put('/personal', function(req, res, next) {
     res.send();
 });
 
+router.post('/photo', function(req, res, next) {
+    console.log(req.body);
+});
+
 
 router.put('/availability', function(req, res, next) {
     User.update(req.user.id, {availability:req.body});

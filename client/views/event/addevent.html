@@ -28,17 +28,29 @@
                             </md-input-container>
                         </div>
                         <div layout="row">
-                            <md-datepicker ng-model="startDay" ng-change="saveStartDate(startDay)" md-placeholder="From date"></md-datepicker>
-                            <md-input-container>
-                                <label>Start time</label>
-                                <input type="time" ng-model="startTime" ng-change="saveStartTime(startTime)"/>
+                            <md-input-container flex-gt-xs>
+                                <md-icon ng-click="pickStartDay($event)" class="material-icons">today</md-icon>
+                                <label>Start Datum</label>
+                                <input type="date" mdp-date-picker ng-model="startDay" />
+                            </md-input-container>
+
+                            <md-input-container flex-gt-xs>
+                                <md-icon ng-click="pickStartTime($event)" class="material-icons">access_time</md-icon>
+                                <label>Start Uhrzeit</label>
+                                <input ng-click="pickStartTime($event)" type="time" ng-model="startTime"/>
                             </md-input-container>
                         </div>
                         <div layout="row">
-                            <md-datepicker ng-model="endDay" ng-change="saveEndDate(endDay)" md-placeholder="Until date"></md-datepicker>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>End time</label>
-                                <input type="time" ng-model="endTime" ng-change="saveEndTime(endTime)"/>
+                            <md-input-container flex-gt-xs>
+                                <md-icon ng-click="pickEndDay($event)" class="material-icons">today</md-icon>
+                                <label>End Datum</label>
+                                <input type="date" mdp-date-picker ng-model="endDay" />
+                            </md-input-container>
+
+                            <md-input-container flex-gt-xs>
+                                <md-icon ng-click="pickEndTime($event)" class="material-icons">access_time</md-icon>
+                                <label>End Uhrzeit</label>
+                                <input ng-click="pickEndTime($event)" type="time" ng-model="endTime"/>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">

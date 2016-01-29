@@ -18,11 +18,15 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     };
 
     me.dayClick = function(date) {
-        var dateString = formatDate(date);
-        for(var i=0; i < eventlist.length; i++) {
-            var event = eventlist[i];
-            if(event.startdate == dateString)
-                window.location.href = '#/event/'+event.id;
+        //var dateString = formatDate(date);
+        for(var i=0; i < me.eventList.length; i++) {
+            var event = me.eventList[i];
+            var startdate = new Date(event.startdate);
+            if (startdate.getDate() == date.getDate() &&
+                startdate.getMonth() == date.getMonth() &&
+                startdate.getYear() == date.getYear()) {
+                window.location.href = '#/event/' + event.id;
+            }
         }
     };
 
@@ -35,11 +39,16 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     };
 
     me.setDayContent = function(date) {
-        var dateString = formatDate(date);
         for(var i=0; i < me.eventList.length; i++) {
             var event = me.eventList[i];
-            if(event.startdate == dateString)
+            var startdate = new Date(event.startdate);
+            console.log("startdate: ", startdate);
+            console.log("date: ", date);
+            if( startdate.getDate() == date.getDate() &&
+                startdate.getMonth() == date.getMonth() &&
+                startdate.getYear() == date.getYear()) {
                 return event.title;
+            }
         }
     };
 

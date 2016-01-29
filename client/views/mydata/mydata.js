@@ -5,6 +5,10 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     me.user = user;
     me.genders = User.genders;
 
+    me.$on('flow::fileAdded', function (event, $flow, flowFile) {
+        console.log(event, $flow, flowFile);
+    });
+
     me.breadcrumb = function(){
         return 'Meine Daten';
     }
@@ -21,6 +25,17 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
             mobil: me.user.mobil,
             email: me.user.email
         });
+        console.log(JSON.stringify($flow.files[0]));
+    }
+
+    me.photoUpload = function(flowFile, flowChunk, isTest){
+        console.log("file:", flowFile.file);
+        console.log("name:" + JSON.stringify(flowFile.name));
+        console.log("relativePath:" + JSON.stringify(flowFile.relativePath));
+        console.log("size:" + JSON.stringify(flowFile.size));
+        console.log("uniqueIdentifier:" + JSON.stringify(flowFile.uniqueIdentifier));
+        //console.log("flowChunk:" + JSON.stringify(flowChunk));
+        console.log("isTest:" + isTest);
     }
 
     me.submitAvailability = function(){

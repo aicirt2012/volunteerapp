@@ -5,7 +5,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     me.eventId = $routeParams.id;
     me.event = event;
     me.event.startdate = new Date(me.event.startdate);
+    me.event.startdate.setSeconds(0);
+    me.event.startdate.setMilliseconds(0);
     me.event.enddate = new Date(me.event.enddate);
+    me.event.enddate.setSeconds(0);
+    me.event.enddate.setMilliseconds(0);
 
     me.breadcrumb = function(){
         return 'Eventverwaltung > ' + me.event.title;

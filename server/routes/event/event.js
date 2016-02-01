@@ -62,23 +62,14 @@ router.get('/:id', function(req, res) {
             res.status(500).send();
         else{
             var helpers = [];
-            console.log(event.helpers);
             async.forEach(event.helpers, function(helper, cb){
-              /*
-                if(helper && Object.keys(helper).length > 0)
-                    User.findById(helper.helperid, function(err, user){
-                        helpers.push({
-                            id: user.id,
-                            name: user.name,
-                            date: helper.date
-                        });
-                        cb();
+                User.findById(helper.id, function(err, user){
+                    helpers.push({
+                        id: user.id,
+                        name: user.name
                     });
-                else
                     cb();
-                    */
-                console.log(helper);
-                cb();
+                });
             }, function(err){
                 event.helpers = helpers;
                 res.json(event);

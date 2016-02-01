@@ -9,8 +9,10 @@ var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
 var EventHelper = require('../../sc/EventHelper');
 
-router.get('/schema', function(req, res, next) {
+router.post('/', function(req, res, next) {
     var asyncTasks = [];
+
+    // Create Schema
     asyncTasks.push(function(cb){
         SocioCortex.workspace.delete(config.sc.workspaceId, cb);
     });
@@ -29,14 +31,9 @@ router.get('/schema', function(req, res, next) {
     asyncTasks.push(function(cb){
         EventHelper.schema.create(cb);
     });
-    async.series(asyncTasks, function(err){
-        res.json({success:true});
-    });
-});
 
 
-router.get('/init', function(req, res, next) {
-    var asyncTasks = [];
+    // Initialize with Testdata
     asyncTasks.push(function(cb){
         var users = JSON.parse(fs.readFileSync('server/routes/setup/user.list.json'));
         async.forEach(users, function(u, cb){

@@ -181,10 +181,11 @@ function createAttributeValue(entityId, attributeName, value, cb){
 }
 
 function deleteAttributeValue(entityId, attributeName, value, cb){
+    console.log('delAttibuteValue: '+entityId, attributeName, value);
     findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, function(err, attrId){
         if(!err) {
             console.log(attrId);
-            http.del('/attributes/' + attrId + '/values', value, function (err, res, body) {
+            http.del('/attributes/' + attrId + '/values', value.id, function (err, res, body) {
                 if (err || res.statusCode != 200) {
                     console.error('Error during deleting Attribute '+attrId+' value "' + JSON.stringify(value)  + '"!');
                     console.error(body);

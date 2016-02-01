@@ -54,7 +54,7 @@ module.exports = {
                 SocioCortex.attribute.value.create(entityId, attrName, value, cb);
             },
             delAttributeValue: function(entityId, attrName, value, cb){
-                SocioCortex.attribute.value.del(entityId, attrName, value, cb);
+                SocioCortex.attribute.value.delete(entityId, attrName, value, cb);
             },
             schema:{
                 create: function(cb){

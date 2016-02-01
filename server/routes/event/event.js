@@ -90,7 +90,7 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
 router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    console.log('delete helperId', helperId);
+    console.log('delete helperId', helperId, eventId);
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         res.send();
     });

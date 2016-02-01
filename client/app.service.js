@@ -2,11 +2,16 @@
 app.service('Event', function($resource) {
     var Event = $resource('/api/event/:id');
     var EventHelper = $resource('/api/event/:eventId/helpers/:helperId');
+
+    function register(eventId, helperId, cb){
+        return EventHelper.save({eventId: eventId, helperId: helperId}, {}, cb);
+    }
+
     return {
         save: Event.save,
         get: Event.get,
         list: Event.query,
-        register: EventHelper.save,
+        register: register,
         unregister: EventHelper.delete
     }
 });

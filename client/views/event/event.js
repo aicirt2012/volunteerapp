@@ -16,7 +16,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     };
 
     me.register = function(){
-        Event.register({eventId: me.eventId, helperId: User.getUserId()},{});
+        Event.register(me.eventId, User.getUserId());
     };
 
     me.unregister = function(helperId){

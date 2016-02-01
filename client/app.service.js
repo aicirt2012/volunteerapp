@@ -55,7 +55,7 @@ app.service('User', function($resource, $base64) {
         {id: 'organizer', label: 'Organisator'}
     ];
 
-    var getUserId = function(){
+    function getUserId(){
         var jwt = localStorage.getItem('JWT');
         if(jwt)
             return atob(jwt.split('.')[1]);

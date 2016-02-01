@@ -14,3 +14,7 @@ find("1simtcfyj1ksw")
 .select(helper)
 
 even in sc "Event"
+
+
+
+-Personalverwaltung->Verfügbarekeit anpassen

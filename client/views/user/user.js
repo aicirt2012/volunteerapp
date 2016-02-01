@@ -22,13 +22,9 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     }
 
     me.submitPersonalData = function(){
-        User.update(me.user, function(){
+        User.update(me.user.id, me.user, function(){
             console.log('user updated');
         })
-    }
-
-    me.submitAvailability = function(){
-
     }
 
     me.breadcrumb = function(){

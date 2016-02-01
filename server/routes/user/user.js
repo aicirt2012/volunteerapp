@@ -53,6 +53,7 @@ router.put('/:id', function(req, res, next) {
     console.log('update user');
     var uId = req.params.id;
     //use get und dann update
+    console.log(req.body.gender);
     User.update( uId, {
         gender: req.body.gender,
         name: req.body.name,

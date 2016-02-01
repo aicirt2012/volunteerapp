@@ -44,7 +44,9 @@ app.service('MyData', function($resource) {
 app.service('User', function($resource, $base64) {
 
     var Me = $resource('/api/user/me');
-    var User = $resource('/api/user/:id');
+    var User = $resource('/api/user/:id', null,{
+            'update': { method:'PUT' }
+        });
     var UserList = $resource('/api/user/list');
     var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
     var roles = [
@@ -61,6 +63,9 @@ app.service('User', function($resource, $base64) {
             return null; //TODO implement error handling
     }
 
+    function update(userId, data, cb){
+        return User.update({id:userId}, data, cb);
+    }
 
     return {
         list: UserList.query,
@@ -70,7 +75,7 @@ app.service('User', function($resource, $base64) {
         post: User.post,
         me: Me.get,
         save: User.save,
-        update: User.update,
+        update: update,
         getUserId: getUserId
     }
 });

@@ -96,10 +96,10 @@ function createEntity(entityTypeId, data, cb){
 }
 
 function updateEntity(entityId, attributes, data, cb){
-    http.put('/entities/'+entityId+'?attributes=*', data, function (err, res, body) {
+    http.put('/entities/'+entityId, data, function (err, res, body) {
         if (err || res.statusCode != 200) {
             console.error('Error updating Entity "' + entityId + '"!');
-            console.error(body);
+            console.error(JSON.stringify(body));
         } else {
             cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
         }

@@ -35,7 +35,7 @@ module.exports = {
                 };
                 SocioCortex.entity.create(entityTypeId, data, cb)
             },
-            update: function(entityId, attributes, attrs, cb){
+            update: function(entityId, attrs, cb){
                 console.log('update instance');
                 var data = {
                     id: entityId,
@@ -44,9 +44,11 @@ module.exports = {
                 var keys = Object.keys(attrs);
                 for(var i=0; i<keys.length; i++){
                     var key = keys[i];
+
                     //TODO check if attr belong to model
                     var value = attrs[key];
                     data.attributes.push({name: key, values: [value]});
+                   // console.log('here------------------------', JSON.stringify(data));
                 }
                 SocioCortex.entity.update(entityId, attributes, data, cb)
             },

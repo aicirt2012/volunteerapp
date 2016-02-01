@@ -20,7 +20,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     };
 
     me.unregister = function(helperId){
-        Event.unregister({eventId: me.eventId, helperId: helperId});
+        Event.unregister(me.eventId, helperId);
     };
 
     $mdSidenav('left').open();

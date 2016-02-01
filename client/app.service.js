@@ -7,12 +7,16 @@ app.service('Event', function($resource) {
         return EventHelper.save({eventId: eventId, helperId: helperId}, {}, cb);
     }
 
+    function unregister(eventId, helperId, cb){
+        return EventHelper.delete({eventId: eventId, helperId: helperId}, {}, cb);
+    }
+
     return {
         save: Event.save,
         get: Event.get,
         list: Event.query,
         register: register,
-        unregister: EventHelper.delete
+        unregister: unregister
     }
 });
 

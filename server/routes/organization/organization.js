@@ -4,13 +4,10 @@ var Organization = require('../../sc/Organisation');
 
 
 
-router.get('/list', function(req, res, next) {
-
+router.get('/', function(req, res, next) {
     Organization.findAll(function(err, organizations){
         res.json(organizations);
     });
-
-
 });
 
 router.get('/:id', function(req, res, next) {

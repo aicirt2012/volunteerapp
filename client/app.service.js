@@ -15,10 +15,18 @@ app.service('Event', function($resource) {
         return Event.get({id: eventId}, {}, cb);
     }
 
+    function list(){
+        return Event.query();
+    }
+
+    function save(data, cb){
+        return Event.save(data, cb)
+    }
+
     return {
-        save: Event.save,
+        save: save,
         get: get,
-        list: Event.query,
+        list: list,
         register: register,
         unregister: unregister
     }
@@ -26,10 +34,23 @@ app.service('Event', function($resource) {
 
 app.service('Organization', function($resource) {
     var Organization = $resource('/api/organization/:id');
+
+    function get(organizationId, cb){
+        return Organization.get({id: organizationId}, cb);
+    }
+
+    function list(){
+        return Organization.query;
+    }
+
+    function save(data, cb){
+        return Organization.save(data, cb);
+    }
+
     return {
-        get: Organization.get,
-        save: Organization.save,
-        list: Organization.query
+        get: get,
+        save: save,
+        list: list
     }
 });
 

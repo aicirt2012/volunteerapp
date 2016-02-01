@@ -47,7 +47,6 @@ app.service('User', function($resource, $base64) {
     var User = $resource('/api/user/:id', null,{
             'update': { method:'PUT' }
         });
-    var UserList = $resource('/api/user/list');
     var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
     var roles = [
         {id: 'helper', label: 'Helfer'},
@@ -68,7 +67,7 @@ app.service('User', function($resource, $base64) {
     }
 
     return {
-        list: UserList.query,
+        list: User.query,
         genders: genders,
         roles: roles,
         get: User.get,

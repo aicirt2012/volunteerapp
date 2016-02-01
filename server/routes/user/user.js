@@ -6,11 +6,7 @@ var http = require('../../util/http');
 var User = require('../../sc/User');
 
 
-router.get('/list', function(req, res, next) {
-    User.findAll(function(err, users){
-        res.json(users);
-    });
-});
+
 
 
 router.get('/me', function(req, res, next) {
@@ -38,6 +34,12 @@ router.post('/', function(req, res, next) {
     });
 });
 
+router.get('/', function(req, res, next) {
+    User.findAll(function(err, users){
+        res.json(users);
+    });
+});
+
 router.get('/:id', function(req, res, next) {
     var uId = req.params.id;
     User.findById(uId, function(err, user){
@@ -48,7 +50,6 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-/** update user */
 router.put('/:id', function(req, res, next) {
     console.log('update user');
     var uId = req.params.id;

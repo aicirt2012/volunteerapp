@@ -42,15 +42,21 @@ app.service('MyData', function($resource) {
 app.service('User', function($resource, $base64) {
 
     var Me = $resource('/api/user/me');
-    var User = $resource('/api/user/:id', null,{
-            'update': { method:'PUT' }
-        });
-    var genders = [{id: 'MALE', label: 'Herr'},{id: 'FEMALE', label: 'Frau'}];
-    var roles = [
-        {id: 'helper', label: 'Helfer'},
-        {id: 'team', label: 'Team'},
-        {id: 'organizer', label: 'Organisator'}
-    ];
+    var User = $resource('/api/user/:id', null, {
+        'update': {method: 'PUT'}
+    });
+
+    function genders() {
+        return [{id: 'MALE', label: 'Herr'}, {id: 'FEMALE', label: 'Frau'}];
+    }
+
+    function roles(){
+        return [
+            {id: 'helper', label: 'Helfer'},
+            {id: 'team', label: 'Team'},
+            {id: 'organizer', label: 'Organisator'}
+        ];
+    }
 
     function getUserId(){
         var jwt = localStorage.getItem('JWT');
@@ -66,8 +72,8 @@ app.service('User', function($resource, $base64) {
 
     return {
         list: User.query,
-        genders: genders,
-        roles: roles,
+        genders: genders(),
+        roles: roles(),
         get: User.get,
         post: User.post,
         me: Me.get,

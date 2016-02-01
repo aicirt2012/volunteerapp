@@ -1,8 +1,7 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routeParams', 'User', function($scope, $mdSidenav, Event, event, $routeParams, User) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', function($scope, $mdSidenav, Event, event, User) {
 
 
     var me = $scope;
-    me.eventId = $routeParams.id;
     me.event = event;
     me.event.startdate = new Date(me.event.startdate);
     me.event.startdate.setSeconds(0);
@@ -16,11 +15,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     };
 
     me.register = function(){
-        Event.register(me.eventId, User.getUserId());
+        Event.register(me.event.id, User.getUserId());
     };
 
     me.unregister = function(helperId){
-        Event.unregister(me.eventId, helperId);
+        Event.unregister(me.event.id, helperId);
     };
 
     $mdSidenav('left').open();

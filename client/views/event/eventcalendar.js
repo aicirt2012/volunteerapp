@@ -71,14 +71,11 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     function formatDate(date){
         var day = date.getDate();
         var month = date.getMonth().valueOf()+1;
-        if(day < 10){
+        if(day < 10)
             day = '0' + day;
-        }
-        if(month < 10){
+        if(month < 10)
             month = '0' + month;
-        }
-        return month + "-" + day +"-"
-            + date.getFullYear();
+        return month + "-" + day +"-"+ date.getFullYear();
     }
 
 }]);

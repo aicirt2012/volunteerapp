@@ -11,9 +11,13 @@ app.service('Event', function($resource) {
         return EventHelper.delete({eventId: eventId, helperId: helperId}, {}, cb);
     }
 
+    function get(eventId, cb){
+        return Event.get({id: eventId}, {}, cb);
+    }
+
     return {
         save: Event.save,
-        get: Event.get,
+        get: get,
         list: Event.query,
         register: register,
         unregister: unregister

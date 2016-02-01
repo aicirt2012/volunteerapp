@@ -19,7 +19,7 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'EventCtrl',
             resolve: {
                 event: function($route, Event) {
-                    var e = Event.get({id: $route.current.params.id}).$promise;
+                    var e = Event.get($route.current.params.id).$promise;
                     console.log(JSON.stringify(e));
                     return e;
                 }

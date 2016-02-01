@@ -177,7 +177,23 @@ function createAttributeValue(entityId, attributeName, value, cb){
             });
         }else
             cb(err);
+    });
+}
 
+function deleteAttributeValue(entityId, attributeName, value, cb){
+    findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, function(err, attrId){
+        if(!err) {
+            console.log(attrId);
+            http.del('/attributes/' + attrId + '/values', value, function (err, res, body) {
+                if (err || res.statusCode != 200) {
+                    console.error('Error during deleting Attribute '+attrId+' value "' + JSON.stringify(value)  + '"!');
+                    console.error(body);
+                    cb(err);
+                } else
+                    cb(err);
+            });
+        }else
+            cb(err);
     });
 }
 
@@ -226,7 +242,8 @@ module.exports = {
     },
     attribute:{
         value:{
-            create: createAttributeValue
+            create: createAttributeValue,
+            delete: deleteAttributeValue
         },
         findByEntity: findAttributesByEntityId,
         findByEntityAndAttributeName: findAttributeIdByEntityIdAndAttibuteName

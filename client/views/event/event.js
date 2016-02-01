@@ -16,13 +16,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', '$routePa
     };
 
     me.register = function(){
-        Event.register({id: me.eventId}, {
-            helperId: User.getUserId()
-        });
+        Event.register({eventId: me.eventId, helperId: User.getUserId()},{});
     };
 
-    me.unregister = function(){
-        Event.unregister({id: me.eventId}, {helperId:'c3ztqpdyu86k'});
+    me.unregister = function(helperId){
+        Event.unregister({eventId: me.eventId, helperId: helperId});
     };
 
     $mdSidenav('left').open();

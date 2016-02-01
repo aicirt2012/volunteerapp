@@ -62,7 +62,7 @@
 
                 <md-list>
                     <md-subheader class="md-no-sticky">Helfer:</md-subheader>
-                    <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="goToPerson(person.name, $event)">
+                    <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
                         <user-avatar></user-avatar>
                         <div class="md-list-item-text" layout="column">
                             <h3>{{helper.name}}</h3>

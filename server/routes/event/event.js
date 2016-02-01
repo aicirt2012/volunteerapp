@@ -79,18 +79,21 @@ router.get('/:id', function(req, res) {
 
 });
 
-router.post('/:id/register', function(req, res) {
-    var eventId = req.params.id;
-    var helperId = req.body.helperId;
-    console.log(eventId, helperId);
+router.post('/:eventId/helpers/:helperId', function(req, res) {
+    var eventId = req.params.eventId;
+    var helperId = req.params.helperId;
     Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         res.send();
     });
 });
 
-router.post('/:id/unregister', function(req, res) {
-    console.log('unregister for event');
-    res.send();
+router.delete('/:eventId/helpers/:helperId', function(req, res) {
+    var eventId = req.params.eventId;
+    var helperId = req.params.helperId;
+    console.log('delete helperId', helperId);
+    Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
+        res.send();
+    });
 });
 
 

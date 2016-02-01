@@ -35,6 +35,7 @@ module.exports = {
         }, cb);
     },
     del: function(path, data, cb){
+        console.log('DEL: '+ config.sc.url + path + " "+JSON.stringify(data));
         request.del({
             url: config.sc.url + path,
             headers: headers,

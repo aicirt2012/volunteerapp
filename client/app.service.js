@@ -2,7 +2,7 @@
 app.service('Event', function($resource) {
     var Event = $resource('/api/event/:id');
     var EventList = $resource('/api/event/list');
-    var EventHelper = $resource('/api/event/:id/register');
+    var EventHelper = $resource('/api/event/:eventId/helpers/:helperId');
     return {
         save: Event.save,
         get: Event.get,

@@ -81,12 +81,10 @@ router.get('/init', function(req, res, next) {
             Event.save({
                 title: e.title,
                 place: e.place,
-                startdate: e.startdate,
-                enddate: e.enddate,
-                starttime: e.starttime,
-                endtime: e.endtime,
+                startdate: new Date().toISOString(),
+                enddate: new Date().toISOString(),
                 anzhelper: e.anzhelper,
-                helpers: {},
+               // helpers: {},
                 description: e.description,
                 important: e.important
             }, function(){

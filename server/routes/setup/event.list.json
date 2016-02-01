@@ -5,8 +5,6 @@
     "place": "schleißheimerstraße 4",
     "startdate": "01-22-2016",
     "enddate": "01-22-2016",
-    "starttime": "18:00",
-    "endtime": "20:00",
     "anzhelper": 3,
     "description": "Wir planen eine Kinobesuch im Kino ...",
     "important": false
@@ -18,8 +16,6 @@
     "place": "Alianz Arena",
     "startdate": "01-08-2016",
     "enddate": "01-08-2016",
-    "starttime": "15:00",
-    "endtime": "19:00",
     "anzhelper": 6,
     "description": "Wir planen ein Fussballtunier ...",
     "important": false

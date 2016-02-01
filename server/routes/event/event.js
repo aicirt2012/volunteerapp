@@ -62,7 +62,9 @@ router.get('/:id', function(req, res) {
             res.status(500).send();
         else{
             var helpers = [];
+            console.log(event.helpers);
             async.forEach(event.helpers, function(helper, cb){
+              /*
                 if(helper && Object.keys(helper).length > 0)
                     User.findById(helper.helperid, function(err, user){
                         helpers.push({
@@ -74,6 +76,9 @@ router.get('/:id', function(req, res) {
                     });
                 else
                     cb();
+                    */
+                console.log(helper);
+                cb();
             }, function(err){
                 event.helpers = helpers;
                 res.json(event);
@@ -87,7 +92,7 @@ router.post('/:id/register', function(req, res) {
     var eventId = req.params.id;
     var helperId = req.body.helperId;
     console.log(eventId, helperId);
-    Event.addAttributeValue(eventId, 'helpers', {helperid: helperId, date: new Date().toISOString()}, function(err){
+    Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         res.send();
     });
 });

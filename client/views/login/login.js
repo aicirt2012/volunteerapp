@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', ['$scope', 'Authenticate', '$mdSidenav', function($scope, Authenticate, $mdSidenav) {
+app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, User, $mdSidenav) {
 
     var me = $scope;
 
@@ -7,8 +7,7 @@ app.controller('LoginCtrl', ['$scope', 'Authenticate', '$mdSidenav', function($s
     me.pw = '123';
 
     me.login = function(){
-        Authenticate.login(me.email,me.pw).then(function(data){
-            console.log('logged in',data);
+        User.login(me.email,me.pw).then(function(data){
             window.location.href = '#/user';
         }, function(){
             console.log('login failed');

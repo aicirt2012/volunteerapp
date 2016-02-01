@@ -40,7 +40,7 @@ app.service('MyData', function($resource) {
 
 
 app.service('User', function($resource, $base64) {
-
+    var Login = $resource('/api/login');
     var Me = $resource('/api/user/me');
     var User = $resource('/api/user/:id', null, {
         'update': {method: 'PUT'}
@@ -70,24 +70,7 @@ app.service('User', function($resource, $base64) {
         return User.update({id:userId}, data, cb);
     }
 
-    return {
-        list: User.query,
-        genders: genders(),
-        roles: roles(),
-        get: User.get,
-        post: User.post,
-        me: Me.get,
-        save: User.save,
-        update: update,
-        getUserId: getUserId
-    }
-});
-
-
-app.service('Authenticate', function($resource) {
-    var Login = $resource('/api/login');
-
-    this.login = function(email, pw){
+    function login(email, pw){
         var p = Login.save({
             email : email,
             pw: pw
@@ -98,11 +81,25 @@ app.service('Authenticate', function($resource) {
             console.error("fail@loginUser");
         });
         return p;
-    };
+    }
 
-    this.logout = function(){
+    function logout(){
         localStorage.removeItem('JWT');
     }
 
-
+    return {
+        list: User.query,
+        genders: genders(),
+        roles: roles(),
+        get: User.get,
+        post: User.post,
+        me: Me.get,
+        save: User.save,
+        update: update,
+        getUserId: getUserId,
+        login: login,
+        logout: logout
+    }
 });
+
+

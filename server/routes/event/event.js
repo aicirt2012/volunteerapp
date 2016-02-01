@@ -3,9 +3,7 @@ var router = express.Router();
 var async = require('async');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
-var EventHelper = require('../../sc/EventHelper');
 var mailer = require('../../util/mailer');
-var SocioCortex = require('../../sc/SocioCortex');
 
 
 router.get('/', function(req, res) {

@@ -11,7 +11,7 @@
         </md-toolbar>
         <md-dialog-content style="max-width:500px;max-height:810px; ">
             <md-content class="md-padding">
-                <p>Möchten Sie siche verbindlich zum Event <b>{{event.title}}</b> am <b>{{event.startdate}}</b> anmelden?</p>
+                <p>Möchten Sie siche verbindlich zum Event <b>{{event.title}}</b> am <b>{{event.startdate | date: 'dd.MM.yyyy'}}</b> anmelden?</p>
             </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">

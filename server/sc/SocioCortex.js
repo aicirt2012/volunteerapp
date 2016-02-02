@@ -211,7 +211,7 @@ function convertEntityToFlatJSON(attributes, entity){
     for(var j=0; j< e.attributes.length; j++) {
         var attrInst = e.attributes[j];
         var attrDef = attributes[attrInst.name];
-        if(attrDef && attrDef.multiplicity  && attrDef.multiplicity == 'many'){
+        if(attrDef && attrDef.multiplicity  && (attrDef.multiplicity == 'many' || attrDef.multiplicity == 'any')){
             r[attrInst.name] = [];
             for(var i=0; i<attrInst.values.length; i++)
                 r[attrInst.name].push(attrInst.values[i]);

@@ -7,6 +7,7 @@ var mailer = require('../../util/mailer');
 
 
 router.get('/', function(req, res) {
+    console.log('get all Events');
     Event.findAll(function(err, events){
         res.json(events);
     });
@@ -38,10 +39,12 @@ router.post('/', function(req, res) {
         res.send();
     });
 
-});
+});4
 
 router.get('/:id', function(req, res) {
+
     var eId = req.params.id;
+    console.log('get Events with id '+eId);
     Event.findById(eId, function(err, event){
         if(err)
             res.status(500).send();

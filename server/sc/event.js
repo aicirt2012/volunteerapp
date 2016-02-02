@@ -7,7 +7,7 @@ var Event = EntityType.define({
     title: {type:'String'},
     description: {type:'String'},
     nrhelpers: {type:'Number'},
-    helpers: {type: 'link',  options: {entityType: {id: 'user'}, multiplicity: 'many'},  multiplicity: 'many'}, //TODO fix multiplicity not working
+    helpers: {type: 'link',  options: {entityType: {id: 'user'}},  multiplicity: 'any'}, //TODO fix multiplicity not working
     emails: {type:'String'},
     startdate: {type:'Date'},
     enddate: {type:'Date'},

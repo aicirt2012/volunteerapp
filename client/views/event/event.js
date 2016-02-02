@@ -11,7 +11,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.event.enddate.setMilliseconds(0);
 
     me.breadcrumb = function(){
-        return 'Eventverwaltung > ' + me.event.title;
+        return 'Eventverwaltung > Event';
     };
 
     me.register = function(){
@@ -24,7 +24,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     $mdSidenav('left').open();
 
-
+    me.back = function(){
+        window.location.href = '#/eventcalendar';
+    }
 
 
     $scope.showTabDialog = function(ev) {

@@ -101,7 +101,8 @@ function updateEntity(entityId, attributes, data, cb){
             console.error('Error updating Entity "' + entityId + '"!');
             console.error(JSON.stringify(body));
         } else {
-            cb(err, convertEntityToFlatJSON(attributes, JSON.parse(body)));
+            console.log(JSON.stringify(body));
+            cb(err, convertEntityToFlatJSON(attributes, body));
         }
     });
 }

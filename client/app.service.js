@@ -39,8 +39,8 @@ app.service('Organization', function($resource) {
         return Organization.get({id: organizationId}, cb);
     }
 
-    function list(){
-        return Organization.query;
+    function list(cb){
+        return Organization.query(cb);
     }
 
     function save(data, cb){

@@ -1,12 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
-
-
-
 
 
 router.get('/me', function(req, res, next) {

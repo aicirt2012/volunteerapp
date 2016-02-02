@@ -4,6 +4,7 @@ app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', 
     var me = $scope;
 
     me.organizationlist = Organization.list(function(data){
+
     });
 
     me.selectOrganization = function(id){

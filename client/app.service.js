@@ -105,6 +105,7 @@ app.service('User', function($resource, $base64) {
     }
 
     function login(email, pw){
+        console.log('login with : '+email+' '+pw );
         var p = Login.save({
             email : email,
             pw: pw

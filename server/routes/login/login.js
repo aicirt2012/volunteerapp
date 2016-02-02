@@ -12,6 +12,7 @@ router.post('/', function(req, res, next) {
 
     var email = req.body.email;
     var pw = req.body.pw;
+    console.log(email);
 
     User.canLogin(email, pw, function(err, user){
         if(err) {

@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 
@@ -15,9 +14,10 @@ router.put('/personal', function(req, res, next) {
         mobil: req.body.mobil,
         email: req.body.email
     };
-    console.log(data);
-    User.update(req.user.id, data);
-    res.send();
+    User.update(req.user.id, data, function(){
+        res.send();
+    });
+
 });
 
 router.post('/photo', function(req, res, next) {
@@ -26,8 +26,9 @@ router.post('/photo', function(req, res, next) {
 
 
 router.put('/availability', function(req, res, next) {
-    User.update(req.user.id, {availability:req.body});
-    res.send();
+    User.update(req.user.id, {availability:req.body}, function(){
+        res.send();
+    });
 });
 
 

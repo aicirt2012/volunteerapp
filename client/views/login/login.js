@@ -3,11 +3,11 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, Us
     var me = $scope;
 
     //TODO Remove only for simple testing
-    me.email = 'user1@tum.de';
+    me.email = 'user2@tum.de';
     me.pw = '123';
 
     me.login = function(){
-        User.login(me.email,me.pw).then(function(data){
+        User.login(me.email, me.pw).then(function(data){
             window.location.href = '#/user';
         }, function(){
             console.log('login failed');

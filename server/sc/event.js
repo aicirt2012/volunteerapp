@@ -17,7 +17,10 @@ var Event = EntityType.define({
 
 Event.findByUserId = function(userId){
     console.log('find special person');
+
+    //find Event .where(helpers .any("13lyldapgh0lt" = id))
 }
+
 
 
 module.exports = Event;

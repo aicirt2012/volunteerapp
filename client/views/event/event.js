@@ -25,29 +25,33 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     $mdSidenav('left').open();
 
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
-        };
-    }
+
 
     $scope.showTabDialog = function(ev) {
         $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '/views/event/tabDialog.tmpl.html',
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.register = function() {
+                    $mdDialog.hide('d');
+                };
+            },
+            templateUrl: '/views/event/dialogRegister.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true
-        }).then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
+            clickOutsideToClose:true,
+            locals: {
+               event: me.event
+            }
+        }).then(function(a) {
+             me.register();
         }, function() {
-            $scope.status = 'You cancelled the dialog.';
+            // dialog canceled
         });
     };
 }]);

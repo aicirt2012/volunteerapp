@@ -15,5 +15,9 @@ var Event = EntityType.define({
 }, 'event');
 
 
+Event.findByUserId = function(userId){
+    console.log('find special person');
+}
+
 
 module.exports = Event;

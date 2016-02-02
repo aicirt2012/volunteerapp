@@ -61,7 +61,7 @@
                 </form>
 
                 <md-list>
-                    <md-subheader class="md-no-sticky">Helfer:</md-subheader>
+                    <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
                     <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
                         <user-avatar></user-avatar>
                         <div class="md-list-item-text" layout="column">
@@ -69,6 +69,9 @@
                         </div>
                     </md-list-item>
                 </md-list>
+                <md-button class="md-primary md-raised" ng-click="showTabDialog($event)" flex="100"  flex-gt-md="auto">
+                    Tab Dialog
+                </md-button>
 
             </md-card-content>
             <md-card-footer>
@@ -80,6 +83,7 @@
                 <br/><br/><br/><br/>
             </md-card-footer>
         </md-card>
+
 
     </ui-view>
 </md-content>

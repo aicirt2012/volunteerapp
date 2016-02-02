@@ -39,7 +39,7 @@ router.post('/', function(req, res) {
         res.send();
     });
 
-});4
+});
 
 router.get('/:id', function(req, res) {
 
@@ -82,6 +82,7 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
         res.send();
     });
 });
+
 
 
 

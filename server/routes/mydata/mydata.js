@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var http = require('../../util/http');
 var User = require('../../sc/User');
-
+var Event = require('../../sc/Event');
 
 
 
@@ -28,6 +28,12 @@ router.post('/photo', function(req, res, next) {
 router.put('/availability', function(req, res, next) {
     User.update(req.user.id, {availability:req.body}, function(){
         res.send();
+    });
+});
+
+router.get('/events', function(req, res){
+    Event.findByUserId(req.user.id, function(err, events){
+        res.send(events);
     });
 });
 

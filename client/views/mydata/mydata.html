@@ -122,6 +122,27 @@
                             </section>
                         </form>
                     </div>
+                    <div role="tabpanel"
+                         id="tab3-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="2"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="e in events" ng-click="selectUser(user.id)">
+                                <div class="md-tile-left inset" hide-sm >
+                                    <ng-md-icon icon="event_available" size="48"></ng-md-icon>
+                                </div>
+                                <div class="md-list-item-text">
+                                    <h3><b>{{e.title}}</b></h3>
+                                    <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
+                                    <p>{{e.description}}</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                        <p ng-if="event.length==0">Sie sind für keine Events Registiert!</p>
+                    </div>
                 </md-card-content>
             </ng-switch>
         </md-card>

@@ -16,15 +16,11 @@ var Event = EntityType.define({
 
 
 Event.findByUserId = function(userId, cb){
-    console.log('find special person');
-
-    //find Event .where(helpers .any("13lyldapgh0lt" = id))
-
-    Event.find('helpers .any("13lyldapgh0lt" = id)', function(err, events){
+    Event.find('helpers .any("'+userId+'" = id)', function(err, events){
         if(!err){
             cb(false, events)
         }else
-            cb(new Error('User not found'), null);
+            cb(new Error('No Events for User found'), null);
     });
 }
 

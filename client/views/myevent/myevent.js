@@ -2,27 +2,27 @@ app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', fun
 
 
     var me = $scope;
-    me.myevents = myevents;
+    me.futureevents = [];
+    me.pastevents = [];
+
+    for(var i=0; i< myevents.length; i++){
+        var e = myevents[i];
+        var now = new Date().getTime();
+        var eDate = new Date(e.startdate).getTime();
+        if(now> eDate)
+            me.pastevents.push(e);
+        else
+            me.futureevents.push(e);
+    }
 
 
     me.breadcrumb = function(){
         return 'Meine Events';
     }
 
-
-
-    me.submitPersonalData = function(){
-        MyData.personal.update({
-            gender: me.user.gender,
-            name: me.user.name,
-            tel: me.user.tel,
-            mobil: me.user.mobil,
-            email: me.user.email
-        });
-        console.log(JSON.stringify($flow.files[0]));
+    me.selectEvent = function(eventId){
+        window.location.href = '#/event/'+eventId;
     }
-
-
 
 
     $mdSidenav('left').open();

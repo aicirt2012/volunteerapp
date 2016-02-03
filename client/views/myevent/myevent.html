@@ -5,24 +5,57 @@
         <div class="inset" hide-sm></div>
 
         <md-card style="padding: 0px">
-                <md-card-content>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span>Zukünftige Events</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <md-card-content style="padding: 0px">
+                <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="e in futureevents" ng-click="selectEvent(e.id)">
+                        <div class="md-tile-left inset" hide-sm >
+                            <ng-md-icon icon="event_available" size="48"></ng-md-icon>
+                        </div>
+                        <div class="md-list-item-text">
+                            <h3><b>{{e.title}}</b></h3>
+                            <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
+                            <p>{{e.description}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <p ng-if="futureevents.length==0">Sie sind für keine Events Registiert!<br/><br/></p>
 
-                    <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="e in myevents" ng-click="selectUser(user.id)">
-                            <div class="md-tile-left inset" hide-sm >
-                                <ng-md-icon icon="event_available" size="48"></ng-md-icon>
-                            </div>
-                            <div class="md-list-item-text">
-                                <h3><b>{{e.title}}</b></h3>
-                                <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
-                                <p>{{e.description}}</p>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                    <p ng-if="event.length==0">Sie sind für keine Events Registiert!</p>
+            </md-card-content>
+        </md-card>
 
-                </md-card-content>
-            </ng-switch>
+        <md-card style="padding: 0px; margin-top:20px;">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span>Vergangene Events</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <md-card-content style="padding: 0px">
+                <md-list>
+                    <md-list-item class="md-3-line" ng-repeat="e in pastevents" ng-click="selectEvent(e.id)">
+                        <div class="md-tile-left inset" hide-sm >
+                            <ng-md-icon icon="event_available" size="48"></ng-md-icon>
+                        </div>
+                        <div class="md-list-item-text">
+                            <h3><b>{{e.title}}</b></h3>
+                            <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
+                            <p>{{e.description}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <p ng-if="pastevents.length==0">Sie waren für keine Events Registiert!</p>
+
+            </md-card-content>
         </md-card>
 
 

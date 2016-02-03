@@ -19,7 +19,7 @@
                     Organisatoren
                 </md-tab>
             </md-tabs>
-            <md-card-content>
+            <md-card-content style="padding: 0px;">
                 <md-list>
                     <md-list-item class="md-3-line" ng-repeat="user in userlist | filter: isSelectedRole" ng-click="selectUser(user.id)">
                         <div class="md-tile-left inset" hide-sm>
@@ -32,7 +32,7 @@
                         </div>
                     </md-list-item>
                 </md-list>
-                <p ng-if="!hasSelectedRole()">Keine User vorhanden!</p>
+                <p style="padding:15px;" ng-if="!hasSelectedRole()">Keine User vorhanden!<br/><br/></p>
             </md-card-content>
         </md-card>
 

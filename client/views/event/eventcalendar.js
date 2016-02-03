@@ -39,10 +39,9 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     me.setDayContent = function(date) {
         for(var i=0; i < me.eventList.length; i++) {
             var e = me.eventList[i];
-            var s = new Date(event.startdate);
-            if( s.getDate() == date.getDate() && s.getMonth() == date.getMonth() &&  s.getYear() == date.getYear()) {
+            var s = new Date(e.startdate);
+            if( s.getDate() == date.getDate() && s.getMonth() == date.getMonth() &&  s.getYear() == date.getYear())
                 return e.title;
-            }
         }
     };
 

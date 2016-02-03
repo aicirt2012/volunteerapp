@@ -40,7 +40,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                     $mdDialog.cancel();
                 };
                 $scope.register = function() {
-                    $mdDialog.hide('d');
+                    $mdDialog.hide();
                 };
             },
             templateUrl: '/views/event/dialogRegister.html',
@@ -50,10 +50,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             locals: {
                event: me.event
             }
-        }).then(function(a) {
+        }).then(function() {
              me.register();
-        }, function() {
-            // dialog canceled
         });
     };
 }]);

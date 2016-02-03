@@ -65,10 +65,13 @@ app.service('MyData', function($resource) {
         'update': { method:'PUT' }
     });
 
+    var Events = $resource('/api/mydata/events', null, {});
+
 
     return {
         personal: Personal,
-        availability: Availability
+        availability: Availability,
+        events: Events
     };
 });
 

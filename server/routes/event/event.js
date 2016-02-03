@@ -54,7 +54,9 @@ router.get('/:id', function(req, res) {
                 User.findById(helper.id, function(err, user){
                     helpers.push({
                         id: user.id,
-                        name: user.name
+                        name: user.name,
+                        email: user.email,
+                        tel: user.tel
                     });
                     cb();
                 });

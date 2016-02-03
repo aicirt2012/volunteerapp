@@ -74,9 +74,13 @@
                 <md-list>
                     <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
                     <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
-                        <user-avatar></user-avatar>
-                        <div class="md-list-item-text" layout="column">
+                        <div class="md-tile-left inset" hide-sm>
+                            <user-avatar></user-avatar>
+                        </div>
+                        <div class="md-list-item-text">
                             <h3>{{helper.name}}</h3>
+                            <p>{{helper.email}}</p>
+                            <p>{{helper.tel}}</p>
                         </div>
                     </md-list-item>
                 </md-list>

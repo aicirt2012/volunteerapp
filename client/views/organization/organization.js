@@ -5,9 +5,12 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
     me.organization = organization;
 
     me.breadcrumb = function(){
-        return 'Einrichtungsverwaltung > ' + me.organization.name;
+        return 'Einrichtungsverwaltung > Einrichtung';
     }
 
+    me.back = function(){
+        window.location.href = '#/organization';
+    }
 
     $mdSidenav('left').open();
 }]);

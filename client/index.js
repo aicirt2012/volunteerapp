@@ -10,7 +10,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
     me.menu = [
         {
             link : 'eventcalendar',
-            title: 'Eventverwaltung',
+            title: 'Eventkalender',
             icon: 'event'
         },
         {

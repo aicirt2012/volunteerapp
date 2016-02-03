@@ -1,7 +1,6 @@
 app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', function($scope, $mdSidenav, eventlist) {
 
 
-
     var me = $scope;
     me.eventList = eventlist;
 
@@ -18,7 +17,6 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     };
 
     me.dayClick = function(date) {
-        //var dateString = formatDate(date);
         for(var i=0; i < me.eventList.length; i++) {
             var event = me.eventList[i];
             var startdate = new Date(event.startdate);
@@ -40,19 +38,13 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
 
     me.setDayContent = function(date) {
         for(var i=0; i < me.eventList.length; i++) {
-            var event = me.eventList[i];
-            var startdate = new Date(event.startdate);
-           // console.log("startdate: ", startdate);
-          //  console.log("date: ", date);
-            if( startdate.getDate() == date.getDate() &&
-                startdate.getMonth() == date.getMonth() &&
-                startdate.getYear() == date.getYear()) {
-                return event.title;
+            var e = me.eventList[i];
+            var s = new Date(event.startdate);
+            if( s.getDate() == date.getDate() && s.getMonth() == date.getMonth() &&  s.getYear() == date.getYear()) {
+                return e.title;
             }
         }
     };
-
-
 
     me.selectEvent = function(id){
         window.location.href = '#/event/'+id;
@@ -68,14 +60,5 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
         return 'Eventverwaltung';
     };
 
-    function formatDate(date){
-        var day = date.getDate();
-        var month = date.getMonth().valueOf()+1;
-        if(day < 10)
-            day = '0' + day;
-        if(month < 10)
-            month = '0' + month;
-        return month + "-" + day +"-"+ date.getFullYear();
-    }
 
 }]);

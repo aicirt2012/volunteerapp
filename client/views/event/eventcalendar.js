@@ -42,8 +42,8 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
         for(var i=0; i < me.eventList.length; i++) {
             var event = me.eventList[i];
             var startdate = new Date(event.startdate);
-            console.log("startdate: ", startdate);
-            console.log("date: ", date);
+           // console.log("startdate: ", startdate);
+          //  console.log("date: ", date);
             if( startdate.getDate() == date.getDate() &&
                 startdate.getMonth() == date.getMonth() &&
                 startdate.getYear() == date.getYear()) {

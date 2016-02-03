@@ -29,6 +29,15 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/event/addevent.html',
             controller: 'AddEventCtrl'
         })
+        .when('/myevents', {
+            templateUrl: 'views/myevent/myevent.html',
+            controller: 'MyEventCtrl',
+            resolve: {
+                myevents: function(MyData){
+                    return MyData.events.query().$promise;
+                }
+            }
+        })
         .when('/mydata', {
             templateUrl: 'views/mydata/mydata.html',
             controller: 'MyDataCtrl',

@@ -26,6 +26,11 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
     ];
     me.admin = [
         {
+            link : 'myevents',
+            title: 'Meine Events',
+            icon: 'event_available'
+        },
+        {
             link : 'mydata',
             title: 'Meine Daten',
             icon: 'settings'

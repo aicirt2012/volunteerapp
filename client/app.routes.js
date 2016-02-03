@@ -75,13 +75,12 @@ app.config(['$routeProvider', function($routeProvider) {
         })
         .when('/organization', {
             templateUrl: 'views/organization/organizationlist.html',
-            controller: 'OrganizationListCtrl'
-            /*
-             resolve: {
-             user: function($route, User) {
-             return User.get({id: $route.current.params.id});
+            controller: 'OrganizationListCtrl',
+            resolve: {
+                organizations: function(Organization) {
+                    return Organization.list().$promise;
+                }
              }
-             }*/
         })
         .when('/organization/:id', {
             templateUrl: 'views/organization/organization.html',

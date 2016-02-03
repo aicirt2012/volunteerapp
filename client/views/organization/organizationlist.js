@@ -1,11 +1,9 @@
-app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'Organization', function($scope, $mdSidenav, Organization) {
+app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'organizations', 'Organization', function($scope, $mdSidenav, organizations, Organization) {
 
 
     var me = $scope;
 
-    me.organizationlist = Organization.list(function(data){
-
-    });
+    me.organizationlist = organizations;
 
     me.selectOrganization = function(id){
         window.location.href = '#/organization/'+id;

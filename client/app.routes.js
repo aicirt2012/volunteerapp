@@ -44,9 +44,6 @@ app.config(['$routeProvider', function($routeProvider) {
             resolve: {
                 user: function(User){
                     return User.me();
-                },
-                events: function(MyData){
-                    return MyData.events.query().$promise;
                 }
             }
         })

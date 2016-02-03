@@ -1,10 +1,9 @@
-app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'events', 'User', 'MyData', function($scope, $mdSidenav, user, events, User, MyData) {
+app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', function($scope, $mdSidenav, user, User, MyData) {
 
 
     var me = $scope;
     me.user = user;
     me.genders = User.genders;
-    me.events = events;
 
     me.$on('flow::fileAdded', function (event, $flow, flowFile) {
         console.log(event, $flow, flowFile);

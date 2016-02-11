@@ -1,8 +1,8 @@
-<md-dialog aria-label="Event Anmeldung">
+<md-dialog aria-label="Event Abmeldung">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Event Anmeldung</h2>
+                <h2>Event Abmeldung</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -11,7 +11,7 @@
         </md-toolbar>
         <md-dialog-content style="max-width:500px;max-height:810px; ">
             <md-content class="md-padding">
-                <p>Möchten Sie sich verbindlich zum Event <b>{{event.title}}</b> am <b>{{event.startdate | date: 'dd.MM.yyyy'}}</b> anmelden?</p>
+                <p>Sind Sie sicher, dass Sie sich von dem Event <b>{{event.title}}</b> am <b>{{event.startdate | date: 'dd.MM.yyyy'}}</b> abmelden wollen?</p>
             </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">
@@ -19,8 +19,8 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="register()" >
-                Anmelden
+            <md-button class="md-raised md-primary" ng-click="unregister()" >
+                Abmelden
             </md-button>
         </md-dialog-actions>
     </form>

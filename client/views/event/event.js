@@ -19,7 +19,29 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     };
 
     me.unregister = function(helperId){
-        Event.unregister(me.event.id, helperId);
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.unregister = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/event/dialogUnregister.html',
+            parent: angular.element(document.body),
+            //targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function() {
+            Event.unregister(me.event.id, helperId);
+        });
     };
 
     $mdSidenav('left').open();

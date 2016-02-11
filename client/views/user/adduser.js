@@ -38,6 +38,10 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         })
     };
 
+    me.back = function(){
+        window.location.href = '#/user';
+    }
+
     $mdSidenav('left').open();
 
 }]);

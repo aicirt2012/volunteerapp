@@ -56,7 +56,7 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', functi
     $mdSidenav('left').open();
 
     me.breadcrumb = function(){
-        return 'Eventverwaltung';
+        return 'Eventkalender';
     };
 
 

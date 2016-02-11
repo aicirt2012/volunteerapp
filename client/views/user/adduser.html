@@ -4,7 +4,18 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card>
+        <md-card style="padding: 0px;">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
+                        <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Neuer Benutzer</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-card-content>
 

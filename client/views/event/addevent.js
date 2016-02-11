@@ -91,6 +91,9 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
 
     me.myDate = new Date();
 
+    me.back = function(){
+        window.location.href = '#/eventcalendar';
+    }
 
     $mdSidenav('left')
         .open();

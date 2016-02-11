@@ -8,6 +8,14 @@
         <div class="inset" hide-sm></div>
 
         <md-card style="padding: 0px;">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span>Einrichtungen</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
             <md-card-content style="padding: 0px;">
                 <md-list>
                     <md-list-item class="md-3-line" ng-repeat="organization in organizationlist" ng-click="selectOrganization(organization.id)">

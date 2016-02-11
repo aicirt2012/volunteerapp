@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 
     // Initialize with Testdata
     asyncTasks.push(function(cb){
-        var users = JSON.parse(fs.readFileSync('server/routes/setup/user.list.json'));
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
         async.forEach(users, function(u, cb){
             User.save({
                 gender: u.gender,
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
 
     });
     asyncTasks.push(function(cb){
-        var organizations = JSON.parse(fs.readFileSync('server/routes/setup/organization.list.json'));
+        var organizations = JSON.parse(fs.readFileSync(__dirname+ '/organization.list.json'));
         async.forEach(organizations, function(o, cb){
             Organization.save({
                 name: o.name,
@@ -69,7 +69,7 @@ router.post('/', function(req, res, next) {
         });
     });
     asyncTasks.push(function(cb){
-        var events = JSON.parse(fs.readFileSync('server/routes/setup/event.list.json'));
+        var events = JSON.parse(fs.readFileSync(__dirname + '/event.list.json'));
         async.forEach(events, function(e, cb){
             Event.save({
                 title: e.title,

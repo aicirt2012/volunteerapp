@@ -43,12 +43,8 @@ md-sidenav ng-md-icon {
 .event-calendar{
     background-color: #fff;
 }
-.datepickerdemoBasicUsage {
-    /** Demo styles for mdCalendar. */ }
-/**.datepickerdemoBasicUsage md-content {
-    padding-bottom: 200px; }
-.datepickerdemoBasicUsage .validation-messages {
-    font-size: 11px;
-    color: darkred;
-    margin: 10px 0 0 25px;
-}*/
+/**makes date-time-picker match with color scheme*/
+md-toolbar.md-hue-1:not(.md-menu-toolbar) {
+    background-color: #07A9F3;
+    color: rgba(255,255,255,0.87);
+}

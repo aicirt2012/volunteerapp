@@ -9,8 +9,8 @@ var Event = EntityType.define({
     nrhelpers: {type:'Number'},
     helpers: {type: 'link',  options: {entityType: {id: 'user'}},  multiplicity: 'any'},
     emails: {type:'String'},
-    startdate: {type:'Date'},
-    enddate: {type:'Date'},
+    startdate: {type:'String'},
+    enddate: {type:'String'},
     organization: {type: 'link', options:{entityType: {id:'organization'}} }
 }, 'event');
 

@@ -47,6 +47,8 @@ function createAttributeDefinition(workspaceId, typeId, name, definition, cb) {
         attributeType: definition.type,
         options: definition.options
     };
+    if(definition.multiplicity)
+        data.multiplicity = definition.multiplicity;
     http.post('/entityTypes/'+typeId+'/attributeDefinitions', data, function (err, res, body) {
         if(err || res.statusCode != 200){
             console.error('Error during creating AttributeDefinition!');

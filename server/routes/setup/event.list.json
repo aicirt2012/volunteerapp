@@ -1,23 +1,102 @@
 [
   {
-    "id": "dd",
+    "id": "kino",
     "title": "Kinoabend Ice Age 2",
-    "place": "schleißheimerstraße 4",
-    "startdate": "01-22-2016",
-    "enddate": "01-22-2016",
+    "place": "Schleißheimerstraße 4",
+    "startdate": "2016-01-22T17:30:44.476Z",
+    "enddate": "2016-01-22T19:00:44.476Z",
     "anzhelper": 3,
-    "description": "Wir planen eine Kinobesuch im Kino ...",
+    "description": "Wir planen eine Kinobesuch im Kino um den Film Ice Age 2 zu schauen.",
     "important": false
   },
-
   {
-    "id": "ff",
-    "title": "Fussballtunier",
+    "id": "kochen",
+    "title": "Kochabend",
+    "place": "Bayernkaserne",
+    "startdate": "2016-01-04T18:00:44.476Z",
+    "enddate": "2016-01-04T21:00:44.476Z",
+    "anzhelper": 2,
+    "description": "Wir planen einen Kochabend um traditionelle Gerichte zu kochen.",
+    "important": false
+  },
+  {
+    "id": "fussball",
+    "title": "Fussball",
     "place": "Alianz Arena",
-    "startdate": "01-08-2016",
-    "enddate": "01-08-2016",
+    "startdate": "2016-02-07T15:00:44.476Z",
+    "enddate": "2016-02-07T19:00:44.476Z",
     "anzhelper": 6,
     "description": "Wir planen ein Fussballtunier ...",
+    "important": false
+  },
+  {
+    "id": "museum",
+    "title": "Museum",
+    "place": "Pinakothek der Moderne",
+    "startdate": "2016-02-23T11:30:44.476Z",
+    "enddate": "2016-02-23T13:00:44.476Z",
+    "anzhelper": 2,
+    "description": "Wir planen ein Museumsbesuch in der Pinakothek der Moderne.",
+    "important": false
+  },
+  {
+    "id": "wandern",
+    "title": "Wandern",
+    "place": "Zugspitze",
+    "startdate": "2016-02-18T08:00:44.476Z",
+    "enddate": "2016-02-18T16:00:44.476Z",
+    "anzhelper": 5,
+    "description": "Wir planen eine Wandertour in den Alpen.",
+    "important": false
+  },
+  {
+    "id": "brauhaus",
+    "title": "Brauhaus",
+    "place": "Giesinger Brauhaus",
+    "startdate": "2016-03-17T18:00:44.476Z",
+    "enddate": "2016-03-17T21:00:44.476Z",
+    "anzhelper": 3,
+    "description": "Wir planen einen gemeinschaftliches Essen im Giesinger Brauhaus.",
+    "important": false
+  },
+  {
+    "id": "kochen2",
+    "title": "Kochabend",
+    "place": "Bayernkaserne",
+    "startdate": "2016-03-07T18:00:44.476Z",
+    "enddate": "2016-03-07T21:00:44.476Z",
+    "anzhelper": 2,
+    "description": "Nach dem der letzte Kochabend so ein Erfolg war, planen wir erneut einen Kochabend.",
+    "important": false
+  },
+  {
+    "id": "fest",
+    "title": "Frühlingsfest",
+    "place": "Theresienwiese",
+    "startdate": "2016-04-15T17:00:44.476Z",
+    "enddate": "2016-04-15T22:00:44.476Z",
+    "anzhelper": 4,
+    "description": "Wir planen einen besuch auf dem Münchener Frühlingsfest.",
+    "important": false
+  },
+  {
+    "id": "radeln",
+    "title": "Radeln an der Isar",
+    "place": "Isar",
+    "startdate": "2016-02-28T11:00:44.476Z",
+    "enddate": "2016-02-28T14:00:44.476Z",
+    "anzhelper": 3,
+    "description": "Wir planen eine Fahrradtour endlang der Isar.",
+    "important": false
+  },
+  {
+    "id": "bmw",
+    "title": "BMW Welt",
+    "place": "Olymipazentrum",
+    "startdate": "2016-03-22T14:30:44.476Z",
+    "enddate": "2016-03-22T17:00:44.476Z",
+    "anzhelper": 2,
+    "description": "Wir planen einen besuch in der BMW Welt am Olympiapark.",
     "important": false
   }
 ]

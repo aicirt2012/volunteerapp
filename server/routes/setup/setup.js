@@ -74,8 +74,8 @@ router.post('/', function(req, res, next) {
             Event.save({
                 title: e.title,
                 place: e.place,
-                startdate: new Date().toISOString(),
-                enddate: new Date().toISOString(),
+                startdate: e.startdate,
+                enddate: e.enddate,
                 anzhelper: e.anzhelper,
                // helpers: {},
                 description: e.description,

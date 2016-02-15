@@ -1,5 +1,93 @@
 [
   {
+    "id": "kevin",
+    "name": "Kevin Becker",
+    "gender": "MALE",
+    "email": "kevin@volunteerapp.de",
+    "pw": "123",
+    "tel": "089112338",
+    "mobil": "0158899721",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": false, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": false, "afternoon": false, "evening": false},
+      "th": {"morning": false, "afternoon": false, "evening": true},
+      "fr": {"morning": true, "afternoon": true, "evening": true},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Silberhornstr. 9" ,"city": "Munich"}
+  },
+  {
+    "id": "sabine",
+    "name": "Sabine Becker",
+    "gender": "FEMALE",
+    "email": "sabine@volunteerapp.de",
+    "pw": "123",
+    "tel": "089112338",
+    "mobil": "0172230874",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": false, "afternoon": true, "evening": true},
+      "tu": {"morning": false, "afternoon": true, "evening": true},
+      "we": {"morning": false, "afternoon": true, "evening": true},
+      "th": {"morning": false, "afternoon": false, "evening": false},
+      "fr": {"morning": false, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": true, "evening": false},
+      "su": {"morning": true, "afternoon": true, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Silberhornstr. 8" ,"city": "Munich"}
+  },
+  {
+    "id": "frederike",
+    "name": "Frederike Engels",
+    "gender": "FEMALE",
+    "email": "frederike@volunteerapp.de",
+    "pw": "123",
+    "tel": "08977656",
+    "mobil": "0167728222",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": false, "afternoon": false, "evening": true},
+      "tu": {"morning": false, "afternoon": false, "evening": true},
+      "we": {"morning": false, "afternoon": false, "evening": true},
+      "th": {"morning": false, "afternoon": true, "evening": true},
+      "fr": {"morning": true, "afternoon": true, "evening": true},
+      "sa": {"morning": true, "afternoon": true, "evening": true},
+      "su": {"morning": true, "afternoon": true, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Bonnerplatz 6" ,"city": "München"}
+  },
+  {
+    "id": "vera",
+    "name": "Vera Meier",
+    "gender": "FEMALE",
+    "email": "meier@volunteerapp.de",
+    "pw": "123",
+    "tel": "0895678",
+    "mobil": "0161112223",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": false, "afternoon": false, "evening": true},
+      "tu": {"morning": false, "afternoon": false, "evening": true},
+      "we": {"morning": false, "afternoon": false, "evening": true},
+      "th": {"morning": false, "afternoon": false, "evening": true},
+      "fr": {"morning": false, "afternoon": false, "evening": true},
+      "sa": {"morning": true, "afternoon": true, "evening": true},
+      "su": {"morning": true, "afternoon": true, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Echingerstr. 27" ,"city": "Munich"}
+  },
+  {
     "id": "sdhfu309",
     "name": "Max Mustermann",
     "gender": "MALE",
@@ -22,26 +110,158 @@
     "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
   },
   {
-    "id": "sdhddfu309",
-    "name": "Eva Hummel",
-    "gender": "FEMALE",
-    "email": "user2@tum.de",
+    "id": "andreas",
+    "name": "Andreas Müller",
+    "gender": "MALE",
+    "email": "andreas@volunteerapp.de",
     "pw": "123",
-    "tel": "012378495",
-    "mobil": "0723843434",
+    "tel": "08912345",
+    "mobil": "0175678910",
     "notes": "Some notes",
-    "role": "organizer",
+    "role": "helper",
     "availability": {
-      "mo": {"morning": true, "afternoon": false, "evening": false},
-      "tu": {"morning": true, "afternoon": false, "evening": false},
-      "we": {"morning": true, "afternoon": false, "evening": false},
-      "th": {"morning": true, "afternoon": false, "evening": false},
-      "fr": {"morning": true, "afternoon": false, "evening": false},
-      "sa": {"morning": true, "afternoon": false, "evening": false},
-      "su": {"morning": true, "afternoon": false, "evening": true}
+      "mo": {"morning": false, "afternoon": false, "evening": true},
+      "tu": {"morning": false, "afternoon": false, "evening": true},
+      "we": {"morning": false, "afternoon": false, "evening": true},
+      "th": {"morning": false, "afternoon": false, "evening": true},
+      "fr": {"morning": false, "afternoon": true, "evening": true},
+      "sa": {"morning": false, "afternoon": false, "evening": true},
+      "su": {"morning": false, "afternoon": false, "evening": true}
     },
     "events":[],
-    "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
+    "test":{"street": "Heisenbergstr. 10" ,"city": "Garching"}
+  },
+  {
+    "id": "mark",
+    "name": "Mark Schmidt",
+    "gender": "MALE",
+    "email": "mark@volunteerapp.de",
+    "pw": "123",
+    "tel": "089098765",
+    "mobil": "0159876543",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": false, "afternoon": false, "evening": false},
+      "tu": {"morning": false, "afternoon": false, "evening": false},
+      "we": {"morning": false, "afternoon": true, "evening": true},
+      "th": {"morning": false, "afternoon": true, "evening": true},
+      "fr": {"morning": false, "afternoon": true, "evening": false},
+      "sa": {"morning": true, "afternoon": true, "evening": false},
+      "su": {"morning": false, "afternoon": true, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 54" ,"city": "Munich"}
+  },
+  {
+    "id": "anna",
+    "name": "Anna Schulz",
+    "gender": "FEMALE",
+    "email": "anna@volunteerapp.de",
+    "pw": "123",
+    "tel": "089112233",
+    "mobil": "01782121212",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": true, "afternoon": true, "evening": true},
+      "tu": {"morning": false, "afternoon": false, "evening": false},
+      "we": {"morning": false, "afternoon": false, "evening": false},
+      "th": {"morning": false, "afternoon": false, "evening": true},
+      "fr": {"morning": true, "afternoon": true, "evening": false},
+      "sa": {"morning": true, "afternoon": true, "evening": true},
+      "su": {"morning": true, "afternoon": true, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 22" ,"city": "Munich"}
+  },
+  {
+    "id": "daniel",
+    "name": "Daniel Stark",
+    "gender": "MALE",
+    "email": "daniel@volunteerapp.de",
+    "pw": "123",
+    "tel": "08911289",
+    "mobil": "016443712",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": true, "afternoon": true, "evening": true},
+      "tu": {"morning": true, "afternoon": true, "evening": true},
+      "we": {"morning": true, "afternoon": true, "evening": true},
+      "th": {"morning": false, "afternoon": false, "evening": false},
+      "fr": {"morning": false, "afternoon": false, "evening": false},
+      "sa": {"morning": false, "afternoon": false, "evening": false},
+      "su": {"morning": false, "afternoon": false, "evening": false}
+    },
+    "events":[],
+    "test":{"street": "Schleissheimerstr. 19" ,"city": "Eching"}
+  },
+  {
+    "id": "ines",
+    "name": "Ines Stein",
+    "gender": "FEMALE",
+    "email": "ines@volunteerapp.de",
+    "pw": "123",
+    "tel": "08974612",
+    "mobil": "0153388991",
+    "notes": "Some notes",
+    "role": "helper",
+    "availability": {
+      "mo": {"morning": true, "afternoon": true, "evening": true},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": true, "evening": true},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": true, "evening": true},
+      "sa": {"morning": false, "afternoon": false, "evening": false},
+      "su": {"morning": false, "afternoon": false, "evening": false}
+    },
+    "events":[],
+    "test":{"street": "Arcisstr. 90" ,"city": "Munich"}
+  },
+  {
+    "id": "bernd",
+    "name": "Bernd Halder",
+    "gender": "MALE",
+    "email": "bernd@volunteerapp.de",
+    "pw": "123",
+    "tel": "0126748234",
+    "mobil": "08917782",
+    "notes": "Some notes",
+    "role": "team",
+    "availability": {
+      "mo": {"morning": false, "afternoon": true, "evening": false},
+      "tu": {"morning": true, "afternoon": true, "evening": false},
+      "we": {"morning": true, "afternoon": true, "evening": false},
+      "th": {"morning": true, "afternoon": true, "evening": false},
+      "fr": {"morning": true, "afternoon": true, "evening": true},
+      "sa": {"morning": false, "afternoon": false, "evening": false},
+      "su": {"morning": false, "afternoon": false, "evening": false}
+    },
+    "events":[],
+    "test":{"street": "Hans-Leipelt-Str. 89" ,"city": "Munich"}
+  },
+  {
+    "id": "dave",
+    "name": "Dave Kerman",
+    "gender": "MALE",
+    "email": "dave@volunteerapp.de",
+    "pw": "123",
+    "tel": "0891267312",
+    "mobil": "016452783",
+    "notes": "Some notes",
+    "role": "team",
+    "availability": {
+      "mo": {"morning": false, "afternoon": true, "evening": true},
+      "tu": {"morning": false, "afternoon": true, "evening": true},
+      "we": {"morning": false, "afternoon": true, "evening": true},
+      "th": {"morning": true, "afternoon": true, "evening": false},
+      "fr": {"morning": false, "afternoon": false, "evening": false},
+      "sa": {"morning": false, "afternoon": false, "evening": false},
+      "su": {"morning": false, "afternoon": false, "evening": false}
+    },
+    "events":[],
+    "test":{"street": "Schellingstr. 3" ,"city": "Munich"}
   },
   {
     "id": "sdhddfu309",
@@ -51,7 +271,7 @@
     "pw": "123",
     "tel": "012378495",
     "mobil": "0723843434",
-    "notes": "Some notes",
+    "notes": "Organisatorin",
     "role": "organizer",
     "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
@@ -63,7 +283,29 @@
       "su": {"morning": true, "afternoon": false, "evening": true}
     },
     "events":[],
-    "test":{"street": "Hans-Leipelt-Str. 8" ,"city": "Munich"}
+    "test":{"street": "Hans-Leipelt-Str. 18" ,"city": "Munich"}
+  },
+  {
+    "id": "sdhddfu309",
+    "name": "Eva Hummel",
+    "gender": "FEMALE",
+    "email": "user2@tum.de",
+    "pw": "123",
+    "tel": "012378495",
+    "mobil": "0723843434",
+    "notes": "Organisatorin",
+    "role": "organizer",
+    "availability": {
+      "mo": {"morning": true, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": false, "evening": false},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Baader-Str. 10" ,"city": "Munich"}
   }
 
 ]

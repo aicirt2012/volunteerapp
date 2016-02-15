@@ -28,6 +28,7 @@ router.post('/', function(req, res) {
         description: req.body.description,
         important: req.body.important
     }, function(){
+        mailer.send({to: 'felix.michel@tum.de', subject: 'Test2', html: 'Hallo '});
         //TODO implened query to find users
         /*
         User.findAvailableUsers(startdate, starttime, endtime, endate, function(users){

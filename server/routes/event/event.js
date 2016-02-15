@@ -28,7 +28,24 @@ router.post('/', function(req, res) {
         description: req.body.description,
         important: req.body.important
     }, function(){
-        mailer.send({to: 'felix.michel@tum.de', subject: 'Test2', html: 'Hallo '});
+        var start = new Date(req.body.startdate);
+        var sDate = start.getDate() + '.' + start.getMonth()+1 + '.' + start.getFullYear();
+        var sTime = start.getHours() + ':' + start.getMinutes();
+        var end = new Date(req.body.enddate);
+        var eTime = end.getHours() + ':' + end.getMinutes();
+        mailer.send({
+            to: 'felix.michel@tum.de',
+            subject: 'Neues Event',
+            html: '<h3>Hallo Felix!</h3>' +
+            '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+            '<b>' + req.body.title + '</b>' +
+            '<p>Am ' + sDate +' von ' + sTime + ' Uhr bis ' + eTime + ' Uhr. <br>' +
+            'Ort: ' + req.body.place + '<br>'+
+            'Beschreibung: ' + req.body.description + '<br>'+
+            'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
+            '<p>Viele Grüße, <br>'+
+            'dein VolunterApp Team</p>'
+        });
         //TODO implened query to find users
         /*
         User.findAvailableUsers(startdate, starttime, endtime, endate, function(users){

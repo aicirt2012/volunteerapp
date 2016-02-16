@@ -5,7 +5,7 @@
     "place": "Schleißheimerstraße 4",
     "startdate": "2016-01-22T17:30:44.476Z",
     "enddate": "2016-01-22T19:00:44.476Z",
-    "anzhelper": 3,
+    "nrhelpers": 3,
     "description": "Wir planen eine Kinobesuch im Kino um den Film Ice Age 2 zu schauen.",
     "important": false
   },
@@ -15,7 +15,7 @@
     "place": "Bayernkaserne",
     "startdate": "2016-01-04T18:00:44.476Z",
     "enddate": "2016-01-04T21:00:44.476Z",
-    "anzhelper": 2,
+    "nrhelpers": 2,
     "description": "Wir planen einen Kochabend um traditionelle Gerichte zu kochen.",
     "important": false
   },
@@ -25,7 +25,7 @@
     "place": "Alianz Arena",
     "startdate": "2016-02-07T15:00:44.476Z",
     "enddate": "2016-02-07T19:00:44.476Z",
-    "anzhelper": 6,
+    "nrhelpers": 6,
     "description": "Wir planen ein Fussballtunier ...",
     "important": false
   },
@@ -35,7 +35,7 @@
     "place": "Pinakothek der Moderne",
     "startdate": "2016-02-23T11:30:44.476Z",
     "enddate": "2016-02-23T13:00:44.476Z",
-    "anzhelper": 2,
+    "nrhelpers": 2,
     "description": "Wir planen ein Museumsbesuch in der Pinakothek der Moderne.",
     "important": false
   },
@@ -45,7 +45,7 @@
     "place": "Zugspitze",
     "startdate": "2016-02-18T08:00:44.476Z",
     "enddate": "2016-02-18T16:00:44.476Z",
-    "anzhelper": 5,
+    "nrhelpers": 5,
     "description": "Wir planen eine Wandertour in den Alpen.",
     "important": false
   },
@@ -55,7 +55,7 @@
     "place": "Giesinger Brauhaus",
     "startdate": "2016-03-17T18:00:44.476Z",
     "enddate": "2016-03-17T21:00:44.476Z",
-    "anzhelper": 3,
+    "nrhelpers": 3,
     "description": "Wir planen einen gemeinschaftliches Essen im Giesinger Brauhaus.",
     "important": false
   },
@@ -65,7 +65,7 @@
     "place": "Bayernkaserne",
     "startdate": "2016-03-07T18:00:44.476Z",
     "enddate": "2016-03-07T21:00:44.476Z",
-    "anzhelper": 2,
+    "nrhelpers": 2,
     "description": "Nach dem der letzte Kochabend so ein Erfolg war, planen wir erneut einen Kochabend.",
     "important": false
   },
@@ -75,8 +75,17 @@
     "place": "Theresienwiese",
     "startdate": "2016-04-15T17:00:44.476Z",
     "enddate": "2016-04-15T22:00:44.476Z",
-    "anzhelper": 4,
+    "nrhelpers": 4,
     "description": "Wir planen einen besuch auf dem Münchener Frühlingsfest.",
+    "organization":{
+      "id": "org00001",
+      "name": "Helper e.V.",
+      "zip": "80805",
+      "city": "München",
+      "street": "ocen dirive 67",
+      "tel": "012378495",
+      "email": "helper@com"
+    },
     "important": false
   },
   {
@@ -85,7 +94,7 @@
     "place": "Isar",
     "startdate": "2016-02-28T11:00:44.476Z",
     "enddate": "2016-02-28T14:00:44.476Z",
-    "anzhelper": 3,
+    "nrhelpers": 3,
     "description": "Wir planen eine Fahrradtour endlang der Isar.",
     "important": false
   },
@@ -95,8 +104,8 @@
     "place": "Olymipazentrum",
     "startdate": "2016-03-22T14:30:44.476Z",
     "enddate": "2016-03-22T17:00:44.476Z",
-    "anzhelper": 2,
-    "description": "Wir planen einen besuch in der BMW Welt am Olympiapark.",
+    "nrhelpers": 2,
+    "description": "Wir planen einen Besuch in der BMW Welt am Olympiapark.",
     "important": false
   }
 ]

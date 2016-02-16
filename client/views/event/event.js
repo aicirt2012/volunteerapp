@@ -9,6 +9,10 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.event.enddate = new Date(me.event.enddate);
     me.event.enddate.setSeconds(0);
     me.event.enddate.setMilliseconds(0);
+    if(me.event.organization) {
+        me.event.organization = JSON.parse(me.event.organization);
+    }
+
 
     me.breadcrumb = function(){
         return 'Eventverwaltung > Event';

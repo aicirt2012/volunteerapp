@@ -1,4 +1,4 @@
-app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', function($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker) {
+app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', 'Organization', function($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker, Organization) {
 
     var me = $scope;
     me.event = {
@@ -8,6 +8,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         enddate: new Date(),
         nrhelpers:1,
         description:'',
+        organization:'',
         important:false
     };
 
@@ -15,6 +16,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         Event.save(me.event, function(){
             console.log('event created');
         })
+        window.location.href = '#/eventcalendar';
     }
 
     me.showCancel = function(){
@@ -93,6 +95,14 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
 
     me.back = function(){
         window.location.href = '#/eventcalendar';
+    }
+
+    me.loadOrganizations = function () {
+        return Organization.list().$promise.then(
+            function (organizations) {
+                console.log(JSON.stringify(organizations));
+                me.organizationlist = organizations;
+            });
     }
 
     $mdSidenav('left')

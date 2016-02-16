@@ -55,6 +55,7 @@ router.post('/', function(req, res, next) {
         var organizations = JSON.parse(fs.readFileSync(__dirname+ '/organization.list.json'));
         async.forEach(organizations, function(o, cb){
             Organization.save({
+                id: o.id,
                 name: o.name,
                 zip: o.zip,
                 city: o.city,
@@ -76,7 +77,7 @@ router.post('/', function(req, res, next) {
                 place: e.place,
                 startdate: e.startdate,
                 enddate: e.enddate,
-                anzhelper: e.anzhelper,
+                nrhelpers: e.nrhelpers,
                // helpers: {},
                 description: e.description,
                 important: e.important

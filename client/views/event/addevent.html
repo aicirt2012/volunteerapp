@@ -27,6 +27,14 @@
                                 <label>Titel</label>
                                 <input ng-model="event.title">
                             </md-input-container>
+                            <md-input-container flex>
+                                <label>Organisation</label>
+                                <md-select ng-model="event.organization" md-on-open="loadOrganizations()">
+                                    <md-option ng-repeat="orga in organizationlist" value="{{orga}}">
+                                        {{orga.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
                         </div>
                         <div layout layout-sm="column">
                             <md-input-container class="md-block" flex-gt-xs>

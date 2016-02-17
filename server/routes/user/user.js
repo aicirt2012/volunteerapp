@@ -14,19 +14,24 @@ router.get('/me', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-
-    User.save({
-        gender: req.body.gender,
-        name: req.body.name,
-        tel: req.body.tel,
-        mobil: req.body.mobil,
-        email: req.body.email,
-        pw: "userpw",
-        notes: req.body.notes,
-        role: req.body.role,
-        availability: req.body.availability
-    }, function(){
-        res.send();
+    User.exists(req.body.email, '', function(err){
+        if(err) {
+            console.log(err);
+        }else{
+            User.save({
+                gender: req.body.gender,
+                name: req.body.name,
+                tel: req.body.tel,
+                mobil: req.body.mobil,
+                email: req.body.email,
+                pw: "userpw",
+                notes: req.body.notes,
+                role: req.body.role,
+                availability: req.body.availability
+            }, function () {
+                res.send();
+            });
+        }
     });
 });
 
@@ -49,17 +54,24 @@ router.get('/:id', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
     console.log('update user');
     var uId = req.params.id;
-    User.update( uId, {
-        gender: req.body.gender,
-        name: req.body.name,
-        tel: req.body.tel,
-        mobil: req.body.mobil,
-        email: req.body.email,
-        notes: req.body.notes,
-        role: req.body.role,
-        availability: req.body.availability
-    }, function(){
-        res.send();
+    User.exists(req.body.email, uId, function(err){
+        if(err) {
+            console.log(err);
+        }else{
+            console.log('here');
+            User.update( uId, {
+                gender: req.body.gender,
+                name: req.body.name,
+                tel: req.body.tel,
+                mobil: req.body.mobil,
+                email: req.body.email,
+                notes: req.body.notes,
+                role: req.body.role,
+                availability: req.body.availability
+            }, function(){
+                res.send();
+            });
+        }
     });
 });
 

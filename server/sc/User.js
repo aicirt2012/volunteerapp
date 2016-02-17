@@ -56,6 +56,21 @@ User.hashPw = function(plainPw){
     return bcrypt.hashSync(plainPw, bcrypt.genSaltSync(10), null);
 };
 
+User.exists = function(email, uId, cb){
+    User.find('email="'+email.toLowerCase()+'"', function(err, users){
+        if(users && users.length == 1){
+            var user = users[0];
+            if(uId == user.id){
+                return cb(false);
+            }else{
+                return cb(new Error('email already exists'));
+            }
+        }else{
+            return cb(false);
+        }
+    });
+}
+
 User.toMe = function(user){
     return {
         id: user.id,

@@ -36,6 +36,7 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         User.save(me.user, function(){
             console.log('user created');
         })
+        window.location.href = '#/user';
     };
 
     me.back = function(){

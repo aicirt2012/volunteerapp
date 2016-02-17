@@ -7,17 +7,23 @@ var Event = require('../../sc/Event');
 
 
 router.put('/personal', function(req, res, next) {
-    var data =  {
-        gender: req.body.gender,
-        name: req.body.name,
-        tel: req.body.tel,
-        mobil: req.body.mobil,
-        email: req.body.email
-    };
-    User.update(req.user.id, data, function(){
-        res.send();
+    var uId = req.user.id;
+    User.exists(req.body.email, uId, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            var data = {
+                gender: req.body.gender,
+                name: req.body.name,
+                tel: req.body.tel,
+                mobil: req.body.mobil,
+                email: req.body.email
+            };
+            User.update(uId, data, function () {
+                res.send();
+            });
+        }
     });
-
 });
 
 router.post('/photo', function(req, res, next) {

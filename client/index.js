@@ -5,7 +5,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
 
     me.user = User.me();
 
-    $scope.leftOpen = true;
+    $scope.leftOpen = false;
 
     me.menu = [
         {

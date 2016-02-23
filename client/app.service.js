@@ -139,6 +139,11 @@ app.service('User', function($resource, $base64) {
         return p;
     }
 
+    function meCache(){
+        isUserCached()
+        return userCache;
+    }
+
     function isUserCached(){
         if(userCache == null)
             console.error('user not in cache');
@@ -187,6 +192,7 @@ app.service('User', function($resource, $base64) {
         get: User.get,
         post: User.post,
         me: me,
+        meCache: meCache,
         save: User.save,
         update: update,
         getUserId: getUserId,

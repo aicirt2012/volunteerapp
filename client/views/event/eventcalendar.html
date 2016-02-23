@@ -1,6 +1,6 @@
 <toolbar title="{{breadcrumb()}}"></toolbar>
 
-<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd()">
+<md-button ng-if="addVisible" class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="add()">
     <ng-md-icon icon="add"></ng-md-icon>
 </md-button>
 <!--ng-include src="'shared/toolbar/toolbar.html'"></ng-include-->

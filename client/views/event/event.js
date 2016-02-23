@@ -3,6 +3,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     var me = $scope;
     me.editMode = false;
+    me.editVisible = User.isOrganizer();
+    me.helperListVisible = User.isOrganizer();
+
     me.event = event;
     me.event.startdate = new Date(me.event.startdate);
     me.event.startdate.setSeconds(0);
@@ -14,6 +17,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.event.organization = JSON.parse(me.event.organization);
     }
 
+    me.edit = function(){
+        me.editMode = true;
+    }
 
     me.breadcrumb = function(){
         return 'Eventverwaltung > Event';

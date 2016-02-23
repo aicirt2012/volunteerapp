@@ -1,8 +1,8 @@
 <toolbar title="{{breadcrumb()}}"></toolbar>
 
-<md-content flex md-scroll-y>
+<md-content>
     <ui-view layout="column" layout-fill layout-padding>
-        <div class="insert" hide-sm></div>
+
 
         <md-card style="padding: 0px;">
             <md-toolbar>
@@ -119,44 +119,38 @@
                                 <p> Beschreibung </p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-2-line">
+                        <md-list-item ng-if="editVisible" class="md-2-line">
                             <md-icon md-svg-icon="communication:phone"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.nrhelpers }} </h3>
-                                <p> Benötigte Helfer </p>
-                            </div>
-                        </md-list-item>
-                        <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.nrhelpers }} </h3>
-                                <p> Benötigte Helfer </p>
+                                <md-button class="md-raised md-primary" ng-click="edit()">Bearbeiten</md-button>
                             </div>
                         </md-list-item>
                     </md-list>
+
                 </div>
 
-                <md-list>
-                    <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
-                    <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
-                        <div class="md-tile-left inset" hide-sm>
-                            <user-avatar></user-avatar>
-                        </div>
-                        <div class="md-list-item-text">
-                            <h3>{{helper.name}}</h3>
-                            <p>{{helper.email}}</p>
-                            <p>{{helper.tel}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
+                <div ng-if="helperListVisible">
+                    <md-list>
+                        <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
+                            <div class="md-tile-left inset" hide-sm>
+                                <user-avatar></user-avatar>
+                            </div>
+                            <div class="md-list-item-text">
+                                <h3>{{helper.name}}</h3>
+                                <p>{{helper.email}}</p>
+                                <p>{{helper.tel}}</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
 
+                </div>
 
             </md-card-content>
             <md-card-footer>
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                     <md-button class="md-primary md-raised" ng-click="showTabDialog($event)">Anmelden</md-button>
                     <!--md-button class="md-raised md-primary" ng-click="unregister()">Abmelden</md-button>
-                    <md-button class="md-raised md-primary" ng-click="">Bearbeiten</md-button-->
                 </section>
                 <br/><br/><br/><br/>
             </md-card-footer>

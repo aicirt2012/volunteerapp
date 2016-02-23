@@ -8,7 +8,7 @@
     "tel": "089112338",
     "mobil": "0158899721",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},
@@ -30,7 +30,7 @@
     "tel": "089112338",
     "mobil": "0172230874",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": true, "evening": true},
       "tu": {"morning": false, "afternoon": true, "evening": true},
@@ -52,7 +52,7 @@
     "tel": "08977656",
     "mobil": "0167728222",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": false, "evening": true},
       "tu": {"morning": false, "afternoon": false, "evening": true},
@@ -74,7 +74,7 @@
     "tel": "0895678",
     "mobil": "0161112223",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": false, "evening": true},
       "tu": {"morning": false, "afternoon": false, "evening": true},
@@ -96,7 +96,7 @@
     "tel": "012378495",
     "mobil": "0723843434",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},
@@ -118,7 +118,7 @@
     "tel": "08912345",
     "mobil": "0175678910",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": false, "evening": true},
       "tu": {"morning": false, "afternoon": false, "evening": true},
@@ -140,7 +140,7 @@
     "tel": "089098765",
     "mobil": "0159876543",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": false, "afternoon": false, "evening": false},
       "tu": {"morning": false, "afternoon": false, "evening": false},
@@ -162,7 +162,7 @@
     "tel": "089112233",
     "mobil": "01782121212",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": true, "afternoon": true, "evening": true},
       "tu": {"morning": false, "afternoon": false, "evening": false},
@@ -184,7 +184,7 @@
     "tel": "08911289",
     "mobil": "016443712",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": true, "afternoon": true, "evening": true},
       "tu": {"morning": true, "afternoon": true, "evening": true},
@@ -206,7 +206,7 @@
     "tel": "08974612",
     "mobil": "0153388991",
     "notes": "Some notes",
-    "role": "helper",
+    "role": "HELPER",
     "availability": {
       "mo": {"morning": true, "afternoon": true, "evening": true},
       "tu": {"morning": true, "afternoon": false, "evening": false},
@@ -228,7 +228,7 @@
     "tel": "0126748234",
     "mobil": "08917782",
     "notes": "Some notes",
-    "role": "team",
+    "role": "TEAM",
     "availability": {
       "mo": {"morning": false, "afternoon": true, "evening": false},
       "tu": {"morning": true, "afternoon": true, "evening": false},
@@ -250,7 +250,7 @@
     "tel": "0891267312",
     "mobil": "016452783",
     "notes": "Some notes",
-    "role": "team",
+    "role": "TEAM",
     "availability": {
       "mo": {"morning": false, "afternoon": true, "evening": true},
       "tu": {"morning": false, "afternoon": true, "evening": true},
@@ -272,7 +272,7 @@
     "tel": "012378495",
     "mobil": "0723843434",
     "notes": "Organisatorin",
-    "role": "organizer",
+    "role": "ORGANIZER",
     "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},
@@ -294,7 +294,7 @@
     "tel": "012378495",
     "mobil": "0723843434",
     "notes": "Organisatorin",
-    "role": "organizer",
+    "role": "ORGANIZER",
     "availability": {
       "mo": {"morning": true, "afternoon": false, "evening": false},
       "tu": {"morning": true, "afternoon": false, "evening": false},

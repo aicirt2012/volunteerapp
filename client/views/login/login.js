@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, User, $mdSidenav) {
+app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$rootScope', function($scope, User, $mdSidenav, $rootScope) {
 
     var me = $scope;
 
@@ -8,6 +8,7 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, Us
 
     me.login = function(){
         User.login(me.email, me.pw).then(function(data){
+            $scope.$parent.initMenu();
             window.location.href = '#/user';
         }, function(){
             console.log('login failed');

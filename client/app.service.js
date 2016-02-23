@@ -104,6 +104,10 @@ app.service('User', function($resource, $base64) {
         return User.update({id:userId}, data, cb);
     }
 
+    function isLoggedIn(){
+        return localStorage.getItem('JWT') != null;
+    }
+
     function login(email, pw){
         console.log('login with : '+email+' '+pw );
         var p = Login.save({
@@ -112,6 +116,7 @@ app.service('User', function($resource, $base64) {
         }).$promise;
         p.then(function(data){
             localStorage.setItem('JWT', data.token);
+            userCache = data.user;
         },function(){
             console.error("fail@loginUser");
         });
@@ -142,21 +147,21 @@ app.service('User', function($resource, $base64) {
 
     function isTeam(){
         if(!isUserCached())
-            return null
+            return null;
         else
             return userCache.role == "TEAM";
     }
 
     function isHelper(){
         if(!isUserCached())
-            return null
+            return null;
         else
             return userCache.role == "HELPER";
     }
 
     function isOrganizer(){
         if(!isUserCached())
-            return null
+            return null;
         else
             return userCache.role == "ORGANIZER";
     }
@@ -164,7 +169,7 @@ app.service('User', function($resource, $base64) {
     function roleLabel(){
         if(userCache == null){
             console.error('user not in cache');
-            return null
+            return null;
         }else {
             for (var i = 0; i < roles.length; i++)
                 if (roles[i].id == userCache.role)
@@ -185,6 +190,7 @@ app.service('User', function($resource, $base64) {
         save: User.save,
         update: update,
         getUserId: getUserId,
+        isLoggedIn: isLoggedIn,
         login: login,
         logout: logout,
         isHelper: isHelper,

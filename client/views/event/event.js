@@ -17,6 +17,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.event.organization = JSON.parse(me.event.organization);
     }
 
+    me.userlist = User.list(function(users){
+        me.userlist = users;
+        console.log(JSON.stringify(users));
+    });
+
     me.edit = function(){
         me.editMode = true;
     }

@@ -48,13 +48,13 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
         window.location.href = '#/event/'+id;
     };
 
+    me.addVisible = User.isOrganizer();
     me.add = function(){
         window.location.href = '#/addevent';
     };
 
-    me.addVisible = function(){
-        return User.isOrganizer();
-    };
+
+
 
     $mdSidenav('left').open();
 

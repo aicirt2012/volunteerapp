@@ -1,8 +1,8 @@
-app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'organizations', 'Organization', function($scope, $mdSidenav, organizations, Organization) {
+app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'organizations', 'User', function($scope, $mdSidenav, organizations, User) {
 
 
     var me = $scope;
-
+    me.addVisible = User.isOrganizer();
     me.organizationlist = organizations;
 
     me.selectOrganization = function(id){

@@ -2,6 +2,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
 
     var me = $scope;
+    me.editMode = false;
     me.event = event;
     me.event.startdate = new Date(me.event.startdate);
     me.event.startdate.setSeconds(0);

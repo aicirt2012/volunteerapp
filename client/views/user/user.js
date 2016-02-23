@@ -1,4 +1,4 @@
-app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'user', function($scope, $mdSidenav, User, $routeParams, user) {
+app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'user', 'userevents', function($scope, $mdSidenav, User, $routeParams, user, userevents) {
 
 
     var me = $scope;
@@ -12,10 +12,23 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         {id: 'events', label: 'Events'}
     ];
 
+    me.futureevents = [];
+
+    for(var i=0; i< userevents.length; i++){
+        var e = userevents[i];
+        var now = new Date().getTime();
+        var eDate = new Date(e.startdate).getTime();
+        if(now< eDate)
+            me.futureevents.push(e);
+    }
+
     for(var i = 0; i<User.roles.length; i++)
        if(User.roles[i].id == $routeParams.role)
            me.selectedRole = User.roles[i];
 
+    me.selectEvent = function(eventId){
+        window.location.href = '#/event/'+eventId;
+    }
 
     me.onCancel = function(){
         window.location.href = '#/user';

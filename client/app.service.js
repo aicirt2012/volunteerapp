@@ -3,6 +3,12 @@ app.service('Event', function($resource) {
     var Event = $resource('/api/event/:id');
     var EventHelper = $resource('/api/event/:eventId/helpers/:helperId');
 
+    var UserEvents = $resource('/api/event/user/:id');
+
+    function getUserEvents(userId){
+        return UserEvents.query({id: userId});
+    }
+
     function register(eventId, helperId, cb){
         return EventHelper.save({eventId: eventId, helperId: helperId}, {}, cb);
     }
@@ -28,7 +34,8 @@ app.service('Event', function($resource) {
         get: get,
         list: list,
         register: register,
-        unregister: unregister
+        unregister: unregister,
+        getUserEvents: getUserEvents
     }
 });
 

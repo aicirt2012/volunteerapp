@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$rootScope', function($scope, User, $mdSidenav, $rootScope) {
+app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, User, $mdSidenav) {
 
     var me = $scope;
 

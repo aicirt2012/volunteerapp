@@ -15,7 +15,7 @@
         <div layout="column" class="md-toolbar-tools-bottom inset">
             <user-avatar></user-avatar>
             <span></span>
-            <div>{{user.name}}</div>
+            <div>{{user.name}} ({{user.roleLabel}})</div>
             <div>{{user.email}}</div>
         </div>
     </md-toolbar>
@@ -31,9 +31,9 @@
                 </md-item-content>
             </a>
         </md-item>
-       <md-divider></md-divider>
+        <md-divider></md-divider>
         <md-subheader>Mein Bereich</md-subheader>
-        <md-item ng-repeat="item in admin" ng-click="openView(item.link)">
+        <md-item ng-repeat="item in mymenu" ng-click="openView(item.link)">
             <a>
                 <md-item-content md-ink-ripple layout="row" layout-align="start center">
                     <div class="inset">

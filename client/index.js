@@ -3,28 +3,37 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
     var me = $scope;
 
 
-    me.user = User.me();
+    me.menu = [];
+
+    User.me().then(function(data){
+        me.user = data;
+        me.user.roleLabel = User.roleLabel();
+
+        if(User.isOrganizer() || User.isTeam() || User.isHelper())
+            me.menu.push({
+                link : 'eventcalendar',
+                title: 'Eventkalender',
+                icon: 'event'
+            });
+
+        if(User.isOrganizer() || User.isTeam())
+            me.menu.push({
+                link : 'user',
+                title: 'Personalverwaltung',
+                icon: 'group'
+            });
+
+        if(User.isOrganizer() || User.isTeam())
+            me.menu.push({
+                link : 'organization',
+                title: 'Einrichtungsverwaltung',
+                icon: 'home'
+            });
+    });
 
     $scope.leftOpen = false;
 
-    me.menu = [
-        {
-            link : 'eventcalendar',
-            title: 'Eventkalender',
-            icon: 'event'
-        },
-        {
-            link : 'user',
-            title: 'Personalverwaltung',
-            icon: 'group'
-        },
-        {
-            link : 'organization',
-            title: 'Einrichtungsverwaltung',
-            icon: 'home'
-        }
-    ];
-    me.admin = [
+    me.mymenu = [
         {
             link : 'myevents',
             title: 'Meine Events',
@@ -48,7 +57,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
             $scope.leftOpen = false;
         }else
             window.location.href = '#/'+url;
-            $scope.leftOpen = true;
+        $scope.leftOpen = true;
     };
 
 

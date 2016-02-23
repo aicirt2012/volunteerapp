@@ -38,7 +38,7 @@ User.canLogin = function(email, plainPw, cb){
             var user = users[0];
             if(bcrypt.compareSync(plainPw, user.pw))
                 cb(false, user);
-             else
+            else
                 cb(new Error('Invalid Pw'), null);
         }else
             cb(new Error('User not found'), null);
@@ -79,6 +79,7 @@ User.toMe = function(user){
         tel: user.tel,
         mobil: user.mobil,
         email: user.email,
+        role: user.role,
         availability:  user.availability
     }
 }

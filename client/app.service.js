@@ -82,17 +82,14 @@ app.service('User', function($resource, $base64) {
     var User = $resource('/api/user/:id', null, {
         'update': {method: 'PUT'}
     });
+    var roles = [
+        {id: 'HELPER', label: 'Helfer'},
+        {id: 'TEAM', label: 'Team'},
+        {id: 'ORGANIZER', label: 'Organisator'}
+    ];
 
     function genders() {
         return [{id: 'MALE', label: 'Herr'}, {id: 'FEMALE', label: 'Frau'}];
-    }
-
-    function roles(){
-        return [
-            {id: 'helper', label: 'Helfer'},
-            {id: 'team', label: 'Team'},
-            {id: 'organizer', label: 'Organisator'}
-        ];
     }
 
     function getUserId(){
@@ -125,18 +122,74 @@ app.service('User', function($resource, $base64) {
         localStorage.removeItem('JWT');
     }
 
+    /* methods on user cache */
+    var userCache = null;
+    function me(){
+        var p = Me.get().$promise;
+        p.then(function(user){
+            userCache = user;
+        },function(){
+            console.error("fail to load user me!");
+        });
+        return p;
+    }
+
+    function isUserCached(){
+        if(userCache == null)
+            console.error('user not in cache');
+        return userCache != null;
+    }
+
+    function isTeam(){
+        if(!isUserCached())
+            return null
+        else
+            return userCache.role == "TEAM";
+    }
+
+    function isHelper(){
+        if(!isUserCached())
+            return null
+        else
+            return userCache.role == "HELPER";
+    }
+
+    function isOrganizer(){
+        if(!isUserCached())
+            return null
+        else
+            return userCache.role == "ORGANIZER";
+    }
+
+    function roleLabel(){
+        if(userCache == null){
+            console.error('user not in cache');
+            return null
+        }else {
+            for (var i = 0; i < roles.length; i++)
+                if (roles[i].id == userCache.role)
+                    return roles[i].label;
+            console.error('role with id ' + userCache.role + ' not found!');
+            return null;
+        }
+    }
+
     return {
         list: User.query,
         genders: genders(),
-        roles: roles(),
+        roles: roles,
+        roleLabel: roleLabel,
         get: User.get,
         post: User.post,
-        me: Me.get,
+        me: me,
         save: User.save,
         update: update,
         getUserId: getUserId,
         login: login,
-        logout: logout
+        logout: logout,
+        isHelper: isHelper,
+        isTeam: isTeam,
+        isOrganizer: isOrganizer
     }
 });
 

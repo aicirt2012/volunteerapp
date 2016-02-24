@@ -72,7 +72,10 @@
                                 <textarea ng-model="event.description" columns="3" md-maxlength="150" rows="5"></textarea>
                             </md-input-container>
                         </div>
-
+                        <div layout layout-sm="column">
+                            <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
+                            <md-button class="md-raised md-primary" ng-click="submitEdit()">Änderungen übernehmen</md-button>
+                        </div>
                     </form>
                 </div>
                 <div ng-if="!editMode">
@@ -122,7 +125,7 @@
                         <md-list-item ng-if="isOrganizer" class="md-2-line">
                             <md-icon md-svg-icon="communication:phone"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <md-button class="md-raised md-primary" ng-click="edit()">Bearbeiten</md-button>
+                                <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
@@ -174,30 +177,3 @@
 </md-content>
 
 
-<!-- Move to popup
-                               <form ng-submit="$event.preventDefault()">
-                                   <md-autocomplete
-                                           md-selected-item="selectedItem"
-                                           md-search-text="search"
-                                           md-items="item in userlist"
-                                           md-item-text="item.name"
-                                           md-min-length="0"
-                                           placeholder="Add "
-                                           md-menu-class="autocomplete-custom-template">
-                                       <md-item-template>
-                                         <span class="item-title">
-                                             <user-avatar style="max-width: 20px;"></user-avatar>
-                                           <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
-                                           <span> {{item.name}} </span>
-                                         </span>
-                                         <span class="item-metadata">
-                                           <span class="item-metastat">
-                                             <strong>{{item.email}}</strong> watchers
-                                           </span>
-                                           <span class="item-metastat">
-                                             <strong>{{item.tel}}</strong> forks
-                                           </span>
-                                         </span>
-                                       </md-item-template>
-                                   </md-autocomplete>
-                               </form> -->

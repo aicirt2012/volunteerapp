@@ -25,7 +25,8 @@
                          md-swipe-left="next()"
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
-                        <form name="userForm">
+                        <div ng-if="editMode">
+                            <form name="userForm">
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Anrede</label>
@@ -74,10 +75,62 @@
                             </div>
                             <br/><br/>
                             <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
+                                <md-button class="md-raised" ng-click="edit()">Abbrechen</md-button>&nbsp;
                                 <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
                             </section>
-                        </form>
+                            </form>
+                        </div>
+                        <div ng-if="!editMode">
+                            <md-list>
+                                <md-list-item class="md-2-line" ng-init="getGender()">
+                                    <md-icon class="material-icons">person</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{user.genderLabel}} {{ user.name }} </h3>
+                                        <p> Name </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">mail</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.email }} </h3>
+                                        <p> E-Mail </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">phone</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.tel }} </h3>
+                                        <p> Tel </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">phone_iphone</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.mobil }}</h3>
+                                        <p> Mobil </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line" ng-init="getRole()">
+                                    <md-icon class="material-icons">group</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.roleLabel }} </h3>
+                                        <p> Rolle </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">description</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.notes }} </h3>
+                                        <p> Notizen </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item ng-if="editVisible" class="md-2-line">
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <md-button class="md-raised md-primary" ng-click="edit()">Bearbeiten</md-button>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </div>
                     </div>
                     <div role="tabpanel"
                          id="tab2-content"
@@ -101,39 +154,42 @@
                                 </tr>
                                 <tr>
                                     <td>Vormittag</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.mo.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.tu.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.we.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.th.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.fr.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.sa.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.su.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
                                 </tr>
                                 <tr>
                                     <td>Nachmittag</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.mo.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.tu.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.we.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.th.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.fr.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.sa.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.su.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
                                 </tr>
                                 <tr>
                                     <td>Abend</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.mo.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.tu.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.we.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.th.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.fr.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.sa.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
+                                    <td><md-checkbox ng-disabled="!editMode" ng-model="user.availability.su.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
                                 </tr>
 
                             </table>
                             <br/><br/>
-                            <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
+                            <section ng-if="editVisible && !editMode" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                                <md-button class="md-raised md-primary" ng-click="edit()">Bearbeiten</md-button>
+                            </section>
+                            <section ng-if="editMode" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                                <md-button class="md-raised" ng-click="edit()">Abbrechen</md-button>&nbsp;
                                 <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
                             </section>
                         </form>

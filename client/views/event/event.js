@@ -22,8 +22,20 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.userlist = users;
     });
 
-    me.edit = function(){
+
+    me.openEdit = function(){
+        me.eventCopy = me.event;
         me.editMode = true;
+    }
+
+    me.abortEdit = function(){
+        me.editMode = false;
+        me.event = me.eventCopy;
+    }
+
+    me.submitEdit = function(){
+        me.editMode = false;
+        //TODO update event here
     }
 
     me.breadcrumb = function(){

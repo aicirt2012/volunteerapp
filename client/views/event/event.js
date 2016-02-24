@@ -3,8 +3,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     var me = $scope;
     me.editMode = false;
-    me.editVisible = User.isOrganizer();
-    me.helperListVisible = User.isOrganizer();
+    me.isOrganizer = User.isOrganizer();
+    me.isTeam = User.isTeam();
+    me.isHelper = User.isHelper();
 
     me.event = event;
     me.event.startdate = new Date(me.event.startdate);
@@ -19,7 +20,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.userlist = User.list(function(users){
         me.userlist = users;
-        console.log(JSON.stringify(users));
     });
 
     me.edit = function(){
@@ -30,36 +30,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         return 'Eventverwaltung > Event';
     };
 
-    me.register = function(){
-        Event.register(me.event.id, User.getUserId());
-    };
-
-    me.unregister = function(helperId){
-        $mdDialog.show({
-            controller: function ($scope, $mdDialog, event) {
-                $scope.event = event;
-                $scope.hide = function() {
-                    $mdDialog.hide();
-                };
-                $scope.cancel = function() {
-                    $mdDialog.cancel();
-                };
-                $scope.unregister = function() {
-                    $mdDialog.hide();
-                };
-            },
-            templateUrl: '/views/event/dialogUnregister.html',
-            parent: angular.element(document.body),
-            //targetEvent: ev,
-            clickOutsideToClose:true,
-            locals: {
-                event: me.event
-            }
-        }).then(function() {
-            Event.unregister(me.event.id, helperId);
-        });
-    };
-
     $mdSidenav('left').open();
 
     me.back = function(){
@@ -67,7 +37,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
 
-    $scope.showTabDialog = function(ev) {
+    me.helperRegister = function(ev) {
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
@@ -81,7 +51,61 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                     $mdDialog.hide();
                 };
             },
-            templateUrl: '/views/event/dialogRegister.html',
+            templateUrl: '/views/event/dialogHelperRegister.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function() {
+            //TODO cahnge this here
+            Event.register(me.event.id, User.getUserId());
+        });
+    };
+
+    me.helperUnregister = function(helperId){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.unregister = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/event/dialogHelperUnregister.html',
+            parent: angular.element(document.body),
+            //targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function() {
+            //TODO change this here
+            Event.unregister(me.event.id, helperId);
+        });
+    };
+
+    me.meRegister = function(ev) {
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.register = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/event/dialogMeRegister.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,
@@ -89,7 +113,33 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                event: me.event
             }
         }).then(function() {
-             me.register();
+            Event.register(me.event.id, User.getUserId());
+        });
+    };
+
+    me.meUnregister = function(helperId){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.unregister = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/event/dialogMeUnregister.html',
+            parent: angular.element(document.body),
+            //targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function() {
+            Event.unregister(me.event.id, helperId);
         });
     };
 }]);

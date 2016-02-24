@@ -119,20 +119,26 @@
                                 <p> Beschreibung </p>
                             </div>
                         </md-list-item>
-                        <md-list-item ng-if="editVisible" class="md-2-line">
+                        <md-list-item ng-if="isOrganizer" class="md-2-line">
                             <md-icon md-svg-icon="communication:phone"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <md-button class="md-raised md-primary" ng-click="edit()">Bearbeiten</md-button>
                             </div>
                         </md-list-item>
+                        <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
+                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <md-button class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
+                                <md-button class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
+                            </div>
+                        </md-list-item>
                     </md-list>
-
                 </div>
 
-                <div ng-if="helperListVisible">
+                <div ng-if="isOrganizer || isTeam">
                     <md-list>
                         <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
-                        <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="unregister(helper.id)">
+                        <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">
                             <div class="md-tile-left inset" hide-sm>
                                 <user-avatar></user-avatar>
                             </div>
@@ -142,35 +148,12 @@
                                 <p>{{helper.tel}}</p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-3-line">
-                            <div>icon</div>
+                        <md-list-item class="md-1-line">
+                            <div class="md-tile-left inset" hide-sm>
+                                <user-avatar></user-avatar>
+                            </div>
                             <div class="md-list-item-text">
-                                <form ng-submit="$event.preventDefault()">
-                                    <md-autocomplete
-                                            md-selected-item="selectedItem"
-                                            md-search-text="search"
-                                            md-items="item in userlist"
-                                            md-item-text="item.name"
-                                            md-min-length="0"
-                                            placeholder="Add "
-                                            md-menu-class="autocomplete-custom-template">
-                                        <md-item-template>
-                                          <span class="item-title">
-                                              <user-avatar style="max-width: 20px;"></user-avatar>
-                                            <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
-                                            <span> {{item.name}} </span>
-                                          </span>
-                                          <span class="item-metadata">
-                                            <span class="item-metastat">
-                                              <strong>{{item.email}}</strong> watchers
-                                            </span>
-                                            <span class="item-metastat">
-                                              <strong>{{item.tel}}</strong> forks
-                                            </span>
-                                          </span>
-                                        </md-item-template>
-                                    </md-autocomplete>
-                                </form>
+                                <md-button class="md-primary md-raised" ng-click="helperRegister()">Helfer Anmelden</md-button>
                             </div>
                         </md-list-item>
                     </md-list>
@@ -180,8 +163,7 @@
             </md-card-content>
             <md-card-footer>
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                    <md-button class="md-primary md-raised" ng-click="showTabDialog($event)">Anmelden</md-button>
-                    <!--md-button class="md-raised md-primary" ng-click="unregister()">Abmelden</md-button-->
+
                 </section>
                 <br/><br/><br/><br/>
             </md-card-footer>
@@ -190,3 +172,32 @@
 
     </ui-view>
 </md-content>
+
+
+<!-- Move to popup
+                               <form ng-submit="$event.preventDefault()">
+                                   <md-autocomplete
+                                           md-selected-item="selectedItem"
+                                           md-search-text="search"
+                                           md-items="item in userlist"
+                                           md-item-text="item.name"
+                                           md-min-length="0"
+                                           placeholder="Add "
+                                           md-menu-class="autocomplete-custom-template">
+                                       <md-item-template>
+                                         <span class="item-title">
+                                             <user-avatar style="max-width: 20px;"></user-avatar>
+                                           <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                                           <span> {{item.name}} </span>
+                                         </span>
+                                         <span class="item-metadata">
+                                           <span class="item-metastat">
+                                             <strong>{{item.email}}</strong> watchers
+                                           </span>
+                                           <span class="item-metastat">
+                                             <strong>{{item.tel}}</strong> forks
+                                           </span>
+                                         </span>
+                                       </md-item-template>
+                                   </md-autocomplete>
+                               </form> -->

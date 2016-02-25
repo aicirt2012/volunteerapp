@@ -19,6 +19,9 @@ router.post('/', function(req, res, next) {
         SocioCortex.workspace.create(config.sc.workspaceId, cb);
     });
     asyncTasks.push(function(cb){
+        Log.schema.create(cb);
+    });
+    asyncTasks.push(function(cb){
         Organization.schema.create(cb);
     });
     asyncTasks.push(function(cb){

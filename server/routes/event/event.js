@@ -54,19 +54,6 @@ router.post('/', function(req, res) {
             }
 
         });
-
-
-
-
-
-        //TODO implened query to find users
-        /*
-        User.findAvailableUsers(startdate, starttime, endtime, endate, function(users){
-            for(var i=0; i<users.length; i++){
-
-            }
-            mailer.send({to: '', subject: '', html: 'Hallo '});
-        });*/
         res.send();
     });
 

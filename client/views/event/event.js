@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', function($scope, $mdSidenav, Event, event, User, $mdDialog, Util) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog) {
 
 
     var me = $scope;
@@ -75,7 +75,10 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 if(err){
                     console.error('Error during registering helper on event!');
                 }else{
+                    console.log('Update Event data after registering helper!');
                     me.event = data;
+                    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+                    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
                 }
             });
         });
@@ -130,7 +133,10 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                event: me.event
             }
         }).then(function() {
-            Event.register(me.event.id, User.getUserId());
+            console.log('Update Event data after registering helper!');
+            me.event = data;
+            me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+            me.event.enddate = Util.initDateFromJSON(me.event.enddate);
         });
     };
 

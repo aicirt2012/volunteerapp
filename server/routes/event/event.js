@@ -45,6 +45,10 @@ router.post('/', function(req, res) {
             '<p>Viele Grüße, <br>'+
             'dein VolunterApp Team</p>'
         });
+
+        //find user.where(availability.mo.morning)
+        //find user.where(availability.mo.morning or availability.mo.afternoon)
+
         //TODO implened query to find users
         /*
         User.findAvailableUsers(startdate, starttime, endtime, endate, function(users){

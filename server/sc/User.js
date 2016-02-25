@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var http = require('../util/http');
 var bcrypt = require("bcrypt-nodejs");
 var EntityType = require('../sc/EntityType');
@@ -28,8 +29,11 @@ User.roles = {
     ORGANIZER: 'ORGANIZER'
 }
 
-User.findAvailableUsers = function(startdate, starttime, endtime, endate, cb){
-    console.log('find special person');
+//TODO implement this
+User.findAvailableUsers = function(start, end, cb){
+    //find user.where(availability.mo.morning or availability.mo.afternoon)
+    //console.log('find special person');
+
 }
 
 User.canLogin = function(email, plainPw, cb){

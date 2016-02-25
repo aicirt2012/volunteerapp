@@ -14,6 +14,7 @@ var Log = EntityType.define({
 }, 'log');
 
 Log.level = {
+    DEBUG: 'DEBUG',
     INFO: 'INFO',
     ERR: 'ERR'
 }
@@ -22,6 +23,18 @@ Log.actions = {
     LOGIN: 'LOGIN',
     LOGIN_FAILED: 'LOGIN_FAILED',
     LOGOUT: 'LOGOUT'
+}
+
+Log.debug = function(user, action, description){
+    Log.log(user, Log.level.DEBUG, action, description);
+}
+
+Log.info = function(user, action, description){
+    Log.log(user, Log.level.INFO, action, description);
+}
+
+Log.err = function(user, action, description){
+    Log.log(user, Log.level.ERR, action, description);
 }
 
 Log.log = function(user, level, action, description){
@@ -34,7 +47,7 @@ Log.log = function(user, level, action, description){
         level: level,
         action: action,
         description: description
-    });
+    }, function(){});
 }
 
 module.exports = Log;

@@ -34,21 +34,35 @@ Event.findWithHelperById = function(eventId, cb){
         if(err)
             cb(err, null);
         else{
-            var helpers = [];
-            async.forEach(event.helpers, function(helper, cb){
-                User.findById(helper.id, function(err, user){
-                    helpers.push({
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                        tel: user.tel
+            var asyncTasks = [];
+            asyncTasks.push(function(cb){
+                var helpers = [];
+                async.forEach(event.helpers, function(helper, cb){
+                    User.findById(helper.id, function(err, user){
+                        helpers.push({
+                            id: user.id,
+                            name: user.name,
+                            email: user.email,
+                            tel: user.tel
+                        });
+                        cb();
                     });
+                }, function(err){
+                    event.helpers = helpers;
                     cb();
                 });
-            }, function(err){
-
-                event.helpers = helpers;
-
+            });
+            asyncTasks.push( function(cb){
+                Organisation.findById(event.organization.id, function(err, orga){
+                    if(err)
+                        event.organization = {};
+                    else
+                        event.organization = orga;
+                    cb();
+                });
+            })
+            async.series(asyncTasks, function(err){
+                console.log('d', JSON.stringify(event));
                 cb(false, event);
             });
         }

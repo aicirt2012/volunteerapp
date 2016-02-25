@@ -31,25 +31,15 @@ User.roles = {
 
 
 User.findAvailableUsers = function(start, end, cb){
-    /*
-    morning: 00:00 -> 11:59
-    afternoon: 12:00 -> 17:59
-    evening: 18:00 -> 23:59
-    find user.where(availability.mo.morning or availability.mo.afternoon)
-    */
-
     var matches = [];
-   // var start = new Date();
-   // var end = new Date(2016, 1, 27);
-    console.log(start.toISOString());
-    console.log(end.toISOString());
-
     do{
         matches['availability.'+dayOfWeekLabel(start)+'.'+timeSlotLabel(start)]=true;
         start = new Date(start.getTime()+3600*1000);
     }while(start.getTime() < end.getTime())
 
     matches = Object.keys(matches);
+
+    //find user.where(availability.mo.morning or availability.mo.afternoon)
     query = '';
     for(var i=0; i<matches.length; i++){
         query += matches[i];
@@ -66,6 +56,9 @@ User.findAvailableUsers = function(start, end, cb){
     });
 
     function timeSlotLabel(date){
+        //morning: 00:00 -> 11:59
+        //afternoon: 12:00 -> 17:59
+        //evening: 18:00 -> 23:59
         var hour = moment(date).format('H');
         if(hour<12)
             return 'morning';

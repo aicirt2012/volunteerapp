@@ -29,12 +29,67 @@ User.roles = {
     ORGANIZER: 'ORGANIZER'
 }
 
-//TODO implement this
-User.findAvailableUsers = function(start, end, cb){
-    //find user.where(availability.mo.morning or availability.mo.afternoon)
-    //console.log('find special person');
 
+User.findAvailableUsers = function(start, end, cb){
+    /*
+    morning: 00:00 -> 11:59
+    afternoon: 12:00 -> 17:59
+    evening: 18:00 -> 23:59
+    find user.where(availability.mo.morning or availability.mo.afternoon)
+    */
+
+    var matches = [];
+   // var start = new Date();
+   // var end = new Date(2016, 1, 27);
+    console.log(start.toISOString());
+    console.log(end.toISOString());
+
+    do{
+        matches['availability.'+dayOfWeekLabel(start)+'.'+timeSlotLabel(start)]=true;
+        start = new Date(start.getTime()+3600*1000);
+    }while(start.getTime() < end.getTime())
+
+    matches = Object.keys(matches);
+    query = '';
+    for(var i=0; i<matches.length; i++){
+        query += matches[i];
+        if(i<matches.length-1)
+            query += ' or ';
+    }
+
+    User.find(query, function(err, users){
+        if(!err){
+            console.log(JSON.stringify(users));
+            cb(false, users);
+        }else
+            cb(new Error('User not found'), null);
+    });
+
+    function timeSlotLabel(date){
+        var hour = moment(date).format('H');
+        if(hour<12)
+            return 'morning';
+        if(hour<18)
+            return 'afternoon';
+        else
+            return 'evening';
+    }
+
+    function dayOfWeekLabel(date){
+        var dayOfWeek = parseInt(moment(date).format('e'));
+        switch(dayOfWeek){
+            case(1): return 'mo';
+            case(2): return 'tu';
+            case(3): return 'we';
+            case(4): return 'th';
+            case(5): return 'fr';
+            case(6): return 'sa';
+            case(7): return 'su';
+        }
+    }
 }
+
+
 
 User.canLogin = function(email, plainPw, cb){
     User.find('email="'+email.toLowerCase()+'"', function(err, users){

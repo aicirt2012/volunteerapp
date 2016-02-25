@@ -62,7 +62,6 @@ Event.findWithHelperById = function(eventId, cb){
                 });
             })
             async.series(asyncTasks, function(err){
-                console.log('d', JSON.stringify(event));
                 cb(false, event);
             });
         }

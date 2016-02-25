@@ -68,6 +68,7 @@ router.get('/:id', function(req, res) {
         if(err)
             res.status(500).send();
         else{
+            event.nrhelpersregistered = event.helpers.length;
             res.json(event);
         }
     });

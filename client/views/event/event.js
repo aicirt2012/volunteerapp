@@ -8,12 +8,16 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isHelper = User.isHelper();
 
     me.event = event;
+
+    //TODO should this maybe only initialized if the event do not have data?
     me.event.startdate = new Date(me.event.startdate);
     me.event.startdate.setSeconds(0);
     me.event.startdate.setMilliseconds(0);
     me.event.enddate = new Date(me.event.enddate);
     me.event.enddate.setSeconds(0);
     me.event.enddate.setMilliseconds(0);
+
+    //TODO Do we need this hack?
     if(me.event.organization) {
         me.event.organization = JSON.parse(me.event.organization);
     }

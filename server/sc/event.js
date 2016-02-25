@@ -1,6 +1,8 @@
 var express = require('express');
+var async = require('async');
 var http = require('../util/http');
 var EntityType = require('../sc/EntityType');
+var User = require('../sc/User');
 
 
 var Event = EntityType.define({
@@ -22,6 +24,32 @@ Event.findByUserId = function(userId, cb){
         }else
             cb(new Error('No Events for User found'), null);
     });
+}
+
+
+Event.findWithHelperById = function(eventId, cb){
+    Event.findById(eventId, function(err, event){
+        if(err)
+            cb(err, null);
+        else{
+            var helpers = [];
+            async.forEach(event.helpers, function(helper, cb){
+                User.findById(helper.id, function(err, user){
+                    helpers.push({
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        tel: user.tel
+                    });
+                    cb();
+                });
+            }, function(err){
+                event.helpers = helpers;
+                cb(false, event);
+            });
+        }
+    });
+
 }
 
 

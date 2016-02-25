@@ -68,6 +68,15 @@ router.get('/:id', function(req, res) {
         if(err)
             res.status(500).send();
         else{
+            event.nrhelpersregistered = event.helpers.length;
+            event.imregistered = false;
+            for(var i=0; i< event.helpers.length; i++)
+                if(event.helpers[i].id == req.user.id)
+                    event.imregistered = true;
+            //TODO remove comment for production
+            //if(req.user.role == User.roles.HELPER)
+            //    delete event.helpers;
+
             res.json(event);
         }
     });
@@ -85,7 +94,6 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
                 if (err)
                     res.status(500).send();
                 else {
-                   // console.log(event);
                     res.json(event);
                 }
             });
@@ -97,7 +105,13 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        res.send();
+        Event.findWithHelperById(eventId, function (err, event) {
+            if (err)
+                res.status(500).send();
+            else {
+                res.json(event);
+            }
+        });
     });
 });
 

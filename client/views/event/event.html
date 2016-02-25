@@ -90,8 +90,8 @@
                         <md-list-item class="md-2-line">
                             <md-icon class="material-icons">group_add</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.nrhelpers }} </h3>
-                                <p> Benötigte Helfer </p>
+                                <h3> {{ event.nrhelpersregistered }}/{{ event.nrhelpers }} </h3>
+                                <p> Angemeldete / benötigte Helfer </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
@@ -131,8 +131,8 @@
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
                             <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <md-button class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
-                                <md-button class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
+                                <md-button ng-if="!event.imregistered" class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
+                                <md-button ng-if="event.imregistered" class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
                             </div>
                         </md-list-item>
                     </md-list>
@@ -140,7 +140,7 @@
 
                 <div ng-if="isOrganizer || isTeam" style="background-color: #E6E6E6;" layout-padding="">
                     <md-list>
-                        <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
+                        <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):</md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">
                             <div class="md-tile-left inset" hide-sm>
                                 <user-avatar></user-avatar>

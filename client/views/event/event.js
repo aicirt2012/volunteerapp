@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '$mdDialog', function($scope, $mdSidenav, Event, event, User, $mdDialog) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', function($scope, $mdSidenav, Event, event, User, $mdDialog, Util) {
 
 
     var me = $scope;
@@ -8,14 +8,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isHelper = User.isHelper();
 
     me.event = event;
+    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
 
-    //TODO should this maybe only initialized if the event do not have data?
-    me.event.startdate = new Date(me.event.startdate);
-    me.event.startdate.setSeconds(0);
-    me.event.startdate.setMilliseconds(0);
-    me.event.enddate = new Date(me.event.enddate);
-    me.event.enddate.setSeconds(0);
-    me.event.enddate.setMilliseconds(0);
 
     //TODO Do we need this hack?
     if(me.event.organization) {

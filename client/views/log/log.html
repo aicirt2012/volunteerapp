@@ -6,7 +6,22 @@
 
         <md-card style="padding:0px">
             <md-card-content>
-
+                <table style="width:100%">
+                    <tr>
+                        <td>Datum</td>
+                        <td>Aktion</td>
+                        <td>User</td>
+                        <td>Role</td>
+                        <td>Beschreibug</td>
+                    </tr>
+                    <tr ng-repeat="log in logs">
+                        <td>{{log.date}}</td>
+                        <td>{{log.action}}</td>
+                        <td>{{log.username}}</td>
+                        <td>{{log.userrole}}</td>
+                        <td>{{log.description}}</td>
+                    </tr>
+                </table>
             </md-card-content>
         </md-card>
 

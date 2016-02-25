@@ -2,15 +2,12 @@ app.controller('LogCtrl', ['$scope', '$mdSidenav', 'log', function($scope, $mdSi
 
 
     var me = $scope;
-
     me.log = log;
 
 
     me.breadcrumb = function(){
         return 'Systemlog';
     };
-
-
 
     $mdSidenav('left').open();
 

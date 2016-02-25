@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var moment = require('moment');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var mailer = require('../../util/mailer');
@@ -8,7 +9,7 @@ var mailer = require('../../util/mailer');
 
 router.get('/', function(req, res) {
     console.log('get all Events');
-    Event.findAll(function(err, events){
+        Event.findAll(function(err, events){
         res.json(events);
     });
 });
@@ -30,17 +31,14 @@ router.post('/', function(req, res) {
         organization: {id: req.body.organization}
     }, function(){
         var start = new Date(req.body.startdate);
-        var sDate = start.getDate() + '.' + start.getMonth()+1 + '.' + start.getFullYear();
-        var sTime = start.getHours() + ':' + start.getMinutes();
         var end = new Date(req.body.enddate);
-        var eTime = end.getHours() + ':' + end.getMinutes();
         mailer.send({
             to: 'felix.michel@tum.de',
             subject: 'Neues Event',
             html: '<h3>Hallo Felix!</h3>' +
             '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
             '<b>' + req.body.title + '</b>' +
-            '<p>Am ' + sDate +' von ' + sTime + ' Uhr bis ' + eTime + ' Uhr. <br>' +
+            '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
             'Ort: ' + req.body.place + '<br>'+
             'Beschreibung: ' + req.body.description + '<br>'+
             'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +

@@ -7,6 +7,7 @@ var SocioCortex = require('../../sc/SocioCortex');
 var User = require('../../sc/User');
 var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
+var Log = require('../../sc/Log');
 
 router.post('/', function(req, res, next) {
     var asyncTasks = [];

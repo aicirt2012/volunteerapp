@@ -30,7 +30,7 @@
                             <md-input-container flex>
                                 <label>Organisation</label>
                                 <md-select ng-model="event.organization" md-on-open="loadOrganizations()">
-                                    <md-option ng-repeat="orga in organizationlist" value="{{orga}}">
+                                    <md-option ng-repeat="orga in organizationlist" value="{{orga.id}}">
                                         {{orga.name}}
                                     </md-option>
                                 </md-select>

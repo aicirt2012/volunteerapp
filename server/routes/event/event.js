@@ -27,7 +27,7 @@ router.post('/', function(req, res) {
         nrhelpers: req.body.nrhelpers,
         description: req.body.description,
         important: req.body.important,
-        organization: req.body.organization
+        organization: {id: req.body.organization}
     }, function(){
         var start = new Date(req.body.startdate);
         var sDate = start.getDate() + '.' + start.getMonth()+1 + '.' + start.getFullYear();

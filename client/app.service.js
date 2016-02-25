@@ -179,6 +179,13 @@ app.service('User', function($resource, $base64) {
             return userCache.role == "ORGANIZER";
     }
 
+    function isAdmin(){
+        if(!isUserCached())
+            return null;
+        else
+            return userCache.role == "ADMIN";
+    }
+
     function roleLabel(){
         if(userCache == null){
             console.error('user not in cache');
@@ -237,7 +244,8 @@ app.service('User', function($resource, $base64) {
         logout: logout,
         isHelper: isHelper,
         isTeam: isTeam,
-        isOrganizer: isOrganizer
+        isOrganizer: isOrganizer,
+        isAdmin: isAdmin
     }
 });
 

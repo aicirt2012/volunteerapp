@@ -26,7 +26,8 @@ User.genders = {
 User.roles = {
     HELPER: 'HELPER',
     TEAM: 'TEAM',
-    ORGANIZER: 'ORGANIZER'
+    ORGANIZER: 'ORGANIZER',
+    ADMIN: 'ADMIN'
 }
 
 

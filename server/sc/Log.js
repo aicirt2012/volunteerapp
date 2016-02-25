@@ -38,6 +38,16 @@ Log.err = function(user, action, description){
 }
 
 Log.log = function(user, level, action, description){
+    console.log(JSON.stringify({
+        username: user.name,
+        useremail: user.email,
+        userid: user.id,
+        userrole:  user.role,
+        //date: new Date().toISOString(),
+        level: level,
+        action: action,
+        description: description
+    }));
     Log.save({
         username: user.name,
         useremail: user.email,

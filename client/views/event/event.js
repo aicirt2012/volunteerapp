@@ -46,6 +46,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
+                $scope.isDisabled    = false;
+                $scope.userlist         = loadAll();
+                $scope.querySearch   = querySearch;
                 $scope.hide = function() {
                     $mdDialog.hide();
                 };
@@ -55,6 +58,28 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 $scope.register = function() {
                     $mdDialog.hide();
                 };
+
+                function querySearch (query) {
+                    return query ? $scope.userlist.filter( createFilterFor(query) ) : $scope.userlist;
+                }
+
+                function loadAll() {
+                    var userlist = me.userlist;
+                    return userlist.map( function (user) {
+                        user.value = user.name.toLowerCase();
+                        return user;
+                    });
+                }
+
+                /**
+                 * Create filter function for a query string
+                 */
+                function createFilterFor(query) {
+                    var lowercaseQuery = angular.lowercase(query);
+                    return function filterFn(user) {
+                        return (user.value.search(lowercaseQuery) !== -1);
+                    };
+                }
             },
             templateUrl: '/views/event/dialogHelperRegister.html',
             parent: angular.element(document.body),

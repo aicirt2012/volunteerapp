@@ -2,7 +2,7 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Helfer zum Event Anmeldung</h2>
+                <h2>Helfer zum Event anmelden</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -14,27 +14,31 @@
                 <p>Wählen Sie einen Helfer aus und melden Ihn verbindlich zum Event <b>{{event.title}}</b> am <b>{{event.startdate | date: 'dd.MM.yyyy'}}</b> an</p>
                    <form ng-submit="$event.preventDefault()">
                        <md-autocomplete
+                               ng-disabled="isDisabled"
+                               md-no-cache="noCache"
                                md-selected-item="selectedItem"
-                               md-search-text="search"
-                               md-items="item in userlist"
-                               md-item-text="item.name"
+                               md-search-text="searchText"
+                               md-items="user in querySearch(searchText)"
+                               md-item-text="user.name"
                                md-min-length="0"
                                placeholder="Hier Helfername eintippen! "
                                md-menu-class="autocomplete-custom-template">
                            <md-item-template>
-                             <span class="item-title">
-                                 <user-avatar style="max-width: 20px;"></user-avatar>
-                               <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
-                               <span> {{item.name}} </span>
-                             </span>
-                             <span class="item-metadata">
-                               <span class="item-metastat">
-                                 <strong>{{item.email}}</strong> watchers
+
+                              <span class="item-title" layout-align="start centre">
+                                  <md-icon  class="material-icons">person</md-icon>
+                                  <strong>{{user.name}}</strong>
+                              </span>
+                              <span class="item-metadata">
+                                  <span class="item-metastat">
+                                      <md-icon  class="material-icons">mail</md-icon>
+                                      <span>{{user.email}}</span>
+                                  </span>
+                                  <span class="item-metastat">
+                                      <md-icon  class="material-icons">phone</md-icon>
+                                      <span>{{user.tel}}</span>
+                                  </span>
                                </span>
-                               <span class="item-metastat">
-                                 <strong>{{item.tel}}</strong> forks
-                               </span>
-                             </span>
                            </md-item-template>
                        </md-autocomplete>
                    </form>

@@ -1,8 +1,9 @@
-app.controller('LogCtrl', ['$scope', '$mdSidenav', 'log', function($scope, $mdSidenav, log) {
+app.controller('LogCtrl', ['$scope', '$mdSidenav', 'logs', function($scope, $mdSidenav, logs) {
 
 
     var me = $scope;
-    me.log = log;
+    console.log(JSON.stringify(logs));
+    me.logs = logs;
 
 
     me.breadcrumb = function(){

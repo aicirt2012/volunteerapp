@@ -96,7 +96,7 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/log/log.html',
             controller: 'LogCtrl',
             resolve: {
-                log: function(Log) {
+                logs: function(Log) {
                     return Log.list().$promise;
                 }
             }

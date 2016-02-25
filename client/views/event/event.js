@@ -138,7 +138,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         });
     };
 
-    me.meUnregister = function(helperId){
+    me.meUnregister = function(){
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
@@ -160,7 +160,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 event: me.event
             }
         }).then(function() {
-            Event.unregister(me.event.id, helperId);
+            console.log('unregister ', me.event.id, User.getUserId());
+            Event.unregister(me.event.id, User.getUserId());
         });
     };
 }]);

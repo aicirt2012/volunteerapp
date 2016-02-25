@@ -15,7 +15,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.init(event);
 
-    console.log(JSON.stringify(me.event));
     me.userlist = User.list(function(users){
         me.userlist = users;
     });
@@ -33,7 +32,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.submitEdit = function(){
         me.editMode = false;
-        //TODO update event here
     }
 
     me.breadcrumb = function(){

@@ -78,7 +78,17 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        res.send();
+        if(err)
+            res.status(500);
+        else{
+            Event.findWithHelperById(helperId, function (err, event) {
+                if (err)
+                    res.status(500).send();
+                else {
+                    res.json(event);
+                }
+            });
+        }
     });
 });
 

@@ -76,7 +76,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             }
         }).then(function() {
             //TODO cahnge this here
-            Event.register(me.event.id, User.getUserId());
+            Event.register(me.event.id, User.getUserId(), function(err, data){
+                if(err){
+                    console.error('Error during registering helper on event!');
+                }else{
+                    me.event = data;
+                }
+            });
         });
     };
 

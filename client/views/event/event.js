@@ -156,7 +156,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             }
         }).then(function() {
             Event.register(me.event.id, User.getUserId(), function(data){
-                console.log(JSON.stringify(me.event));
                 me.event = data;
                 me.event.startdate = Util.initDateFromJSON(me.event.startdate);
                 me.event.enddate = Util.initDateFromJSON(me.event.enddate);
@@ -187,7 +186,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             }
         }).then(function() {
             console.log('unregister ', me.event.id, User.getUserId());
-            Event.unregister(me.event.id, User.getUserId(), function(){
+            Event.unregister(me.event.id, User.getUserId(), function(data){
                 me.event = data;
                 me.event.startdate = Util.initDateFromJSON(me.event.startdate);
                 me.event.enddate = Util.initDateFromJSON(me.event.enddate);

@@ -9,7 +9,7 @@ var mailer = require('../../util/mailer');
 
 router.get('/', function(req, res) {
     console.log('get all Events');
-        Event.findAll(function(err, events){
+    Event.findAll(function(err, events){
         res.json(events);
     });
 });
@@ -32,19 +32,29 @@ router.post('/', function(req, res) {
     }, function(){
         var start = new Date(req.body.startdate);
         var end = new Date(req.body.enddate);
-        mailer.send({
-            to: 'felix.michel@tum.de',
-            subject: 'Neues Event',
-            html: '<h3>Hallo Felix!</h3>' +
-            '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
-            '<b>' + req.body.title + '</b>' +
-            '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
-            'Ort: ' + req.body.place + '<br>'+
-            'Beschreibung: ' + req.body.description + '<br>'+
-            'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
-            '<p>Viele Grüße, <br>'+
-            'dein VolunterApp Team</p>'
+
+        User.findAvailableUsers(start, end, function(users){
+            for(var i=0; i<users.length; i++){
+                console.log('send email to'+users[i].email);
+                /*
+                mailer.send({
+                    to: 'felix.michel@tum.de',
+                    subject: 'Neues Event',
+                    html: '<h3>Hallo Felix!</h3>' +
+                    '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+                    '<b>' + req.body.title + '</b>' +
+                    '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
+                    'Ort: ' + req.body.place + '<br>'+
+                    'Beschreibung: ' + req.body.description + '<br>'+
+                    'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
+                    '<p>Viele Grüße, <br>'+
+                    'dein VolunterApp Team</p>'
+                });*/
+            }
+
         });
+
+
 
 
 

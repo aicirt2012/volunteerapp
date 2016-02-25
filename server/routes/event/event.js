@@ -94,7 +94,6 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
                 if (err)
                     res.status(500).send();
                 else {
-                   // console.log(event);
                     res.json(event);
                 }
             });
@@ -106,7 +105,13 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        res.send();
+        Event.findWithHelperById(eventId, function (err, event) {
+            if (err)
+                res.status(500).send();
+            else {
+                res.json(event);
+            }
+        });
     });
 });
 

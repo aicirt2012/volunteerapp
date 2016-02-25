@@ -135,19 +135,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                event: me.event
             }
         }).then(function() {
-
             Event.register(me.event.id, User.getUserId(), function(data){
-                /*if(err){
-                    console.error('Error during registering helper on event!');
-                }else{*/
-                console.log(JSON.stringify(data));
-                    console.log('Update Event data after registering helper!');
-                    me.event = data;
-                    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-                    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
-               // }
+                me.event = data;
+                me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+                me.event.enddate = Util.initDateFromJSON(me.event.enddate);
             });
-
         });
     };
 

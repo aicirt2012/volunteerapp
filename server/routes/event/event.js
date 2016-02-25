@@ -81,10 +81,11 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
         if(err)
             res.status(500);
         else{
-            Event.findWithHelperById(helperId, function (err, event) {
+            Event.findWithHelperById(eventId, function (err, event) {
                 if (err)
                     res.status(500).send();
                 else {
+                   // console.log(event);
                     res.json(event);
                 }
             });

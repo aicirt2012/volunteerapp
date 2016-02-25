@@ -44,7 +44,9 @@ Event.findWithHelperById = function(eventId, cb){
                     cb();
                 });
             }, function(err){
+
                 event.helpers = helpers;
+
                 cb(false, event);
             });
         }

@@ -27,7 +27,7 @@
 
                               <span class="item-title" layout-align="start centre">
                                   <md-icon  class="material-icons">person</md-icon>
-                                  <strong>{{user.name}}</strong>
+                                  <span ng-bind-html="highlight(searchText, user.name)"></span>
                               </span>
                               <span class="item-metadata">
                                   <span class="item-metastat">

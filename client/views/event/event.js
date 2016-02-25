@@ -69,6 +69,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                     $scope.selectedUserId = user.id;
                 }
 
+                $scope.highlight = function(search, text){
+                    if (search)
+                        return text.replace(new RegExp('('+search+')', 'gi'),'<b>$1</b>');
+                    else
+                        return text;
+                }
+
                 function querySearch (query) {
                     return query ? $scope.userlist.filter( createFilterFor(query) ) : $scope.userlist;
                 }

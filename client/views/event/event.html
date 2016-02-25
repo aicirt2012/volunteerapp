@@ -151,14 +151,7 @@
                                 <p>{{helper.tel}}</p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">
-                            <div class="md-tile-left inset" hide-sm>
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-list-item-text">
-                                <md-button class="md-primary md-raised" ng-click="helperRegister()">Helfer Anmelden</md-button>
-                            </div>
-                        </md-list-item>
+                        <md-button class="md-primary md-raised" ng-click="helperRegister()">Helfer Anmelden</md-button>
                     </md-list>
 
                 </div>

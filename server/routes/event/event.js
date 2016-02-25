@@ -64,24 +64,34 @@ router.get('/:id', function(req, res) {
 
     var eId = req.params.id;
     console.log('get Events with id '+eId);
-    Event.findWithHelperById(eId, function(err, event){
+    findEvent(eId, req.user, function(err, event){
         if(err)
             res.status(500).send();
         else{
-            event.nrhelpersregistered = event.helpers.length;
-            event.imregistered = false;
-            for(var i=0; i< event.helpers.length; i++)
-                if(event.helpers[i].id == req.user.id)
-                    event.imregistered = true;
-            //TODO remove comment for production
-            //if(req.user.role == User.roles.HELPER)
-            //    delete event.helpers;
-
             res.json(event);
         }
     });
 
 });
+
+function findEvent(eId, user, cb){
+    Event.findWithHelperById(eId, function(err, event){
+        if(err)
+            cb(err, null);
+        else{
+            event.nrhelpersregistered = event.helpers.length;
+            event.imregistered = false;
+            for(var i=0; i< event.helpers.length; i++)
+                if(event.helpers[i].id == user.id)
+                    event.imregistered = true;
+            //TODO remove comment for production
+            //if(req.user.role == User.roles.HELPER)
+            //    delete event.helpers;
+
+            cb(false, event);
+        }
+    });
+}
 
 router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
@@ -90,7 +100,7 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
         if(err)
             res.status(500);
         else{
-            Event.findWithHelperById(eventId, function (err, event) {
+            findEvent(eventId, req.user, function (err, event) {
                 if (err)
                     res.status(500).send();
                 else {
@@ -105,13 +115,16 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        Event.findWithHelperById(eventId, function (err, event) {
-            if (err)
-                res.status(500).send();
-            else {
-                res.json(event);
-            }
-        });
+        if(err)
+            res.status(500);
+        else
+            findEvent(eventId, req.user, function (err, event) {
+                if (err)
+                    res.status(500).send();
+                else {
+                    res.json(event);
+                }
+            });
     });
 });
 

@@ -223,3 +223,17 @@ app.service('User', function($resource, $base64) {
 });
 
 
+app.service('Util', function() {
+
+    function initDateFromJSON(dateAsString){
+        var d = new Date(dateAsString);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        return d;
+    }
+
+    return {
+        initDateFromJSON: initDateFromJSON
+    };
+});
+

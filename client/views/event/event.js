@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '$mdDialog', function($scope, $mdSidenav, Event, event, User, $mdDialog) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog) {
 
 
     var me = $scope;
@@ -8,12 +8,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isHelper = User.isHelper();
 
     me.event = event;
-    me.event.startdate = new Date(me.event.startdate);
-    me.event.startdate.setSeconds(0);
-    me.event.startdate.setMilliseconds(0);
-    me.event.enddate = new Date(me.event.enddate);
-    me.event.enddate.setSeconds(0);
-    me.event.enddate.setMilliseconds(0);
+    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+
+
+    //TODO Do we need this hack?
     if(me.event.organization) {
         me.event.organization = JSON.parse(me.event.organization);
     }
@@ -72,7 +71,18 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             }
         }).then(function() {
             //TODO cahnge this here
-            Event.register(me.event.id, User.getUserId());
+            Event.register(me.event.id, User.getUserId(), function(){
+                if(err){
+                    console.error('Error during registering helper on event!');
+                }else{
+                    /*TODO
+                    console.log('Update Event data after registering helper!');
+                    me.event = data;
+                    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+                    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+                    */
+                }
+            });
         });
     };
 
@@ -125,7 +135,10 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                event: me.event
             }
         }).then(function() {
-            Event.register(me.event.id, User.getUserId());
+            console.log('Update Event data after registering helper!');
+            me.event = data;
+            me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+            me.event.enddate = Util.initDateFromJSON(me.event.enddate);
         });
     };
 

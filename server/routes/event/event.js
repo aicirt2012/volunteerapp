@@ -64,25 +64,11 @@ router.get('/:id', function(req, res) {
 
     var eId = req.params.id;
     console.log('get Events with id '+eId);
-    Event.findById(eId, function(err, event){
+    Event.findWithHelperById(eId, function(err, event){
         if(err)
             res.status(500).send();
         else{
-            var helpers = [];
-            async.forEach(event.helpers, function(helper, cb){
-                User.findById(helper.id, function(err, user){
-                    helpers.push({
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                        tel: user.tel
-                    });
-                    cb();
-                });
-            }, function(err){
-                event.helpers = helpers;
-                res.json(event);
-            });
+            res.json(event);
         }
     });
 
@@ -92,7 +78,17 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        res.send();
+        if(err)
+            res.status(500);
+        else{
+            Event.findWithHelperById(helperId, function (err, event) {
+                if (err)
+                    res.status(500).send();
+                else {
+                    res.json(event);
+                }
+            });
+        }
     });
 });
 

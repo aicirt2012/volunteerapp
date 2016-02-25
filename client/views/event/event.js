@@ -7,9 +7,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isTeam = User.isTeam();
     me.isHelper = User.isHelper();
 
-    me.event = event;
-    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+    me.init = function(event){
+        me.event = event;
+        me.event.startdate = Util.initDateFromJSON(me.event.startdate);
+        me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+    }
+
+    me.init(event);
 
     console.log(JSON.stringify(me.event));
     me.userlist = User.list(function(users){
@@ -43,14 +47,16 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
 
+
+
     me.helperRegister = function(ev) {
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
                 $scope.selectedUser = null;
-                $scope.isDisabled    = false;
-                $scope.userlist         = loadAll();
-                $scope.querySearch   = querySearch;
+                $scope.isDisabled = false;
+                $scope.userlist = loadAll();
+                $scope.querySearch = querySearch;
                 $scope.hide = function() {
                     $mdDialog.hide();
                 };
@@ -63,7 +69,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
                 $scope.selectedUserChange = function(user) {
                     $scope.selectedUserId = user.id;
-                    console.log(user);
                 }
 
                 function querySearch (query) {
@@ -96,19 +101,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 event: me.event
             }
         }).then(function(helperId) {
-            //TODO cahnge this here
-            console.log(helperId);
-            Event.register(me.event.id, helperId, function(){
-                if(err){
-                    console.error('Error during registering helper on event!');
-                }else{
-                    /*TODO
-                    console.log('Update Event data after registering helper!');
-                    me.event = data;
-                    me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-                    me.event.enddate = Util.initDateFromJSON(me.event.enddate);
-                    */
-                }
+            Event.register(me.event.id, helperId, function(event){
+                me.init(event);
             });
         });
     };
@@ -129,14 +123,14 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             },
             templateUrl: '/views/event/dialogHelperUnregister.html',
             parent: angular.element(document.body),
-            //targetEvent: ev,
             clickOutsideToClose:true,
             locals: {
                 event: me.event
             }
         }).then(function() {
-            //TODO change this here
-            Event.unregister(me.event.id, helperId);
+            Event.unregister(me.event.id, helperId, function(event){
+                me.init(event);
+            });
         });
     };
 
@@ -162,10 +156,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                event: me.event
             }
         }).then(function() {
-            Event.register(me.event.id, User.getUserId(), function(data){
-                me.event = data;
-                me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-                me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+            Event.register(me.event.id, User.getUserId(), function(event){
+                me.init(event);
             });
         });
     };
@@ -186,17 +178,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             },
             templateUrl: '/views/event/dialogMeUnregister.html',
             parent: angular.element(document.body),
-            //targetEvent: ev,
             clickOutsideToClose:true,
             locals: {
                 event: me.event
             }
         }).then(function() {
-            console.log('unregister ', me.event.id, User.getUserId());
-            Event.unregister(me.event.id, User.getUserId(), function(data){
-                me.event = data;
-                me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-                me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+            Event.unregister(me.event.id, User.getUserId(), function(event){
+                me.init(event);
             });
         });
     };

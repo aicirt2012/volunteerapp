@@ -73,8 +73,9 @@ router.get('/:id', function(req, res) {
             for(var i=0; i< event.helpers.length; i++)
                 if(event.helpers[i].id == req.user.id)
                     event.imregistered = true;
-            if(req.user.role == User.roles.HELPER)
-                delete event.helpers;
+            //TODO remove comment for production
+            //if(req.user.role == User.roles.HELPER)
+            //    delete event.helpers;
 
             res.json(event);
         }

@@ -95,9 +95,10 @@ app.service('User', function($resource, $base64) {
         {id: 'ORGANIZER', label: 'Organisator'}
     ];
 
-    function genders() {
-        return [{id: 'MALE', label: 'Herr'}, {id: 'FEMALE', label: 'Frau'}];
-    }
+    var genders = [
+        {id: 'MALE', label: 'Herr'},
+        {id: 'FEMALE', label: 'Frau'}
+    ];
 
     function getUserId(){
         var jwt = localStorage.getItem('JWT');
@@ -191,9 +192,18 @@ app.service('User', function($resource, $base64) {
         }
     }
 
+    function genderLabel(user){
+            for(var g in genders)
+                if(genders[g].id == user.gender)
+                    return genders[g].label;
+            console.error('gender with id ' + user.gender + ' not found');
+            return null;
+    }
+
     return {
         list: User.query,
-        genders: genders(),
+        genders: genders,
+        genderLabel: genderLabel,
         roles: roles,
         roleLabel: roleLabel,
         get: User.get,

@@ -67,7 +67,7 @@ app.config(['$routeProvider', function($routeProvider) {
             controller: 'UserCtrl',
             resolve: {
                 user: function($route, User) {
-                    return User.get({id: $route.current.params.id});
+                    return User.get({id: $route.current.params.id}).$promise;
                 },
                 userevents: function($route, Event){
                     return Event.getUserEvents($route.current.params.id).$promise;

@@ -101,11 +101,13 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     });
 });
 
+router.get('/user/:id/', function(req, res){
+    var uId = req.params.id;
+    Event.findByUserId(uId, function(err, events){
+        res.send(events);
 
-
-
-
-
+    });
+});
 
 
 module.exports = router;

@@ -192,20 +192,39 @@ app.service('User', function($resource, $base64) {
         }
     }
 
-    function genderLabel(user){
-            for(var g in genders)
-                if(genders[g].id == user.gender)
+    function userRoleLabel(user){
+        if(user == null){
+            console.error('user is null');
+            return null;
+        }else {
+            for (var i = 0; i < roles.length; i++)
+                if (roles[i].id == user.role)
+                    return roles[i].label;
+            console.error('role with id ' + user.role + ' not found!');
+            return null;
+        }
+    }
+
+    function userGenderLabel(user){
+        if(user == null){
+            console.error('user is null');
+            return null;
+        }else {
+            for (var g in genders)
+                if (genders[g].id == user.gender)
                     return genders[g].label;
             console.error('gender with id ' + user.gender + ' not found');
             return null;
+        }
     }
 
     return {
         list: User.query,
         genders: genders,
-        genderLabel: genderLabel,
+        userGenderLabel: userGenderLabel,
         roles: roles,
         roleLabel: roleLabel,
+        userRoleLabel: userRoleLabel,
         get: User.get,
         post: User.post,
         me: me,

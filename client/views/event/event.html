@@ -131,8 +131,8 @@
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
                             <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <md-button class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
-                                <md-button class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
+                                <md-button ng-if="!event.imregistered" class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
+                                <md-button ng-if="event.imregistered" class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
                             </div>
                         </md-list-item>
                     </md-list>

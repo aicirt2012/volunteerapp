@@ -69,6 +69,13 @@ router.get('/:id', function(req, res) {
             res.status(500).send();
         else{
             event.nrhelpersregistered = event.helpers.length;
+            event.imregistered = false;
+            for(var i=0; i< event.helpers.length; i++)
+                if(event.helpers[i].id == req.user.id)
+                    event.imregistered = true;
+            if(req.user.role == User.roles.HELPER)
+                delete event.helpers;
+
             res.json(event);
         }
     });

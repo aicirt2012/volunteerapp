@@ -11,6 +11,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.event.startdate = Util.initDateFromJSON(me.event.startdate);
     me.event.enddate = Util.initDateFromJSON(me.event.enddate);
 
+    console.log(JSON.stringify(me.event));
     me.userlist = User.list(function(users){
         me.userlist = users;
     });

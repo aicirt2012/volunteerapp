@@ -82,7 +82,7 @@
                         </div>
                         <div ng-if="!editMode">
                             <md-list>
-                                <md-list-item class="md-2-line" ng-init="getGender()">
+                                <md-list-item class="md-2-line">
                                     <md-icon class="material-icons">person</md-icon>
                                     <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                         <h3> {{user.genderLabel}} {{ user.name }} </h3>
@@ -110,7 +110,7 @@
                                         <p> Mobil </p>
                                     </div>
                                 </md-list-item>
-                                <md-list-item class="md-2-line" ng-init="getRole()">
+                                <md-list-item class="md-2-line">
                                     <md-icon class="material-icons">group</md-icon>
                                     <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                         <h3> {{ user.roleLabel }} </h3>

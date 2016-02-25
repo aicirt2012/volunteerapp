@@ -4,7 +4,9 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     var me = $scope;
     me.user = user;
     me.genders = User.genders;
+    me.user.genderLabel = User.userGenderLabel(user);
     me.roles = User.roles;
+    me.user.roleLabel = User.userRoleLabel(user);
     me.selectedTabNr = 1;
     me.editMode = false;
     me.editVisible = User.isOrganizer();
@@ -45,22 +47,6 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
 
     me.breadcrumb = function(){
         return 'Personalverwaltung > '+me.selectedRole.label + ' > ' + me.user.name;
-    }
-
-    me.getRole = function(){
-        for(var r in me.roles){
-            var role = me.roles[r];
-            if(role.id == me.user.role)
-                me.user.roleLabel = role.label;
-        }
-    }
-
-    me.getGender = function(){
-        for(var g in me.genders){
-            var gender = me.genders[g];
-            if(gender.id == me.user.gender)
-                me.user.genderLabel = gender.label;
-        }
     }
 
     $mdSidenav('left').open();

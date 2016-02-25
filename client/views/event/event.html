@@ -16,7 +16,7 @@
                     <span flex></span>
                 </div>
             </md-toolbar>
-            <md-card-content>
+            <md-card-content layout="row" layout-align="space-between centre" style="padding : 0;">
 
                 <div ng-if="editMode">
                     <form name="eventForm" layout-padding="">
@@ -78,58 +78,58 @@
                         </div>
                     </form>
                 </div>
-                <div ng-if="!editMode">
+                <div ng-if="!editMode" layout-padding>
                     <md-list>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">home</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.organization.name }} </h3>
                                 <p> Organisation </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">group_add</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.nrhelpers }} </h3>
                                 <p> Benötigte Helfer </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">place</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.place }} </h3>
                                 <p> Ort </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">today</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} Uhr</h3>
                                 <p> Begin </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">today</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr </h3>
                                 <p> Ende </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons">description</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.description }} </h3>
                                 <p> Beschreibung </p>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="isOrganizer" class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
-                            <md-icon md-svg-icon="communication:phone"></md-icon>
+                            <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <md-button class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
                                 <md-button class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
@@ -138,9 +138,9 @@
                     </md-list>
                 </div>
 
-                <div ng-if="isOrganizer || isTeam">
+                <div ng-if="isOrganizer || isTeam" style="background-color: #E6E6E6;" layout-padding="">
                     <md-list>
-                        <md-subheader class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
+                        <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer (/):</md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">
                             <div class="md-tile-left inset" hide-sm>
                                 <user-avatar></user-avatar>
@@ -159,25 +159,11 @@
                                 <md-button class="md-primary md-raised" ng-click="helperRegister()">Helfer Anmelden</md-button>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-3-line">
-                            <div class="md-tile-left inset" hide-sm>
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-list-item-text">
-
-                            </div>
-                        </md-list-item>
                     </md-list>
 
                 </div>
 
             </md-card-content>
-            <md-card-footer>
-                <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-
-                </section>
-                <br/><br/><br/><br/>
-            </md-card-footer>
         </md-card>
 
 

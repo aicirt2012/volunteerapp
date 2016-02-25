@@ -264,3 +264,15 @@ app.service('Util', function() {
     };
 });
 
+
+app.service('Log', function($resource) {
+    var Log = $resource('/api/log');
+
+    function list(cb){
+        return Log.query(cb);
+    }
+
+    return {
+        list: list
+    }
+});

@@ -92,6 +92,15 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             }
         })
+        .when('/log', {
+            templateUrl: 'views/log/log.html',
+            controller: 'LogCtrl',
+            resolve: {
+                log: function($route, Log) {
+                    return Log.list().$promise;
+                }
+            }
+        })
         .otherwise({
             redirectTo: '/login'
         });

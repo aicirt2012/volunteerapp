@@ -31,6 +31,12 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
                     title: 'Einrichtungsverwaltung',
                     icon: 'home'
                 });
+            if(User.isAdmin())
+                me.menu.push({
+                    link : 'log',
+                    title: 'Systemlog',
+                    icon: 'home'
+                });
         });
         me.mymenu = [
             {

@@ -16,7 +16,7 @@
                        <md-autocomplete
                                ng-disabled="isDisabled"
                                md-no-cache="noCache"
-                               md-selected-item="selectedItem"
+                               md-selected-item-change="selectedUserChange(user)"
                                md-search-text="searchText"
                                md-items="user in querySearch(searchText)"
                                md-item-text="user.name"
@@ -49,8 +49,8 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="register()" >
-                Anmelden
+            <md-button class="md-raised md-primary" ng-click="register(selectedUserId)" >
+                Anmelden {{user}}
             </md-button>
         </md-dialog-actions>
     </form>

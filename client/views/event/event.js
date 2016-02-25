@@ -47,6 +47,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
+                $scope.selectedUser = null;
                 $scope.isDisabled    = false;
                 $scope.userlist         = loadAll();
                 $scope.querySearch   = querySearch;
@@ -56,9 +57,14 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 $scope.cancel = function() {
                     $mdDialog.cancel();
                 };
-                $scope.register = function() {
-                    $mdDialog.hide();
+                $scope.register = function(helperId) {
+                    $mdDialog.hide(helperId);
                 };
+
+                $scope.selectedUserChange = function(user) {
+                    $scope.selectedUserId = user.id;
+                    console.log(user);
+                }
 
                 function querySearch (query) {
                     return query ? $scope.userlist.filter( createFilterFor(query) ) : $scope.userlist;
@@ -89,9 +95,10 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             locals: {
                 event: me.event
             }
-        }).then(function() {
+        }).then(function(helperId) {
             //TODO cahnge this here
-            Event.register(me.event.id, User.getUserId(), function(){
+            console.log(helperId);
+            Event.register(me.event.id, helperId, function(){
                 if(err){
                     console.error('Error during registering helper on event!');
                 }else{

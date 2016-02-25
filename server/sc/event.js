@@ -3,6 +3,7 @@ var async = require('async');
 var http = require('../util/http');
 var EntityType = require('../sc/EntityType');
 var User = require('../sc/User');
+var Organisation = require('../sc/Organisation');
 
 
 var Event = EntityType.define({
@@ -29,6 +30,7 @@ Event.findByUserId = function(userId, cb){
 
 Event.findWithHelperById = function(eventId, cb){
     Event.findById(eventId, function(err, event){
+        console.log(JSON.stringify(event));
         if(err)
             cb(err, null);
         else{

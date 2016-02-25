@@ -69,6 +69,14 @@ router.post('/', function(req, res, next) {
             cb();
         });
     });
+    var organization = null;
+    asyncTasks.push(function(cb){
+        Organization.findAll(function(err, orgs){
+            organization = orgs[0];
+            console.log(JSON.stringify(organization));
+            cb();
+        });
+    });
     asyncTasks.push(function(cb){
         var events = JSON.parse(fs.readFileSync(__dirname + '/event.list.json'));
         async.forEach(events, function(e, cb){
@@ -80,7 +88,8 @@ router.post('/', function(req, res, next) {
                 nrhelpers: e.nrhelpers,
                // helpers: {},
                 description: e.description,
-                important: e.important
+                important: e.important,
+                organization: {id: organization.id}
             }, function(){
                 cb();
             });

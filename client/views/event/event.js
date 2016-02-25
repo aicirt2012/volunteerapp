@@ -11,12 +11,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.event.startdate = Util.initDateFromJSON(me.event.startdate);
     me.event.enddate = Util.initDateFromJSON(me.event.enddate);
 
-
-    //TODO Do we need this hack?
-    if(me.event.organization) {
-        me.event.organization = JSON.parse(me.event.organization);
-    }
-
     me.userlist = User.list(function(users){
         me.userlist = users;
     });

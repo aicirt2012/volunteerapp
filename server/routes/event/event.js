@@ -99,20 +99,27 @@ function findEvent(eId, user, cb){
 router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
-    Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        if(err)
-            res.status(500);
-        else{
-            findEvent(eventId, req.user, function (err, event) {
+
+    Event.isRegistered(eventId, helperId, function(err, isRegistered){
+        if(!isRegistered) {
+            Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
+            Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
                 if (err)
-                    res.status(500).send();
+                    res.status(500);
                 else {
-                    res.json(event);
+                    findEvent(eventId, req.user, function (err, event) {
+                        if (err)
+                            res.status(500).send();
+                        else {
+                            res.json(event);
+                        }
+                    });
                 }
             });
         }
     });
+
+
 });
 
 router.delete('/:eventId/helpers/:helperId', function(req, res) {

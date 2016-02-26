@@ -28,6 +28,16 @@ Event.findByUserId = function(userId, cb){
 }
 
 
+Event.isRegistered = function(eventId, helperId, cb){
+    Event.find('helpers .any("'+helperId+'" = id) and id="'+eventId+'"', function(err, events){
+        if(!err){
+            cb(false, events.length>0)
+        }else
+            cb(new Error('No Events for User found'), null);
+    });
+}
+
+
 Event.findWithHelperById = function(eventId, cb){
     Event.findById(eventId, function(err, event){
         console.log(JSON.stringify(event));

@@ -50,6 +50,9 @@ module.exports = {
                 }
                 SocioCortex.entity.update(entityId, attributes, data, cb)
             },
+            delete: function(entityId, cb){
+                SocioCortex.entity.delete(entityId, cb);
+            },
             addAttributeValue: function(entityId, attrName, value, cb){
                 SocioCortex.attribute.value.create(entityId, attrName, value, cb);
             },

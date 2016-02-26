@@ -109,6 +109,16 @@ function updateEntity(entityId, attributes, data, cb){
     });
 }
 
+function deleteEntity(entityId, cb){
+    http.del('/entities/'+entityId, {}, function (err, res, body) {
+        if (err || res.statusCode != 200) {
+            console.error('Error deleting Entity "' + entityId + '"!');
+        } else {
+            cb(err);
+        }
+    });
+}
+
 function findEntities(entityTypeId, attributes, cb){
     http.get('/entityTypes/'+entityTypeId+'/entities?attributes=*', function (err, res, body) {
         if (err || res.statusCode != 200) {
@@ -240,6 +250,7 @@ module.exports = {
     entity:{
         create: createEntity,
         update: updateEntity,
+        delete: deleteEntity,
         findById: findEntityById
     },
     entities:{

@@ -23,6 +23,19 @@ router.put('/', function(req, res) {
         res.sendStatus(403);
 });
 
+router.del('/:id', function(req, res) {
+    if(User.atLeastOrganizer(req.user.role )){
+        var eId = req.params.id;
+        Event.delete(eId, function(err){
+            if(err)
+                res.sendStatus(500);
+            else
+                res.sendStatus(200);
+        });
+    }else
+        res.sendStatus(403);
+});
+
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var data = {

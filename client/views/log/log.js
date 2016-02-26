@@ -2,7 +2,6 @@ app.controller('LogCtrl', ['$scope', '$mdSidenav', 'logs', function($scope, $mdS
 
 
     var me = $scope;
-    console.log(JSON.stringify(logs));
     me.logs = logs;
 
 

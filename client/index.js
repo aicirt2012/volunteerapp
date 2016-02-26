@@ -35,7 +35,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
                 me.menu.push({
                     link : 'log',
                     title: 'Systemlog',
-                    icon: 'home'
+                    icon: 'rotate_right'
                 });
         });
         me.mymenu = [

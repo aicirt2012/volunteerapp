@@ -19,6 +19,17 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.userlist = users;
     });
 
+    me.filteredUsers = function(){
+        var helperIds = [];
+        for(var i= 0; i<event.helpers.length; i++)
+            helperIds.push(event.helpers[i].id);
+        var fu = [];
+        for(var i= 0; i<me.userlist.length; i++)
+            if(helperIds.indexOf(me.userlist[i].id) == -1)
+                fu.push(me.userlist[i]);
+        return fu;
+    }
+
 
     me.openEdit = function(){
         me.eventCopy = me.event;
@@ -81,7 +92,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 }
 
                 function loadAll() {
-                    var userlist = me.userlist;
+                    var userlist = me.filteredUsers();
                     return userlist.map( function (user) {
                         user.value = user.name.toLowerCase();
                         return user;

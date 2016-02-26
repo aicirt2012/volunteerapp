@@ -14,11 +14,29 @@ router.get('/', function(req, res) {
     });
 });
 
-router.put('/', function(req, res) {
+router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         Log.info(req.user, Log.actions.EVENT_UPDATE);
-        //TODO implement this
-        res.send();
+        var eId = req.params.id;
+        var data = {
+            title: req.body.title,
+            place: req.body.place,
+            startdate: req.body.startdate,
+            enddate: req.body.enddate,
+            nrhelpers: req.body.nrhelpers,
+            description: req.body.description,
+            important: req.body.important,
+            organization: {id: req.body.organization}
+        };
+
+        Event.update(data, function(err){
+            findEvent(eId, req.user, function(err, event){
+                if(err)
+                    res.sendStatus(500);
+                else
+                    res.json(event);
+            });
+        });
     }else
         res.sendStatus(403);
 });

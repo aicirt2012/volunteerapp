@@ -1,6 +1,8 @@
 
 app.service('Event', function($resource) {
-    var Event = $resource('/api/event/:id');
+    var Event = $resource('/api/event/:id', null, {
+        'update': { method:'PUT' }
+    });
     var EventHelper = $resource('/api/event/:eventId/helpers/:helperId');
 
     var UserEvents = $resource('/api/event/user/:id');
@@ -21,6 +23,10 @@ app.service('Event', function($resource) {
         return Event.get({id: eventId}, {}, cb);
     }
 
+    function update(eventId, data, cb){
+        return Event.update({id: eventId}, data, cb);
+    }
+
     function del(eventId, cb){
         return Event.delete({id: eventId}, {}, cb);
     }
@@ -36,6 +42,7 @@ app.service('Event', function($resource) {
     return {
         save: save,
         get: get,
+        update: update,
         del: del,
         list: list,
         register: register,

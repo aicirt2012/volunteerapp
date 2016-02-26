@@ -44,6 +44,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.submitEdit = function(){
         me.editMode = false;
+        Event.update(me.event.id, me.event, function(){
+            console.log('update executed!');
+        });
     }
 
     me.cancelEvent = function(){

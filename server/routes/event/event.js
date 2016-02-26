@@ -4,6 +4,7 @@ var async = require('async');
 var moment = require('moment');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
+var Log = require('../../sc/Log');
 var mailer = require('../../util/mailer');
 
 
@@ -16,11 +17,12 @@ router.get('/', function(req, res) {
 
 router.put('/', function(req, res) {
     console.log('update event');
+    Log.info(req.user, Log.actions.EVENT_UPDATE);
     res.send();
 });
 
 router.post('/', function(req, res) {
-    Event.save({
+    var data = {
         title: req.body.title,
         place: req.body.place,
         startdate: req.body.startdate,
@@ -29,7 +31,9 @@ router.post('/', function(req, res) {
         description: req.body.description,
         important: req.body.important,
         organization: {id: req.body.organization}
-    }, function(){
+    };
+    Log.info(req.user, Log.actions.EVENT_CREATE, data);
+    Event.save(data, function(){
         var start = new Date(req.body.startdate);
         var end = new Date(req.body.enddate);
 
@@ -95,6 +99,7 @@ function findEvent(eId, user, cb){
 router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
+    Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
     Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         if(err)
             res.status(500);
@@ -113,6 +118,8 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
 router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
+    console.log('event '+eventId+' helper '+helperId);
+    Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         if(err)
             res.status(500);

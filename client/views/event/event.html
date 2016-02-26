@@ -138,7 +138,7 @@
                     </md-list>
                 </div>
 
-                <div ng-if="isOrganizer || isTeam" style="background-color: #E6E6E6;" layout-padding="">
+                <div ng-if="isOrganizer || isTeam" style="background-color: #E6E6E6;" >
                     <md-list>
                         <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):</md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">

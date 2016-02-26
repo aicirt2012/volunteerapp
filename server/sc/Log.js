@@ -22,7 +22,12 @@ Log.level = {
 Log.actions = {
     LOGIN: 'LOGIN',
     LOGIN_FAILED: 'LOGIN_FAILED',
-    LOGOUT: 'LOGOUT'
+    LOGOUT: 'LOGOUT',
+    EVENT_CREATE: 'EVENT_CREATE',
+    EVENT_UPDATE: 'EVENT_UPDATE',
+    EVENT_DELETE: 'EVENT_DELETE',
+    EVENT_REGISTER: 'EVENT_REGISTER',
+    EVENT_UNREGISTER: 'EVENT_UNREGISTER'
 }
 
 Log.debug = function(user, action, description){
@@ -46,7 +51,7 @@ Log.log = function(user, level, action, description){
         date: new Date().toISOString(),
         level: level,
         action: action,
-        description: description
+        description: description? description : 'N.A'
     }));
     Log.save({
         username: user? user.name : 'N.A.',

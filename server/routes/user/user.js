@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 
@@ -75,7 +74,7 @@ router.put('/:id', function(req, res) {
     });
 });
 
-/** reset userpw */
+
 router.put('/resetpw', function(req, res) {
     User.save({
         pw: req.body.pw
@@ -83,16 +82,6 @@ router.put('/resetpw', function(req, res) {
         res.send();
     });
 });
-
-
-
-/*
-router.get('/available', function(req, res, next) {
-    User.find( 'availability.fr.afternoon', function(err, users){
-        res.json(users)
-    });
-});
-*/
 
 
 

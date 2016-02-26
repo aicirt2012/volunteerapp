@@ -4,7 +4,7 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
     var me = $scope;
     me.userlist = userlist;
     me.roles = User.roles;
-    me.addVisible = User.isOrganizer();
+    me.addVisible = User.isAdmin() || User.isOrganizer();
 
     me.selectedTabNr = 1;
     me.$watch('selectedTabNr', function(newValue) {

@@ -5,7 +5,7 @@ var http = require('../../util/http');
 var User = require('../../sc/User');
 
 
-router.get('/me', function(req, res, next) {
+router.get('/me', function(req, res) {
     if(!req.user)
         res.status(403).send();
     else
@@ -13,7 +13,7 @@ router.get('/me', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
     User.exists(req.body.email, '', function(err){
         if(err) {
             console.log(err);
@@ -35,13 +35,13 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     User.findAll(function(err, users){
         res.json(users);
     });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function(req, res) {
     var uId = req.params.id;
     User.findById(uId, function(err, user){
         if(err)
@@ -51,7 +51,7 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', function(req, res) {
     console.log('update user');
     var uId = req.params.id;
     User.exists(req.body.email, uId, function(err){
@@ -76,7 +76,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /** reset userpw */
-router.put('/resetpw', function(req, res, next) {
+router.put('/resetpw', function(req, res) {
     User.save({
         pw: req.body.pw
     }, function(){
@@ -84,27 +84,15 @@ router.put('/resetpw', function(req, res, next) {
     });
 });
 
-router.get('/sendmailtest', function(req, res, next) {
-    mailer.send({
-        to: 'felix.michel@tum.de',
-        subject: 'Hello ✔',
-        text: 'Hello world ✔',
-        html: '<b>Hello world ✔</b>'
-    },function(error, info){
-        if(error)
-            return console.log(error);
-        console.log('Message sent: ' + info.response);
-    });
-    res.send();
-});
 
 
+/*
 router.get('/available', function(req, res, next) {
     User.find( 'availability.fr.afternoon', function(err, users){
         res.json(users)
     });
 });
-
+*/
 
 
 

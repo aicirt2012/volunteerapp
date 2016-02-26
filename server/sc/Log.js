@@ -39,20 +39,20 @@ Log.err = function(user, action, description){
 
 Log.log = function(user, level, action, description){
     console.log(JSON.stringify({
-        username: user.name,
-        useremail: user.email,
-        userid: user.id,
-        userrole:  user.role,
-        //date: new Date().toISOString(),
+        username: user? user.name : 'N.A.',
+        useremail: user? user.email : 'N.A.',
+        userid: user? user.id : 'N.A.',
+        userrole:  user? user.role : 'N.A.',
+        date: new Date().toISOString(),
         level: level,
         action: action,
         description: description
     }));
     Log.save({
-        username: user.name,
-        useremail: user.email,
-        userid: user.id,
-        userrole:  user.role,
+        username: user? user.name : 'N.A.',
+        useremail: user? user.email : 'N.A.',
+        userid: user? user.id : 'N.A.',
+        userrole:  user? user.role : 'N.A.',
         date: new Date().toISOString(),
         level: level,
         action: action,

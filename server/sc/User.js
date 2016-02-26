@@ -30,6 +30,19 @@ User.roles = {
     ADMIN: 'ADMIN'
 }
 
+User.isAdmin = function(role){
+    return role && role == User.roles.ADMIN;
+}
+User.isOrganizer = function(role){
+    return role && role == User.roles.ORGANIZER;
+}
+User.isTeam = function(role){
+    return role && role == User.roles.TEAM;
+}
+User.isHelper = function(role){
+    return role && role == User.roles.HELPER;
+}
+
 User.atLeastAdmin = function(role){
     return role && role == User.roles.ADMIN;
 }

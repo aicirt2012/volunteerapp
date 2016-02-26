@@ -92,9 +92,9 @@ function findEvent(eId, user, cb){
             for(var i=0; i< event.helpers.length; i++)
                 if(event.helpers[i].id == user.id)
                     event.imregistered = true;
-            //TODO remove comment for production
-            //if(req.user.role == User.roles.HELPER)
-            //    delete event.helpers;
+
+            if(User.isHelper(user.role))
+                delete event.helpers;
 
             cb(false, event);
         }

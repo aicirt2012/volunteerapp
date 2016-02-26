@@ -5,10 +5,7 @@ var User = require('../../sc/User');
 
 
 router.get('/me', function(req, res) {
-    if(!req.user)
-        res.sendStatus(403);
-    else
-        res.json(User.toMe(req.user));
+    res.json(User.toMe(req.user));
 });
 
 

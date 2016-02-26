@@ -30,6 +30,24 @@ User.roles = {
     ADMIN: 'ADMIN'
 }
 
+User.atLeastAdmin = function(role){
+    return role && role == User.roles.ADMIN;
+}
+
+User.atLeastOrganizer = function(role){
+    return User.atLeastAdmin(role)||
+           role && role == User.roles.ORGANIZER ;
+}
+
+User.atLeastTeam = function(role){
+    return User.atLeastOrganizer(role) ||
+           role && role == User.roles.TEAM;
+}
+
+User.atLeastHelper= function(role){
+    return User.atLeastTeam(role) ||
+           role && role == User.roles.HELPER;
+}
 
 User.findAvailableUsers = function(start, end, cb){
     var matches = [];

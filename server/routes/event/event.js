@@ -9,16 +9,18 @@ var mailer = require('../../util/mailer');
 
 
 router.get('/', function(req, res) {
-    console.log('get all Events');
     Event.findAll(function(err, events){
         res.json(events);
     });
 });
 
 router.put('/', function(req, res) {
-    console.log('update event');
-    Log.info(req.user, Log.actions.EVENT_UPDATE);
-    res.send();
+    if(User.atLeastOrganizer(req.user.role )){
+        Log.info(req.user, Log.actions.EVENT_UPDATE);
+        //TODO implement this
+        res.send();
+    }else
+        res.status(403);
 });
 
 router.post('/', function(req, res) {
@@ -32,35 +34,38 @@ router.post('/', function(req, res) {
         important: req.body.important,
         organization: {id: req.body.organization}
     };
-    Log.info(req.user, Log.actions.EVENT_CREATE, data);
-    Event.save(data, function(){
-        var start = new Date(req.body.startdate);
-        var end = new Date(req.body.enddate);
 
-        User.findAvailableUsers(start, end, function(err, users){
-            console.log('users found '+users.length);
-            for(var i=0; i<users.length; i++){
-                console.log('send email to'+users[i].email);
-                /*
-                mailer.send({
-                    to: 'felix.michel@tum.de',
-                    subject: 'Neues Event',
-                    html: '<h3>Hallo Felix!</h3>' +
-                    '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
-                    '<b>' + req.body.title + '</b>' +
-                    '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
-                    'Ort: ' + req.body.place + '<br>'+
-                    'Beschreibung: ' + req.body.description + '<br>'+
-                    'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
-                    '<p>Viele Grüße, <br>'+
-                    'dein VolunterApp Team</p>'
-                });*/
-            }
+    if(User.atLeastOrganizer(req.user.role )){
+        Log.info(req.user, Log.actions.EVENT_CREATE, data);
+        Event.save(data, function(){
+            var start = new Date(req.body.startdate);
+            var end = new Date(req.body.enddate);
 
+            User.findAvailableUsers(start, end, function(err, users){
+                console.log('users found '+users.length);
+                for(var i=0; i<users.length; i++){
+                    console.log('send email to'+users[i].email);
+                    /*
+                    mailer.send({
+                        to: 'felix.michel@tum.de',
+                        subject: 'Neues Event',
+                        html: '<h3>Hallo Felix!</h3>' +
+                        '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+                        '<b>' + req.body.title + '</b>' +
+                        '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
+                        'Ort: ' + req.body.place + '<br>'+
+                        'Beschreibung: ' + req.body.description + '<br>'+
+                        'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
+                        '<p>Viele Grüße, <br>'+
+                        'dein VolunterApp Team</p>'
+                    });*/
+                }
+
+            });
+            res.send();
         });
-        res.send();
-    });
-
+    }else
+        res.status(403);
 });
 
 router.get('/:id', function(req, res) {
@@ -100,45 +105,54 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
 
-    Event.isRegistered(eventId, helperId, function(err, isRegistered){
-        if(!isRegistered) {
-            Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
-            Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
-                if (err)
-                    res.status(500);
-                else {
-                    findEvent(eventId, req.user, function (err, event) {
-                        if (err)
-                            res.status(500).send();
-                        else {
-                            res.json(event);
-                        }
-                    });
-                }
-            });
-        }
-    });
-
+    if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
+        Event.isRegistered(eventId, helperId, function(err, isRegistered){
+            if(!isRegistered) {
+                Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
+                Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
+                    if (err)
+                        res.status(500);
+                    else {
+                        findEvent(eventId, req.user, function (err, event) {
+                            if (err)
+                                res.status(500).send();
+                            else {
+                                res.json(event);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }else
+        res.status(403);
 
 });
 
 router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    console.log('event '+eventId+' helper '+helperId);
-    Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
-    Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
-        if(err)
-            res.status(500);
-        else
-            findEvent(eventId, req.user, function (err, event) {
-                if (err)
-                    res.status(500).send();
-                else {
-                    res.json(event);
-                }
-            });
-    });
+    if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
+        Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
+        Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
+            if (err)
+                res.status(500);
+            else
+                findEvent(eventId, req.user, function (err, event) {
+                    if (err)
+                        res.status(500).send();
+                    else {
+                        res.json(event);
+                    }
+                });
+        });
+    }else
+        res.status(403);
+});
+
+router.post('/:eventId/message', function(req, res) {
+    var eventId = req.params.eventId;
+
 });
 
 router.get('/user/:id/', function(req, res){

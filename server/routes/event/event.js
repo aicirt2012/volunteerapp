@@ -20,7 +20,7 @@ router.put('/', function(req, res) {
         //TODO implement this
         res.send();
     }else
-        res.status(403);
+        res.sendStatus(403);
 });
 
 router.post('/', function(req, res) {
@@ -74,7 +74,7 @@ router.get('/:id', function(req, res) {
     console.log('get Events with id '+eId);
     findEvent(eId, req.user, function(err, event){
         if(err)
-            res.status(500).send();
+            res.sendStatus(500);
         else{
             res.json(event);
         }
@@ -111,11 +111,11 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
                 Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
                 Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
                     if (err)
-                        res.status(500);
+                        res.sendStatus(500);
                     else {
                         findEvent(eventId, req.user, function (err, event) {
                             if (err)
-                                res.status(500).send();
+                                res.sendStatus(500);
                             else {
                                 res.json(event);
                             }
@@ -125,7 +125,7 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
             }
         });
     }else
-        res.status(403);
+        res.sendStatus(403);
 
 });
 
@@ -136,18 +136,18 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
         Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
         Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
             if (err)
-                res.status(500);
+                res.sendStatus(500);
             else
                 findEvent(eventId, req.user, function (err, event) {
                     if (err)
-                        res.status(500).send();
+                        res.sendStatus(500);
                     else {
                         res.json(event);
                     }
                 });
         });
     }else
-        res.status(403);
+        res.sendStatus(403);
 });
 
 router.post('/:eventId/message', function(req, res) {

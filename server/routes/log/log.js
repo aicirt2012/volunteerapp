@@ -5,12 +5,12 @@ var User = require('../../sc/User');
 
 
 router.get('/', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role)){
+    if(User.atLeastAdmin(req.user.role)){
         Log.findAll(function(err, logs){
             res.json(logs);
         });
     }else
-        res.status(403);
+        res.sendStatus(403);
 });
 
 

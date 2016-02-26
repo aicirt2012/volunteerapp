@@ -102,7 +102,7 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
 
     Event.isRegistered(eventId, helperId, function(err, isRegistered){
         if(!isRegistered) {
-            Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
+            Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
             Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
                 if (err)
                     res.status(500);
@@ -126,7 +126,7 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     console.log('event '+eventId+' helper '+helperId);
-    Log.info(req.user, Log.actions.EVENT_UPDATE, {eventId: eventId, helperId: helperId});
+    Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
     Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function(err){
         if(err)
             res.status(500);

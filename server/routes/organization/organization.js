@@ -4,16 +4,15 @@ var Organization = require('../../sc/Organisation');
 var User = require('../../sc/User');
 
 
-
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     Organization.findAll(function(err, organizations){
         res.json(organizations);
     });
 });
 
-router.get('/:id', function(req, res, next) {
-    var oId = req.params.id;
+router.get('/:id', function(req, res) {
     if(User.atLeastTeam(req.user.role )){
+        var oId = req.params.id;
         Organization.findById(oId, function(err, organization){
             if(err)
                 res.sendStatus(500);

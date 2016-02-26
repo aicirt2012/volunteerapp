@@ -9,7 +9,7 @@ var jwt = require('jsonwebtoken');
 
 router.post('/', function(req, res, next) {
     if(!req.body || !req.body.email || !req.body.pw)
-        return res.status(403).send();
+        return res.sendStatus(403);
 
     var email = req.body.email;
     var pw = req.body.pw;
@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
         if(err) {
             console.log(err);
             Log.info(null, Log.actions.LOGIN_FAILED, email);
-            return res.status(403).send();
+            return res.sendStatus(403);
         }else {
             Log.info(user, Log.actions.LOGIN);
             return res.json({

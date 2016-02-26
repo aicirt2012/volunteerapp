@@ -50,17 +50,7 @@ Log.err = function(user, action, description){
 }
 
 Log.log = function(user, level, action, description){
-    console.log(JSON.stringify({
-        username: user? user.name : 'N.A.',
-        useremail: user? user.email : 'N.A.',
-        userid: user? user.id : 'N.A.',
-        userrole:  user? user.role : 'N.A.',
-        date: new Date().toISOString(),
-        level: level,
-        action: action,
-        description: description? description : 'N.A'
-    }));
-    Log.save({
+    var data = {
         username: user? user.name : 'N.A.',
         useremail: user? user.email : 'N.A.',
         userid: user? user.id : 'N.A.',
@@ -69,7 +59,9 @@ Log.log = function(user, level, action, description){
         level: level,
         action: action,
         description: description
-    }, function(){});
+    };
+    console.log(JSON.stringify(data));
+    Log.save(data, function(){});
 }
 
 module.exports = Log;

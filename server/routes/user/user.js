@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
                     tel: req.body.tel,
                     mobil: req.body.mobil,
                     email: req.body.email,
-                    pw: "userpw",
+                    pw: User.hashPw(req.body.pw),
                     notes: req.body.notes,
                     role: req.body.role,
                     availability: req.body.availability

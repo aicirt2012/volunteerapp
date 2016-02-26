@@ -11,27 +11,27 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
             me.user = data;
             me.user.roleLabel = User.roleLabel();
             me.menu = [];
-            if(User.isOrganizer() || User.isTeam() || User.isHelper())
+            if(User.isAdmin() || User.isOrganizer() || User.isTeam() || User.isHelper())
                 me.menu.push({
                     link : 'eventcalendar',
                     title: 'Eventkalender',
                     icon: 'event'
                 });
 
-            if(User.isOrganizer() || User.isTeam())
+            if(User.isAdmin() || User.isOrganizer() || User.isTeam())
                 me.menu.push({
                     link : 'user',
                     title: 'Personalverwaltung',
                     icon: 'group'
                 });
 
-            if(User.isOrganizer() || User.isTeam())
+            if(User.isAdmin() || User.isOrganizer() || User.isTeam())
                 me.menu.push({
                     link : 'organization',
                     title: 'Einrichtungsverwaltung',
                     icon: 'home'
                 });
-            if(User.isAdmin()||User.isOrganizer())
+            if(User.isAdmin() || User.isOrganizer())
                 me.menu.push({
                     link : 'log',
                     title: 'Systemlog',

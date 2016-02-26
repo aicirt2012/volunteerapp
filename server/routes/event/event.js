@@ -41,7 +41,6 @@ router.post('/', function(req, res) {
             var end = new Date(req.body.enddate);
 
             User.findAvailableUsers(start, end, function(err, users){
-                console.log('users found '+users.length);
                 for(var i=0; i<users.length; i++){
                     console.log('send email to'+users[i].email);
                     /*

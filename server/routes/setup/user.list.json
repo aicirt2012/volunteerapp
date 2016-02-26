@@ -306,6 +306,28 @@
     },
     "events":[],
     "test":{"street": "Baader-Str. 10" ,"city": "Munich"}
+  },
+  {
+    "id": "sdhddfu3d09",
+    "name": "John Smith",
+    "gender": "MALE",
+    "email": "admin@tum.de",
+    "pw": "123",
+    "tel": "012378495",
+    "mobil": "0723843434",
+    "notes": "Organisatorin",
+    "role": "ADMIN",
+    "availability": {
+      "mo": {"morning": true, "afternoon": false, "evening": false},
+      "tu": {"morning": true, "afternoon": false, "evening": false},
+      "we": {"morning": true, "afternoon": false, "evening": false},
+      "th": {"morning": true, "afternoon": false, "evening": false},
+      "fr": {"morning": true, "afternoon": false, "evening": false},
+      "sa": {"morning": true, "afternoon": false, "evening": false},
+      "su": {"morning": true, "afternoon": false, "evening": true}
+    },
+    "events":[],
+    "test":{"street": "Accrisstraße. 10" ,"city": "Munich"}
   }
 
 ]

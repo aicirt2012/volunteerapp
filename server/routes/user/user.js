@@ -6,72 +6,83 @@ var User = require('../../sc/User');
 
 router.get('/me', function(req, res) {
     if(!req.user)
-        res.status(403).send();
+        res.sendStatus(403);
     else
         res.json(User.toMe(req.user));
 });
 
 
 router.post('/', function(req, res) {
-    User.exists(req.body.email, '', function(err){
-        if(err) {
-            console.log(err);
-        }else{
-            User.save({
-                gender: req.body.gender,
-                name: req.body.name,
-                tel: req.body.tel,
-                mobil: req.body.mobil,
-                email: req.body.email,
-                pw: "userpw",
-                notes: req.body.notes,
-                role: req.body.role,
-                availability: req.body.availability
-            }, function () {
-                res.send();
-            });
-        }
-    });
+    if(User.atLeastOrganizer(req.user.role )){
+        User.exists(req.body.email, '', function(err){
+            if(err) {
+                console.log(err);
+            }else{
+                User.save({
+                    gender: req.body.gender,
+                    name: req.body.name,
+                    tel: req.body.tel,
+                    mobil: req.body.mobil,
+                    email: req.body.email,
+                    pw: "userpw",
+                    notes: req.body.notes,
+                    role: req.body.role,
+                    availability: req.body.availability
+                }, function () {
+                    res.send();
+                });
+            }
+        });
+    }else
+        res.sendStatus(403);
 });
 
 router.get('/', function(req, res) {
-    User.findAll(function(err, users){
-        res.json(users);
-    });
+    if(User.atLeastTeam(req.user.role )){
+        User.findAll(function(err, users){
+            res.json(users);
+        });
+    }else
+        res.sendStatus(403);
 });
 
 router.get('/:id', function(req, res) {
-    var uId = req.params.id;
-    User.findById(uId, function(err, user){
-        if(err)
-            res.status(500).send();
-        else
-            res.json(user);
-    });
+    if(User.atLeastTeam(req.user.role )){
+        var uId = req.params.id;
+        User.findById(uId, function(err, user){
+            if(err)
+                res.sendStatus(500);
+            else
+                res.json(user);
+        });
+    }else
+        res.sendStatus(403);
 });
 
 router.put('/:id', function(req, res) {
-    console.log('update user');
-    var uId = req.params.id;
-    User.exists(req.body.email, uId, function(err){
-        if(err) {
-            console.log(err);
-        }else{
-            console.log('here');
-            User.update( uId, {
-                gender: req.body.gender,
-                name: req.body.name,
-                tel: req.body.tel,
-                mobil: req.body.mobil,
-                email: req.body.email,
-                notes: req.body.notes,
-                role: req.body.role,
-                availability: req.body.availability
-            }, function(){
-                res.send();
-            });
-        }
-    });
+    if(User.atLeastOrganizer(req.user.role )){
+        var uId = req.params.id;
+        User.exists(req.body.email, uId, function(err){
+            if(err) {
+                console.log(err);
+            }else{
+                console.log('here');
+                User.update( uId, {
+                    gender: req.body.gender,
+                    name: req.body.name,
+                    tel: req.body.tel,
+                    mobil: req.body.mobil,
+                    email: req.body.email,
+                    notes: req.body.notes,
+                    role: req.body.role,
+                    availability: req.body.availability
+                }, function(){
+                    res.send();
+                });
+            }
+        });
+    }else
+        res.sendStatus(403);
 });
 
 

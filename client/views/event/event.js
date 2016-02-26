@@ -46,6 +46,12 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.editMode = false;
     }
 
+    me.cancelEvent = function(){
+        Event.del(me.event.id, function(){
+            console.log('deleted');
+        });
+    }
+
     me.breadcrumb = function(){
         return 'Eventverwaltung > Event';
     };

@@ -23,7 +23,7 @@ router.put('/', function(req, res) {
         res.sendStatus(403);
 });
 
-router.del('/:id', function(req, res) {
+router.delete('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var eId = req.params.id;
         Event.delete(eId, function(err){

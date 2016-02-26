@@ -21,6 +21,10 @@ app.service('Event', function($resource) {
         return Event.get({id: eventId}, {}, cb);
     }
 
+    function del(eventId, cb){
+        return Event.delete({id: eventId}, {}, cb);
+    }
+
     function list(){
         return Event.query();
     }
@@ -32,6 +36,7 @@ app.service('Event', function($resource) {
     return {
         save: save,
         get: get,
+        del: del,
         list: list,
         register: register,
         unregister: unregister,

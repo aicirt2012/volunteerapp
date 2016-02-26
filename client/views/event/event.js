@@ -3,6 +3,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     var me = $scope;
     me.editMode = false;
+    me.isAdmin = User.isAdmin();
     me.isOrganizer = User.isOrganizer();
     me.isTeam = User.isTeam();
     me.isHelper = User.isHelper();

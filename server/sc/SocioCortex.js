@@ -187,10 +187,11 @@ function deleteAttributeValue(entityId, attributeName, value, cb){
     console.log('delAttibuteValue: '+entityId, attributeName, value);
     findAttributeIdByEntityIdAndAttibuteName(entityId, attributeName, function(err, attrId){
         if(!err) {
-            console.log(attrId);
-            http.del('/attributes/' + attrId + '/values', value, function (err, res, body) {
+            //console.log(attrId);
+            var values = [value];
+            http.del('/attributes/' + attrId + '/values', values, function (err, res, body) {
                 if (err || res.statusCode != 200) {
-                    console.error('Error during deleting Attribute '+attrId+' value "' + JSON.stringify(value)  + '"!');
+                    console.error('Error during deleting Attribute '+attrId+' values "' + JSON.stringify(values)  + '"!');
                     console.error(body);
                     cb(err);
                 } else

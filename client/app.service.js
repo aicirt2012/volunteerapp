@@ -86,11 +86,13 @@ app.service('MyData', function($resource) {
 
     var Events = $resource('/api/mydata/events', null, {});
 
+    var Photo = $resource('/api/mydata/photo', null, {});
 
     return {
         personal: Personal,
         availability: Availability,
-        events: Events
+        events: Events,
+        photo: Photo
     };
 });
 

@@ -1,4 +1,4 @@
-app.controller('PhotoCtrl', ['$scope', '$mdSidenav','Upload', '$timeout', function($scope, $mdSidenav, Upload, $timeout) {
+app.controller('PhotoCtrl', ['$scope', '$mdSidenav','Upload', '$timeout', 'MyData', function($scope, $mdSidenav, Upload, $timeout, MyData) {
 
 
     var me = $scope;
@@ -7,8 +7,13 @@ app.controller('PhotoCtrl', ['$scope', '$mdSidenav','Upload', '$timeout', functi
     $mdSidenav('left').open();
 
     $scope.upload = function (dataUrl) {
+        console.log(dataUrl);
+        MyData.photo.save({dd:dataUrl}, function(d){
+            console.log('finsh');
+        });
+        /*
         Upload.upload({
-            url: 'http://localhost:3000/api',
+            url: 'http://localhost:3000/api/mydata/photo',
             data: {
                 file: Upload.dataUrltoBlob(dataUrl)
             },
@@ -21,7 +26,7 @@ app.controller('PhotoCtrl', ['$scope', '$mdSidenav','Upload', '$timeout', functi
                 + ': ' + response.data;
         }, function (evt) {
             $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-        });
+        });*/
     }
 
 }]);

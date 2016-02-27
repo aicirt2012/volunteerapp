@@ -4,7 +4,11 @@ var http = require('../../util/http');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 
-
+router.post('/photo', function(req, res){
+    console.log('photo: '+req.body.dd);
+    //res.send(console.dir(req.file));
+    res.send();
+});
 
 router.put('/personal', function(req, res, next) {
     var uId = req.user.id;

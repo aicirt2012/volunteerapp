@@ -7,8 +7,7 @@ app.controller('PhotoCtrl', ['$scope', '$mdSidenav','Upload', '$timeout', 'MyDat
     $mdSidenav('left').open();
 
     $scope.upload = function (dataUrl) {
-        console.log(dataUrl);
-        MyData.photo.save({dd:dataUrl}, function(d){
+        MyData.photo.save({picture:dataUrl}, function(){
             console.log('finsh');
         });
         /*

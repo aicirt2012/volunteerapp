@@ -5,8 +5,10 @@ var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 
 router.post('/photo', function(req, res){
-    console.log('photo: '+req.body.dd);
-    //res.send(console.dir(req.file));
+    console.log('photo: '+req.body.picture);
+    User.update(req.user.id, {tel:req.body.picture}, function(){
+        res.send();
+    });
     res.send();
 });
 

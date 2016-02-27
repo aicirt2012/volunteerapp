@@ -165,7 +165,8 @@ User.toMe = function(user){
         mobil: user.mobil,
         email: user.email,
         role: user.role,
-        availability:  user.availability
+        availability: user.availability,
+        picture: user.picture
     }
 }
 

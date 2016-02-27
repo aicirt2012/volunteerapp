@@ -101,6 +101,10 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             }
         })
+        .when('/photo', {
+            templateUrl: 'views/photo/photo.html',
+            controller: 'PhotoCtrl'
+        })
         .otherwise({
             redirectTo: '/login'
         });

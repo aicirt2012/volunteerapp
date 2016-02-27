@@ -2,7 +2,9 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
 
 
     var me = $scope;
+    me.editMode = false;
     me.user = user;
+    me.user.genderLabel = User.userGenderLabel(user);
     me.genders = User.genders;
 
     me.$on('flow::fileAdded', function (event, $flow, flowFile) {
@@ -13,8 +15,15 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         return 'Meine Daten';
     }
 
-    me.onCancel = function(){
-        window.location.href = '#/user';
+    me.abortEdit = function(){
+        me.user =  me.userCopy;
+        me.editMode = false;
+        //window.location.href = '#/user';
+    }
+
+    me.openEdit = function(){
+        me.userCopy = JSON.parse(JSON.stringify(me.user));
+        me.editMode = true;
     }
 
     me.submitPersonalData = function(){

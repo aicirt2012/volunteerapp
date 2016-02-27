@@ -25,7 +25,45 @@
                          md-swipe-left="next()"
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
-                        <form name="userForm">
+                        <div ng-if="!editMode">
+                            <md-list>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">person</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{user.genderLabel}} {{ user.name }} </h3>
+                                        <p> Name </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">mail</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.email }} </h3>
+                                        <p> E-Mail </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">phone</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.tel }} </h3>
+                                        <p> Tel </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <md-icon class="material-icons">phone_iphone</md-icon>
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <h3> {{ user.mobil }}</h3>
+                                        <p> Mobil </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                        <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                        <div ng-if="editMode">
+                            <form name="userForm">
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Anrede</label>
@@ -58,10 +96,11 @@
                             </div>
                             <br/><br/>
                             <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
+                                <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
                                 <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
                             </section>
                         </form>
+                        </div>
                     </div>
                     <div role="tabpanel"
                          id="tab2-content"
@@ -117,7 +156,7 @@
                             </table>
                             <br/><br/>
                             <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
+                                <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
                                 <md-button class="md-raised md-primary" ng-click="submitAvailability()">Speichern</md-button>
                             </section>
                         </form>

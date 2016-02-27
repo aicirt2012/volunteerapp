@@ -17,7 +17,45 @@
                 </div>
             </md-toolbar>
             <md-card-content>
-                <form name="userForm">
+                <div ng-if="!editMode">
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <md-icon class="material-icons">person</md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <h3> {{ organization.name }} </h3>
+                                <p> Name </p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon class="material-icons">place</md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <h3> {{organization.street}} <br/> {{ organization.zip }} {{organization.city}}  </h3>
+                                <p> Addresse </p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon class="material-icons">mail</md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <h3> {{ organization.email }}</h3>
+                                <p> Email </p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <md-icon class="material-icons">phone</md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <h3> {{ organization.tel }} </h3>
+                                <p> Tel </p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div ng-if="editMode">
+                    <form name="userForm">
                     <div layout layout-sm="column">
                         <md-input-container flex>
                             <label>Name</label>
@@ -54,10 +92,11 @@
                     </div>
                     <br/><br/>
                     <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button class="md-raised">Abbrechen</md-button>&nbsp;
-                        <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
+                        <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitEdit()">Speichern</md-button>
                     </section>
                 </form>
+                </div>
             </md-card-content>
         </md-card>
 

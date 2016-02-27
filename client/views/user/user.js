@@ -3,8 +3,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
 
     var me = $scope;
     me.user = user;
-    me.genders = User.genders;
     me.user.genderLabel = User.userGenderLabel(user);
+    me.genders = User.genders;
     me.roles = User.roles;
     me.selectedTabNr = 1;
     me.editMode = false;

@@ -5,7 +5,6 @@ var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 
 router.post('/photo', function(req, res){
-    console.log('photo: '+req.body.picture);
     User.update(req.user.id, {picture:req.body.picture}, function(){
         res.send();
     });

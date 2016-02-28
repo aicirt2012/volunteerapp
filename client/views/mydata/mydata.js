@@ -39,9 +39,9 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     }
 
     $scope.submitPhotoUpload = function (dataUrl) {
-        console.log('sumbit');
+        me.user.picture = dataUrl;
         MyData.photo.save({picture:dataUrl}, function(){
-            console.log('finsh');
+            me.editMode = false;
         });
     }
 

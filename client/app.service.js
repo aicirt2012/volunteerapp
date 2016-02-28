@@ -173,10 +173,6 @@ app.service('User', function($resource, $base64) {
         return userCache != null;
     }
 
-    function getPictureURL(userId){
-        return '/api/user/'+userId+'/picture?jwt='+localStorage.getItem('JWT');
-    }
-
     function isTeam(){
         if(!isUserCached())
             return null;
@@ -258,7 +254,6 @@ app.service('User', function($resource, $base64) {
         save: User.save,
         update: update,
         getUserId: getUserId,
-        getPictureURL: getPictureURL,
         isLoggedIn: isLoggedIn,
         login: login,
         logout: logout,

@@ -14,9 +14,7 @@
     <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
-            <user-avatar ng-if="!user.picture"></user-avatar>
-            <img src="{{profilePictureURL}}" height="64" width="64" style="border-radius: 32px;"/>
-            <!--<img ng-if="user.picture" data-ng-src="{{user.picture}}" height="64" width="64" style="border-radius: 32px;"/>-->
+            <user-picture picture="{{user.picture}}"></user-picture>
             <span></span>
             <div>{{user.name}} ({{user.roleLabel}})</div>
             <div>{{user.email}}</div>
@@ -78,6 +76,7 @@
 <script src="/app.service.js"></script>
 <script src="/shared/toolbar/toolbar.directive.js"></script>
 <script src="/shared/useradvatar/useradvatar.directive.js"></script>
+<script src="/shared/userpicture/userpicture.directive.js"></script>
 <script src="/shared/organizationadvatar/organizationadvatar.directive.js"></script>
 
 

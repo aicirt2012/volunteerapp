@@ -91,6 +91,7 @@ router.put('/resetpw', function(req, res) {
     });
 });
 
+/* not needed anymore
 router.get('/:id/picture', function(req, res) {
     var uId = req.params.id;
 
@@ -102,6 +103,6 @@ router.get('/:id/picture', function(req, res) {
     res.header("Content-Type", "image/png");
     res.end(binaryData);
 });
-
+*/
 
 module.exports = router;

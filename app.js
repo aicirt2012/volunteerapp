@@ -39,8 +39,9 @@ app.use('/api',function (req, res, next) {
     var token = null;
     if (auth)
         token = auth.split(" ")[1];
-    else if(req.method == 'GET' && req.query.jwt != null)
-        token = req.query.jwt;
+
+    // else if(req.method == 'GET' && req.query.jwt != null)
+    //     token = req.query.jwt;
 
     if (token) {
         jwt.verify(token, config.jwt.secret, function (err, userid) {

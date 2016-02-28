@@ -10,8 +10,6 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
         User.me().then(function(data){
             me.user = data;
             me.user.roleLabel = User.roleLabel();
-            me.profilePictureURL = User.getPictureURL(me.user.id);
-            console.log(JSON.stringify(me.user));
             me.menu = [];
             if(User.isAdmin() || User.isOrganizer() || User.isTeam() || User.isHelper())
                 me.menu.push({

@@ -145,7 +145,7 @@
                         <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):</md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers" ng-click="helperUnregister(helper.id)">
                             <div class="md-tile-left inset" hide-sm>
-                                <user-picture picture="{{helper.picture}}"></user-picture>
+                                <user-picture picture="{{helper.picture}}" size="64"></user-picture>
                             </div>
                             <div class="md-list-item-text">
                                 <h3>{{helper.name}}</h3>

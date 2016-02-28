@@ -4,6 +4,7 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     var me = $scope;
     me.user = user;
     me.user.genderLabel = User.userGenderLabel(user);
+    me.user.roleLabel =
     me.genders = User.genders;
     me.roles = User.roles;
     me.selectedTabNr = 1;

@@ -23,7 +23,7 @@
                 <md-list>
                     <md-list-item class="md-3-line" ng-repeat="user in userlist | filter: isSelectedRole" ng-click="selectUser(user.id)">
                         <div class="md-tile-left inset" hide-sm>
-                            <user-picture picture="{{user.picture}}"></user-picture>
+                            <user-picture picture="{{user.picture}}" size="64"></user-picture>
                         </div>
                         <div class="md-list-item-text">
                             <h3>{{user.name}}</h3>

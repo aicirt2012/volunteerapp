@@ -14,8 +14,9 @@
     <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
-            <!--<user-avatar></user-avatar>-->
-            <img data-ng-src="{{user.picture}}" height="64" width="64" style="border-radius: 32px;"/>
+            <user-avatar ng-if="!user.picture"></user-avatar>
+            <img src="{{profilePictureURL}}" height="64" width="64" style="border-radius: 32px;"/>
+            <!--<img ng-if="user.picture" data-ng-src="{{user.picture}}" height="64" width="64" style="border-radius: 32px;"/>-->
             <span></span>
             <div>{{user.name}} ({{user.roleLabel}})</div>
             <div>{{user.email}}</div>

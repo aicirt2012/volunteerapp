@@ -17,6 +17,7 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     ];
 
     me.futureevents = [];
+    me.pastevents = [];
 
     for(var i=0; i< userevents.length; i++){
         var e = userevents[i];
@@ -24,6 +25,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         var eDate = new Date(e.startdate).getTime();
         if(now< eDate)
             me.futureevents.push(e);
+        else
+            me.pastevents.push(e);
     }
 
     me.openEdit = function(){

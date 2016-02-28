@@ -170,6 +170,10 @@
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
 
+                        <div ng-if="!editMode">
+                            <user-picture picture="{{user.picture}}" size="200"></user-picture>
+                            <md-button ng-click="openEdit()" class="md-raised md-primary">Ändern</md-button>
+                        </div>
                         <div ng-if="editMode">
                             <style>
                                 .cropArea {
@@ -179,7 +183,6 @@
                                     height:400px;
                                 }
                             </style>
-
                             <div layout="row">
                                 <div>
                                     <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
@@ -194,10 +197,6 @@
                                     <img ng-src="{{croppedDataUrl}}" style="border-radius: 200px;"/>
                                 </div>
                             </div>
-                        </div>
-                        <div ng-if="!editMode">
-                            <user-picture picture="{{user.picture}}" size="200"></user-picture>
-                            <md-button ng-click="openEdit()" class="md-raised md-primary">Ändern</md-button>
                         </div>
 
                     </div>

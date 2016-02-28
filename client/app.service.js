@@ -103,6 +103,9 @@ app.service('User', function($resource, $base64) {
     var User = $resource('/api/user/:id', null, {
         'update': {method: 'PUT'}
     });
+    var Picture = $resource('/api/user/:id/picture', null, {
+        'update': {method: 'PUT'}
+    });
     var roles = [
         {id: 'HELPER', label: 'Helfer'},
         {id: 'TEAM', label: 'Team'},
@@ -125,6 +128,10 @@ app.service('User', function($resource, $base64) {
 
     function update(userId, data, cb){
         return User.update({id:userId}, data, cb);
+    }
+
+    function updatePicture(userId, base64Pic, cb){
+        return Picture.update({id:userId}, {picture: base64Pic}, cb);
     }
 
     function isLoggedIn(){
@@ -253,6 +260,7 @@ app.service('User', function($resource, $base64) {
         meCache: meCache,
         save: User.save,
         update: update,
+        updatePicture: updatePicture,
         getUserId: getUserId,
         isLoggedIn: isLoggedIn,
         login: login,

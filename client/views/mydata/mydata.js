@@ -38,7 +38,7 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         MyData.availability.update(me.user.availability);
     }
 
-    $scope.submitPhotoUpload = function (dataUrl) {
+    me.submitPhotoUpload = function (dataUrl) {
         me.user.picture = dataUrl;
         MyData.photo.save({picture:dataUrl}, function(){
             me.editMode = false;

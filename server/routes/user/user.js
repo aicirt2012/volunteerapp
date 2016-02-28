@@ -72,12 +72,24 @@ router.put('/:id', function(req, res) {
                     email: req.body.email,
                     notes: req.body.notes,
                     role: req.body.role,
-                    availability: req.body.availability
+                    availability: req.body.availability,
                 }, function(){
                     res.send();
                 });
             }
         });
+    }else
+        res.sendStatus(403);
+});
+
+router.put('/:id/picture', function(req, res) {
+    if(User.atLeastOrganizer(req.user.role )){
+        var uId = req.params.id;
+        User.update( uId, {
+            picture: req.body.picture
+        }, function(){
+            res.send();
+        });        
     }else
         res.sendStatus(403);
 });

@@ -26,8 +26,12 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
             me.futureevents.push(e);
     }
 
-    me.edit = function(){
-        me.editMode = !me.editMode;
+    me.openEdit = function(){
+        me.editMode = true;
+    }
+
+    me.abortEdit = function(){
+        me.editMode = false;
     }
 
     me.selectEvent = function(eventId){
@@ -38,7 +42,14 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         User.update(me.user.id, me.user, function(){
             console.log('user updated');
         });
-        me.edit();
+        me.editMode = false;
+    }
+
+    me.submitPhotoUpload = function (dataUrl) {
+        me.user.picture = dataUrl;
+        User.updatePicture(me.user.id, me.user.picture, function(){
+            me.editMode = false;
+        });
     }
 
     $mdSidenav('left').open();

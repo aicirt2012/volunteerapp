@@ -4,7 +4,7 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     var me = $scope;
     me.user = user;
     me.user.genderLabel = User.userGenderLabel(user);
-    me.user.roleLabel =
+    me.user.roleLabel = User.userRoleLabel(user);
     me.genders = User.genders;
     me.roles = User.roles;
     me.selectedTabNr = 1;
@@ -44,6 +44,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     me.breadcrumb = function(){
         return 'Personalverwaltung > '+ User.roleLabel() + ' > ' + me.user.name;
     }
+
+    console.log(me.breadcrumb());
 
     $mdSidenav('left').open();
 

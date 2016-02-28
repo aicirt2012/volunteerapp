@@ -1,7 +1,8 @@
 app.directive('toolbar', function() {
     return {
         scope: {
-            title: '@'
+            title: '@',
+            picture: '@'
         },
         replace: true,
         templateUrl: '/shared/toolbar/toolbar.html'

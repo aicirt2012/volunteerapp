@@ -170,31 +170,33 @@
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
 
-                        <style>
-                            .cropArea {
-                                background: #E4E4E4;
-                                overflow: hidden;
-                                width:400px;
-                                height:400px;
-                            }
-                            form .progress {
-                                line-height: 15px;
-                            }
+                        <div ng-if="editMode">
+                            <style>
+                                .cropArea {
+                                    background: #E4E4E4;
+                                    overflow: hidden;
+                                    width:400px;
+                                    height:400px;
+                                }
+                            </style>
 
-                        </style>
-
-                        <div layout="row">
-                            <div>
-                                <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-                                    <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+                            <div layout="row">
+                                <div>
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                        <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+                                    </div>
+                                    <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised md-primary">Foto Auswählen</md-button>
+                                    <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary">Hochladen</md-button>
                                 </div>
-                                <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised md-primary">Foto Auswählen</md-button>
-                                <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary">Hochladen</md-button>
+                                <div>
+                                    vorschau:
+                                    <img ng-src="{{croppedDataUrl}}" style="border-radius: 200px;"/>
+                                </div>
                             </div>
-                            <div>
-                                vorschau:
-                                <img ng-src="{{croppedDataUrl}}" style="border-radius: 200px;"/>
-                            </div>
+                        </div>
+                        <div ng-if="!editMode">
+                            <user-picture picture="{{user.picture}}"></user-picture>
+                            <md-button ng-click="openEdit()" class="md-raised md-primary">Ändern</md-button>
                         </div>
 
                     </div>

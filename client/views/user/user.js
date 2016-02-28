@@ -41,12 +41,6 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         me.edit();
     }
 
-    me.breadcrumb = function(){
-        return 'Personalverwaltung > '+ User.roleLabel() + ' > ' + me.user.name;
-    }
-
-    console.log(me.breadcrumb());
-
     $mdSidenav('left').open();
 
 }]);

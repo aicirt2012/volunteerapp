@@ -174,44 +174,25 @@
                             .cropArea {
                                 background: #E4E4E4;
                                 overflow: hidden;
-                                width:500px;
-                                height:350px;
+                                width:400px;
+                                height:400px;
                             }
                             form .progress {
                                 line-height: 15px;
                             }
-                            .progress {
-                                display: inline-block;
-                                width: 100px;
-                                border: 3px groove #CCC;
-                            }
-                            .progress div {
-                                font-size: smaller;
-                                background: orange;
-                                width: 0;
-                            }
+
                         </style>
                         <form name="myForm">
-                            <div>Crop Image and Upload</div>
 
-                            <button ngf-select ng-model="picFile" accept="image/*">
-                                Select Picture</button>
-                            <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
-                                 class="cropArea">
-                                <img-crop image="picFile  | ngfDataUrl"
-                                          result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
-                                </img-crop>
+                            <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised md-primary">Foto Auswählen</md-button>
+                            <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary">Hochladen</md-button>
+                            <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
                             </div>
                             <div>
-                                <img ng-src="{{croppedDataUrl}}" height="100"/>
+                                <img ng-src="{{croppedDataUrl}}"/>
                             </div>
-                            <button ng-click="submitPhotoUpload(croppedDataUrl)">Submit</button>
 
-                            <span class="progress" ng-show="progress >= 0">
-                              <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-                            </span>
-                            <span ng-show="result">Upload Successful</span>
-                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
                         </form>
                     </div>
                 </md-card-content>

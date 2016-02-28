@@ -53,7 +53,8 @@ Event.findWithHelperById = function(eventId, cb){
                             id: user.id,
                             name: user.name,
                             email: user.email,
-                            tel: user.tel
+                            tel: user.tel,
+                            picture: user.picture
                         });
                         cb();
                     });

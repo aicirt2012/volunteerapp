@@ -1,4 +1,4 @@
-app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', function($scope, $mdSidenav, user, User, MyData) {
+app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 'Upload', '$timeout', function($scope, $mdSidenav, user, User, MyData, Upload, $timeout) {
 
 
     var me = $scope;
@@ -7,9 +7,6 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     me.user.genderLabel = User.userGenderLabel(user);
     me.genders = User.genders;
 
-    me.$on('flow::fileAdded', function (event, $flow, flowFile) {
-        console.log(event, $flow, flowFile);
-    });
 
     me.breadcrumb = function(){
         return 'Meine Daten';
@@ -37,18 +34,32 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         console.log(JSON.stringify($flow.files[0]));
     }
 
-    me.photoUpload = function(flowFile, flowChunk, isTest){
-        console.log("file:", flowFile.file);
-        console.log("name:" + JSON.stringify(flowFile.name));
-        console.log("relativePath:" + JSON.stringify(flowFile.relativePath));
-        console.log("size:" + JSON.stringify(flowFile.size));
-        console.log("uniqueIdentifier:" + JSON.stringify(flowFile.uniqueIdentifier));
-        //console.log("flowChunk:" + JSON.stringify(flowChunk));
-        console.log("isTest:" + isTest);
+    me.submitAvailability = function(){
+
+        MyData.availability.update(me.user.availability);
     }
 
-    me.submitAvailability = function(){
-        MyData.availability.update(me.user.availability);
+    $scope.submitPhotoUpload = function (dataUrl) {
+        console.log('sumbit');
+        MyData.photo.save({picture:dataUrl}, function(){
+            console.log('finsh');
+        });
+        /*
+         Upload.upload({
+         url: 'http://localhost:3000/api/mydata/photo',
+         data: {
+         file: Upload.dataUrltoBlob(dataUrl)
+         },
+         }).then(function (response) {
+         $timeout(function () {
+         $scope.result = response.data;
+         });
+         }, function (response) {
+         if (response.status > 0) $scope.errorMsg = response.status
+         + ': ' + response.data;
+         }, function (evt) {
+         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+         });*/
     }
 
     $mdSidenav('left').open();

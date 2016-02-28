@@ -9,7 +9,6 @@ router.post('/photo', function(req, res){
     User.update(req.user.id, {picture:req.body.picture}, function(){
         res.send();
     });
-    res.send();
 });
 
 router.put('/personal', function(req, res, next) {

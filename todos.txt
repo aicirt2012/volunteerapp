@@ -12,4 +12,6 @@ https://de.wikipedia.org/wiki/ISO_8601
      der filter der bereits angemelden helfer wird nur initial ausgführt,
      post nur abschicken wenn helfer ausgewählt ist sonst nicht!
 
+-photo upload formating
+-pw reset
 

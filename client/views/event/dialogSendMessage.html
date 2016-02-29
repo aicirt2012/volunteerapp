@@ -12,6 +12,7 @@
         <md-dialog-content style="max-width:500px;max-height:810px; ">
             <md-content class="md-padding">
                 <p>Nachricht an alle angemeldeten Helfer!</p>
+                <p><b>Betreff: {{event.title}}</b></p>
                 <md-input-container class="md-block">
                     <label>Nachricht:</label>
                     <textarea ng-model="message" md-maxlength="1000" rows="15" md-select-on-focus></textarea>
@@ -24,7 +25,7 @@
                 Abbrechen
             </md-button>
             <md-button class="md-raised md-primary" ng-click="sendMessage(message)" >
-                Anmelden
+                Senden
             </md-button>
         </md-dialog-actions>
     </form>

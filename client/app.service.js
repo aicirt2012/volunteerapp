@@ -4,8 +4,8 @@ app.service('Event', function($resource) {
         'update': { method:'PUT' }
     });
     var EventHelper = $resource('/api/event/:eventId/helpers/:helperId');
-
     var UserEvents = $resource('/api/event/user/:id');
+    var EventMessage = $resource('/api/event/:id/message');
 
     function getUserEvents(userId){
         return UserEvents.query({id: userId});
@@ -39,6 +39,10 @@ app.service('Event', function($resource) {
         return Event.save(data, cb)
     }
 
+    function sendMessage(eventId, msg){
+        return EventMessage.save({id: eventId}, {message: msg});
+    }
+
     return {
         save: save,
         get: get,
@@ -47,7 +51,8 @@ app.service('Event', function($resource) {
         list: list,
         register: register,
         unregister: unregister,
-        getUserEvents: getUserEvents
+        getUserEvents: getUserEvents,
+        sendMessage: sendMessage
     }
 });
 

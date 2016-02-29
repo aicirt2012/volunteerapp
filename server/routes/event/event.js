@@ -41,6 +41,20 @@ router.put('/:id', function(req, res) {
         res.sendStatus(403);
 });
 
+router.post('/:id/messsage', function(req, res) {
+    if(User.atLeastOrganizer(req.user.role )){
+       // Log.info(req.user, Log.actions.EVENT_UPDATE);
+        var eId = req.params.id;
+        var data = {
+            title: req.body.title,
+            place: req.body.place,
+        };
+
+
+    }else
+        res.sendStatus(403);
+});
+
 router.delete('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var eId = req.params.id;
@@ -173,14 +187,32 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     }else
         res.sendStatus(403);
 });
-
+/*
 router.post('/:eventId/message', function(req, res) {
     if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
         var eventId = req.params.eventId;
         //TODO implement send message
+
+
+        /*
+         mailer.send({
+         to: 'felix.michel@tum.de',
+         subject: 'Neues Event',
+         html: '<h3>Hallo Felix!</h3>' +
+         '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+         '<b>' + req.body.title + '</b>' +
+         '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
+         'Ort: ' + req.body.place + '<br>'+
+         'Beschreibung: ' + req.body.description + '<br>'+
+         'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
+         '<p>Viele Grüße, <br>'+
+         'dein VolunterApp Team</p>'
+         });
+
     }else
         res.sendStatus(403);
 });
+*/
 
 router.get('/user/:id/', function(req, res){
     var uId = req.params.id;

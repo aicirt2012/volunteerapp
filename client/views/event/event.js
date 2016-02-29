@@ -24,8 +24,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.filteredUsers = function(){
         var helperIds = [];
-        for(var i= 0; i<event.helpers.length; i++)
-            helperIds.push(event.helpers[i].id);
+        for(var i= 0; i<me.event.helpers.length; i++)
+            helperIds.push(me.event.helpers[i].id);
         var fu = [];
         for(var i= 0; i<me.userlist.length; i++)
             if(helperIds.indexOf(me.userlist[i].id) == -1)

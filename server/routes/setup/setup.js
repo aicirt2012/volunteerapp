@@ -46,7 +46,8 @@ router.post('/', function(req, res, next) {
                 pw: User.hashPw(u.pw),
                 notes: u.notes,
                 role: u.role,
-                availability: u.availability
+                availability: u.availability,
+                picture: u.picture
             }, function(){
                 cb();
             });

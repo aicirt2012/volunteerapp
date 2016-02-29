@@ -341,7 +341,7 @@
       "su": {"morning": true, "afternoon": false, "evening": true}
     },
     "events":[],
-    "picture": "",
+    "picture": "nopicture",
     "test":{"street": "Accrisstraße. 10" ,"city": "Munich"}
   }
 

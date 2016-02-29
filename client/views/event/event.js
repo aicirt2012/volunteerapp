@@ -159,10 +159,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         });
     };
 
-    me.helperUnregister = function(helperId){
+    me.helperUnregister = function(helper){
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
+                $scope.helper = helper
                 $scope.hide = function() {
                     $mdDialog.hide();
                 };
@@ -180,7 +181,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 event: me.event
             }
         }).then(function() {
-            Event.unregister(me.event.id, helperId, function(event){
+            Event.unregister(me.event.id, helper.id, function(event){
                 me.init(event);
             });
         });

@@ -5,3 +5,25 @@ npm install -g bower
 C:\Users\michelf\AppData\Roaming\npm
 
 3) Execute bower in the client directory
+
+
+
+
+Server Setup:
+1) pull
+2) npm install
+3) bower install
+4) node bin
+
+cd C:\dev\repo\
+npm install
+
+cd C:\dev\repo\client
+bower install
+
+C:\dev\repo\
+modify secret in conf
+
+cd C:\dev\repo\bin
+node www
+

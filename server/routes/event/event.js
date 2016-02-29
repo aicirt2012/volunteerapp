@@ -41,16 +41,27 @@ router.put('/:id', function(req, res) {
         res.sendStatus(403);
 });
 
-router.post('/:id/messsage', function(req, res) {
+router.post('/:id/message', function(req, res) {
+    var eId = req.params.id;
+    var msg = req.body.message;
     if(User.atLeastOrganizer(req.user.role )){
-       // Log.info(req.user, Log.actions.EVENT_UPDATE);
-        var eId = req.params.id;
-        var data = {
-            title: req.body.title,
-            place: req.body.place,
-        };
-
-
+       Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
+        Event.findWithHelperById(eId, function(err, event){
+            if(err)
+                res.sendStatus(500);
+            else{
+                for(var i= 0; i<event.helpers.length; i++){
+                    var h = event.helpers[i];
+                    //TODO replace mail for production
+                    mailer.send({
+                        to: 'felix.michel@tum.de',
+                        subject: event.title,
+                        text: msg
+                    });
+                }
+                res.send()
+            }
+        });
     }else
         res.sendStatus(403);
 });

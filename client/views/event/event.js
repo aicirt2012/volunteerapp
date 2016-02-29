@@ -67,8 +67,30 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         window.location.href = '#/eventcalendar';
     }
 
-
-
+    me.sendMessage = function(helperId){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.sendMessage = function(msg) {
+                    $mdDialog.hide(msg);
+                };
+            },
+            templateUrl: '/views/event/dialogSendMessage.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function(msg) {
+            Event.sendMessage(me.event.id, msg);
+        });
+    };
 
     me.helperRegister = function(ev) {
         $mdDialog.show({

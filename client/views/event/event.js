@@ -151,9 +151,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
                 event: me.event
             }
         }).then(function(helperId) {
-            Event.register(me.event.id, helperId, function(event){
-                me.init(event);
-            });
+            if(helperId) {
+                Event.register(me.event.id, helperId, function (event) {
+                    me.init(event);
+                });
+            }
         });
     };
 

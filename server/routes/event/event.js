@@ -141,9 +141,9 @@ function findEvent(eId, user, cb){
 }
 
 router.post('/:eventId/helpers/:helperId', function(req, res) {
+    var eventId = req.params.eventId;
+    var helperId = req.params.helperId;
     if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
-        var eventId = req.params.eventId;
-        var helperId = req.params.helperId;
         Event.isRegistered(eventId, helperId, function(err, isRegistered){
             if(!isRegistered) {
                 Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
@@ -168,9 +168,9 @@ router.post('/:eventId/helpers/:helperId', function(req, res) {
 });
 
 router.delete('/:eventId/helpers/:helperId', function(req, res) {
+    var eventId = req.params.eventId;
+    var helperId = req.params.helperId;
     if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
-        var eventId = req.params.eventId;
-        var helperId = req.params.helperId;
         Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
         Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
             if (err)

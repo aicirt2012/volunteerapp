@@ -16,9 +16,11 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.init(event);
 
-    me.userlist = User.list(function(users){
-        me.userlist = users;
-    });
+
+    if(me.isAdmin || me.isOrganizer)
+        me.userlist = User.list(function(users){
+            me.userlist = users;
+        });
 
     me.filteredUsers = function(){
         var helperIds = [];

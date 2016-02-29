@@ -9,7 +9,7 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, Us
     me.login = function(){
         User.login(me.email, me.pw).then(function(data){
             $scope.$parent.initMenu();
-            window.location.href = '#/user';
+            window.location.href = '#/eventcalendar';
         }, function(){
             console.log('login failed');
         });

@@ -78,6 +78,9 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     };
 
 
+    me.toggleSidenav = function(componentId){
+        $mdSidenav(componentId).open();
+    }
 
     $mdSidenav('left').open();
 

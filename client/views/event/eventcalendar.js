@@ -69,7 +69,9 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     };
 
 
-
+    me.toggleSidenav = function(componentId){
+        $mdSidenav(componentId).open();
+    }
 
     $mdSidenav('left').open();
 

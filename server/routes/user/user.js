@@ -97,19 +97,14 @@ router.put('/:id/picture', function(req, res) {
 
 
 router.post('/:id/resetpw', function(req, res) {
-    console.log('rest');
-    res.send();
-    /*
     if(User.atLeastOrganizer(req.user.role )){
         var uId = req.params.id;
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
-        console.log(hashedPw);
-/*
         User.findById(uId, function(err, user){
             if(err)
                 res.sendStatus(500);
-            else{
+            else
                 User.update( uId, {
                     pw: hashedPw
                 }, function(){
@@ -119,14 +114,11 @@ router.post('/:id/resetpw', function(req, res) {
                         html: 'Hallo '+user.name + '<br/> Ihr neues Passwort lautet: "'+plainPw+'"!<br\> Viele Grüße, <br\>Volunteer App Team'
                     });
                     res.send();
-                });
-            }
+                });            
         });
-
-
     }else
         res.sendStatus(403);
-        */
+
 });
 
 /* not needed anymore

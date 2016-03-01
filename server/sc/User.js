@@ -139,7 +139,7 @@ User.hashPw = function(plainPw){
 
 User.generatePw = function(){
     return generator.generate({
-        length: 15,
+        length: 8,
         numbers: true
     });
 }

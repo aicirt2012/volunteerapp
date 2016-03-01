@@ -105,7 +105,7 @@ app.service('MyData', function($resource) {
 app.service('User', function($resource, $base64) {
     var Login = $resource('/api/login');
     var Me = $resource('/api/user/me');
-    var ResetPw = $resource('/api/user/:id/restpw');
+    var ResetPw = $resource('/api/user/:id/resetpw');
     var User = $resource('/api/user/:id', null, {
         'update': {method: 'PUT'}
     });

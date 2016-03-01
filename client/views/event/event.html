@@ -8,7 +8,11 @@
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
-                        <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+                        <ng-md-icon icon="arrow_back" size="24">
+                            <md-tooltip>
+                                Zurück zum Kalender
+                            </md-tooltip>
+                        </ng-md-icon>
                     </md-button>
                     <h2>
                         <span>{{event.title}}</span>
@@ -16,9 +20,9 @@
                     <span flex></span>
                 </div>
             </md-toolbar>
-            <md-card-content layout="row" layout-align="space-between centre" style="padding : 0;">
+            <md-card-content layout="row" layout-align="space-between stretch" style="padding : 0;">
 
-                <div ng-if="editMode">
+                <div ng-if="editMode" layout-fill>
                     <form name="eventForm" layout-padding="">
                         <div layout layout-sm="column">
                             <md-input-container flex>
@@ -81,19 +85,32 @@
                 <div ng-if="!editMode" layout-padding>
                     <md-list>
                         <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">home</md-icon>
+                            <md-icon class="material-icons">home
+                            </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.organization.name }} </h3>
                                 <p style="color:black;"> {{ event.organization.email }} | {{ event.organization.tel }}</p>
                                 <p> Organisation </p>
                             </div>
+                            <md-tooltip md-direction="left">
+                                Veranstalter des Events
+                            </md-tooltip>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">group_add</md-icon>
+                            <md-icon class="material-icons">group_add
+                            </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.nrhelpersregistered }}/{{ event.nrhelpers }} </h3>
                                 <p> Angemeldete / benötigte Helfer </p>
                             </div>
+                            <md-tooltip class="tt-multiline" md-direction="left">
+                                <span ng-if="event.nrhelpersregistered > 1">{{ event.nrhelpersregistered }} Helfer sind bereits angemeldet,</span>
+                                <span ng-if="event.nrhelpersregistered == 1">Es ist 1 Helfer angemeldet,</span>
+                                <span ng-if="event.nrhelpersregistered == 0">Es sind keine Helfer angemeldet, </span> <br/>
+                                <span ng-if="event.nrhelpers - event.nrhelpersregistered >1">es werden noch {{ event.nrhelpers - event.nrhelpersregistered }} Helfer benötigt.</span>
+                                <span ng-if="event.nrhelpers - event.nrhelpersregistered == 1">es wird noch 1 weiterer Helfer benötigt.</span>
+                                <span ng-if="event.nrhelpers - event.nrhelpersregistered == 0">es werden keine weiteren Helfer benötigt.</span>
+                            </md-tooltip>
                         </md-list-item>
                         <md-list-item class="md-2-line">
                             <md-icon class="material-icons">place</md-icon>
@@ -103,7 +120,8 @@
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">today</md-icon>
+                            <md-icon class="material-icons">today
+                            </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} Uhr</h3>
                                 <p> Begin </p>
@@ -119,7 +137,7 @@
                         <md-list-item class="md-2-line">
                             <md-icon class="material-icons">description</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.description }} </h3>
+                                <h3 style="white-space: pre-line;"> {{ event.description }} </h3>
                                 <p> Beschreibung </p>
                             </div>
                         </md-list-item>
@@ -127,7 +145,12 @@
                             <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
-                                <md-button class="md-raised" ng-click="cancelEvent()">Absagen</md-button>
+                                <md-button class="md-raised" ng-click="cancelEvent()">
+                                    Absagen
+                                    <md-tooltip md-direction="right">
+                                        Durch Absagen wird das Event unwiederruflich gelöscht
+                                    </md-tooltip>
+                                </md-button>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
@@ -140,7 +163,7 @@
                     </md-list>
                 </div>
 
-                <div ng-if="isAdmin || isOrganizer || isTeam" style="background-color: #E6E6E6;" >
+                <div ng-if="isAdmin || isOrganizer || isTeam" style="background-color: #E6E6E6;">
                     <md-list>
                         <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):</md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers | orderBy: helper" ng-click="helperUnregister(helper)">
@@ -153,8 +176,18 @@
                                 <p>{{helper.tel}}</p>
                             </div>
                         </md-list-item>
-                        <md-button class="md-primary md-raised" ng-click="helperRegister()">Helfer Anmelden</md-button>
-                        <md-button class="md-primary md-raised" ng-click="sendMessage()">Nachricht Senden</md-button>
+                        <md-button class="md-primary md-raised" ng-click="helperRegister()">
+                            Helfer Anmelden
+                            <md-tooltip>
+                                Weitere Helfer zu diesem Event hinzufügen
+                            </md-tooltip>
+                        </md-button>
+                        <md-button class="md-primary md-raised" ng-if="event.nrhelpersregistered != 0" ng-click="sendMessage()">
+                            Nachricht Senden
+                            <md-tooltip>
+                                Nachricht an alle ange- <br/> meldeten Helfer senden
+                            </md-tooltip>
+                        </md-button>
                     </md-list>
 
                 </div>

@@ -64,3 +64,10 @@ md-toolbar.md-hue-1:not(.md-menu-toolbar) {
     height: 18px;
     width: 18px;
 }
+md-tooltip .md-content {
+    height: auto;
+    line-height: 15px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    text-align: center;
+}

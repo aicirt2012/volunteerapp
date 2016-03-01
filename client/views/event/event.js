@@ -52,10 +52,32 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
     me.cancelEvent = function(){
-        Event.del(me.event.id, function(){
-            console.log('deleted');
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, event) {
+                $scope.event = event;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.cancelEvent = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/event/dialogCancelEvent.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                event: me.event
+            }
+        }).then(function() {
+            Event.del(me.event.id, function(){
+                window.location.href = '#/eventcalendar';
+                console.log('deleted');
+            });
         });
-    }
+    };
 
     me.breadcrumb = function(){
         return 'Eventverwaltung > Event';
@@ -163,7 +185,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;
-                $scope.helper = helper
+                $scope.helper = helper;
                 $scope.hide = function() {
                     $mdDialog.hide();
                 };

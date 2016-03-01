@@ -9,7 +9,7 @@
                     <md-toolbar>
                         <div class="md-toolbar-tools">
                             <h2>
-                                <span>Login</span>
+                                <span>Volunteer App Login</span>
                             </h2>
                             <span flex></span>
                         </div>
@@ -17,37 +17,33 @@
                     <md-card-content>
                         <form name="userForm">
                             <div layout layout-sm="column">
-                                <md-input-container flex>
-                                    <label>Email</label>
-                                    <input ng-model="email">
-                                </md-input-container>
+                                <div>
+                                    <div layout layout-sm="row">
+                                        <md-input-container md-no-float class="md-block" style="margin: 0px">
+                                            <input ng-model="email" placeholder="Email">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="row">
+                                        <md-input-container md-no-float class="md-block" style="margin: 0px">
+                                            <input ng-model="pw" type="password" placeholder="Passwort">
+                                        </md-input-container>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <section layout="row" layout-sm="column" layout-align="center end" layout-wrap style="margin-right:-40px; margin-top:20px;">
+                                        <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login()">
+                                            <ng-md-icon icon="arrow_forward" size="24"></ng-md-icon>
+                                        </md-button>
+                                    </section>
+                                </div>
                             </div>
-                            <div layout layout-sm="column">
-                                <md-input-container flex>
-                                    <label>Passwort</label>
-                                    <input ng-model="pw" type="password">
-                                </md-input-container>
-                            </div>
-                            <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login()">
-                                    <ng-md-icon icon="arrow_forward" size="24"></ng-md-icon>
-                                </md-button>
-                            </section>
                         </form>
-
+                        <img src="/img/tumlogo_blue.png" height="30" />
                     </md-card-content>
-
                 </md-card>
 
             </div>
-            <div layout="row" layout-align="center center" style="color:#ccc; font-size: smaller; padding-bottom:10px; padding-top: 30px;">
-                powered by:
-            </div>
-            <div layout="row" layout-align="center center">
-                <img src="/img/tumlogo_gray.png" width="234" height="75"/> <div style="border-left:1px solid #ccc; height: 80px; margin:0px 20px;">&nbsp; </div>
-                <img src="/img/sebislogo_gray.png" width="200" height="60" />
-            </div>
-
         </div>
     </ui-view>
 </md-content>

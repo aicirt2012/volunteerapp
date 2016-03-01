@@ -3,6 +3,12 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
 
     var me = $scope;
     me.events = eventlist;
+    for(var i=0; i<me.events.length; i++){
+        var e = me.events[i];
+        var s = moment(e.startdate);
+        var e = moment(e.enddate);
+        me.events[i].duration = moment.duration(e.diff(s)).asHours();
+    }
 
     me.selectedDate = null;
     me.firstDayOfWeek = 0;
@@ -31,6 +37,10 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
             }
         }
     };
+
+    me.selectEvent = function(eventId){
+        window.location.href = '#/event/' + eventId;
+    }
 
     me.prevMonth = function(data) {
         me.msg = "You clicked (prev) month " + data.month + ", " + data.year;

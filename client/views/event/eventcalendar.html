@@ -42,11 +42,14 @@
         <md-card ng-if="!isCalendarView" style="padding: 0px;">
             <md-card-content style="padding: 0px;">
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="e in events" ng-click="selectEvent(user.id)">
+                    <md-list-item class="md-3-line" ng-repeat="e in events | orderBy: startdate" ng-click="selectEvent(e.id)" ">
+                        <div class="md-tile-left inset" hide-sm >
+                            <ng-md-icon icon="event_available" size="48"></ng-md-icon>
+                        </div>
                         <div class="md-list-item-text">
-                            <h3>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.title}}</h3>
-                            <h4></h4>
-                            <p>{{e}}</p>
+                            <h3><b>{{e.title}} </b></h3>
+                            <h4>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.startdate | date: 'HH:mm'}}Uhr {{e.duration}}h</h4>
+                            <p>{{e.description}}</p>
                         </div>
                     </md-list-item>
                 </md-list>

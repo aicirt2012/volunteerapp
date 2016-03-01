@@ -13,9 +13,9 @@
             <md-content class="md-padding">
                 <p><b>An:</b> Alle angemeldeten Helfer</p>
                 <p><b>Betreff:</b> {{event.title}}</p>
-                <md-input-container class="md-block">
-                    <label>Nachricht:</label>
-                    <textarea ng-model="message" rows="15" md-select-on-focus></textarea>
+                <p><b>Nachricht:</b></p>
+                <md-input-container  md-no-float class="md-block">
+                    <textarea ng-model="message" rows="15" md-select-on-focus placeholder="Ihre Nachricht an die Helfer ..."></textarea>
                 </md-input-container>
             </md-content>
         </md-dialog-content>

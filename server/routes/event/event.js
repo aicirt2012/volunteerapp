@@ -52,9 +52,8 @@ router.post('/:id/message', function(req, res) {
             else{
                 for(var i= 0; i<event.helpers.length; i++){
                     var h = event.helpers[i];
-                    //TODO replace mail for production
                     mailer.send({
-                        to: 'felix.michel@tum.de',
+                        to: h.email,
                         subject: event.title,
                         text: msg
                     });
@@ -81,7 +80,7 @@ router.delete('/:id', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        var data = {
+        var e = {
             title: req.body.title,
             place: req.body.place,
             startdate: req.body.startdate,
@@ -91,28 +90,26 @@ router.post('/', function(req, res) {
             important: req.body.important,
             organization: {id: req.body.organization}
         };
-        Log.info(req.user, Log.actions.EVENT_CREATE, data);
-        Event.save(data, function(){
-            var start = new Date(req.body.startdate);
-            var end = new Date(req.body.enddate);
+        Log.info(req.user, Log.actions.EVENT_CREATE, e);
+        Event.save(e, function(err){
+            var start = new Date(e.startdate);
+            var end = new Date(e.enddate);
 
             User.findAvailableUsers(start, end, function(err, users){
                 for(var i=0; i<users.length; i++){
-                    console.log('send email to'+users[i].email);
-                    /*
                     mailer.send({
-                        to: 'felix.michel@tum.de',
-                        subject: 'Neues Event',
+                        to: users[i].email,
+                        subject: 'Neues Event: '+e.title,
                         html: '<h3>Hallo Felix!</h3>' +
                         '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
                         '<b>' + req.body.title + '</b>' +
                         '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
                         'Ort: ' + req.body.place + '<br>'+
-                        'Beschreibung: ' + req.body.description + '<br>'+
-                        'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
+                        'Beschreibung: ' + e.description + '<br>'+
+                        'Es werden ' + e.nrhelpers + ' Helfer benötigt.</p>' +
                         '<p>Viele Grüße, <br>'+
                         'dein VolunterApp Team</p>'
-                    });*/
+                    });
                 }
 
             });
@@ -198,32 +195,6 @@ router.delete('/:eventId/helpers/:helperId', function(req, res) {
     }else
         res.sendStatus(403);
 });
-/*
-router.post('/:eventId/message', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role ) || req.user.id == helperId){
-        var eventId = req.params.eventId;
-        //TODO implement send message
-
-
-        /*
-         mailer.send({
-         to: 'felix.michel@tum.de',
-         subject: 'Neues Event',
-         html: '<h3>Hallo Felix!</h3>' +
-         '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
-         '<b>' + req.body.title + '</b>' +
-         '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
-         'Ort: ' + req.body.place + '<br>'+
-         'Beschreibung: ' + req.body.description + '<br>'+
-         'Es werden ' + req.body.nrhelpers + ' Helfer benötigt.</p>' +
-         '<p>Viele Grüße, <br>'+
-         'dein VolunterApp Team</p>'
-         });
-
-    }else
-        res.sendStatus(403);
-});
-*/
 
 router.get('/user/:id/', function(req, res){
     var uId = req.params.id;

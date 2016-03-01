@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 
@@ -95,12 +96,37 @@ router.put('/:id/picture', function(req, res) {
 });
 
 
-router.put('/resetpw', function(req, res) {
-    User.save({
-        pw: req.body.pw
-    }, function(){
-        res.send();
-    });
+router.post('/:id/resetpw', function(req, res) {
+    console.log('rest');
+    res.send();
+    /*
+    if(User.atLeastOrganizer(req.user.role )){
+        var uId = req.params.id;
+        var plainPw = User.generatePw();
+        var hashedPw = User.hashPw(plainPw);
+        console.log(hashedPw);
+/*
+        User.findById(uId, function(err, user){
+            if(err)
+                res.sendStatus(500);
+            else{
+                User.update( uId, {
+                    pw: hashedPw
+                }, function(){
+                    mailer.send({
+                        to: user.email,
+                        subject: 'Ihr Passwort wurde zurückgesetzt!',
+                        html: 'Hallo '+user.name + '<br/> Ihr neues Passwort lautet: "'+plainPw+'"!<br\> Viele Grüße, <br\>Volunteer App Team'
+                    });
+                    res.send();
+                });
+            }
+        });
+
+
+    }else
+        res.sendStatus(403);
+        */
 });
 
 /* not needed anymore

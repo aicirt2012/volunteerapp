@@ -1,4 +1,4 @@
-app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'user', 'userevents', function($scope, $mdSidenav, User, $routeParams, user, userevents) {
+app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'user', 'userevents', '$mdDialog', function($scope, $mdSidenav, User, $routeParams, user, userevents, $mdDialog) {
 
 
     var me = $scope;
@@ -54,6 +54,30 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
             me.editMode = false;
         });
     }
+
+
+    me.resetPw = function(helper){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.resetPw = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/user/dialogResetPw.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true
+        }).then(function() {
+            User.resetPw(me.user.id, function(){});
+        });
+    };
+
+
 
     $mdSidenav('left').open();
 

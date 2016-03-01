@@ -23,6 +23,7 @@
     "gulp": "^3.9.0",
     "async": "1.4.2",
     "bcrypt-nodejs": "^0.0.3",
-    "moment": "2.11.2"
+    "moment": "2.11.2",
+    "generate-password": "1.1.1"
   }
 }

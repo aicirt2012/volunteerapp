@@ -105,6 +105,7 @@ app.service('MyData', function($resource) {
 app.service('User', function($resource, $base64) {
     var Login = $resource('/api/login');
     var Me = $resource('/api/user/me');
+    var ResetPw = $resource('/api/user/:id/restpw');
     var User = $resource('/api/user/:id', null, {
         'update': {method: 'PUT'}
     });
@@ -137,6 +138,10 @@ app.service('User', function($resource, $base64) {
 
     function updatePicture(userId, base64Pic, cb){
         return Picture.update({id:userId}, {picture: base64Pic}, cb);
+    }
+
+    function resetPw(userId, cb){
+        return ResetPw.save({id:userId}, {}, cb);
     }
 
     function isLoggedIn(){
@@ -266,6 +271,7 @@ app.service('User', function($resource, $base64) {
         save: User.save,
         update: update,
         updatePicture: updatePicture,
+        resetPw: resetPw,
         getUserId: getUserId,
         isLoggedIn: isLoggedIn,
         login: login,

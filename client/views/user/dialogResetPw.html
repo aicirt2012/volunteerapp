@@ -1,0 +1,27 @@
+<md-dialog aria-label="Passwort zurücksetzten">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Passwort zurücksetzen</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:500px;max-height:810px; ">
+            <md-content class="md-padding">
+                <p>Wollen Sie das Passwort des Users wirklich zurücksetzen?</p>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()" style="margin-right:20px;" >
+                Abbrechen
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="resetPw()" >
+                Zurücksetzen
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -2,6 +2,7 @@ var express = require('express');
 var moment = require('moment');
 var http = require('../util/http');
 var bcrypt = require("bcrypt-nodejs");
+var generator = require('generate-password');
 var EntityType = require('../sc/EntityType');
 
 
@@ -129,30 +130,30 @@ User.canLogin = function(email, plainPw, cb){
             cb(new Error('User not found'), null);
     });
 }
-User.setPw = function(pw, cb){
-    //TODO use bcyrpt with salt
-    console.log('set pw');
-}
 
 User.hashPw = function(plainPw){
-    if (!plainPw) {
-        // TODO: node crash vermeiden ???
-    }
+    if(!plainPw)
+        console.error('Empty password can not be hashed!');
     return bcrypt.hashSync(plainPw, bcrypt.genSaltSync(10), null);
-};
+}
+
+User.generatePw = function(){
+    return generator.generate({
+        length: 15,
+        numbers: true
+    });
+}
 
 User.exists = function(email, uId, cb){
     User.find('email="'+email.toLowerCase()+'"', function(err, users){
         if(users && users.length == 1){
             var user = users[0];
-            if(uId == user.id){
+            if(uId == user.id)
                 return cb(false);
-            }else{
+            else
                 return cb(new Error('email already exists'));
-            }
-        }else{
+        }else
             return cb(false);
-        }
     });
 }
 

@@ -119,7 +119,7 @@
                                 <p> Ort </p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-2-line">
+                        <md-list-item ng-if="!event.isoneday" class="md-2-line">
                             <md-icon class="material-icons">today
                             </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
@@ -127,11 +127,19 @@
                                 <p> Begin </p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="md-2-line">
+                        <md-list-item ng-if="!event.isoneday" class="md-2-line">
                             <md-icon class="material-icons">today</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr </h3>
                                 <p> Ende </p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item ng-if="event.isoneday" class="md-2-line">
+                            <md-icon class="material-icons">today
+                            </md-icon>
+                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr</h3>
+                                <p> Datum </p>
                             </div>
                         </md-list-item>
                         <md-list-item class="md-2-line">

@@ -1,13 +1,11 @@
-app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User', function($scope, $mdSidenav, eventlist, User) {
+app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User', 'Util', function($scope, $mdSidenav, eventlist, User, Util) {
 
 
     var me = $scope;
     me.events = eventlist;
     for(var i=0; i<me.events.length; i++){
         var e = me.events[i];
-        var s = moment(e.startdate);
-        var e = moment(e.enddate);
-        me.events[i].duration = moment.duration(e.diff(s)).asHours();
+        me.events[i].duration = Util.diffInH(e.startdate, e.enddate);
     }
 
     me.selectedDate = null;

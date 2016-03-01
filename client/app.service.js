@@ -293,8 +293,20 @@ app.service('Util', function() {
         return d;
     }
 
+    function diffInH(startDate, endDate){
+        var s = moment(startDate);
+        var e = moment(endDate);
+        return moment.duration(e.diff(s)).asHours();
+    }
+
+    function isOneDay(startDate, endDate){
+        return moment(startDate,"DD-MM-YYYY")+'' == moment(endDate,"DD-MM-YYYY")+'';
+    }
+
     return {
-        initDateFromJSON: initDateFromJSON
+        initDateFromJSON: initDateFromJSON,
+        diffInH: diffInH,
+        isOneDay: isOneDay
     };
 });
 

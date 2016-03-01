@@ -12,6 +12,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         me.event = event;
         me.event.startdate = Util.initDateFromJSON(me.event.startdate);
         me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+        me.event.isoneday = Util.isOneDay(me.event.startdate, me.event.enddate);
     }
 
     me.init(event);
@@ -74,7 +75,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         }).then(function() {
             Event.del(me.event.id, function(){
                 window.location.href = '#/eventcalendar';
-                console.log('deleted');
             });
         });
     };

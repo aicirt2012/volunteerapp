@@ -2,13 +2,18 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
 
 
     var me = $scope;
-    me.eventList = eventlist;
+    me.events = eventlist;
 
     me.selectedDate = null;
     me.firstDayOfWeek = 0;
     me.dayFormat = "d";
     me.firstDayOfWeek = 0; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     me.tooltips = true;
+    me.isCalendarView = false;
+
+    me.toggleView = function(){
+        me.isCalendarView = !me.isCalendarView;
+    }
 
     me.setDirection = function(direction) {
         me.direction = direction;
@@ -16,8 +21,8 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     };
 
     me.dayClick = function(date) {
-        for(var i=0; i < me.eventList.length; i++) {
-            var event = me.eventList[i];
+        for(var i=0; i < me.events.length; i++) {
+            var event = me.events[i];
             var startdate = new Date(event.startdate);
             if (startdate.getDate() == date.getDate() &&
                 startdate.getMonth() == date.getMonth() &&
@@ -36,8 +41,8 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     };
 
     me.setDayContent = function(date) {
-        for(var i=0; i < me.eventList.length; i++) {
-            var e = me.eventList[i];
+        for(var i=0; i < me.events.length; i++) {
+            var e = me.events[i];
             var s = new Date(e.startdate);
             if( s.getDate() == date.getDate() && s.getMonth() == date.getMonth() &&  s.getYear() == date.getYear())
                 return e.title;

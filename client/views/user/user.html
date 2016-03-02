@@ -4,6 +4,8 @@
             <ng-md-icon icon="menu"></ng-md-icon>
         </md-button>
         Personalverwaltung &gt; {{user.roleLabel}} &gt; &nbsp; <div style="display: inline-block;"> <user-picture  picture="{{user.picture}}" size="40"/></div> &nbsp; {{user.name}} &nbsp;
+        <ng-md-icon ng-click="accountView = !accountView" icon="settings" size="20"></ng-md-icon>
+
     </div>
 </md-toolbar>
 
@@ -12,7 +14,7 @@
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card style="padding:0px">
+        <md-card ng-if="!accountView" style="padding:0px">
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
                     <md-tab id="tab1" aria-controls="tab1-content">
@@ -83,7 +85,6 @@
                                 <md-list-item ng-if="editVisible" class="md-2-line">
                                     <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                         <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
-                                        <md-button class="md-raised md-primary" ng-click="resetPw()">Passwort zurücksetzen</md-button>
                                     </div>
                                 </md-list-item>
                             </md-list>
@@ -274,6 +275,40 @@
                                 </div>
                             </md-list-item>
                         </md-list>
+                    </div>
+                </md-card-content>
+            </ng-switch>
+        </md-card>
+        <md-card ng-if="accountView" style="padding:0px">
+            <ng-switch on="selectedAccountTabNr" class="tabpanel-container">
+                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedAccountTabNr">
+                    <md-tab id="tab10" aria-controls="tab10-content">
+                        Passwort
+                    </md-tab>
+                    <md-tab id="tab20" aria-controls="tab20-content">
+                        Account Löschen
+                    </md-tab>
+                </md-tabs>
+                <md-card-content>
+                    <div role="tabpanel0"
+                         id="tab10-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+
+                        <md-button class="md-raised md-primary" ng-click="resetPw()">Passwort zurücksetzen</md-button>
+
+                    </div>
+                    <div role="tabpanel"
+                         id="tab20-content"
+                         aria-labelledby="tab2"
+                         ng-switch-when="1"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+
                     </div>
                 </md-card-content>
             </ng-switch>

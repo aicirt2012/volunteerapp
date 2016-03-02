@@ -10,6 +10,7 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     me.selectedTabNr = 1;
     me.editMode = false;
     me.editVisible = User.isAdmin() || User.isOrganizer();
+    me.accountView = false;
     me.tabs = [
         {id: 'personaldata', label: 'Persönliche Daten'},
         {id: 'availability', label: 'Verfügbarkeit'},

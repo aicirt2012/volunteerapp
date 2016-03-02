@@ -1,4 +1,4 @@
-var app = angular.module('RefugeeApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'materialCalendar', 'ngSanitize', 'ngResource', 'angular-jwt', 'base64', 'ngFileUpload', 'ngImgCrop', 'mdPickers']);
+var app = angular.module('RefugeeApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'materialCalendar', 'ngSanitize', 'ngResource', 'angular-jwt', 'base64', 'ngFileUpload', 'ngImgCrop', 'mdPickers', 'ngMessages']);
 
 app.config(function($mdThemingProvider) {
     var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {

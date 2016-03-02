@@ -71,3 +71,7 @@ md-tooltip .md-content {
     padding-bottom: 3px;
     text-align: center;
 }
+.inputContainerMessage{
+    color: rgb(221,44,0);
+    font-size: 12px;
+}

@@ -31,14 +31,22 @@
                                 </md-input-container>
                                 <md-input-container flex>
                                     <label>Name</label>
-                                    <input ng-model="user.name">
+                                    <input required name="userName" ng-model="user.name" ng-pattern="/^[a-zA-Züäöß ]*$/">
+                                    <div ng-messages="userForm.userName.$error">
+                                        <div class="inputContainerMessage" ng-if="userForm.userName.$error.required && userForm.userName.$touched">
+                                            Name muss ausgefüllt sein!
+                                        </div>
+                                        <div class="inputContainerMessage" ng-if="userForm.userName.$error.pattern && userForm.userName.$touched">
+                                            Nur Buchstaben erlaubt!
+                                        </div>
+                                    </div>
                                 </md-input-container>
                             </div>
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Email</label>
                                     <input ng-model="user.email" name="userEmail" type="email" required/>
-                                    <div style="color: rgb(221,44,0); font-size: 12px" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">Dies ist keine gültige E-Mail Adresse!</div>
+                                    <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">Dies ist keine gültige E-Mail Adresse!</div>
                                 </md-input-container>
                             </div>
                             <div layout="row" layout-sm="column">

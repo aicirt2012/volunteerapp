@@ -37,7 +37,8 @@
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Email</label>
-                                    <input ng-model="user.email">
+                                    <input ng-model="user.email" name="userEmail" type="email" required/>
+                                    <div style="color: rgb(221,44,0); font-size: 12px" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">Dies ist keine gültige E-Mail Adresse!</div>
                                 </md-input-container>
                             </div>
                             <div layout="row" layout-sm="column">

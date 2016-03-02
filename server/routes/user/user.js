@@ -12,25 +12,29 @@ router.get('/me', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        User.exists(req.body.email, '', function(err){
-            if(err) {
-                console.log(err);
-            }else{
-                User.save({
-                    gender: req.body.gender,
-                    name: req.body.name,
-                    tel: req.body.tel,
-                    mobil: req.body.mobil,
-                    email: req.body.email,
-                    pw: User.hashPw(req.body.pw),
-                    notes: req.body.notes,
-                    role: req.body.role,
-                    availability: req.body.availability
-                }, function () {
-                    res.send();
-                });
-            }
-        });
+        //if(User.validates(req.body.gender, req.body.name, req.body.tel, req.body.mobil,req.body.email, req.body.notes, req.body.role)){
+            User.exists(req.body.email, '', function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    User.save({
+                        gender: req.body.gender,
+                        name: req.body.name,
+                        tel: req.body.tel,
+                        mobil: req.body.mobil,
+                        email: req.body.email,
+                        pw: User.hashPw(req.body.pw),
+                        notes: req.body.notes,
+                        role: req.body.role,
+                        availability: req.body.availability
+                    }, function () {
+                        res.send();
+                    });
+                }
+            });
+        //}else{
+          //  res.sendStatus(500);
+        //}
     }else
         res.sendStatus(403);
 });
@@ -59,26 +63,30 @@ router.get('/:id', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        var uId = req.params.id;
-        User.exists(req.body.email, uId, function(err){
-            if(err) {
-                console.log(err);
-            }else{
-                console.log('here');
-                User.update( uId, {
-                    gender: req.body.gender,
-                    name: req.body.name,
-                    tel: req.body.tel,
-                    mobil: req.body.mobil,
-                    email: req.body.email,
-                    notes: req.body.notes,
-                    role: req.body.role,
-                    availability: req.body.availability,
-                }, function(){
-                    res.send();
-                });
-            }
-        });
+        //if(User.validates(req.body.gender, req.body.name, req.body.tel, req.body.mobil,req.body.email, req.body.notes, req.body.role)) {
+            var uId = req.params.id;
+            User.exists(req.body.email, uId, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('here');
+                    User.update(uId, {
+                        gender: req.body.gender,
+                        name: req.body.name,
+                        tel: req.body.tel,
+                        mobil: req.body.mobil,
+                        email: req.body.email,
+                        notes: req.body.notes,
+                        role: req.body.role,
+                        availability: req.body.availability
+                    }, function () {
+                        res.send();
+                    });
+                }
+            });
+       //}else{
+         //   res.sendStatus(500);
+        //}
     }else
         res.sendStatus(403);
 });
@@ -90,7 +98,7 @@ router.put('/:id/picture', function(req, res) {
             picture: req.body.picture
         }, function(){
             res.send();
-        });        
+        });
     }else
         res.sendStatus(403);
 });

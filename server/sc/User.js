@@ -157,6 +157,19 @@ User.exists = function(email, uId, cb){
     });
 }
 
+User.validates = function(gender, name, tel, mobil, email, notes, role){
+    if(validator.isEmail(email) && validator.isAlpha(name)
+        && validator.isMobilePhone(tel) && validator.isMobilePhone(mobil)
+        && validator.isAlphanumeric(notes)
+        && (validator.equals(gender, 'MALE') || validator.equals(gender, 'FEMALE'))
+        && (validator.equals(role, 'HELPER') || validator.equals(role, 'TEAM')
+        || validator.equals(role, 'ORGANIZER') || validator.equals(role, 'ADMIN'))){
+            return true;
+    }else{
+        return false;
+    }
+}
+
 User.toMe = function(user){
     return {
         id: user.id,

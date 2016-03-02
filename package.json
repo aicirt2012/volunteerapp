@@ -24,6 +24,7 @@
     "async": "1.4.2",
     "bcrypt-nodejs": "^0.0.3",
     "moment": "2.11.2",
-    "generate-password": "1.1.1"
+    "generate-password": "1.1.1",
+    "validator": "5.1.0"
   }
 }

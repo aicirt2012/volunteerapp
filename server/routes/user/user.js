@@ -4,6 +4,7 @@ var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 var validator = require('../../util/validator');
+var Log = require('../../sc/Log');
 
 
 router.get('/me', function(req, res) {
@@ -100,6 +101,26 @@ router.put('/:id', function(req, res) {
        }else{
            res.sendStatus(400);
         }
+    }else
+        res.sendStatus(403);
+});
+
+router.del('/:id', function(req, res) {
+    if(User.atLeastAdmin(req.user.role )){
+        var uId = req.params.id;
+        Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
+        Event.findByUserId(uId, function(err, events){
+            if(err) {
+                console.log(err);
+            }else{
+                for(var i=0; i<events.length; i++)
+                    Event.delAttributeValue(events[i].id, 'helpers', {id: uId}, function (err) {});
+                //TODO implement async series for delete
+                User.delete(uId, function(err){
+                    res.send();
+                });
+            }
+        });
     }else
         res.sendStatus(403);
 });

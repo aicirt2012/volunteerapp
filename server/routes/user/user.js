@@ -13,7 +13,14 @@ router.get('/me', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        //if(User.validates(req.body.gender, req.body.name, req.body.tel, req.body.mobil,req.body.email, req.body.notes, req.body.role)){
+        validator.isEmail(req.body.email);
+        validator.matches(req.body.name, /[a-zA-ZöüäßÜÖÄ ]*/);
+        validator.isMobilePhone(req.body.tel, 'de-DE');
+        validator.isMobilePhone(req.body.mobil, 'de-DE');
+        validator.matches(req.body.role, /HELPER|TEAM|ORGANIZER|ADMIN/i);
+        validator.matches(req.body.gender, /MALE|FEMALE/i);
+
+        if(validator.allValid()){
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
@@ -25,7 +32,7 @@ router.post('/', function(req, res) {
                         mobil: req.body.mobil,
                         email: req.body.email,
                         pw: User.hashPw(req.body.pw),
-                        notes: req.body.notes,
+                        notes: validator.blacklist(req.body.notes, "<>;\"\'´"),
                         role: req.body.role,
                         availability: req.body.availability
                     }, function () {
@@ -33,9 +40,9 @@ router.post('/', function(req, res) {
                     });
                 }
             });
-        //}else{
-          //  res.sendStatus(500);
-        //}
+        }else{
+            res.sendStatus(400);
+        }
     }else
         res.sendStatus(403);
 });

@@ -71,6 +71,11 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
             me.event.startdate.setDate(date.getDate());
             me.event.startdate.setMonth(date.getMonth());
             me.event.startdate.setFullYear(date.getFullYear());
+            //Also set end day for better usability
+            me.endDay = date;
+            me.event.enddate.setDate(date.getDate());
+            me.event.enddate.setMonth(date.getMonth());
+            me.event.enddate.setFullYear(date.getFullYear());
         });
     }
 

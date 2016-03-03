@@ -6,6 +6,7 @@ var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var Log = require('../../sc/Log');
 var mailer = require('../../util/mailer');
+var val = require('../../util/validator');
 
 
 router.get('/', function(req, res) {
@@ -16,27 +17,34 @@ router.get('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        Log.info(req.user, Log.actions.EVENT_UPDATE);
-        var eId = req.params.id;
-        var data = {
-            title: req.body.title,
-            place: req.body.place,
-            startdate: req.body.startdate,
-            enddate: req.body.enddate,
-            nrhelpers: req.body.nrhelpers,
-            description: req.body.description,
-            important: req.body.important,
-            organization: {id: req.body.organization}
-        };
+        val.isTitle(req.body.title);
+        val.isDate(req.body.startdate);
+        val.isDate(req.body.enddate);
 
-        Event.update(data, function(err){
-            findEvent(eId, req.user, function(err, event){
-                if(err)
-                    res.sendStatus(500);
-                else
-                    res.json(event);
+        if(val.allValid()) {
+
+            Log.info(req.user, Log.actions.EVENT_UPDATE);
+            var eId = req.params.id;
+            var data = {
+                title: req.body.title,
+                place: val.blacklist(req.body.place, "<>;\"\'´"),
+                startdate: req.body.startdate,
+                enddate: req.body.enddate,
+                nrhelpers: req.body.nrhelpers,
+                description: val.blacklist(req.body.description, "<>;\"\'´"),
+                important: req.body.important,
+                organization: {id: req.body.organization}
+            };
+
+            Event.update(data, function (err) {
+                findEvent(eId, req.user, function (err, event) {
+                    if (err)
+                        res.sendStatus(500);
+                    else
+                        res.json(event);
+                });
             });
-        });
+        }
     }else
         res.sendStatus(403);
 });
@@ -80,41 +88,49 @@ router.delete('/:id', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        var e = {
-            title: req.body.title,
-            place: req.body.place,
-            startdate: req.body.startdate,
-            enddate: req.body.enddate,
-            nrhelpers: req.body.nrhelpers,
-            description: req.body.description,
-            important: req.body.important,
-            organization: {id: req.body.organization}
-        };
-        Log.info(req.user, Log.actions.EVENT_CREATE, e);
-        Event.save(e, function(err){
-            var start = new Date(e.startdate);
-            var end = new Date(e.enddate);
+        val.isTitle(req.body.title);
+        val.isDate(req.body.startdate);
+        val.isDate(req.body.enddate);
 
-            User.findAvailableUsers(start, end, function(err, users){
-                for(var i=0; i<users.length; i++){
-                    mailer.send({
-                        to: users[i].email,
-                        subject: 'Neues Event: '+e.title,
-                        html: '<h3>Hallo Felix!</h3>' +
-                        '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
-                        '<b>' + req.body.title + '</b>' +
-                        '<p>Am ' + moment(start).format('DD.MM.YYYY') +' von ' + moment(start).format('HH:mm') + ' Uhr bis ' +moment(end).format('DD.MM.YYYY')+ ' '+ moment(end).format('HH:mm') + ' Uhr. <br>' +
-                        'Ort: ' + req.body.place + '<br>'+
-                        'Beschreibung: ' + e.description + '<br>'+
-                        'Es werden ' + e.nrhelpers + ' Helfer benötigt.</p>' +
-                        '<p>Viele Grüße, <br>'+
-                        'dein VolunterApp Team</p>'
-                    });
-                }
+        if(val.allValid()) {
+            var e = {
+                title: req.body.title,
+                place: val.blacklist(req.body.place, "<>;\"\'´"),
+                startdate: req.body.startdate,
+                enddate: req.body.enddate,
+                nrhelpers: req.body.nrhelpers,
+                description: val.blacklist(req.body.description, "<>;\"\'´"),
+                important: req.body.important,
+                organization: {id: req.body.organization}
+            };
+            Log.info(req.user, Log.actions.EVENT_CREATE, e);
+            Event.save(e, function (err) {
+                var start = new Date(e.startdate);
+                var end = new Date(e.enddate);
 
+                User.findAvailableUsers(start, end, function (err, users) {
+                    for (var i = 0; i < users.length; i++) {
+                        mailer.send({
+                            to: users[i].email,
+                            subject: 'Neues Event: ' + e.title,
+                            html: '<h3>Hallo Felix!</h3>' +
+                            '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+                            '<b>' + req.body.title + '</b>' +
+                            '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
+                            'Ort: ' + req.body.place + '<br>' +
+                            'Beschreibung: ' + e.description + '<br>' +
+                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.</p>' +
+                            '<p>Viele Grüße, <br>' +
+                            'dein VolunterApp Team</p>'
+                        });
+                    }
+
+                });
+                res.send();
             });
-            res.send();
-        });
+        }else{
+            res.status(400);
+        }
     }else
         res.status(403);
 });

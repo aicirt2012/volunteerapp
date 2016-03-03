@@ -39,7 +39,7 @@ validator.reset = function() {
 }
 
 validator.isName = function(name) {
-    validator.matches(name, /[a-zA-ZöüäßÜÖÄ ]*/);
+    validator.matches(name, /^[a-zA-ZöüäßÜÖÄ ]+$/);
 }
 
 validator.isPhone = function(phone, required){
@@ -48,11 +48,17 @@ validator.isPhone = function(phone, required){
 }
 
 validator.isRole = function(role) {
-    validator.matches(role, /HELPER|TEAM|ORGANIZER|ADMIN/i);
+    validator.matches(role, /^(HELPER|TEAM|ORGANIZER|ADMIN)$/);
 }
 
 validator.isGender = function(gender) {
-    validator.matches(gender, /MALE|FEMALE/i);
+    validator.matches(gender, /^(MALE|FEMALE)$/);
+}
+
+validator.isTitle = function(name) {
+    console.log("Before validate title ", name);
+    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ ]+$/);
+    console.log("after validate title ", name);
 }
 
 module.exports = validator;

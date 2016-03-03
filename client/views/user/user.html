@@ -102,7 +102,7 @@
                                     </md-input-container>
                                     <md-input-container flex>
                                         <label>Name</label>
-                                        <input required name="userName" ng-model="user.name" ng-pattern="/^[a-zA-Züäöß ]*$/">
+                                        <input required name="userName" ng-model="user.name" ng-pattern="/^[a-zA-ZüäöÄÜÖß ]*$/">
                                         <div ng-messages="userForm.userName.$error">
                                             <div class="inputContainerMessage" ng-if="userForm.userName.$error.required && userForm.userName.$touched">
                                                 Name muss ausgefüllt sein!

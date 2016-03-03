@@ -3,7 +3,7 @@ var router = express.Router();
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
-var validator = require('../../util/validator');
+var val = require('../../util/validator');
 var Log = require('../../sc/Log');
 
 
@@ -14,14 +14,14 @@ router.get('/me', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        validator.isEmail(req.body.email);
-        validator.matches(req.body.name, /[a-zA-ZöüäßÜÖÄ ]*/);
-        validator.isMobilePhone(req.body.tel, 'de-DE');
-        validator.isMobilePhone(req.body.mobil, 'de-DE');
-        validator.matches(req.body.role, /HELPER|TEAM|ORGANIZER|ADMIN/i);
-        validator.matches(req.body.gender, /MALE|FEMALE/i);
+        val.isEmail(req.body.email);
+        val.isName(req.body.name);
+        val.isPhone(req.body.tel);
+        val.isPhone(req.body.mobil);
+        val.isRole(req.body.role);
+        val.isGender(req.body.gender);
 
-        if(validator.allValid()){
+        if(val.allValid()){
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
                         mobil: req.body.mobil,
                         email: req.body.email,
                         pw: User.hashPw(req.body.pw),
-                        notes: validator.blacklist(req.body.notes, "<>;\"\'´"),
+                        notes: val.blacklist(req.body.notes, "<>;\"\'´"),
                         role: req.body.role,
                         availability: req.body.availability
                     }, function () {
@@ -72,14 +72,14 @@ router.get('/:id', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
-        validator.isEmail(req.body.email);
-        validator.matches(req.body.name, /[a-zA-ZöüäßÜÖÄ ]*/);
-        validator.isMobilePhone(req.body.tel, 'de-DE');
-        validator.isMobilePhone(req.body.mobil, 'de-DE');
-        validator.matches(req.body.role, /HELPER|TEAM|ORGANIZER|ADMIN/i);
-        validator.matches(req.body.gender, /MALE|FEMALE/i);
+        val.isEmail(req.body.email);
+        val.isName(req.body.name);
+        val.isPhone(req.body.tel);
+        val.isPhone(req.body.mobil);
+        val.isRole(req.body.role);
+        val.isGender(req.body.gender);
 
-        if(validator.allValid()){
+        if(val.allValid()){
             var uId = req.params.id;
             User.exists(req.body.email, uId, function (err) {
                 if (err) {
@@ -90,7 +90,7 @@ router.put('/:id', function(req, res) {
                         tel: req.body.tel,
                         mobil: req.body.mobil,
                         email: req.body.email,
-                        notes: validator.blacklist(req.body.notes, "<>;\"\'´"),
+                        notes: val.blacklist(req.body.notes, "<>;\"\'´"),
                         role: req.body.role,
                         availability: req.body.availability
                     }, function () {

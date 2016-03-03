@@ -38,4 +38,20 @@ validator.reset = function() {
     validations = [];
 }
 
+validator.isName = function(name) {
+    validator.matches(name, /[a-zA-ZöüäßÜÖÄ ]*/);
+}
+
+validator.isPhone = function(phone){
+    validator.isMobilePhone(phone, 'de-DE');
+}
+
+validator.isRole = function(role) {
+    validator.matches(role, /HELPER|TEAM|ORGANIZER|ADMIN/i);
+}
+
+validator.isGender = function(gender) {
+    validator.matches(gender, /MALE|FEMALE/i);
+}
+
 module.exports = validator;

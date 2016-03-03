@@ -56,6 +56,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
             me.endTime = time;
             me.event.enddate.setHours(time.getHours());
             me.event.enddate.setMinutes(time.getMinutes());
+            console.log(me.event.enddate);
         });
     }
 

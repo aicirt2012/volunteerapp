@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', 'Organization', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog, Organization) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', 'Organization', '$mdpDatePicker', '$mdpTimePicker', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog, Organization, $mdpDatePicker, $mdpTimePicker) {
 
 
     var me = $scope;
@@ -10,13 +10,16 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.init = function(event){
         me.event = event;
-        me.event.startdate = Util.initDateFromJSON(me.event.startdate);
-        me.event.enddate = Util.initDateFromJSON(me.event.enddate);
+        me.event.startdate = Util.initDateFromJSON(event.startdate);
+        me.event.enddate = Util.initDateFromJSON(event.enddate);
         me.event.isoneday = Util.isOneDay(me.event.startdate, me.event.enddate);
+        me.startDay = event.startdate;
+        me.startTime = event.startdate;
+        me.endDay = event.enddate;
+        me.endTime = event.enddate;
     }
 
     me.init(event);
-
 
     if(me.isAdmin || me.isOrganizer)
         me.userlist = User.list(function(users){
@@ -34,6 +37,50 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         return fu;
     }
 
+    me.pickStartTime = function(ev) {
+        $mdpTimePicker(ev, me.event.startdate).then(function(time) {
+            time.setSeconds(0);
+            time.setMilliseconds(0);
+            me.startTime = time;
+            me.event.startdate.setHours(time.getHours());
+            me.event.startdate.setMinutes(time.getMinutes());
+        });
+    }
+
+    me.pickStartDay = function(ev) {
+        $mdpDatePicker(ev, me.event.startdate).then(function(date) {
+            me.startDay = date;
+            console.log(me.event.startdate);
+            me.event.startdate.setDate(date.getDate());
+            me.event.startdate.setMonth(date.getMonth());
+            me.event.startdate.setFullYear(date.getFullYear());
+            console.log(me.event.startdate);
+            //Also set end day for better usability
+            me.endDay = date;
+            me.event.enddate.setDate(date.getDate());
+            me.event.enddate.setMonth(date.getMonth());
+            me.event.enddate.setFullYear(date.getFullYear());
+        });
+    }
+
+    me.pickEndTime = function(ev) {
+        $mdpTimePicker(ev, me.event.endTime).then(function(time) {
+            time.setSeconds(0);
+            time.setMilliseconds(0);
+            me.endTime = time;
+            me.event.enddate.setHours(time.getHours());
+            me.event.enddate.setMinutes(time.getMinutes());
+        });
+    }
+
+    me.pickEndDay = function(ev) {
+        $mdpDatePicker(ev, me.event.endDay).then(function(date) {
+            me.endDay = date;
+            me.event.enddate.setDate(date.getDate());
+            me.event.enddate.setMonth(date.getMonth());
+            me.event.enddate.setFullYear(date.getFullYear());
+        });
+    }
 
     me.openEdit = function(){
         me.eventCopy = me.event;

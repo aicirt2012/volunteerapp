@@ -105,7 +105,7 @@ router.put('/:id', function(req, res) {
         res.sendStatus(403);
 });
 
-router.del('/:id', function(req, res) {
+router.delete('/:id', function(req, res) {
     if(User.atLeastAdmin(req.user.role )){
         var uId = req.params.id;
         Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});

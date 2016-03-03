@@ -42,8 +42,9 @@ validator.isName = function(name) {
     validator.matches(name, /[a-zA-ZöüäßÜÖÄ ]*/);
 }
 
-validator.isPhone = function(phone){
-    validator.isMobilePhone(phone, 'de-DE');
+validator.isPhone = function(phone, required){
+    if(phone || required != false)
+        validator.isMobilePhone(phone, 'de-DE');
 }
 
 validator.isRole = function(role) {

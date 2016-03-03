@@ -16,8 +16,8 @@ router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         val.isEmail(req.body.email);
         val.isName(req.body.name);
-        val.isPhone(req.body.tel);
-        val.isPhone(req.body.mobil);
+        val.isPhone(req.body.tel, false);
+        val.isPhone(req.body.mobil, false);
         val.isRole(req.body.role);
         val.isGender(req.body.gender);
 

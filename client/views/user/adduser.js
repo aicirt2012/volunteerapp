@@ -33,6 +33,12 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
     };
 
     me.submitAddUser = function(){
+        if(me.user.tel == '')
+            me.user.tel = null;
+        if(me.user.mobil == '')
+            me.user.mobil = null;
+        if(me.user.notes == '')
+            me.user.notes = null;
         User.save(me.user, function(){
             console.log('user created');
         })

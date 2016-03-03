@@ -27,11 +27,20 @@
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Titel</label>
-                                <input ng-model="event.title">
+                                <input required name="eventTitle" ng-model="event.title">
+                                <div ng-messages="eventForm.eventTitle.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.required && eventForm.eventTitle.$touched">
+                                        Titel muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Organisation</label>
-                                <input ng-model="event.organization.name">
+                                <md-select ng-model="event.organization" md-on-open="loadOrganizations()">
+                                    <md-option ng-repeat="orga in organizationlist" value="{{orga.id}}">
+                                        {{orga.name}}
+                                    </md-option>
+                                </md-select>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">

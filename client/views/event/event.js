@@ -1,4 +1,4 @@
-app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog) {
+app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', 'Util', '$mdDialog', 'Organization', function($scope, $mdSidenav, Event, event, User, Util, $mdDialog, Organization) {
 
 
     var me = $scope;
@@ -46,6 +46,8 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
     me.submitEdit = function(){
+        if(me.event.description == '')
+            me.event.description = null;
         me.editMode = false;
         Event.update(me.event.id, me.event, function(){
             console.log('update executed!');
@@ -87,6 +89,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
 
     me.back = function(){
         window.location.href = '#/eventcalendar';
+    }
+
+    me.loadOrganizations = function () {
+        return Organization.list().$promise.then(
+            function (organizations) {
+                me.organizationlist = organizations;
+            });
     }
 
     me.sendMessage = function(helperId){

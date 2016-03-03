@@ -25,7 +25,12 @@
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Titel</label>
-                                <input ng-model="event.title">
+                                <input required name="eventTitle" ng-model="event.title">
+                                <div ng-messages="eventForm.eventTitle.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.required && eventForm.eventTitle.$touched">
+                                        Titel muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Organisation</label>
@@ -43,33 +48,58 @@
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Ort</label>
-                                <input ng-model="event.place">
+                                <input ng-model="event.place" name="eventPlace" required>
+                                <div ng-messages="eventForm.eventPlace.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.eventPlace.$error.required && eventForm.eventPlace.$touched">
+                                        Ort muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
                         </div>
                         <div layout="row">
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickStartDay($event)" class="material-icons">today</md-icon>
                                 <label>Start Datum</label>
-                                <input type="date" mdp-date-picker ng-model="startDay" />
+                                <input type="date" mdp-date-picker ng-model="startDay" required name="startDay"/>
+                                <div ng-messages="eventForm.startDay.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.startDay.$error.required && eventForm.startDay.$touched">
+                                        Start Datum muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickStartTime($event)" class="material-icons">access_time</md-icon>
                                 <label>Start Uhrzeit</label>
-                                <input ng-click="pickStartTime($event)" type="time" ng-model="startTime"/>
+                                <input ng-click="pickStartTime($event)" type="time" ng-model="startTime" name="startTime" required/>
+                                <div ng-messages="eventForm.starTime.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.startTime.$error.required && eventForm.startTime.$touched">
+                                        Start Uhrzeit muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
                         </div>
                         <div layout="row">
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickEndDay($event)" class="material-icons">today</md-icon>
                                 <label>End Datum</label>
-                                <input type="date" mdp-date-picker ng-model="endDay" />
+                                <input type="date" mdp-date-picker ng-model="endDay" name="endDay" required />
+                                <div ng-messages="eventForm.endDay.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.endDay.$error.required && eventForm.endDay.$touched">
+                                        End Datum muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickEndTime($event)" class="material-icons">access_time</md-icon>
                                 <label>End Uhrzeit</label>
-                                <input ng-click="pickEndTime($event)" type="time" ng-model="endTime"/>
+                                <input ng-click="pickEndTime($event)" type="time" ng-model="endTime" name="endTime" required/>
+                                <div ng-messages="eventForm.endTime.$error">
+                                    <div class="inputContainerMessage" ng-if="eventForm.endTime.$error.required && eventForm.endTime.$touched">
+                                        End Uhrzeit muss ausgefüllt sein!
+                                    </div>
+                                </div>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">

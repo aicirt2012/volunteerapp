@@ -13,6 +13,8 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
     };
 
     me.submitAddEvent = function(){
+        if(me.event.description == '')
+            me.event.description = null;
         Event.save(me.event, function(){
             console.log('event created');
         })
@@ -100,7 +102,6 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
     me.loadOrganizations = function () {
         return Organization.list().$promise.then(
             function (organizations) {
-                console.log(JSON.stringify(organizations));
                 me.organizationlist = organizations;
             });
     }

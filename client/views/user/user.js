@@ -49,6 +49,33 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         me.editMode = false;
     }
 
+    me.deleteUser = function(){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, user) {
+                $scope.user = user;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.deleteUser = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/user/dialogDeleteUser.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                user: me.user
+            }
+        }).then(function() {
+            User.del(me.user.id, function(){
+                window.location.href = '#/user';
+            });
+        });
+    }
+
     me.submitPhotoUpload = function (dataUrl) {
         me.user.picture = dataUrl;
         User.updatePicture(me.user.id, me.user.picture, function(){
@@ -59,7 +86,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
 
     me.resetPw = function(helper){
         $mdDialog.show({
-            controller: function ($scope, $mdDialog) {
+            controller: function ($scope, $mdDialog, user) {
+                $scope.user = user;
                 $scope.hide = function() {
                     $mdDialog.hide();
                 };
@@ -72,7 +100,10 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
             },
             templateUrl: '/views/user/dialogResetPw.html',
             parent: angular.element(document.body),
-            clickOutsideToClose:true
+            clickOutsideToClose:true,
+            locals: {
+                user: me.user
+            }
         }).then(function() {
             User.resetPw(me.user.id, function(){});
         });

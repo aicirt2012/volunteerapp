@@ -5,6 +5,7 @@ var http = require('../../util/http');
 var User = require('../../sc/User');
 var val = require('../../util/validator');
 var Log = require('../../sc/Log');
+var Event = require('../../sc/Event');
 
 
 router.get('/me', function(req, res) {

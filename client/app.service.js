@@ -151,6 +151,10 @@ app.service('User', function($resource, $base64) {
         return ResetPw.save({id:userId}, {}, cb);
     }
 
+    function del(userId, cb){
+        return User.delete({id: userId}, {}, cb);
+    }
+
     function isLoggedIn(){
         return localStorage.getItem('JWT') != null;
     }
@@ -286,7 +290,8 @@ app.service('User', function($resource, $base64) {
         isHelper: isHelper,
         isTeam: isTeam,
         isOrganizer: isOrganizer,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        del: del
     }
 });
 

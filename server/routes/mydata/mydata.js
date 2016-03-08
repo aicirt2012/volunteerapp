@@ -32,6 +32,7 @@ router.put('/personal', function(req, res, next) {
                     mobil: req.body.mobil,
                     email: req.body.email
                 };
+                Log.info(req.user, Log.actions.USER_UPDATE, data);
                 User.update(uId, data, function () {
                     res.send();
                 });

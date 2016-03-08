@@ -117,7 +117,14 @@
                                     <md-input-container flex>
                                         <label>Email</label>
                                         <input ng-model="user.email" name="userEmail" type="email" required/>
-                                            <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">Dies ist keine gültige E-Mail Adresse!</div>
+                                        <div ng-messages="userForm.userEmail.$error">
+                                            <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">
+                                                Dies ist keine gültige E-Mail Adresse!
+                                            </div>
+                                            <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.required && userForm.userEmail.$touched">
+                                                Email muss ausgefüllt sein!
+                                            </div>
+                                        </div>
                                     </md-input-container>
                                 </div>
                                 <div layout="row" layout-sm="column">

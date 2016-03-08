@@ -302,6 +302,9 @@
                         Passwort
                     </md-tab>
                     <md-tab id="tab20" aria-controls="tab20-content">
+                        Rolle
+                    </md-tab>
+                    <md-tab id="tab30" aria-controls="tab30-content">
                         Account Löschen
                     </md-tab>
                 </md-tabs>
@@ -320,6 +323,16 @@
                     <div role="tabpanel"
                          id="tab20-content"
                          aria-labelledby="tab2"
+                         ng-switch-when="1"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+
+                    </div>
+                    </div>
+                    <div role="tabpanel"
+                         id="tab30-content"
+                         aria-labelledby="tab3"
                          ng-switch-when="1"
                          md-swipe-left="next()"
                          md-swipe-right="previous()"

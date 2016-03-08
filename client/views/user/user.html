@@ -3,7 +3,9 @@
         <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
             <ng-md-icon icon="menu"></ng-md-icon>
         </md-button>
-        Personalverwaltung &gt; {{user.roleLabel}} &gt; &nbsp; <div style="display: inline-block;"> <user-picture  picture="{{user.picture}}" size="40"/></div> &nbsp; {{user.name}} &nbsp;
+        <a href="#/user/{{user.role | lowercase}}">Personalverwaltung</a>&nbsp;&gt;&nbsp;
+        <a href="#/user/{{user.role | lowercase}}">{{user.roleLabel}} &gt; &nbsp; </a>
+        <div style="display: inline-block;"> <user-picture  picture="{{user.picture}}" size="40"/></div> &nbsp; {{user.name}} &nbsp;
         <ng-md-icon ng-click="accountView = !accountView" icon="settings" size="20"></ng-md-icon>
 
     </div>

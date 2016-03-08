@@ -22,6 +22,7 @@ router.post('/', function(req, res) {
         val.isGender(req.body.gender);
 
         if(val.allValid()){
+            val.reset();
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
@@ -42,6 +43,7 @@ router.post('/', function(req, res) {
                 }
             });
         }else{
+            val.reset();
             res.sendStatus(400);
         }
     }else
@@ -80,6 +82,7 @@ router.put('/:id', function(req, res) {
         val.isGender(req.body.gender);
 
         if(val.allValid()){
+            val.reset();
             var uId = req.params.id;
             User.exists(req.body.email, uId, function (err) {
                 if (err) {
@@ -99,6 +102,7 @@ router.put('/:id', function(req, res) {
                 }
             });
        }else{
+            val.reset();
            res.sendStatus(400);
         }
     }else

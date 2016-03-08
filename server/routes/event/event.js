@@ -22,7 +22,7 @@ router.put('/:id', function(req, res) {
         val.isDate(req.body.enddate);
 
         if(val.allValid()) {
-
+            val.reset();
             Log.info(req.user, Log.actions.EVENT_UPDATE);
             var eId = req.params.id;
             var data = {
@@ -44,6 +44,9 @@ router.put('/:id', function(req, res) {
                         res.json(event);
                 });
             });
+        }else{
+            val.reset();
+            res.sendStatus(400);
         }
     }else
         res.sendStatus(403);
@@ -93,6 +96,7 @@ router.post('/', function(req, res) {
         val.isDate(req.body.enddate);
 
         if(val.allValid()) {
+            val.reset();
             var e = {
                 title: req.body.title,
                 place: val.blacklist(req.body.place, "<>;\"\'´"),
@@ -129,6 +133,7 @@ router.post('/', function(req, res) {
                 res.send();
             });
         }else{
+            val.reset();
             res.status(400);
         }
     }else

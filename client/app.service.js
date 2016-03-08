@@ -57,10 +57,16 @@ app.service('Event', function($resource) {
 });
 
 app.service('Organization', function($resource) {
-    var Organization = $resource('/api/organization/:id');
+    var Organization = $resource('/api/organization/:id', null, {
+        'update': {method: 'PUT'}
+    });
 
     function get(organizationId, cb){
         return Organization.get({id: organizationId}, cb);
+    }
+
+    function update(organizationId, data, cb){
+        return Organization.update({id:organizationId}, data, cb);
     }
 
     function list(cb){
@@ -74,7 +80,8 @@ app.service('Organization', function($resource) {
     return {
         get: get,
         save: save,
-        list: list
+        list: list,
+        update: update
     }
 });
 

@@ -23,7 +23,6 @@ router.put('/:id', function(req, res) {
 
         if(val.allValid()) {
             val.reset();
-            Log.info(req.user, Log.actions.EVENT_UPDATE);
             var eId = req.params.id;
             var data = {
                 title: req.body.title,
@@ -35,7 +34,7 @@ router.put('/:id', function(req, res) {
                 important: req.body.important,
                 organization: {id: req.body.organization}
             };
-
+            Log.info(req.user, Log.actions.EVENT_UPDATE, data);
             Event.update(data, function (err) {
                 findEvent(eId, req.user, function (err, event) {
                     if (err)
@@ -56,7 +55,7 @@ router.post('/:id/message', function(req, res) {
     var eId = req.params.id;
     var msg = req.body.message;
     if(User.atLeastOrganizer(req.user.role )){
-       Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
+        Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
         Event.findWithHelperById(eId, function(err, event){
             if(err)
                 res.sendStatus(500);
@@ -79,6 +78,7 @@ router.post('/:id/message', function(req, res) {
 router.delete('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var eId = req.params.id;
+        Log.info(req.user, Log.actions.EVENT_DELETE, {eventId: eId});
         Event.delete(eId, function(err){
             if(err)
                 res.sendStatus(500);

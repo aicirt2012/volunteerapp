@@ -27,7 +27,7 @@ router.post('/', function(req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    User.save({
+                    var data = {
                         gender: req.body.gender,
                         name: req.body.name,
                         tel: req.body.tel,
@@ -37,7 +37,9 @@ router.post('/', function(req, res) {
                         notes: val.blacklist(req.body.notes, "<>;\"\'´"),
                         role: req.body.role,
                         availability: req.body.availability
-                    }, function () {
+                    };
+                    Log.info(req.user, Log.actions.USER_CREATE, data);
+                    User.save(data, function () {
                         res.send();
                     });
                 }
@@ -84,19 +86,21 @@ router.put('/:id', function(req, res) {
         if(val.allValid()){
             val.reset();
             var uId = req.params.id;
+            var data = {
+                gender: req.body.gender,
+                name: req.body.name,
+                tel: req.body.tel,
+                mobil: req.body.mobil,
+                email: req.body.email,
+                notes: val.blacklist(req.body.notes, "<>;\"\'´"),
+                role: req.body.role,
+                availability: req.body.availability
+            };
+            Log.info(req.user, Log.actions.USER_UPDATE, data);
             User.exists(req.body.email, uId, function (err) {
                 if (err) {
                 } else {
-                    User.update(uId, {
-                        gender: req.body.gender,
-                        name: req.body.name,
-                        tel: req.body.tel,
-                        mobil: req.body.mobil,
-                        email: req.body.email,
-                        notes: val.blacklist(req.body.notes, "<>;\"\'´"),
-                        role: req.body.role,
-                        availability: req.body.availability
-                    }, function () {
+                    User.update(uId, data, function () {
                         res.send();
                     });
                 }
@@ -147,6 +151,7 @@ router.post('/:id/resetpw', function(req, res) {
         var uId = req.params.id;
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
+        Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
         User.findById(uId, function(err, user){
             if(err)
                 res.sendStatus(500);

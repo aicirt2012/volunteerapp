@@ -77,11 +77,16 @@ app.service('Organization', function($resource) {
         return Organization.save(data, cb);
     }
 
+    function del(organizationId, cb){
+        return Organization.delete({id: organizationId}, {}, cb);
+    }
+
     return {
         get: get,
         save: save,
         list: list,
-        update: update
+        update: update,
+        del: del
     }
 });
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Organization = require('../../sc/Organisation');
 var User = require('../../sc/User');
+var Event = require('../../sc/Event');
 var val = require('../../util/validator');
 var Log = require('../../sc/Log');
 
@@ -84,6 +85,10 @@ router.put('/:id', function(req, res) {
         }
     }else
         res.sendStatus(403);
+});
+
+router.delete('/:id', function(req, res) {
+    console.log('Organization deleted');
 });
 
 module.exports = router;

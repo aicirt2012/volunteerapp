@@ -1,10 +1,20 @@
-<toolbar title="{{breadcrumb()}}"></toolbar>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            <ng-md-icon icon="menu"></ng-md-icon>
+        </md-button>
+        <a href="#/user/{{user.role | lowercase}}">Einrichtungsverwaltung</a>&nbsp;&gt;&nbsp;
+        <a href="#/user/{{user.role | lowercase}}">Einrichtung &gt; &nbsp; </a>
+        <ng-md-icon ng-click="accountView = !accountView" icon="settings" size="20"></ng-md-icon>
+
+    </div>
+</md-toolbar>
 
 <md-content flex md-scroll-y>
     <ui-view layout="column" layout-fill layout-padding>
         <div class="inset" hide-sm></div>
 
-        <md-card style="padding: 0px;">
+        <md-card ng-if="!accountView" style="padding:0px">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
@@ -137,6 +147,29 @@
                 </form>
                 </div>
             </md-card-content>
+        </md-card>
+        <md-card ng-if="accountView" style="padding:0px">
+            <ng-switch on="selectedAccountTabNr" class="tabpanel-container">
+                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedAccountTabNr">
+                    <md-tab id="tab10" aria-controls="tab10-content">
+                        Einrichtung Löschen
+                    </md-tab>
+                </md-tabs>
+                <md-card-content>
+                    <div role="tabpanel0"
+                         id="tab10-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+
+                        <md-button class="md-raised md-primary" ng-click="deleteOrganization()">Einrichtung löschen</md-button>
+
+                    </div>
+
+                </md-card-content>
+            </ng-switch>
         </md-card>
 
 

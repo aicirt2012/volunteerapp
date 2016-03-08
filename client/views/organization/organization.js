@@ -1,9 +1,10 @@
-app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', function($scope, $mdSidenav, organization, Organization) {
+app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$mdDialog', function($scope, $mdSidenav, organization, Organization, $mdDialog) {
 
 
     var me = $scope;
     me.organization = organization;
     me.editMode = false;
+    me.accountView = false;
 
     me.breadcrumb = function(){
         return 'Einrichtungsverwaltung > Einrichtung';
@@ -30,6 +31,36 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
         me.editMode = false;
     }
 
+    me.deleteOrganization = function(){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, organization) {
+                $scope.organization = organization;
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.deleteOrganization = function() {
+                    $mdDialog.hide();
+                };
+            },
+            templateUrl: '/views/organization/dialogDeleteOrganization.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                organization: me.organization
+            }
+        }).then(function() {
+            Organization.del(me.organization.id, function(){
+                window.location.href = '#/organization';
+            });
+       });
+    }
+
+    me.toggleSidenav = function(componentId){
+        $mdSidenav(componentId).open();
+    }
 
     $mdSidenav('left').open();
 }]);

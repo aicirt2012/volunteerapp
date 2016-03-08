@@ -121,12 +121,19 @@ router.delete('/:id', function(req, res) {
             if(err) {
                 console.log(err);
             }else{
-                for(var i=0; i<events.length; i++)
-                    Event.delAttributeValue(events[i].id, 'helpers', {id: uId}, function (err) {});
-                //TODO implement async series for delete
-                User.delete(uId, function(err){
-                    res.send();
+                async.forEach(events, function(e, delUser){
+                    Event.delAttributeValue(e.id, 'helpers', {id: uId}, function (err) {
+                        cb();
+                    });
+                }, function(err){
+                    res.sendStatus(500);
+                    cb();
                 });
+                function delUser(){
+                    User.delete(uId, function(err){
+                        res.send();
+                    });
+                }
             }
         });
     }else
@@ -162,7 +169,10 @@ router.post('/:id/resetpw', function(req, res) {
                     mailer.send({
                         to: user.email,
                         subject: 'Ihr Passwort wurde zurückgesetzt!',
-                        html: 'Hallo '+user.name + '<br/> Ihr neues Passwort lautet: "'+plainPw+'"!<br\> Viele Grüße, <br\>Volunteer App Team'
+                        html: 'Hallo '+user.name + ';<br/>' +
+                              'Ihr neues Passwort lautet: "'+plainPw+'"!<br\>' +
+                              'Viele Grüße, <br\>' +
+                              'Volunteer App Team'
                     });
                     res.send();
                 });

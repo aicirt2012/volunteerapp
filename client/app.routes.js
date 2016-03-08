@@ -92,6 +92,10 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             }
         })
+        .when('/addorganization', {
+            templateUrl: 'views/organization/addorganization.html',
+            controller: 'AddOrganizationCtrl'
+        })
         .when('/log', {
             templateUrl: 'views/log/log.html',
             controller: 'LogCtrl',

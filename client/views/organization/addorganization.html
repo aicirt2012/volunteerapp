@@ -1,0 +1,105 @@
+<toolbar title="{{breadcrumb()}}"></toolbar>
+
+<md-content flex md-scroll-y>
+    <ui-view layout="column" layout-fill layout-padding>
+        <div class="inset" hide-sm></div>
+
+        <md-card style="padding: 0px;">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
+                        <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Neue Einrichtung</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <form name="orgaForm" layout-padding="">
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>Name</label>
+                            <input required name="orgaName" ng-model="organization.name">
+                            <div ng-messages="orgaForm.orgaName.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaName.$error.required && orgaForm.orgaName.$touched">
+                                    Name muss ausgefüllt sein!
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>PLZ</label>
+                            <input ng-model="organization.zip" name="orgaZip" ng-pattern="/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/" required>
+                            <div ng-messages="orgaForm.orgaZip.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaZip.$error.required && orgaForm.orgaZip.$touched">
+                                    PLZ muss ausgefüllt sein!
+                                </div>
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaZip.$error.pattern && orgaForm.orgaZip.$touched">
+                                    Keine gültige PLZ!
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Stadt</label>
+                            <input ng-model="organization.city" name="orgaCity" required>
+                            <div ng-messages="orgaForm.orgaCity.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaCity.$error.required && orgaForm.orgaCity.$touched">
+                                    Stadt muss ausgefüllt sein!
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Straße</label>
+                            <input ng-model="organization.street" name="orgaStreet" ng-pattern="/^[a-zA-Z0-9öüäßÜÖÄ\.\- ]+$/" required>
+                            <div ng-messages="orgaForm.orgaCity.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaStreet.$error.required && orgaForm.orgaStreet.$touched">
+                                    Straße muss ausgefüllt sein!
+                                </div>
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaStreet.$error.pattern && orgaForm.orgaStreet.$touched">
+                                    Keine gültige Straße!
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Email</label>
+                            <input ng-model="organization.email" name="orgaEmail" type="email" required>
+                            <div ng-messages="orgaForm.orgaEmail.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaEmail.$error.email && orgaForm.orgaEmail.$touched">
+                                    Dies ist keine gültige E-Mail Adresse!
+                                </div>
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaEmail.$error.required && orgaForm.orgaEmail.$touched">
+                                    Email muss ausgefüllt sein!
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex>
+                            <label>Tel</label>
+                            <input ng-model="organization.tel" name="orgaTel" required>
+                            <div ng-messages="orgaForm.orgaTel.$error">
+                                <div class="inputContainerMessage" ng-if="orgaForm.orgaTel.$error.required && orgaForm.orgaTel.$touched">
+                                    Telefonnummer muss ausgefüllt sein!
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <br/><br/>
+                    <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button class="md-raised" ng-click="back()">Abbrechen</md-button>&nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitEdit()">Speichern</md-button>
+                    </section>
+                </form>
+            </md-card-content>
+        </md-card>
+
+
+    </ui-view>
+</md-content>

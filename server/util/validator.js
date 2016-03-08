@@ -39,7 +39,7 @@ validator.reset = function() {
 }
 
 validator.isName = function(name) {
-    validator.matches(name, /^[a-zA-ZöüäßÜÖÄ ]+$/);
+    validator.matches(name, /^[a-zA-ZöüäßÜÖÄ\- ]+$/);
 }
 
 validator.isPhone = function(phone, required){
@@ -56,9 +56,19 @@ validator.isGender = function(gender) {
 }
 
 validator.isTitle = function(name) {
-    console.log("Before validate title ", name);
-    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ ]+$/);
-    console.log("after validate title ", name);
+    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ\- ]+$/);
+}
+
+validator.isCity = function(city) {
+    validator.matches(city, /^[a-zA-ZöüäßÜÖÄ\.\- ]+$/);
+}
+
+validator.isStreet = function(street) {
+    validator.matches(street, /^[a-zA-Z0-9öüäßÜÖÄ\.\- ]+$/);
+}
+
+validator.isZip = function(zip) {
+    validator.matches(zip, /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/);
 }
 
 module.exports = validator;

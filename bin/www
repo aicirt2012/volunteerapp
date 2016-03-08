@@ -3,22 +3,24 @@
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('RefugeeApp:server');
 var http = require('http');
+var config = require('../config');
+
 
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3000');
+var port = config.port
 app.set('port', port);
+app.set('env', config.env);
+console.log('Starting '+config.name+' in '+config.env+' mode on port '+port);
+console.log('Using SocioCortex API URL "'+config.sc.url+'" and user "'+config.sc.user+'"');
 
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
 /**
@@ -32,7 +34,6 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 

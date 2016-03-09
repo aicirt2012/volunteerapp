@@ -15,7 +15,6 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     me.abortEdit = function(){
         me.user =  me.userCopy;
         me.editMode = false;
-        //window.location.href = '#/user';
     }
 
     me.openEdit = function(){
@@ -31,7 +30,6 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
             mobil: me.user.mobil,
             email: me.user.email
         });
-        console.log(JSON.stringify($flow.files[0]));
     }
 
     me.submitAvailability = function(){
@@ -39,10 +37,32 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     }
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = dataUrl;
-        MyData.photo.save({picture:dataUrl}, function(){
+        me.user.picture = compressB64PNG(dataUrl, 30, 'compression_canvas');
+
+  //  console.log(dataUrl);
+        console.log(me.user.picture);
+        MyData.photo.save({picture:me.user.picture}, function(){
             me.editMode = false;
         });
+
+    }
+
+    function compressB64PNG(b64Url, quality, tempCanvasId){
+        var img = new Image;
+        img.src = b64Url;
+
+        var cvs = document.getElementById(tempCanvasId);
+        var ctx = cvs.getContext('2d');
+        var img = new Image;
+        ctx.drawImage(img,0,0);
+        img.src = b64Url;
+        var mime_type = 'image/png';
+        var b64UrlCompressed =  cvs.toDataURL(mime_type, quality/100);
+
+        console.log('uncompressed size: '+b64Url.length);
+        console.log('compressed size: '+b64UrlCompressed.length);
+        console.log(b64UrlCompressed);
+        return b64UrlCompressed;
     }
 
     $mdSidenav('left').open();

@@ -1,6 +1,6 @@
 var express = require('express');
 var http = require('../util/http');
-var EntityType = require('eentityType');
+var EntityType = require('../sc/EntityType');
 
 
 var Organization = EntityType.define({

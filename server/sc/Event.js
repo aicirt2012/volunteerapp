@@ -1,7 +1,7 @@
 var express = require('express');
 var async = require('async');
 var http = require('../util/http');
-var EntityType = require('eentityType');
+var EntityType = require('../sc/EntityType');
 var User = require('../sc/User');
 var Organisation = require('../sc/Organisation');
 

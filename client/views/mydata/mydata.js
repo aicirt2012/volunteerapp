@@ -37,14 +37,10 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     }
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = compressB64PNG(dataUrl, 30, 'compression_canvas');
-
-  //  console.log(dataUrl);
-        console.log(me.user.picture);
-        MyData.photo.save({picture:me.user.picture}, function(){
+        me.user.picture = dataUrl //compressB64PNG(dataUrl, 30, 'compression_canvas');
+        MyData.photo.save({picture: me.user.picture}, function(){
             me.editMode = false;
         });
-
     }
 
     function compressB64PNG(b64Url, quality, tempCanvasId){
@@ -52,6 +48,8 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         img.src = b64Url;
 
         var cvs = document.getElementById(tempCanvasId);
+        cvs.height = 64;
+        cvs.width = 64;
         var ctx = cvs.getContext('2d');
         var img = new Image;
         ctx.drawImage(img,0,0);

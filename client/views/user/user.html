@@ -12,10 +12,7 @@
 </md-toolbar>
 
 
-<md-content flex md-scroll-y>
-    <ui-view layout="column" layout-fill layout-padding>
-        <div class="inset" hide-sm></div>
-
+<md-content flex md-scroll-y layout-fill layout-padding>
         <md-card ng-if="!accountView" style="padding:0px">
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
@@ -345,7 +342,4 @@
                 </md-card-content>
             </ng-switch>
         </md-card>
-
-
-    </ui-view>
 </md-content>

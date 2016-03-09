@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
@@ -122,19 +123,18 @@ router.delete('/:id', function(req, res) {
             if(err) {
                 console.log(err);
             }else{
-                async.forEach(events, function(e, delUser){
+                async.forEach(events, function(e, cb){
                     Event.delAttributeValue(e.id, 'helpers', {id: uId}, function (err) {
                         cb();
                     });
                 }, function(err){
-                    res.sendStatus(500);
-                    cb();
+                    if(err)
+                        res.sendStatus(500);
+                    else
+                        User.delete(uId, function(err){
+                            res.send();
+                        });
                 });
-                function delUser(){
-                    User.delete(uId, function(err){
-                        res.send();
-                    });
-                }
             }
         });
     }else

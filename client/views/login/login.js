@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, User, $mdSidenav) {
+app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', function($scope, User, $mdSidenav, $mdDialog) {
 
     var me = $scope;
 
@@ -14,6 +14,22 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', function($scope, Us
             console.log('login failed');
         });
     }
+
+    me.openImpressum = function(){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.close = function() {
+                    $mdDialog.cancel();
+                };
+            },
+            templateUrl: '/views/login/dialogImressum.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true
+        });
+    };
 
     $mdSidenav('left').close();
 

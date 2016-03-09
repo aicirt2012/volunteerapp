@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var http = require('../../util/http');
 var User = require('../../sc/User');
-var Event = require('../../sc/eevent');
+var Event = require('../../sc/Event');
 var val = require('../../util/validator');
 
 router.post('/photo', function(req, res){

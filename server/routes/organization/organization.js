@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var Organization = require('../../sc/Organisation');
 var User = require('../../sc/User');
-var Event = require('../../sc/Event');
+var Event = require('../../sc/eevent');
 var val = require('../../util/validator');
 var Log = require('../../sc/Log');
 

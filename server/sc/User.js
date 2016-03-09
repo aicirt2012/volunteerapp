@@ -3,7 +3,7 @@ var moment = require('moment');
 var http = require('../util/http');
 var bcrypt = require("bcrypt-nodejs");
 var generator = require('generate-password');
-var EntityType = require('../sc/EntityType');
+var EntityType = require('eentityType');
 
 
 var User = EntityType.define({

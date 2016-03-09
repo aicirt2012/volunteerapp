@@ -1,0 +1,49 @@
+<md-dialog aria-label="Rolle ändern">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Rolle ändern</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:500px;max-height:810px; ">
+            <md-content class="md-padding">
+                <p>Wollen Sie die Rolle von <b>{{user.name}}</b> wirklich  von <b>{{user.roleLabel}}</b> zu <b>{{newUserRoleLabel}}</b> ändern?</p>
+                <p ng-if="user.role == 'HELPER' && newUserRole == 'TEAM'">
+                    {{user.name}} kann anschließend die Daten aller Nutzer einsehen.
+                </p>
+                <p ng-if="(user.role == 'HELPER' || user.role == 'TEAM') && newUserRole == 'ORGANIZER'">
+                    {{user.name}} kann anschließend die Daten aller Nutzer einsehen und bearbeiten, sowie Events erstellen, bearbeiten und löschen.
+                </p>
+                <p ng-if="(user.role == 'HELPER' || user.role == 'TEAM' || user.role == 'ORGANIZER') && newUserRole == 'ADMIN'">
+                    {{user.name}} hat anschließend die Rechte alle Daten (Events, Nutzer, Organisationen) einzusehen, zu bearbeiten und zu löschen.
+                </p>
+                <p ng-if="user.role == 'ORGANIZER' && newUserRole == 'TEAM'">
+                    {{user.name}} kann anschließend keine neuen Nutzer oder Events erstellen, sowie vorhandene Nutzer und Events nicht mehr beatbeiten.
+                </p>
+                <p ng-if="user.role == 'ORGANIZER' && newUserRole == 'HELPER'">
+                    {{user.name}} kann anschließend keine neuen Nutzer oder Events erstellen, sowie vorhandene Nutzer und Events nicht mehr beatbeiten
+                    und Daten anderer Nutzer nicht mehr einsehen.
+                </p>
+                <p ng-if="user.role == 'TEAM' && newUserRole == 'HELPER'">
+                    {{user.name}} kann anschließend keine Daten anderer Nutzer mehr einsehen.
+                </p>
+                <p ng-if="user.role == 'ADMIN' && newUserRole != 'ADMIN'">
+                    {{user.name}} hat anschließend keine Administratorrechte mehr.
+                </p>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()" style="margin-right:20px;" >
+                Abbrechen
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="changeRole()" >
+                Ändern
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

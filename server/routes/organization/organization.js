@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var Organization = require('../../sc/Organisation');
 var User = require('../../sc/User');
+var Event = require('../../sc/Event');
 var val = require('../../util/validator');
 var Log = require('../../sc/Log');
 
@@ -82,6 +84,32 @@ router.put('/:id', function(req, res) {
             val.reset();
             res.sendStatus(400);
         }
+    }else
+        res.sendStatus(403);
+});
+
+router.delete('/:id', function(req, res) {
+    if(User.atLeastAdmin(req.user.role )){
+        var oId = req.params.id;
+        Log.info(req.user, Log.actions.ORGANIZATION_DELETE, {organizationId: oId});
+        Event.findByOrganizationId(oId, function(err, events){
+            if(err) {
+                console.log(err);
+            }else{
+                async.forEach(events, function(e, cb){
+                    Event.delete(e.id, function(err){
+                        cb();
+                    });
+                }, function(err){
+                    if(err)
+                        res.sendStatus(500);
+                    else
+                        Organization.delete(oId, function(err){
+                            res.send();
+                        });
+                });
+            }
+        });
     }else
         res.sendStatus(403);
 });

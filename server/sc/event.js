@@ -17,6 +17,14 @@ var Event = EntityType.define({
     organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' }
 }, 'event');
 
+Event.findByOrganizationId = function(organizationId, cb){
+    Event.find('organization.id = "'+organizationId+'"', function(err, events){
+        if(!err){
+            cb(false, events)
+        }else
+            cb(new Error('No Events for Organization found'), null);
+    });
+}
 
 Event.findByUserId = function(userId, cb){
     Event.find('helpers .any("'+userId+'" = id)', function(err, events){

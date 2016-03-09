@@ -1,8 +1,8 @@
-<md-dialog aria-label="Passwort zurücksetzten">
+<md-dialog aria-label="Organisation löschen">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Passwort zurücksetzen</h2>
+                <h2>Organisation löschen</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -11,7 +11,16 @@
         </md-toolbar>
         <md-dialog-content style="max-width:500px;max-height:810px; ">
             <md-content class="md-padding" style="text-align: center">
-                <p>Wollen Sie das Passwort von <b>{{user.name}}</b> wirklich zurücksetzen?</p>
+                <p>
+                    Wollen Sie die Einrichtung <b>{{organization.name}}</b> wirklich löschen? Es werden alle Events die zu der Einrichtung gehören mit gelöscht!
+                </p>
+                <p>
+                    Um die Einrichtung zu löschen geben Sie den Namen der Einrichtung in das Feld ein.
+                </p>
+                <md-input-container flex>
+                    <label>Einrichtungsname</label>
+                    <input required name="orgaName" ng-model="organizationName">
+                </md-input-container>
             </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">
@@ -19,8 +28,8 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="resetPw()" >
-                Zurücksetzen
+            <md-button class="md-raised md-primary" ng-disabled="organization.name != organizationName" ng-click="deleteOrganization()" >
+                Löschen
             </md-button>
         </md-dialog-actions>
     </form>

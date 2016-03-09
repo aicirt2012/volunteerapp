@@ -139,16 +139,6 @@
                                         <input ng-model="user.mobil">
                                     </md-input-container>
                                 </div>
-                                <div layout="row" layout-sm="column">
-                                    <md-input-container flex>
-                                        <label>Rolle</label>
-                                        <md-select ng-model="user.role">
-                                            <md-option ng-repeat="role in roles" value="{{role.id}}">
-                                                {{role.label}}
-                                            </md-option>
-                                        </md-select>
-                                    </md-input-container>
-                                </div>
                                 <div layout layout-sm="column">
                                     <md-input-container flex>
                                         <label>Notizen</label>
@@ -328,17 +318,28 @@
                          ng-switch-when="1"
                          md-swipe-left="next()"
                          md-swipe-right="previous()"
-                         layout="row" layout-align="center center">
+                         layout="column" layout-align="center center">
+
+                        <md-select ng-model="newUserRole" aria-label="userRoleSelect">
+                            <md-option ng-repeat="role in roles" value="{{role.id}}">
+                                {{role.label}}
+                            </md-option>
+                        </md-select>
+
+                        <md-button class="md-raised md-primary" ng-click="changeRole(newUserRole)">Rolle ändern</md-button>
+
 
                     </div>
                     </div>
                     <div role="tabpanel"
                          id="tab30-content"
                          aria-labelledby="tab3"
-                         ng-switch-when="1"
+                         ng-switch-when="2"
                          md-swipe-left="next()"
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
+
+                        <md-button class="md-raised md-primary" ng-click="deleteUser()">Nutzer löschen</md-button>
 
                     </div>
                 </md-card-content>

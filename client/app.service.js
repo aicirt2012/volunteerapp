@@ -77,11 +77,16 @@ app.service('Organization', function($resource) {
         return Organization.save(data, cb);
     }
 
+    function del(organizationId, cb){
+        return Organization.delete({id: organizationId}, {}, cb);
+    }
+
     return {
         get: get,
         save: save,
         list: list,
-        update: update
+        update: update,
+        del: del
     }
 });
 
@@ -119,6 +124,9 @@ app.service('User', function($resource, $base64) {
     var Picture = $resource('/api/user/:id/picture', null, {
         'update': {method: 'PUT'}
     });
+    var ChangeRole = $resource('/api/user/:id/role', null, {
+        'update': {method: 'PUT'}
+    });
     var roles = [
         {id: 'HELPER', label: 'Helfer'},
         {id: 'TEAM', label: 'Team'},
@@ -149,6 +157,14 @@ app.service('User', function($resource, $base64) {
 
     function resetPw(userId, cb){
         return ResetPw.save({id:userId}, {}, cb);
+    }
+
+    function changeRole(userId, newRole, cb){
+        return ChangeRole.update({id:userId}, {role: newRole}, cb);
+    }
+
+    function del(userId, cb){
+        return User.delete({id: userId}, {}, cb);
     }
 
     function isLoggedIn(){
@@ -238,15 +254,15 @@ app.service('User', function($resource, $base64) {
         }
     }
 
-    function userRoleLabel(user){
-        if(user == null){
-            console.error('user is null');
+    function userRoleLabel(userRole){
+        if(userRole == null){
+            console.error('userRole is null');
             return null;
         }else {
             for (var i = 0; i < roles.length; i++)
-                if (roles[i].id == user.role)
+                if (roles[i].id == userRole)
                     return roles[i].label;
-            console.error('role with id ' + user.role + ' not found!');
+            console.error('role with id ' + userRole + ' not found!');
             return null;
         }
     }
@@ -286,7 +302,9 @@ app.service('User', function($resource, $base64) {
         isHelper: isHelper,
         isTeam: isTeam,
         isOrganizer: isOrganizer,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        del: del,
+        changeRole: changeRole
     }
 });
 

@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../sc/User');
 var val = require('../../util/validator');
 var Log = require('../../sc/Log');
+var Event = require('../../sc/Event');
 
 
 router.get('/me', function(req, res) {
@@ -121,19 +123,18 @@ router.delete('/:id', function(req, res) {
             if(err) {
                 console.log(err);
             }else{
-                async.forEach(events, function(e, delUser){
+                async.forEach(events, function(e, cb){
                     Event.delAttributeValue(e.id, 'helpers', {id: uId}, function (err) {
                         cb();
                     });
                 }, function(err){
-                    res.sendStatus(500);
-                    cb();
+                    if(err)
+                        res.sendStatus(500);
+                    else
+                        User.delete(uId, function(err){
+                            res.send();
+                        });
                 });
-                function delUser(){
-                    User.delete(uId, function(err){
-                        res.send();
-                    });
-                }
             }
         });
     }else
@@ -151,7 +152,6 @@ router.put('/:id/picture', function(req, res) {
     }else
         res.sendStatus(403);
 });
-
 
 router.post('/:id/resetpw', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
@@ -180,6 +180,26 @@ router.post('/:id/resetpw', function(req, res) {
     }else
         res.sendStatus(403);
 
+});
+
+router.put('/:id/role', function(req, res) {
+    if(User.atLeastOrganizer(req.user.role )){
+        val.isRole(req.body.role);
+
+        if(val.allValid()){
+            val.reset();
+            var uId = req.params.id;
+            var data = {role: req.body.role};
+            Log.info(req.user, Log.actions.USER_ROLECHANGE, data);
+            User.update(uId, data, function () {
+                res.send();
+            });
+        }else{
+            val.reset();
+            res.sendStatus(400);
+        }
+    }else
+        res.sendStatus(403);
 });
 
 

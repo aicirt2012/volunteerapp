@@ -20,7 +20,6 @@ router.post('/', function(req, res) {
         val.isName(req.body.name);
         val.isPhone(req.body.tel, false);
         val.isPhone(req.body.mobil, false);
-        val.isRole(req.body.role);
         val.isGender(req.body.gender);
 
         if(val.allValid()){
@@ -37,7 +36,7 @@ router.post('/', function(req, res) {
                         email: req.body.email,
                         pw: User.hashPw(req.body.pw),
                         notes: val.blacklist(req.body.notes, "<>;\"\'´"),
-                        role: req.body.role,
+                        role: User.roles.HELPER,
                         availability: req.body.availability
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
@@ -82,7 +81,6 @@ router.put('/:id', function(req, res) {
         val.isName(req.body.name);
         val.isPhone(req.body.tel);
         val.isPhone(req.body.mobil);
-        val.isRole(req.body.role);
         val.isGender(req.body.gender);
 
         if(val.allValid()){
@@ -95,7 +93,6 @@ router.put('/:id', function(req, res) {
                 mobil: req.body.mobil,
                 email: req.body.email,
                 notes: val.blacklist(req.body.notes, "<>;\"\'´"),
-                role: req.body.role,
                 availability: req.body.availability
             };
             Log.info(req.user, Log.actions.USER_UPDATE, data);

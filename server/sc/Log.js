@@ -35,7 +35,8 @@ Log.actions = {
     USER_CREATE: 'USER_CREATE',
     USER_UPDATE: 'USER_UPDATE',
     USER_DELETE: 'USER_DELETE',
-    USER_RESETPW: 'USER_RESETPW'
+    USER_RESETPW: 'USER_RESETPW',
+    USER_ROLECHANGE: 'USER_ROLECHANGE'
 }
 
 Log.debug = function(user, action, description){

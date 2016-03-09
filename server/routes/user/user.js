@@ -153,7 +153,6 @@ router.put('/:id/picture', function(req, res) {
         res.sendStatus(403);
 });
 
-
 router.post('/:id/resetpw', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var uId = req.params.id;
@@ -181,6 +180,26 @@ router.post('/:id/resetpw', function(req, res) {
     }else
         res.sendStatus(403);
 
+});
+
+router.put('/:id/role', function(req, res) {
+    if(User.atLeastOrganizer(req.user.role )){
+        val.isRole(req.body.role);
+
+        if(val.allValid()){
+            val.reset();
+            var uId = req.params.id;
+            var data = {role: req.body.role};
+            Log.info(req.user, Log.actions.USER_ROLECHANGE, data);
+            User.update(uId, data, function () {
+                res.send();
+            });
+        }else{
+            val.reset();
+            res.sendStatus(400);
+        }
+    }else
+        res.sendStatus(403);
 });
 
 

@@ -4,7 +4,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     var me = $scope;
     me.user = user;
     me.user.genderLabel = User.userGenderLabel(user);
-    me.user.roleLabel = User.userRoleLabel(user);
+    me.user.roleLabel = User.userRoleLabel(user.role);
+    me.newUserRole = me.user.role;
     me.genders = User.genders;
     me.roles = User.roles;
     me.selectedTabNr = 1;
@@ -53,9 +54,6 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         $mdDialog.show({
             controller: function ($scope, $mdDialog, user) {
                 $scope.user = user;
-                $scope.hide = function() {
-                    $mdDialog.hide();
-                };
                 $scope.cancel = function() {
                     $mdDialog.cancel();
                 };
@@ -88,9 +86,6 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         $mdDialog.show({
             controller: function ($scope, $mdDialog, user) {
                 $scope.user = user;
-                $scope.hide = function() {
-                    $mdDialog.hide();
-                };
                 $scope.cancel = function() {
                     $mdDialog.cancel();
                 };
@@ -109,6 +104,31 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
         });
     };
 
+    me.changeRole = function(newUserRole){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog, User, user) {
+                $scope.user = user;
+                $scope.newUserRole = newUserRole;
+                $scope.newUserRoleLabel = User.userRoleLabel(newUserRole);
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.changeRole = function() {
+                    $mdDialog.hide($scope.newUserRole);
+                };
+            },
+            templateUrl: '/views/user/dialogChangeRole.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                user: me.user,
+                newUserRole: me.newUserRole
+            }
+        }).then(function(newUserRole) {
+            User.changeRole(me.user.id, newUserRole, function(){});
+            window.location.href = '#/user';
+        });
+    };
 
     me.toggleSidenav = function(componentId){
         $mdSidenav(componentId).open();

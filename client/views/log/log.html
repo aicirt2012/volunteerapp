@@ -1,10 +1,8 @@
 <toolbar title="{{breadcrumb()}}"></toolbar>
 
-<md-content flex md-scroll-y>
-    <ui-view layout="column" layout-fill layout-padding>
-        <div class="inset" hide-sm></div>
+<md-content flex md-scroll-y layout-fill layout-padding>
 
-        <md-card style="padding:0px">
+        <md-card style="padding:0px; overflow-y: hidden">
             <md-card-content style="padding:0px">
                 <table style="width:100%" cellpadding="4" cellspacing="0">
                     <tr style="background-color:rgb(3,169,244); color:white; font-weight:bold;">
@@ -25,6 +23,4 @@
             </md-card-content>
         </md-card>
 
-
-    </ui-view>
 </md-content>

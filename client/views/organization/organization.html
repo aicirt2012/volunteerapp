@@ -10,10 +10,7 @@
     </div>
 </md-toolbar>
 
-<md-content flex md-scroll-y>
-    <ui-view layout="column" layout-fill layout-padding>
-        <div class="inset" hide-sm></div>
-
+<md-content flex md-scroll-y layout-fill layout-padding>
         <md-card ng-if="!accountView" style="padding:0px">
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -171,7 +168,4 @@
                 </md-card-content>
             </ng-switch>
         </md-card>
-
-
-    </ui-view>
 </md-content>

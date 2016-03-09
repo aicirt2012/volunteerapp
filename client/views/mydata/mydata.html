@@ -1,8 +1,6 @@
 <toolbar title="{{breadcrumb()}}"></toolbar>
 
-<md-content flex md-scroll-y>
-    <ui-view layout="column" layout-fill layout-padding>
-        <div class="inset" hide-sm></div>
+<md-content flex md-scroll-y layout-fill layout-padding>
 
         <md-card style="padding: 0px">
             <ng-switch on="selectedTabNr" class="tabpanel-container">
@@ -216,8 +214,5 @@
                 </md-card-content>
             </ng-switch>
         </md-card>
-
-
-    </ui-view>
 </md-content>
 <canvas  id="compression_canvas"></canvas >

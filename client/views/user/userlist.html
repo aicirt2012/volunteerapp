@@ -1,4 +1,4 @@
-<md-button ng-if="addVisible" class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="addUser()">
+<md-button ng-if="isAdmin" class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="addUser()">
     <ng-md-icon icon="add"></ng-md-icon>
 </md-button>
 <toolbar title="{{breadcrumb}}"></toolbar>
@@ -16,6 +16,9 @@
                 </md-tab>
                 <md-tab id="tab3" aria-controls="tab3-content">
                     Organisatoren
+                </md-tab>
+                <md-tab id="tab4" aria-controls="tab3-content">
+                    Admin
                 </md-tab>
             </md-tabs>
             <md-card-content style="padding: 0px;">

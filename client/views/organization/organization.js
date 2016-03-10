@@ -1,10 +1,11 @@
-app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$mdDialog', function($scope, $mdSidenav, organization, Organization, $mdDialog) {
+app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$mdDialog', 'User', function($scope, $mdSidenav, organization, Organization, $mdDialog, User) {
 
 
     var me = $scope;
     me.organization = organization;
     me.editMode = false;
     me.accountView = false;
+    me.isAdmin = User.isAdmin();
 
     me.breadcrumb = function(){
         return 'Einrichtungsverwaltung > Einrichtung';

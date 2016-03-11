@@ -8,6 +8,13 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isTeam = User.isTeam();
     me.isHelper = User.isHelper();
 
+    me.users = [
+        { id: 1, name: 'Bob' },
+        { id: 2, name: 'Alice' },
+        { id: 3, name: 'Steve' }
+    ];
+    me.selectedUser = { id: 1, name: 'Bob' };
+
     me.init = function(event){
         me.event = event;
         me.event.startdate = Util.initDateFromJSON(event.startdate);
@@ -82,8 +89,16 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         });
     }
 
+    me.loadOrganizations = function () {
+        Organization.list().$promise.then(
+            function (organizations) {
+                me.organizationlist = organizations;
+            });
+    }
+
     me.openEdit = function(){
-        me.eventCopy = me.event;
+        me.loadOrganizations();
+        me.eventCopy = JSON.parse(JSON.stringify(me.event));
         me.editMode = true;
     }
 
@@ -96,6 +111,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         if(me.event.description == '')
             me.event.description = null;
         me.editMode = false;
+        me.event.organization = me.event.organization.id;
         Event.update(me.event.id, me.event, function(){
             console.log('update executed!');
         });
@@ -138,12 +154,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         window.location.href = '#/eventcalendar';
     }
 
-    me.loadOrganizations = function () {
-        return Organization.list().$promise.then(
-            function (organizations) {
-                me.organizationlist = organizations;
-            });
-    }
 
     me.sendMessage = function(helperId){
         $mdDialog.show({

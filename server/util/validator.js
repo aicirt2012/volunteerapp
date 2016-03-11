@@ -71,4 +71,12 @@ validator.isZip = function(zip) {
     validator.matches(zip, /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/);
 }
 
+validator.startBeforeEndDate = function(startDate, endDate) {
+    if(new Date(startDate) <= new Date(endDate)){
+        validations.push(true);
+    }else{
+        validations.push(false)
+    }
+}
+
 module.exports = validator;

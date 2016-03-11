@@ -22,10 +22,10 @@ router.put('/:id', function(req, res) {
         val.isDate(req.body.startdate);
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
+        val.startBeforeEndDate(req.body.startdate, req.body.enddate);
 
         if(val.allValid()) {
             var eId = req.params.id;
-            console.log(req.params.id);
             var data = {
                 title: req.body.title,
                 place: val.blacklist(req.body.place, "<>;\"\'´"),
@@ -33,7 +33,6 @@ router.put('/:id', function(req, res) {
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
                 description: val.blacklist(req.body.description, "<>;\"\'´"),
-                important: req.body.important,
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_UPDATE, data);
@@ -97,6 +96,7 @@ router.post('/', function(req, res) {
         val.isDate(req.body.startdate);
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
+        val.startBeforeEndDate(req.body.startdate, req.body.enddate);
 
         if(val.allValid()) {
             var e = {
@@ -106,7 +106,6 @@ router.post('/', function(req, res) {
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
                 description: val.blacklist(req.body.description, "<>;\"\'´"),
-                important: req.body.important,
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);

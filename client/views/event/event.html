@@ -19,8 +19,8 @@
             </md-toolbar>
             <md-card-content layout="row" layout-align="space-between stretch" style="padding : 0;">
 
-                <div ng-if="editMode" layout-fill>
-                    <form name="eventForm" layout-padding="">
+                <div ng-if="editMode" layout-padding layout-fill>
+                    <form ng-if="editMode" name="eventForm" layout-padding="">
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Titel</label>
@@ -40,8 +40,6 @@
                                 </md-select>
                             </md-input-container>
                         </div>
-                        {{event.organization}}
-                        {{newOrganization}}
                         <div layout layout-sm="column">
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Benötigte Helfer</label>

@@ -12,6 +12,7 @@ router.post('/photo', function(req, res){
 });
 
 router.put('/personal', function(req, res, next) {
+    val.init();
     val.isEmail(req.body.email);
     val.isName(req.body.name);
     val.isPhone(req.body.tel);
@@ -19,7 +20,6 @@ router.put('/personal', function(req, res, next) {
     val.isGender(req.body.gender);
 
     if(val.allValid()) {
-        val.reset();
         var uId = req.user.id;
         User.exists(req.body.email, uId, function (err) {
             if (err) {
@@ -39,7 +39,6 @@ router.put('/personal', function(req, res, next) {
             }
         });
     }else{
-        val.reset();
         res.sendStatus(400);
     }
 });

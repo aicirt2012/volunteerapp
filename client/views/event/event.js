@@ -8,13 +8,6 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.isTeam = User.isTeam();
     me.isHelper = User.isHelper();
 
-    me.users = [
-        { id: 1, name: 'Bob' },
-        { id: 2, name: 'Alice' },
-        { id: 3, name: 'Steve' }
-    ];
-    me.selectedUser = { id: 1, name: 'Bob' };
-
     me.init = function(event){
         me.event = event;
         me.event.startdate = Util.initDateFromJSON(event.startdate);
@@ -57,11 +50,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     me.pickStartDay = function(ev) {
         $mdpDatePicker(ev, me.event.startdate).then(function(date) {
             me.startDay = date;
-            console.log(me.event.startdate);
             me.event.startdate.setDate(date.getDate());
             me.event.startdate.setMonth(date.getMonth());
             me.event.startdate.setFullYear(date.getFullYear());
-            console.log(me.event.startdate);
             //Also set end day for better usability
             me.endDay = date;
             me.event.enddate.setDate(date.getDate());
@@ -111,8 +102,9 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         if(me.event.description == '')
             me.event.description = null;
         me.editMode = false;
-        me.event.organization = me.event.organization.id;
-        Event.update(me.event.id, me.event, function(){
+        var data = JSON.parse(JSON.stringify(me.event));
+        data.organization = me.event.organization.id;
+        Event.update(me.event.id, data, function(){
             console.log('update executed!');
         });
     }

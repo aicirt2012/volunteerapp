@@ -17,13 +17,15 @@ router.get('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isTitle(req.body.title);
         val.isDate(req.body.startdate);
         val.isDate(req.body.enddate);
+        val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
 
         if(val.allValid()) {
-            val.reset();
             var eId = req.params.id;
+            console.log(req.params.id);
             var data = {
                 title: req.body.title,
                 place: val.blacklist(req.body.place, "<>;\"\'´"),
@@ -35,7 +37,7 @@ router.put('/:id', function(req, res) {
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_UPDATE, data);
-            Event.update(data, function (err) {
+            Event.update(eId, data, function () {
                 findEvent(eId, req.user, function (err, event) {
                     if (err)
                         res.sendStatus(500);
@@ -44,7 +46,6 @@ router.put('/:id', function(req, res) {
                 });
             });
         }else{
-            val.reset();
             res.sendStatus(400);
         }
     }else
@@ -91,12 +92,13 @@ router.delete('/:id', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isTitle(req.body.title);
         val.isDate(req.body.startdate);
         val.isDate(req.body.enddate);
+        val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
 
         if(val.allValid()) {
-            val.reset();
             var e = {
                 title: req.body.title,
                 place: val.blacklist(req.body.place, "<>;\"\'´"),
@@ -133,7 +135,6 @@ router.post('/', function(req, res) {
                 res.send();
             });
         }else{
-            val.reset();
             res.status(400);
         }
     }else
@@ -163,7 +164,6 @@ function findEvent(eId, user, cb){
 
             if(User.isHelper(user.role))
                 delete event.helpers;
-
             cb(false, event);
         }
     });

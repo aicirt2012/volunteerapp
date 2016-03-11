@@ -16,6 +16,7 @@ router.get('/me', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
         val.isPhone(req.body.tel, false);
@@ -23,7 +24,6 @@ router.post('/', function(req, res) {
         val.isGender(req.body.gender);
 
         if(val.allValid()){
-            val.reset();
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
@@ -46,7 +46,6 @@ router.post('/', function(req, res) {
                 }
             });
         }else{
-            val.reset();
             res.sendStatus(400);
         }
     }else
@@ -77,6 +76,7 @@ router.get('/:id', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
         val.isPhone(req.body.tel);
@@ -84,7 +84,6 @@ router.put('/:id', function(req, res) {
         val.isGender(req.body.gender);
 
         if(val.allValid()){
-            val.reset();
             var uId = req.params.id;
             var data = {
                 gender: req.body.gender,
@@ -105,7 +104,6 @@ router.put('/:id', function(req, res) {
                 }
             });
        }else{
-            val.reset();
            res.sendStatus(400);
         }
     }else
@@ -181,10 +179,10 @@ router.post('/:id/resetpw', function(req, res) {
 
 router.put('/:id/role', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isRole(req.body.role);
 
         if(val.allValid()){
-            val.reset();
             var uId = req.params.id;
             var data = {role: req.body.role};
             Log.info(req.user, Log.actions.USER_ROLECHANGE, data);
@@ -192,7 +190,6 @@ router.put('/:id/role', function(req, res) {
                 res.send();
             });
         }else{
-            val.reset();
             res.sendStatus(400);
         }
     }else

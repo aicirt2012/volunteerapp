@@ -34,7 +34,7 @@ validator.allValid = function() {
     })
 };
 
-validator.reset = function() {
+validator.init = function() {
     validations = [];
 }
 

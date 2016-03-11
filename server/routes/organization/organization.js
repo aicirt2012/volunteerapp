@@ -28,6 +28,7 @@ router.get('/:id', function(req, res) {
 
 router.post('/', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isName(req.body.name);
         val.isZip(req.body.zip);
         val.isCity(req.body.city);
@@ -36,7 +37,6 @@ router.post('/', function(req, res) {
         val.isEmail(req.body.email);
 
         if(val.allValid()){
-            val.reset();
             var org = {
                 name: req.body.name,
                 zip: req.body.zip,
@@ -50,7 +50,6 @@ router.post('/', function(req, res) {
                 res.send();
             });
         }else{
-            val.reset();
             res.sendStatus(400);
         }
     }else
@@ -59,6 +58,7 @@ router.post('/', function(req, res) {
 
 router.put('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
+        val.init();
         val.isName(req.body.name);
         val.isZip(req.body.zip);
         val.isCity(req.body.city);
@@ -67,7 +67,6 @@ router.put('/:id', function(req, res) {
         val.isEmail(req.body.email);
 
         if(val.allValid()){
-            val.reset();
             var org = {
                 name: req.body.name,
                 zip: req.body.zip,
@@ -81,7 +80,6 @@ router.put('/:id', function(req, res) {
                 res.send();
             });
         }else{
-            val.reset();
             res.sendStatus(400);
         }
     }else

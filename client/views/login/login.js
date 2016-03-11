@@ -25,15 +25,13 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', functi
                     $mdDialog.cancel();
                 };
             },
-            templateUrl: '/views/login/dialogImressum.html',
+            templateUrl: '/views/login/dialogImpressum.html',
             parent: angular.element(document.body),
             clickOutsideToClose:true
         });
     };
 
     $mdSidenav('left').close();
-
-
 
 }]);
 

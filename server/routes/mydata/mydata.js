@@ -44,6 +44,8 @@ router.put('/personal', function(req, res, next) {
 });
 
 router.put('/availability', function(req, res, next) {
+    val.init();
+    val.isAvailability(req.body.availability);
     User.update(req.user.id, {availability:req.body}, function(){
         res.send();
     });

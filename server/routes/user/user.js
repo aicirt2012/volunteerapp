@@ -22,6 +22,7 @@ router.post('/', function(req, res) {
         val.isPhone(req.body.tel, false);
         val.isPhone(req.body.mobil, false);
         val.isGender(req.body.gender);
+        val.isAvailability(req.body.availability);
 
         if(val.allValid()){
             User.exists(req.body.email, '', function (err) {
@@ -82,6 +83,7 @@ router.put('/:id', function(req, res) {
         val.isPhone(req.body.tel);
         val.isPhone(req.body.mobil);
         val.isGender(req.body.gender);
+        val.isAvailability(req.body.availability);
 
         if(val.allValid()){
             var uId = req.params.id;

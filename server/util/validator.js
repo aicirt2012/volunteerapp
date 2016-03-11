@@ -79,4 +79,35 @@ validator.startBeforeEndDate = function(startDate, endDate) {
     }
 }
 
+validator.isAvailability = function(availability) {
+    var valid = true;
+    var keys = Object.keys(availability);
+    var expectedKeys = ["mo", "tu", "we", "th", "fr", "sa", "su"];
+    var expectedKeyValues = ["morning", "afternoon", "evening"];
+    if(arraysEqual(keys, expectedKeys)){
+        for(var k in availability){
+            var key = availability[k];
+            var keyValues = Object.keys(key);
+            if(!arraysEqual(keyValues, expectedKeyValues))
+                valid = false;
+        }
+    }else{
+        valid = false;
+    }
+    validations.push(valid);
+}
+
+arraysEqual = function(a1, a2){
+    for(var e in a1){
+        var element = a1[e];
+        var index = a2.indexOf(element);
+        if(index == -1)
+            return false;
+    }
+    if(a2.length == a1.length)
+        return true;
+    else
+        return false;
+}
+
 module.exports = validator;

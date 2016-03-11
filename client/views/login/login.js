@@ -15,7 +15,7 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', functi
         });
     }
 
-    me.openImpressum = function(){
+    me.openContact = function(){
         $mdDialog.show({
             controller: function ($scope, $mdDialog) {
                 $scope.hide = function() {
@@ -25,7 +25,43 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', functi
                     $mdDialog.cancel();
                 };
             },
+            templateUrl: '/views/login/dialogContact.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true
+        });
+    };
+
+    me.openImpressum = function(){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.close = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.datenschutz = function() {
+                    $mdDialog.cancel();
+                    me.openDatenschutz();
+                }
+            },
             templateUrl: '/views/login/dialogImpressum.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true
+        });
+    };
+
+    me.openDatenschutz = function(){
+        $mdDialog.show({
+            controller: function ($scope, $mdDialog) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.close = function() {
+                    $mdDialog.cancel();
+                };
+            },
+            templateUrl: '/views/login/dialogDatenschutz.html',
             parent: angular.element(document.body),
             clickOutsideToClose:true
         });

@@ -1,0 +1,34 @@
+<md-dialog aria-label="Contact">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Kontakt</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content >
+        <md-content class="md-padding">
+            <b>Technische Universität München</b><br/>
+            Forschungsprojekt TUM Living Lab Connected Mobility<br/>
+            Lehrstuhl Software Engineering for Business Information Systems (sebis)<br/>
+            Boltzmannstrasse 3<br/>
+            D-85748 Garching bei München<br/>
+            <br/>
+            <br/>
+            <b>Akademische Projektleitung</b><br/>
+            Prof. Dr. Florian Matthes<br/>
+            matthes(at)in.tum.de<br/>
+            +49 289 17132<br/>
+        </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="close()" style="margin-right:20px;" >
+            OK
+        </md-button>
+    </md-dialog-actions>
+
+</md-dialog>

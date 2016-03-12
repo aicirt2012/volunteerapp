@@ -1,30 +1,30 @@
 <md-dialog aria-label="Contact">
-
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2>Kontakt</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
     <md-dialog-content >
-        <md-content class="md-padding">
-            <b>Technische Universität München</b><br/>
-            Forschungsprojekt TUM Living Lab Connected Mobility<br/>
-            Lehrstuhl Software Engineering for Business Information Systems (sebis)<br/>
-            Boltzmannstrasse 3<br/>
-            D-85748 Garching bei München<br/>
-            <br/>
-            <br/>
+        <md-content class="md-padding" style="min-width:400px">
+            <div layout="row" class="zero">
+                <div flex="50" >
+                    <img src="/img/tumlogo_simple_blue.png" height="30" /><br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <b>Felix Michel</b><br/>
+                    M.Sc.
+                </div>
+                <div flex="50" style="font-size: small;">
+                    <img src="/img/sebislogo2.png" height="30" /><br/>
+                    <br/>
+                    Technische Universität München<br/>
+                    Fakultät für Informatik<br/>
+                    Lehrstuhl für Software Engineering <br/> betrieblicher Informationssysteme<br/>
+                    <br/>
+                    Boltzmannstrasse 3<br/>
+                    D-85748 Garching bei München<br/>
+                    <br/>
+                    felix.michel@tum.de<br/>
+                    wwwmatthes.in.tum.de
+                </div>
+            </div>
         </md-content>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
-        <span flex></span>
-        <md-button ng-click="close()" style="margin-right:20px;" >
-            Schließen
-        </md-button>
-    </md-dialog-actions>
-
 </md-dialog>

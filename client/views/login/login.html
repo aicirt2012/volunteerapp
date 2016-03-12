@@ -2,16 +2,32 @@
         <div layout="column" layout-align="center">
             <div layout="row" layout-align="center center">
 
-                <md-card>
+
+
+
+                <md-card >
                     <md-toolbar>
+                        <div class="md-toolbar-tools">
+
+                            <span flex></span>
+                            <md-icon md-svg-icon="/img/tumlogo_white.png" style="color: greenyellow;"></md-icon>
+                            <!--<div style="width:230px; padding:5px; padding-bottom:0px;"><img src="/img/tumlogo_white.png" height="10"/></div>-->
+                        </div>
+                    </md-toolbar>
+
+                    <md-toolbar>
+                        <!--
+                        <div layout-align="right">
+                        <div style="width:230px; padding:5px; padding-bottom:0px;"><img src="/img/tumlogo_white.png" height="20"/></div>
+                        </div>
+                        -->
                         <div class="md-toolbar-tools">
                             <h2>
                                 <span>Volunteer App Login</span>
                             </h2>
-                            <span flex></span>
                         </div>
                     </md-toolbar>
-                    <md-card-content>
+                    <md-card-content ng-if="!inAction">
                         <form name="userForm">
                             <div layout layout-sm="column">
                                 <div>
@@ -36,7 +52,12 @@
                                 </div>
                             </div>
                         </form>
-                        <img src="/img/tumlogo_blue.png" height="30" />
+                    </md-card-content>
+                    <md-card-content ng-if="inAction">
+                        Einloggen bitte warten ...<br/>
+                        <div  layout="row" layout-sm="column" layout-align="space-around">
+                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                        </div>
                     </md-card-content>
                 </md-card>
 

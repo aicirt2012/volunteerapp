@@ -5,12 +5,16 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', functi
     //TODO Remove only for simple testing
     me.email = 'user2@tum.de';
     me.pw = '123';
+    me.inAction = false;
 
     me.login = function(){
+        me.inAction = true;
         User.login(me.email, me.pw).then(function(data){
+            me.inAction = false;
             $scope.$parent.initMenu();
             window.location.href = '#/eventcalendar';
         }, function(){
+            me.inAction = false;
             console.log('login failed');
         });
     }

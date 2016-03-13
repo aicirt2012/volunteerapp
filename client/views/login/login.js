@@ -7,11 +7,9 @@ app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', functi
     me.pw = '123';
     me.inAction = false;
 
-    me.login = function(){
+    me.login = function(email, pw){
         me.inAction = true;
-        me.email = 'admin@tum.de';
-        console.log(me.email, me.pw);
-        User.login(me.email, me.pw).then(function(data){
+        User.login(email, pw).then(function(data){
             //me.inAction = false;
             $scope.$parent.initMenu();
             window.location.href = '#/eventcalendar';

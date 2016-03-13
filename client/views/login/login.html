@@ -13,36 +13,38 @@
                     </md-toolbar>
                     <md-card-content ng-if="!inAction">
                         <form name="userForm">
-                            <div style="height:100px">
-                            <div layout layout-sm="column" layout-align="center center" layout-fill>
-                                <div>
-                                    <div layout layout-sm="row">
-                                        <md-input-container md-no-float class="md-block" style="margin: 0px">
-                                            <input ng-model="email" placeholder="Email">
-                                        </md-input-container>
+                            <div style="height:100px;">
+                                <div layout layout-sm="column" layout-align="center center" layout-fill>
+                                    <div>
+                                        <div layout layout-sm="row">
+                                            <md-input-container md-no-float class="md-block" style="margin: 0px">
+                                                <input ng-model="email" placeholder="Email">
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-sm="row">
+                                            <md-input-container md-no-float class="md-block" style="margin: 0px">
+                                                <input ng-model="pw" type="password" placeholder="Passwort">
+                                            </md-input-container>
+                                        </div>
                                     </div>
-                                    <div layout layout-sm="row">
-                                        <md-input-container md-no-float class="md-block" style="margin: 0px">
-                                            <input ng-model="pw" type="password" placeholder="Passwort">
-                                        </md-input-container>
+                                    <div>
+                                        <section layout="row" layout-sm="column" layout-align="center end" layout-wrap style="margin-right:-70px;">
+                                            <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login()">
+                                                <ng-md-icon icon="arrow_forward" size="24"></ng-md-icon>
+                                            </md-button>
+                                        </section>
                                     </div>
                                 </div>
-                                <div>
-                                    <section layout="row" layout-sm="column" layout-align="center end" layout-wrap style="margin-right:-70px;">
-                                        <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login()">
-                                            <ng-md-icon icon="arrow_forward" size="24"></ng-md-icon>
-                                        </md-button>
-                                    </section>
-                                </div>
-                            </div>
                             </div>
                         </form>
                     </md-card-content>
                     <md-card-content ng-if="inAction">
-                        Einloggen bitte warten ...<br/>
+
                         <div  layout="row" layout-sm="column" layout-align="space-around">
                             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                        </div>
+                        </div><br/>
+                        <div style="text-align: center;">Einloggen bitte warten ...</div>
+
                     </md-card-content>
                 </md-card>
 

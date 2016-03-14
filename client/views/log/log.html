@@ -4,20 +4,20 @@
 
         <md-card style="padding:0px; overflow-y: hidden">
             <md-card-content style="padding:0px">
-                <table style="width:100%" cellpadding="4" cellspacing="0">
+                <table ng-click="description = !description" style="width:100%" cellpadding="4" cellspacing="0">
                     <tr style="background-color:rgb(3,169,244); color:white; font-weight:bold;">
                         <td>Datum</td>
                         <td>Aktion</td>
                         <td>User</td>
                         <td>Role</td>
-                        <td>Beschreibug</td>
+                        <td ng-if="description">Beschreibug</td>
                     </tr>
                     <tr ng-repeat="log in logs">
                         <td>{{log.date | date: 'dd.MM.yyyy HH:mm'}}</td>
                         <td>{{log.action}}</td>
                         <td>{{log.username}}</td>
                         <td>{{log.userrole}}</td>
-                        <td>{{log.description}}</td>
+                        <td ng-if="description">{{log.description}}</td>
                     </tr>
                 </table>
             </md-card-content>

@@ -78,6 +78,25 @@ router.post('/:id/message', function(req, res) {
 router.delete('/:id', function(req, res) {
     if(User.atLeastOrganizer(req.user.role )){
         var eId = req.params.id;
+        Event.findWithHelperById(eId, function(err, event){
+            for (var i = 0; i < event.helpers.length; i++) {
+                if (err) {
+                    res.sendStatus(500);
+                } else {
+                    mailer.send({
+                        to: event.helpers[i].email,
+                        subject: event.title + ' wurde abgesagt',
+                        html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
+                        '<p>Das Event ' + '<b>' + event.title + '</b>' +
+                        ' am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr,' +
+                        ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>' +
+                        '<p>Viele Grüße, <br>' +
+                        'Ihr VolunterApp Team</p>'
+                    });
+                }
+            }
+        });
+
         Log.info(req.user, Log.actions.EVENT_DELETE, {eventId: eId});
         Event.delete(eId, function(err){
             if(err)
@@ -119,7 +138,7 @@ router.post('/', function(req, res) {
                             to: users[i].email,
                             subject: 'Neues Event: ' + e.title,
                             html: '<h3>Hallo ' + users[i].name + '!</h3>' +
-                            '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.<p>' +
+                            '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
                             '<b>' + req.body.title + '</b>' +
                             '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
                             'Ort: ' + req.body.place + '<br>' +

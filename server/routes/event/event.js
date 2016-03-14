@@ -118,15 +118,15 @@ router.post('/', function(req, res) {
                         mailer.send({
                             to: users[i].email,
                             subject: 'Neues Event: ' + e.title,
-                            html: '<h3>Hallo Felix!</h3>' +
-                            '<p> Es wurde ein Event erstellt, dass dich interessieren könnte.<p>' +
+                            html: '<h3>Hallo ' + users[i].name + '!</h3>' +
+                            '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.<p>' +
                             '<b>' + req.body.title + '</b>' +
                             '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
                             'Ort: ' + req.body.place + '<br>' +
                             'Beschreibung: ' + e.description + '<br>' +
                             'Es werden ' + e.nrhelpers + ' Helfer benötigt.</p>' +
                             '<p>Viele Grüße, <br>' +
-                            'dein VolunterApp Team</p>'
+                            'Ihr VolunterApp Team</p>'
                         });
                     }
 

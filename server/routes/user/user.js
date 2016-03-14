@@ -29,19 +29,32 @@ router.post('/', function(req, res) {
                 if (err) {
                     console.log(err);
                 } else {
+                    var plainPw = User.generatePw();
+                    var hashedPw = User.hashPw(plainPw);
                     var data = {
                         gender: req.body.gender,
                         name: req.body.name,
                         tel: req.body.tel,
                         mobil: req.body.mobil,
                         email: req.body.email,
-                        pw: User.hashPw(req.body.pw),
+                        pw: hashedPw,
                         notes: val.blacklist(req.body.notes, "<>;\"\'´"),
                         role: User.roles.HELPER,
                         availability: req.body.availability
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
-                    User.save(data, function () {
+                    User.save(data, function(){
+                        mailer.send({
+                            to: data.email,
+                            subject: 'Willkommen bei der Volunteer App',
+                            html: 'Hallo '+ data.name + ';<br/>' +
+                            'Es wurde ein Volunteer App Account für Sie erstellt. <br\>' +
+                            'Ihr Passwort lautet: "'+plainPw+'"!<br\>'+
+                            'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden link an: <br\>' +
+                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a>'+
+                            'Viele Grüße, <br\>' +
+                            'Ihr Volunteer App Team'
+                        });
                         res.send();
                     });
                 }
@@ -167,9 +180,10 @@ router.post('/:id/resetpw', function(req, res) {
                         to: user.email,
                         subject: 'Ihr Passwort wurde zurückgesetzt!',
                         html: 'Hallo '+user.name + ';<br/>' +
-                              'Ihr neues Passwort lautet: "'+plainPw+'"!<br\>' +
+                              'Ihr Passwort wurde erfolgreich zurück gesetzt, <br\>' +
+                              'Das neues Passwort lautet: "'+plainPw+'"!<br\>' +
                               'Viele Grüße, <br\>' +
-                              'Volunteer App Team'
+                              'Ihr Volunteer App Team'
                     });
                     res.send();
                 });

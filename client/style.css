@@ -81,3 +81,8 @@ md-tooltip .md-content {
 md-list{
     padding:0px;
 }
+fieldset.standard {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff6400;
+}

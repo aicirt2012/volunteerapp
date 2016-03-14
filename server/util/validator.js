@@ -38,6 +38,13 @@ validator.init = function() {
     validations = [];
 }
 
+validator.conditionsofuseIsTrue = function(conditionsofuse){
+    if(conditionsofuse)
+        validations.push(true);
+    else
+        validations.push(false);
+}
+
 validator.isName = function(name) {
     validator.matches(name, /^[a-zA-ZöüäßÜÖÄ\- ]+$/);
 }

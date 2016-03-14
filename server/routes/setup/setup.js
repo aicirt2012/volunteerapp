@@ -47,7 +47,8 @@ router.post('/', function(req, res, next) {
                 notes: u.notes,
                 role: u.role,
                 availability: u.availability,
-                picture: u.picture
+                picture: u.picture,
+                conditionsofuse: true
             }, function(){
                 cb();
             });

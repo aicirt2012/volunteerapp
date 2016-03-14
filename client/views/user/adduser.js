@@ -21,7 +21,8 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
             "fr": {"morning": false, "afternoon": false, "evening": false},
             "sa": {"morning": false, "afternoon": false, "evening": false},
             "su": {"morning": false, "afternoon": false, "evening": false}
-        }
+        },
+        conditionsofuse: false
     };
 
     me.onCancel = function(){

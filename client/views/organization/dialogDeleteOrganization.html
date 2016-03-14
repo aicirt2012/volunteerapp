@@ -28,7 +28,7 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-disabled="organization.name != organizationName" ng-click="deleteOrganization()" >
+            <md-button class="md-raised md-primary" ng-disabled="organization.name.toUpperCase() != organizationName.toUpperCase()" ng-click="deleteOrganization()" >
                 Löschen
             </md-button>
         </md-dialog-actions>

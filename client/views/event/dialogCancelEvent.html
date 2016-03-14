@@ -10,8 +10,15 @@
             </div>
         </md-toolbar>
         <md-dialog-content style="max-width:500px;max-height:810px; ">
-            <md-content class="md-padding">
+            <md-content class="md-padding" style="text-align: center">
                 <p>Sind Sie sicher, dass Sie das Event <b>{{event.title}}</b> am <b>{{event.startdate | date: 'dd.MM.yyyy'}}</b> absagen wollen?</p>
+                <p>
+                    Um das Event zu löschen geben Sie den Titel des Events in das Feld ein.
+                </p>
+                <md-input-container flex>
+                    <label>Event</label>
+                    <input required name="eventTitle" ng-model="eventTitle">
+                </md-input-container>
             </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">
@@ -19,7 +26,7 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="cancelEvent()" >
+            <md-button class="md-raised md-primary" ng-disabled="event.title != eventTitle" ng-click="cancelEvent()" >
                 Absagen
             </md-button>
         </md-dialog-actions>

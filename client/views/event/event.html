@@ -164,7 +164,8 @@
                             <md-icon class="material-icons">today
                             </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr</h3>
+                                <h3 ng-if="event.startdate.getDate() == event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr</h3>
+                                <h3 ng-if="event.startdate.getDate() != event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr</h3>
                                 <p> Datum </p>
                             </div>
                         </md-list-item>

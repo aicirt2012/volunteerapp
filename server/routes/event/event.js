@@ -40,8 +40,28 @@ router.put('/:id', function(req, res) {
                 findEvent(eId, req.user, function (err, event) {
                     if (err)
                         res.sendStatus(500);
-                    else
+                    else {
+                        for (var i = 0; i < event.helpers.length; i++) {
+                            if (err) {
+                                res.sendStatus(500);
+                            } else {
+                                mailer.send({
+                                    to: event.helpers[i].email,
+                                    subject: event.title + ' wurde geändert',
+                                    html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
+                                    '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
+                                    'Das Event <b>' + event.title + '</b>' +
+                                    ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr,' +
+                                    ' statt.<br/></p>' +
+                                        'Um alle Informationen über das Event einzusehen klicken Sie auf flogenden Link: ' +
+                                    '<a href="http://volunteers.in.tum.de/#/event/'+event.id+'">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'+
+                                    '<p>Viele Grüße, <br>' +
+                                    'Ihr VolunterApp Team</p>'
+                                });
+                            }
+                        }
                         res.json(event);
+                    }
                 });
             });
         }else{

@@ -26,7 +26,7 @@
             <md-button ng-click="cancel()" style="margin-right:20px;" >
                 Abbrechen
             </md-button>
-            <md-button class="md-raised md-primary" ng-disabled="event.title != eventTitle" ng-click="cancelEvent()" >
+            <md-button class="md-raised md-primary" ng-disabled="event.title.toUpperCase() != eventTitle.toUpperCase()" ng-click="cancelEvent()" >
                 Absagen
             </md-button>
         </md-dialog-actions>

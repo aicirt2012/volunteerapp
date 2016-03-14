@@ -75,3 +75,9 @@ md-tooltip .md-content {
     color: rgb(221,44,0);
     font-size: 12px;
 }
+.sidebarListItem .md-no-style, md-list-item.md-no-proxy {
+    padding:0px;
+}
+md-list{
+    padding:0px;
+}

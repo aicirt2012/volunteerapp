@@ -21,30 +21,26 @@
         </div>
     </md-toolbar>
     <md-list>
-        <md-item ng-repeat="item in menu" ng-click="openView(item.link)">
-            <a>
-                <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                    <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                    </div>
-                    <div class="inset">{{item.title}}
-                    </div>
-                </md-item-content>
-            </a>
-        </md-item>
+        <md-list-item class="sidebarListItem" ng-repeat="item in menu" ng-click="openView(item.link)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                <div class="inset">
+                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset">{{item.title}}
+                </div>
+            </md-item-content>
+        </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Mein Bereich</md-subheader>
-        <md-item ng-repeat="item in mymenu" ng-click="openView(item.link)">
-            <a>
-                <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                    <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                    </div>
-                    <div class="inset">{{item.title}}
-                    </div>
-                </md-item-content>
-            </a>
-        </md-item>
+        <md-list-item class="sidebarListItem" ng-repeat="item in mymenu" ng-click="openView(item.link)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                <div class="inset">
+                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset">{{item.title}}
+                </div>
+            </md-item-content>
+        </md-list-item>
     </md-list>
 </md-sidenav>
 

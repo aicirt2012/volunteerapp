@@ -23,6 +23,7 @@ router.post('/', function(req, res) {
         val.isPhone(req.body.mobil, false);
         val.isGender(req.body.gender);
         val.isAvailability(req.body.availability);
+        val.conditionsofuseIsTrue(req.body.conditionsofuse);
 
         if(val.allValid()){
             User.exists(req.body.email, '', function (err) {
@@ -31,6 +32,8 @@ router.post('/', function(req, res) {
                 } else {
                     var plainPw = User.generatePw();
                     var hashedPw = User.hashPw(plainPw);
+                    if(req.body.notes)
+                        var validatedNotes = val.blacklist(req.body.notes, "<>;\"\'´");
                     var data = {
                         gender: req.body.gender,
                         name: req.body.name,
@@ -38,9 +41,10 @@ router.post('/', function(req, res) {
                         mobil: req.body.mobil,
                         email: req.body.email,
                         pw: hashedPw,
-                        notes: val.blacklist(req.body.notes, "<>;\"\'´"),
+                        notes: validatedNotes,
                         role: User.roles.HELPER,
-                        availability: req.body.availability
+                        availability: req.body.availability,
+                        conditionsofuse: req.body.conditionsofuse
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
                     User.save(data, function(){

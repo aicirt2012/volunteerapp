@@ -164,7 +164,8 @@
                             <md-icon class="material-icons">today
                             </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr</h3>
+                                <h3 ng-if="event.startdate.getDate() == event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr</h3>
+                                <h3 ng-if="event.startdate.getDate() != event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr</h3>
                                 <p> Datum </p>
                             </div>
                         </md-list-item>
@@ -210,19 +211,21 @@
                                 <p>{{helper.tel}}</p>
                             </div>
                         </md-list-item>
+                    </md-list>
+                    <div layout="row">
                         <md-button class="md-primary md-raised" ng-click="helperRegister()">
                             Helfer Anmelden
                             <md-tooltip>
                                 Weitere Helfer zu diesem Event hinzufügen
                             </md-tooltip>
                         </md-button>
-                        <md-button class="md-primary md-raised" ng-if="event.nrhelpersregistered != 0" ng-click="sendMessage()">
+                        <md-button class="md-primary md-raised" ng-disabled="event.nrhelpersregistered == 0" ng-click="sendMessage()">
                             Nachricht Senden
                             <md-tooltip>
                                 Nachricht an alle ange- <br/> meldeten Helfer senden
                             </md-tooltip>
                         </md-button>
-                    </md-list>
+                    </div>
 
                 </div>
 

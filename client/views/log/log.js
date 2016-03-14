@@ -3,7 +3,7 @@ app.controller('LogCtrl', ['$scope', '$mdSidenav', 'logs', function($scope, $mdS
 
     var me = $scope;
     me.logs = logs;
-
+    me.description = false;
 
     me.breadcrumb = function(){
         return 'Systemlog';

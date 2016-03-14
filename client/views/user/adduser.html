@@ -114,9 +114,17 @@
 
                         </table>
                         <br/><br/>
+                        <div layout layout-sm="column">
+                            <fieldset class="standard" ng-style="myStyle">
+                                <legend md-warn>Pflichtfeld!</legend>
+                                <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}" ng-model="user.conditionsofuse" class="md-warn">
+                                    Der Nutzer wurde auf Impressum und Datenschutzrichtlinien hingewiesen.
+                                </md-checkbox>
+                            </fieldset>
+                        </div>
                         <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                             <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
-                            <md-button class="md-raised md-primary" ng-click="submitAddUser()">Speichern</md-button>
+                            <md-button ng-disabled="!user.conditionsofuse" class="md-raised md-primary" ng-click="submitAddUser()">Speichern</md-button>
                         </section>
                     </form>
 

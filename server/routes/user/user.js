@@ -47,13 +47,13 @@ router.post('/', function(req, res) {
                         mailer.send({
                             to: data.email,
                             subject: 'Willkommen bei der Volunteer App',
-                            html: 'Hallo '+ data.name + ';<br/>' +
-                            'Es wurde ein Volunteer App Account für Sie erstellt. <br\>' +
-                            'Ihr Passwort lautet: "'+plainPw+'"!<br\>'+
-                            'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden link an: <br\>' +
-                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a>'+
-                            'Viele Grüße, <br\>' +
-                            'Ihr Volunteer App Team'
+                            html: '<h3>Hallo ' + data.name + '!</h3>' +
+                            '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
+                            'Ihr Passwort lautet: "'+plainPw+'"!<br/>'+
+                            'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
+                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>'+
+                            '<p>Viele Grüße, <br/>' +
+                            'Ihr Volunteer App Team</p>'
                         });
                         res.send();
                     });
@@ -179,11 +179,11 @@ router.post('/:id/resetpw', function(req, res) {
                     mailer.send({
                         to: user.email,
                         subject: 'Ihr Passwort wurde zurückgesetzt!',
-                        html: 'Hallo '+user.name + ';<br/>' +
-                              'Ihr Passwort wurde erfolgreich zurück gesetzt, <br\>' +
-                              'Das neues Passwort lautet: "'+plainPw+'"!<br\>' +
-                              'Viele Grüße, <br\>' +
-                              'Ihr Volunteer App Team'
+                        html: '<h3>Hallo ' + user.name + '!</h3>' +
+                              '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
+                              'Ihr neues Passwort lautet: "'+plainPw+'"!<br/></p>' +
+                              '<p>Viele Grüße, <br/>' +
+                              'Ihr Volunteer App Team</p>'
                     });
                     res.send();
                 });

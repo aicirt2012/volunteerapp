@@ -51,9 +51,9 @@ router.put('/:id', function(req, res) {
                                     html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
                                     '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
                                     'Das Event <b>' + event.title + '</b>' +
-                                    ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr,' +
+                                    ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
                                     ' statt.<br/></p>' +
-                                        'Um alle Informationen über das Event einzusehen klicken Sie auf flogenden Link: ' +
+                                    'Um alle Informationen über das Event einzusehen klicken Sie auf flogenden Link: ' +
                                     '<a href="http://volunteers.in.tum.de/#/event/'+event.id+'">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'+
                                     '<p>Viele Grüße, <br>' +
                                     'Ihr VolunterApp Team</p>'
@@ -108,7 +108,7 @@ router.delete('/:id', function(req, res) {
                         subject: event.title + ' wurde abgesagt',
                         html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
                         '<p>Das Event ' + '<b>' + event.title + '</b>' +
-                        ' am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr,' +
+                        ' am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
                         ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>' +
                         '<p>Viele Grüße, <br>' +
                         'Ihr VolunterApp Team</p>'
@@ -163,7 +163,7 @@ router.post('/', function(req, res) {
                             '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
                             'Ort: ' + req.body.place + '<br>' +
                             'Beschreibung: ' + e.description + '<br>' +
-                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.</p>' +
+                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>' +
                             '<p>Viele Grüße, <br>' +
                             'Ihr VolunterApp Team</p>'
                         });

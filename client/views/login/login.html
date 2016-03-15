@@ -11,13 +11,13 @@
                             <div style="width:35px;"><img src="/img/tumlogo_simple_white.png"/></div>
                         </div>
                     </md-toolbar>
-                    <md-card-content ng-if="!inAction">
+                    <md-card-content ng-if="!inAction" style="padding-bottom: 0px;">
                         <form name="userForm">
                             <div style="height:100px;">
                                 <div layout layout-sm="column" layout-align="center center" layout-fill>
                                     <div>
                                         <div layout layout-sm="row">
-                                            <md-input-container md-no-float class="md-block" style="margin: 0px">
+                                            <md-input-container md-no-float class="md-block" style="margin: 0px; margin-top:10px;">
                                                 <input ng-model="email" placeholder="Email">
                                             </md-input-container>
                                         </div>
@@ -27,9 +27,9 @@
                                             </md-input-container>
                                         </div>
                                     </div>
-                                    <div>
-                                        <section layout="row" layout-sm="column" layout-align="center end" layout-wrap style="margin-right:-70px;">
-                                            <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login(email, pw)">
+                                    <div style="margin-left: 15px;">
+                                        <section layout="row" layout-sm="column" layout-align="center end" layout-wrap >
+                                            <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="login(email, pw)" style="margin:0px; width:35px; height:35px; line-height: 35px;">
                                                 <ng-md-icon icon="arrow_forward" size="24"></ng-md-icon>
                                             </md-button>
                                         </section>

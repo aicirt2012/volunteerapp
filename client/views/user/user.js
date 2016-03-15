@@ -8,7 +8,7 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     me.newUserRole = me.user.role;
     me.genders = User.genders;
     me.roles = User.roles;
-    me.selectedTabNr = 1;
+    me.selectedTabNr = 0;
     me.editMode = false;
     me.editVisible = User.isAdmin() || User.isOrganizer();
     me.accountView = false;

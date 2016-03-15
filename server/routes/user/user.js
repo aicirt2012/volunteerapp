@@ -29,6 +29,7 @@ router.post('/', function(req, res) {
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
+                    res.sendStatus(500);
                 } else {
                     var plainPw = User.generatePw();
                     var hashedPw = User.hashPw(plainPw);

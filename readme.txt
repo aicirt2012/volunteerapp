@@ -25,5 +25,6 @@ C:\dev\repo\
 modify secret in conf
 
 cd C:\dev\repo\bin
+setx NODE_ENV production || set NODE_ENV=production || $env:NODE_ENV="production" (for power shell)
 node www
 

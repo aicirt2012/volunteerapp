@@ -4,6 +4,7 @@ var http = require('../../util/http');
 var User = require('../../sc/User');
 var Event = require('../../sc/Event');
 var val = require('../../util/validator');
+var Log = require('../../sc/Log');
 
 router.post('/photo', function(req, res){
     User.update(req.user.id, {picture:req.body.picture}, function(){

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
+var compression = require('compression')
 var config = require('./config')
 
 var setup = require('./server/routes/setup/setup');
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(compression());
+
 
 if (app.get('env') === 'development') {
     app.use('/api/setup', setup);

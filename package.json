@@ -25,6 +25,7 @@
     "bcrypt-nodejs": "^0.0.3",
     "moment": "2.11.2",
     "generate-password": "1.1.1",
-    "validator": "5.1.0"
+    "validator": "5.1.0",
+    "compression": "1.6.1"
   }
 }

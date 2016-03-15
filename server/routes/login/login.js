@@ -17,10 +17,8 @@ router.post('/', function(req, res, next) {
     User.canLogin(email, pw, function(err, user){
         if(err) {
             console.log(err);
-            Log.info(null, Log.actions.LOGIN_FAILED, email);
             return res.sendStatus(403);
         }else {
-            Log.info(user, Log.actions.LOGIN);
             return res.json({
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
                 user: User.toMe(user)

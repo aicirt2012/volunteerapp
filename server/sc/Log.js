@@ -20,9 +20,6 @@ Log.level = {
 }
 
 Log.actions = {
-    LOGIN: 'LOGIN',
-    LOGIN_FAILED: 'LOGIN_FAILED',
-    LOGOUT: 'LOGOUT',
     EVENT_CREATE: 'EVENT_CREATE',
     EVENT_UPDATE: 'EVENT_UPDATE',
     EVENT_DELETE: 'EVENT_DELETE',

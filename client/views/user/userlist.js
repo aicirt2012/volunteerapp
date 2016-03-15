@@ -6,7 +6,7 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
     me.roles = User.roles;
     me.isAdmin = User.isAdmin();
 
-    me.selectedTabNr = 1;
+    me.selectedTabNr = 0;
     me.$watch('selectedTabNr', function(newValue) {
         me.selectedRole = me.roles[me.selectedTabNr];
         me.breadcrumb = 'Personalverwaltung > '+ me.selectedRole.label;

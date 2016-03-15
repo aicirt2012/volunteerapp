@@ -14,8 +14,9 @@ var config = require('../config');
  */
 var port = config.port
 app.set('port', port);
-app.set('env', config.env);
-console.log('Starting '+config.name+' in '+config.env+' mode on port '+port);
+//app.set('env', config.env);
+//process.env['NODE_ENV'] = config.env;
+console.log('Starting '+config.name+' in '+app.get('env')+' mode on port '+port);
 console.log('Using SocioCortex API URL "'+config.sc.url+'" and user "'+config.sc.user+'"');
 
 /**

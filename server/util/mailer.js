@@ -25,7 +25,7 @@ module.exports = {
             });
 
             var mail = {
-                from: 'Refugee <muc.refugees@gmail.com>',
+                from: config.name+' <'+config.email.user+'@gmail.com>',
                 to: mail.to,
                 subject: mail.subject,
                 text: mail.text,

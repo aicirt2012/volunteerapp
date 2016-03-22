@@ -185,7 +185,7 @@ router.get('/:id', function(req, res) {
         if(err)
             res.sendStatus(500);
         else
-            res.json(event);
+            res.send(event);
     });
 });
 

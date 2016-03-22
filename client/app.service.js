@@ -24,6 +24,7 @@ app.service('Event', function($resource) {
     }
 
     function update(eventId, data, cb){
+        delete data.helpers;
         return Event.update({id: eventId}, data, cb);
     }
 

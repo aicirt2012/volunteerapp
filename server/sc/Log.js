@@ -7,7 +7,7 @@ var Log = EntityType.define({
     useremail: {type: 'String'},
     userid: {type: 'String'},
     userrole:  {type: 'String'},
-    date: {type: 'Date'},
+    date: {type: 'String'},
     level: {type: 'String'},
     action: {type:'String'},
     description: {type:'String'}
@@ -49,6 +49,7 @@ Log.err = function(user, action, description){
 }
 
 Log.log = function(user, level, action, description){
+    console.log(new Date().toISOString());
     var data = {
         username: user? user.name : 'N.A.',
         useremail: user? user.email : 'N.A.',

@@ -30,10 +30,12 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
             mobil: me.user.mobil,
             email: me.user.email
         });
+        me.editMode = false;
     }
 
     me.submitAvailability = function(){
         MyData.availability.update(me.user.availability);
+        me.editMode = false;
     }
 
     me.submitPhotoUpload = function (dataUrl) {

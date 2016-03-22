@@ -12,7 +12,7 @@
                         <td>Role</td>
                         <td ng-if="description">Beschreibug</td>
                     </tr>
-                    <tr ng-repeat="log in logs">
+                    <tr ng-repeat="log in logs | orderBy: '-date'">
                         <td>{{log.date | date: 'dd.MM.yyyy HH:mm'}}</td>
                         <td>{{log.action}}</td>
                         <td>{{log.username}}</td>

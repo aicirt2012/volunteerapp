@@ -46,7 +46,7 @@ validator.conditionsofuseIsTrue = function(conditionsofuse){
 }
 
 validator.isName = function(name) {
-    validator.matches(name, /^[a-zA-ZöüäßÜÖÄ\- ]+$/);
+    validator.matches(name, /^[a-zA-ZöüäßÜÖÄ.\- ]+$/);
 }
 
 validator.isPhone = function(phone, required){

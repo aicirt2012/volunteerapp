@@ -5,7 +5,6 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
 
     me.menu = [];
     me.mymenu = [];
-    me.showsidebar = true;
 
     me.initMenu = function(){
         User.me().then(function(data){

@@ -10,49 +10,39 @@
 </head>
 <body layout="row" ng-controller="IndexCtrl">
 
-<style>
-    .hidesidebar {
-        visibility: hidden
-    }
-    .showsidebar {
-        visibility: inherit;
-    }
-</style>
-<div class="hidesidebar" ng-class="{'showsidebar':showsidebar}">
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="leftOpen" md-is-locked-open="leftOpen && $mdMedia('gt-md')">
-        <md-toolbar class="md-tall md-hue-2">
-            <span flex></span>
-            <div layout="column" class="md-toolbar-tools-bottom inset">
-                <user-picture picture="{{user.picture}}" size="64"></user-picture>
-                <span></span>
-                <div>{{user.name}} ({{user.roleLabel}})</div>
-                <div>{{user.email}}</div>
-            </div>
-        </md-toolbar>
-        <md-list>
-            <md-list-item class="sidebarListItem" ng-repeat="item in menu" ng-click="openView(item.link)">
-                <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                    <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                    </div>
-                    <div class="inset">{{item.title}}
-                    </div>
-                </md-item-content>
-            </md-list-item>
-            <md-divider></md-divider>
-            <md-subheader>Mein Bereich</md-subheader>
-            <md-list-item class="sidebarListItem" ng-repeat="item in mymenu" ng-click="openView(item.link)">
-                <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                    <div class="inset">
-                        <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                    </div>
-                    <div class="inset">{{item.title}}
-                    </div>
-                </md-item-content>
-            </md-list-item>
-        </md-list>
-    </md-sidenav>
-</div>
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="leftOpen" md-is-locked-open="leftOpen && $mdMedia('gt-md')">
+    <md-toolbar class="md-tall md-hue-2">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+            <user-picture picture="{{user.picture}}" size="64"></user-picture>
+            <span></span>
+            <div>{{user.name}} ({{user.roleLabel}})</div>
+            <div>{{user.email}}</div>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-list-item class="sidebarListItem" ng-repeat="item in menu" ng-click="openView(item.link)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                <div class="inset">
+                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset">{{item.title}}
+                </div>
+            </md-item-content>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Mein Bereich</md-subheader>
+        <md-list-item class="sidebarListItem" ng-repeat="item in mymenu" ng-click="openView(item.link)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                <div class="inset">
+                    <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset">{{item.title}}
+                </div>
+            </md-item-content>
+        </md-list-item>
+    </md-list>
+</md-sidenav>
 
 <div layout="column" class="relative" layout-fill role="main" style="overflow: hidden; padding-bottom: 60px">
     <div ng-view></div>

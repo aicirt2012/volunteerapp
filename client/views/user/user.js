@@ -89,10 +89,37 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     }
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = dataUrl;
-        User.updatePicture(me.user.id, me.user.picture, function () {
+        me.user.picture = compressB64PNG(dataUrl);
+        User.updatePicture(me.user.id, me.user.picture, function (err) {
+            if(err) {
+                console.error(err);
+            }
             me.editMode = false;
         });
+
+        function compressB64PNG(b64Url) {
+            var size = 64;
+
+            var img = new Image;
+            img.src = b64Url;
+
+            var cvs = document.createElement('canvas');
+            cvs.height = size;
+            cvs.width = size;
+
+            var ctx = cvs.getContext('2d');
+            ctx.drawImage(img, 0, 0, size, size);
+
+            // a png can not have a quality (png is a lossless compression)
+            // giving a compression value will return a invalid png
+            // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+            var b64UrlCompressed = cvs.toDataURL();
+
+            // console.log('uncompressed size: ' + b64Url.length);
+            // console.log('compressed size: ' + b64UrlCompressed.length);
+            // console.log(b64UrlCompressed);
+            return b64UrlCompressed;
+        }
     }
 
 

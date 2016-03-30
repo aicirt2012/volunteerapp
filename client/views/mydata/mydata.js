@@ -53,25 +53,29 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
     }
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = dataUrl //compressB64PNG(dataUrl, 30, 'compression_canvas');
+        me.user.picture = compressB64PNG(dataUrl, 'compression_canvas');
         MyData.photo.save({picture: me.user.picture}, function () {
             me.editMode = false;
         });
     }
 
-    function compressB64PNG(b64Url, quality, tempCanvasId) {
+    function compressB64PNG(b64Url) {
+        var size = 64;
+
         var img = new Image;
         img.src = b64Url;
 
-        var cvs = document.getElementById(tempCanvasId);
-        cvs.height = 64;
-        cvs.width = 64;
+        var cvs = document.createElement('canvas');
+        cvs.height = size;
+        cvs.width = size;
+
         var ctx = cvs.getContext('2d');
-        var img = new Image;
-        ctx.drawImage(img, 0, 0);
-        img.src = b64Url;
-        var mime_type = 'image/png';
-        var b64UrlCompressed = cvs.toDataURL(mime_type, quality / 100);
+        ctx.drawImage(img, 0, 0, size, size);
+
+        // a png can not have a quality (png is a lossless compression)
+        // giving a compression value will return a invalid png
+        // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+        var b64UrlCompressed = cvs.toDataURL();
 
         // console.log('uncompressed size: ' + b64Url.length);
         // console.log('compressed size: ' + b64UrlCompressed.length);

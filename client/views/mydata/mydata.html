@@ -197,7 +197,7 @@
                             <div layout="row">
                                 <div>
                                     <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-                                        <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+                                        <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
                                     </div>
                                     <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised " ng-class="{'md-primary': null == picFile}">Foto Auswählen</md-button>
                                     <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary" ng-disabled="!picFile" >Hochladen</md-button>
@@ -215,4 +215,3 @@
             </ng-switch>
         </md-card>
 </md-content>
-<canvas  id="compression_canvas"></canvas >

@@ -147,7 +147,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
 
-    me.sendMessage = function(helperId){
+    me.sendMessage = function(){
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;

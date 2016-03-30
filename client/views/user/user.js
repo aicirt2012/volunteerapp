@@ -55,10 +55,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
                     case 409:
                         var preset = $mdDialog
                             .alert()
-                            .clickOutsideToClose(true)
                             .title('Konflikt')
                             .textContent('Die ausgewählte E-Mail existiert bereits für einen anderen Nutzer.')
-                            .ariaLabel('email already exists')
                             .ok('Ok');
                         $mdDialog.show(preset);
                         break;

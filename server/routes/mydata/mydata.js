@@ -24,7 +24,7 @@ router.put('/personal', function(req, res, next) {
         var uId = req.user.id;
         User.exists(req.body.email, uId, function (err) {
             if (err) {
-                console.log(err);
+                res.sendStatus(409);
             } else {
                 var data = {
                     gender: req.body.gender,

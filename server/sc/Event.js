@@ -14,6 +14,7 @@ var Event = EntityType.define({
     emails: {type:'String'},
     startdate: {type:'String'},
     enddate: {type:'String'},
+    place: {type:'String'},
     organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' }
 }, 'event');
 

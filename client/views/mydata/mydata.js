@@ -73,9 +73,9 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
         var mime_type = 'image/png';
         var b64UrlCompressed = cvs.toDataURL(mime_type, quality / 100);
 
-        console.log('uncompressed size: ' + b64Url.length);
-        console.log('compressed size: ' + b64UrlCompressed.length);
-        console.log(b64UrlCompressed);
+        // console.log('uncompressed size: ' + b64Url.length);
+        // console.log('compressed size: ' + b64UrlCompressed.length);
+        // console.log(b64UrlCompressed);
         return b64UrlCompressed;
     }
 

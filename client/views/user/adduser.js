@@ -41,7 +41,7 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', func
         if (me.user.notes == '')
             me.user.notes = null;
         User.save(me.user, function () {
-            console.log('user created');
+            // console.log('user created');
         })
         window.location.href = '#/user';
     };

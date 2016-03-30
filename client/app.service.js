@@ -173,7 +173,7 @@ app.service('User', function($resource, $base64) {
     }
 
     function login(email, pw){
-        console.log('login with : '+email+' '+pw );
+        // console.log('login with : '+email+' '+pw );
         var p = Login.save({
             email : email,
             pw: pw
@@ -182,7 +182,7 @@ app.service('User', function($resource, $base64) {
             localStorage.setItem('JWT', data.token);
             userCache = data.user;
         },function(){
-            console.error("fail@loginUser");
+            console.error("fail@loginUser", arguments);
         });
         return p;
     }

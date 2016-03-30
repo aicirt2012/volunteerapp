@@ -1,13 +1,15 @@
+'use strict';
+
 var express = require('express');
 var validator = require('validator');
 
 var validations = [];
 
 // decorate all functions beginning with is
-for(var key in validator) {
+for (var key in validator) {
     var fun = validator[key];
     // if validator has an function which begins with is
-    if(validator.hasOwnProperty( key) && typeof fun === 'function' && /^is/.test( key)) {
+    if (validator.hasOwnProperty(key) && typeof fun === 'function' && /^is/.test(key)) {
         // decorate the function
         var dec = decorate(validator[key]);
         validator[key] = dec;
@@ -15,8 +17,8 @@ for(var key in validator) {
 }
 
 // decorate the following functions
-['contains', 'matches', 'equals'].forEach(function( key) {
-    validator[key] =  decorate(validator[key]);
+['contains', 'matches', 'equals'].forEach(function (key) {
+    validator[key] = decorate(validator[key]);
 });
 
 function decorate(fun) {
@@ -27,94 +29,105 @@ function decorate(fun) {
     }
 }
 
-validator.allValid = function() {
+validator.allValid = function () {
     console.log(validations);
-    return !validations.some(function( b) {
+    return !validations.some(function (b) {
         return b === false;
     })
 };
 
-validator.init = function() {
+validator.init = function () {
     validations = [];
 }
 
-validator.conditionsofuseIsTrue = function(conditionsofuse){
-    if(conditionsofuse)
+validator.conditionsofuseIsTrue = function (conditionsofuse) {
+    if (conditionsofuse)
         validations.push(true);
     else
         validations.push(false);
 }
 
-validator.isName = function(name) {
+validator.isName = function (name) {
     validator.matches(name, /^[a-zA-ZöüäßÜÖÄ.\- ]+$/);
 }
 
-validator.isPhone = function(phone, required){
-    if(phone || required != false)
+validator.isPhone = function (phone, required) {
+    if (phone || required != false)
         validator.isMobilePhone(phone, 'de-DE');
 }
 
-validator.isRole = function(role) {
+validator.isRole = function (role) {
     validator.matches(role, /^(HELPER|TEAM|ORGANIZER|ADMIN)$/);
 }
 
-validator.isGender = function(gender) {
+validator.isGender = function (gender) {
     validator.matches(gender, /^(MALE|FEMALE)$/);
 }
 
-validator.isTitle = function(name) {
+validator.isTitle = function (name) {
     validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ\- ]+$/);
 }
 
-validator.isCity = function(city) {
+validator.isCity = function (city) {
     validator.matches(city, /^[a-zA-ZöüäßÜÖÄ\.\- ]+$/);
 }
 
-validator.isStreet = function(street) {
+validator.isStreet = function (street) {
     validator.matches(street, /^[a-zA-Z0-9öüäßÜÖÄ\.\- ]+$/);
 }
 
-validator.isZip = function(zip) {
+validator.isZip = function (zip) {
     validator.matches(zip, /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/);
 }
 
-validator.startBeforeEndDate = function(startDate, endDate) {
-    if(new Date(startDate) <= new Date(endDate)){
+validator.startBeforeEndDate = function (startDate, endDate) {
+    if (new Date(startDate) <= new Date(endDate)) {
         validations.push(true);
-    }else{
+    } else {
         validations.push(false)
     }
 }
 
-validator.isAvailability = function(availability) {
+validator.isAvailability = function (availabilities) {
     var valid = true;
-    var keys = Object.keys(availability);
-    var expectedKeys = ["mo", "tu", "we", "th", "fr", "sa", "su"];
-    var expectedKeyValues = ["morning", "afternoon", "evening"];
-    if(arraysEqual(keys, expectedKeys)){
-        for(var k in availability){
-            var key = availability[k];
-            var keyValues = Object.keys(key);
-            if(!arraysEqual(keyValues, expectedKeyValues))
+    var expectedDays = ["mo", "tu", "we", "th", "fr", "sa", "su"];
+    var expectedDayValues = ["morning", "afternoon", "evening"];
+
+    var keys = Object.keys(availabilities);
+    if (arraysEqual(keys, expectedDays)) {
+
+        for (var i = 0; i < expectedDays.length; i++) {
+            var day = expectedDays[i];
+            var availability = availabilities[day];
+            var dayValues = Object.keys(availability);
+
+            if (!arraysEqual(dayValues, expectedDayValues)) {
                 valid = false;
+                break;
+            }
+
         }
-    }else{
+
+    } else {
         valid = false;
     }
-    validations.push(valid);
-}
 
-arraysEqual = function(a1, a2){
-    for(var e in a1){
-        var element = a1[e];
-        var index = a2.indexOf(element);
-        if(index == -1)
-            return false;
+    validations.push(valid);
+
+
+    // put into isAvailability to make it private
+    function arraysEqual(toProve, real) {
+        for (var i = 0; i < toProve.length; i++) {
+            var element = toProve[i];
+            var index = real.indexOf(element);
+
+            if (index == -1) {
+                return false;
+            }
+        }
+
+        return real.length === toProve.length;
     }
-    if(a2.length == a1.length)
-        return true;
-    else
-        return false;
-}
+};
 
 module.exports = validator;

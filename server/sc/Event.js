@@ -11,7 +11,7 @@ var Event = EntityType.define({
     description: {type:'String'},
     nrhelpers: {type:'Number'},
     helpers: {type: 'link',  options: {entityType: {id: 'user'}},  multiplicity: 'any'},
-    emails: {type:'String'},
+    emails: {type:'json'},
     startdate: {type:'String'},
     enddate: {type:'String'},
     place: {type:'String'},

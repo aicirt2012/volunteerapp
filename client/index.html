@@ -6,11 +6,17 @@
     <link rel="stylesheet" href="/bower_components/mdPickers/dist/mdPickers.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
     <link rel="stylesheet" href="/style.css">
+    <style>
+        /* used as internal style to prevent async loading of this rule */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
     <title>VolunteerApp</title>
 </head>
 <body layout="row" ng-controller="IndexCtrl">
 
-<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="leftOpen" md-is-locked-open="leftOpen && $mdMedia('gt-md')">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-open="leftOpen" md-is-locked-open="leftOpen && $mdMedia('gt-md')" ng-cloak>
     <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">

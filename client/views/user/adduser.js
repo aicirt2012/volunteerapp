@@ -1,4 +1,4 @@
-app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, $mdSidenav, User) {
+app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', function ($scope, $mdSidenav, User, $mdDialog) {
 
 
     var me = $scope;
@@ -25,32 +25,55 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', function($scope, 
         conditionsofuse: false
     };
 
-    me.onCancel = function(){
+    me.onCancel = function () {
         window.location.href = '#/user';
     }
 
-    me.breadcrumb = function(){
+    me.breadcrumb = function () {
         return 'Personalverwaltung > Benutzer Anlegen';
     };
 
-    me.submitAddUser = function(){
-        if(me.user.tel == '')
+    me.submitAddUser = function () {
+        if (me.user.tel == '')
             me.user.tel = null;
-        if(me.user.mobil == '')
+        if (me.user.mobil == '')
             me.user.mobil = null;
-        if(me.user.notes == '')
+        if (me.user.notes == '')
             me.user.notes = null;
-        User.save(me.user, function(){
+        User.save(me.user, function () {
             console.log('user created');
         })
         window.location.href = '#/user';
     };
 
-    me.back = function(){
+    me.back = function () {
         window.location.href = '#/user';
     }
 
+    me.openDataguidelines = openDialog('/views/login/dialogDatenschutz.html');
+    me.openImpressum = openDialog('/views/login/dialogImpressum.html');
+
+    function openDialog(templateUrl) {
+        return function openDialogFunction($event) {
+            $event.stopPropagation();
+            return $mdDialog.show({
+                controller: function ($scope, $mdDialog) {
+                    $scope.hide = function () {
+                        $mdDialog.hide();
+                    };
+                    $scope.close = function () {
+                        $mdDialog.cancel();
+                    };
+                },
+                templateUrl: templateUrl,
+                parent: angular.element(document.body),
+                clickOutsideToClose: true
+            });
+        }
+    }
+
     $mdSidenav('left').open();
+
 
 }]);
 

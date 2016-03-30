@@ -16,7 +16,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         if(me.event.description == '')
             me.event.description = null;
         Event.save(me.event, function(){
-            console.log('event created');
+            // console.log('event created');
         })
         window.location.href = '#/eventcalendar';
     }
@@ -56,7 +56,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
             me.endTime = time;
             me.event.enddate.setHours(time.getHours());
             me.event.enddate.setMinutes(time.getMinutes());
-            console.log(me.event.enddate);
+            // console.log(me.event.enddate);
         });
     }
 

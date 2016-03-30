@@ -27,7 +27,7 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
 
     me.submitEdit = function(){
         Organization.update(me.organization.id, me.organization, function(){
-            console.log('organization updated');
+            // console.log('organization updated');
         });
         me.editMode = false;
     }

@@ -105,7 +105,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         var data = JSON.parse(JSON.stringify(me.event));
         data.organization = me.event.organization.id;
         Event.update(me.event.id, data, function(){
-            console.log('update executed!');
+            // console.log('update executed!');
         });
     }
 
@@ -147,7 +147,7 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
 
-    me.sendMessage = function(helperId){
+    me.sendMessage = function(){
         $mdDialog.show({
             controller: function ($scope, $mdDialog, event) {
                 $scope.event = event;

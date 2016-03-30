@@ -58,7 +58,6 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
     }
 
     if(User.isLoggedIn()){
-        console.log('user is logged in');
         me.initMenu();
     }
 

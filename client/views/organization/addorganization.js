@@ -21,7 +21,7 @@ app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', f
 
     me.submitEdit = function(){
         Organization.save(me.organization, function(){
-            console.log('organization created');
+            // console.log('organization created');
         })
         window.location.href = '#/organization';
     }

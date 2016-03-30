@@ -10,12 +10,17 @@ app.directive('toolbar', function() {
     };
 });
 
-app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
+app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', '$mdMedia', function($scope, $mdSidenav, $mdMedia) {
 
 
     var me = $scope;
 
     $mdSidenav('left').open();
+
+    me.hideSidenavButton = function(componentId) {
+        console.log($mdMedia('gt-md'), $mdSidenav(componentId).isOpen());
+        return $mdMedia('gt-md') && $mdSidenav(componentId).isOpen();
+    };
 
     me.toggleSidenav = function(componentId){
         $mdSidenav(componentId).open();

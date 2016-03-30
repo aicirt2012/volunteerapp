@@ -18,7 +18,6 @@ app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', '$mdMedia', function($sco
     $mdSidenav('left').open();
 
     me.hideSidenavButton = function(componentId) {
-        console.log($mdMedia('gt-md'), $mdSidenav(componentId).isOpen());
         return $mdMedia('gt-md') && $mdSidenav(componentId).isOpen();
     };
 

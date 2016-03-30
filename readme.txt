@@ -7,7 +7,6 @@ C:\Users\michelf\AppData\Roaming\npm
 3) Execute bower in the client directory
 
 
-
 Server Setup:
 1) pull
 2) npm install

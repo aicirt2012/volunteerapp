@@ -9,13 +9,13 @@ var Log = require('../../sc/Log');
 var Event = require('../../sc/Event');
 
 
-router.get('/me', function(req, res) {
+router.get('/me', function (req, res) {
     res.json(User.toMe(req.user));
 });
 
 
-router.post('/', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+router.post('/', function (req, res) {
+    if (User.atLeastOrganizer(req.user.role)) {
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
         val.isAvailability(req.body.availability);
         val.conditionsofuseIsTrue(req.body.conditionsofuse);
 
-        if(val.allValid()){
+        if (val.allValid()) {
             User.exists(req.body.email, '', function (err) {
                 if (err) {
                     console.log(err);
@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
                 } else {
                     var plainPw = User.generatePw();
                     var hashedPw = User.hashPw(plainPw);
-                    if(req.body.notes)
+                    if (req.body.notes)
                         var validatedNotes = val.blacklist(req.body.notes, "<>;\"\'´");
                     var data = {
                         gender: req.body.gender,
@@ -48,15 +48,15 @@ router.post('/', function(req, res) {
                         conditionsofuse: req.body.conditionsofuse
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
-                    User.save(data, function(){
+                    User.save(data, function () {
                         mailer.send({
                             to: data.email,
                             subject: 'Willkommen bei der Volunteer App',
                             html: '<h3>Hallo ' + data.name + '!</h3>' +
                             '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
-                            'Ihr Passwort lautet: "'+plainPw+'"!<br/>'+
+                            'Ihr Passwort lautet: "' + plainPw + '"!<br/>' +
                             'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
-                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>'+
+                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>' +
                             '<p>Viele Grüße, <br/>' +
                             'Ihr Volunteer App Team</p>'
                         });
@@ -64,37 +64,37 @@ router.post('/', function(req, res) {
                     });
                 }
             });
-        }else{
+        } else {
             res.sendStatus(400);
         }
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.get('/', function(req, res) {
-    if(User.atLeastTeam(req.user.role )){
-        User.findAll(function(err, users){
+router.get('/', function (req, res) {
+    if (User.atLeastTeam(req.user.role)) {
+        User.findAll(function (err, users) {
             res.json(users);
         });
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.get('/:id', function(req, res) {
-    if(User.atLeastTeam(req.user.role )){
+router.get('/:id', function (req, res) {
+    if (User.atLeastTeam(req.user.role)) {
         var uId = req.params.id;
-        User.findById(uId, function(err, user){
-            if(err)
+        User.findById(uId, function (err, user) {
+            if (err)
                 res.sendStatus(500);
             else
                 res.json(user);
         });
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.put('/:id', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+router.put('/:id', function (req, res) {
+    if (User.atLeastOrganizer(req.user.role)) {
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -103,7 +103,7 @@ router.put('/:id', function(req, res) {
         val.isGender(req.body.gender);
         val.isAvailability(req.body.availability);
 
-        if(val.allValid()){
+        if (val.allValid()) {
             var uId = req.params.id;
             var data = {
                 gender: req.body.gender,
@@ -117,103 +117,104 @@ router.put('/:id', function(req, res) {
             Log.info(req.user, Log.actions.USER_UPDATE, data);
             User.exists(req.body.email, uId, function (err) {
                 if (err) {
+                    res.sendStatus(409);
                 } else {
                     User.update(uId, data, function () {
                         res.send();
                     });
                 }
             });
-       }else{
-           res.sendStatus(400);
+        } else {
+            res.sendStatus(400);
         }
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.delete('/:id', function(req, res) {
-    if(User.atLeastAdmin(req.user.role )){
+router.delete('/:id', function (req, res) {
+    if (User.atLeastAdmin(req.user.role)) {
         var uId = req.params.id;
         Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
-        Event.findByUserId(uId, function(err, events){
-            if(err) {
+        Event.findByUserId(uId, function (err, events) {
+            if (err) {
                 console.log(err);
-            }else{
-                async.forEach(events, function(e, cb){
+            } else {
+                async.forEach(events, function (e, cb) {
                     Event.delAttributeValue(e.id, 'helpers', {id: uId}, function (err) {
                         cb();
                     });
-                }, function(err){
-                    if(err)
+                }, function (err) {
+                    if (err)
                         res.sendStatus(500);
                     else
-                        User.delete(uId, function(err){
+                        User.delete(uId, function (err) {
                             res.send();
                         });
                 });
             }
         });
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.put('/:id/picture', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+router.put('/:id/picture', function (req, res) {
+    if (User.atLeastOrganizer(req.user.role)) {
         var uId = req.params.id;
-        User.update( uId, {
+        User.update(uId, {
             picture: req.body.picture
-        }, function(){
+        }, function () {
             res.send();
         });
-    }else
+    } else
         res.sendStatus(403);
 });
 
-router.post('/:id/resetpw', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+router.post('/:id/resetpw', function (req, res) {
+    if (User.atLeastOrganizer(req.user.role)) {
         var uId = req.params.id;
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
         Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
-        User.findById(uId, function(err, user){
-            if(err)
+        User.findById(uId, function (err, user) {
+            if (err)
                 res.sendStatus(500);
             else
-                User.update( uId, {
+                User.update(uId, {
                     pw: hashedPw
-                }, function(){
+                }, function () {
                     mailer.send({
                         to: user.email,
                         subject: 'Ihr Passwort wurde zurückgesetzt!',
                         html: '<h3>Hallo ' + user.name + '!</h3>' +
-                              '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
-                              'Ihr neues Passwort lautet: "'+plainPw+'"!<br/></p>' +
-                              '<p>Viele Grüße, <br/>' +
-                              'Ihr Volunteer App Team</p>'
+                        '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
+                        'Ihr neues Passwort lautet: "' + plainPw + '"!<br/></p>' +
+                        '<p>Viele Grüße, <br/>' +
+                        'Ihr Volunteer App Team</p>'
                     });
                     res.send();
                 });
         });
-    }else
+    } else
         res.sendStatus(403);
 
 });
 
-router.put('/:id/role', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+router.put('/:id/role', function (req, res) {
+    if (User.atLeastOrganizer(req.user.role)) {
         val.init();
         val.isRole(req.body.role);
 
-        if(val.allValid()){
+        if (val.allValid()) {
             var uId = req.params.id;
             var data = {role: req.body.role};
             Log.info(req.user, Log.actions.USER_ROLECHANGE, data);
             User.update(uId, data, function () {
                 res.send();
             });
-        }else{
+        } else {
             res.sendStatus(400);
         }
-    }else
+    } else
         res.sendStatus(403);
 });
 

@@ -5,7 +5,7 @@ app.directive('toolbar', function() {
         },
         replace: true,
         templateUrl: '/shared/toolbar/toolbar.html',
-        controller: 'ToolbarCtrl',
+        controller: 'ToolbarCtrl'
     };
 });
 

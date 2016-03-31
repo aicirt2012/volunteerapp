@@ -1,3 +1,17 @@
+### 0.5.2
+
+#### Bugfixes
+
+* Corrected packaje.json file
+
+#### Features
+
+* Added mdpTimePicker directive for input[type=time]
+
+### 0.5.1
+
+Minor bugfixes and improvements
+
 ### 0.5.0
 
 #### Breaking Changes

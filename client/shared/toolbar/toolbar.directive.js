@@ -5,14 +5,11 @@ app.directive('toolbar', function() {
         },
         replace: true,
         templateUrl: '/shared/toolbar/toolbar.html',
-        controller: 'ToolbarCtrl',
-        bindToController: true
+        controller: 'ToolbarCtrl'
     };
 });
 
-app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', '$mdMedia', function($scope, $mdSidenav, $mdMedia) {
-
-
+app.controller( 'ToolbarCtrl', ['$scope', '$mdSidenav', '$mdMedia', function($scope, $mdSidenav, $mdMedia) {
     var me = $scope;
 
     $mdSidenav('left').open();
@@ -24,5 +21,4 @@ app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', '$mdMedia', function($sco
     me.toggleSidenav = function(componentId){
         $mdSidenav(componentId).open();
     }
-
 }]);

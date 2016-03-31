@@ -160,10 +160,12 @@ router.delete('/:id', function (req, res) {
 router.put('/:id/picture', function (req, res) {
     if (User.atLeastOrganizer(req.user.role)) {
         var uId = req.params.id;
-        User.update(uId, {
-            picture: req.body.picture
-        }, function () {
-            res.send();
+        User.update(uId, {picture: req.body.picture}, function (err, updated) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.send();
+            }
         });
     } else
         res.sendStatus(403);

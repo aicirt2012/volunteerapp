@@ -91,9 +91,8 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     me.submitPhotoUpload = function (dataUrl) {
         me.user.picture = compressB64PNG(dataUrl);
         User.updatePicture(me.user.id, me.user.picture, function (err) {
-            if(err) {
+            if(err)
                 console.error(err);
-            }
             me.editMode = false;
         });
 

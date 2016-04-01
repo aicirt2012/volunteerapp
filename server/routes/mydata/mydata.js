@@ -12,7 +12,7 @@ router.post('/photo', function(req, res){
     });
 });
 
-router.put('/personal', function(req, res, next) {
+router.put('/personal', function(req, res) {
     val.init();
     val.isEmail(req.body.email);
     val.isName(req.body.name);
@@ -44,10 +44,9 @@ router.put('/personal', function(req, res, next) {
     }
 });
 
-router.put('/availability', function(req, res, next) {
-    //TODO fix this validation
-    //val.init();
-    //val.isAvailability(req.body.availability);
+router.put('/availability', function(req, res) {
+    val.init();
+    val.isAvailability(req.body.availability);
 
     User.update(req.user.id, {availability:req.body}, function(){
         res.send();

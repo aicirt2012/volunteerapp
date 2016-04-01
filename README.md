@@ -53,3 +53,9 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 
 ## Organisator: Event Registrierung ##
 ![OrganizerEventregistration](/readme/organizer_eventregistration.png?raw=true "Organizer EventRegistration")
+
+## Organisator: Personalverwaltung ##
+![OrganizerUsers](/readme/organizer_users.png?raw=true "Organizer Users")
+
+## Organisator: Neuen Helfer anlegen ##
+![OrganizerCreateuser](/readme/organizer_createuser.png?raw=true "Organizer CreateUser")

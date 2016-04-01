@@ -23,9 +23,21 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 ## Helfer: Eventansicht##
 ![HelperEvent](/readme/helper_event.png?raw=true "Helper Event")
 
-## Helfer: Eventanmeldung##
+## Helfer: Eventanmeldung ##
 ![HelperEventregistration](/readme/helper_eventregistration.png?raw=true "Helper Eventregistration")
 
 
 ## Helfer: Übersicht über Meine Events##
 ![HelperMyevents](/readme/helper_myevents.png?raw=true "Helper Myevents")
+
+## Helfer: Meine Daten ##
+![HelperMydata](/readme/helper_mydata.png?raw=true "Helper Mydata")
+
+## Helfer: Meine Daten, Verfügbarkeit ##
+![HelperMydataav](/readme/helper_mydataav.png?raw=true "Helper Mydataav")
+
+## Helfer: Meine Daten, Foto ##
+![HelperMydataph](/readme/helper_mydataph.png?raw=true "Helper Mydataph")
+
+## Organisator: Event erstellen ##
+![OrganizerCreateEvent](/readme/organizer_createevent.png?raw=true "Organizer CreateEvent")

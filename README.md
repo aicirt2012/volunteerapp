@@ -68,10 +68,10 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 ![OrganizeruserEvents](/readme/organizer_userevents.png?raw=true "Organizer UserEvents")
 
 ## Organisator: Einrichtungsverwaltung ##
-![Organizer organizations](/readme/organizer_orgnizations.png?raw=true "Organizer Orgnizations")
+![Organizer organizations](/readme/organizer_organizations.png?raw=true "Organizer Orgnizations")
 
 ## Organisator: Einrichtung ##
-![Organizer organization](/readme/organizer_orgnization.png?raw=true "Organizer Orgnization")
+![Organizer organization](/readme/organizer_organization.png?raw=true "Organizer Orgnization")
 
 ## Admin: Log ##
 ![Admin Log](/readme/admin_log.png?raw=true "Admin Log")

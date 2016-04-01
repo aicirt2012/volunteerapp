@@ -41,3 +41,15 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 
 ## Organisator: Event erstellen ##
 ![OrganizerCreateEvent](/readme/organizer_createevent.png?raw=true "Organizer CreateEvent")
+
+## Organisator: Event erstellen, Datum wählen ##
+![OrganizerCreateEvent2](/readme/organizer_createevent2.png?raw=true "Organizer CreateEvent2")
+
+## Organisator: Event erstellen, Uhrzeit wählen ##
+![OrganizerCreateEvent3](/readme/organizer_createevent3.png?raw=true "Organizer CreateEvent3")
+
+## Organisator: Eventansicht ##
+![OrganizerEvent](/readme/organizer_event.png?raw=true "Organizer Event")
+
+## Organisator: Event Registrierung ##
+![OrganizerEventregistration](/readme/organizer_eventregistration.png?raw=true "Organizer EventRegistration")

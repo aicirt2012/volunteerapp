@@ -59,3 +59,19 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 
 ## Organisator: Neuen Helfer anlegen ##
 ![OrganizerCreateuser](/readme/organizer_createuser.png?raw=true "Organizer CreateUser")
+
+## Organisator: Helfer Bearbeiten ##
+![Organizeredithelper](/readme/organizer_edithelper.png?raw=true "Organizer EditHelper")
+![Organizeredithelper2](/readme/organizer_edithelper2.png?raw=true "Organizer EditHelper2")
+
+## Organisator: Benutzer Events ##
+![OrganizeruserEvents](/readme/organizer_userevents.png?raw=true "Organizer UserEvents")
+
+## Organisator: Einrichtungsverwaltung ##
+![Organizer organizations](/readme/organizer_orgnizations.png?raw=true "Organizer Orgnizations")
+
+## Organisator: Einrichtung ##
+![Organizer organization](/readme/organizer_orgnization.png?raw=true "Organizer Orgnization")
+
+## Admin: Log ##
+![Admin Log](/readme/admin_log.png?raw=true "Admin Log")

@@ -22,3 +22,14 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 
 ## Helfer: Kalenderansicht ##
 ![HelperCalendar](/readme/helper_calendar.png?raw=true "Helper Calendar")
+
+
+## Helfer: Eventansicht##
+![HelperEvent](/readme/helper_event.png?raw=true "Helper Event"
+
+## Helfer: Eventanmeldung##
+![HelperEventregistration](/readme/helper_eventregistration.png?raw=true "Helper Eventregistration")
+
+
+## Helfer: Übersicht über Meine Events##
+![HelperMyevents](/readme/helper_myevents.png?raw=true "Helper Myevents")

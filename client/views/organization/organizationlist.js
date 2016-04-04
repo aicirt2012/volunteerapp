@@ -2,7 +2,7 @@ app.controller('OrganizationListCtrl', ['$scope', '$mdSidenav', 'organizations',
 
 
     var me = $scope;
-    me.addVisible = User.isOrganizer();
+    me.addVisible = User.isOrganizer() || User.isAdmin();
     me.organizationlist = organizations;
 
     me.selectOrganization = function(id){

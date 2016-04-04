@@ -1,0 +1,32 @@
+ // Initialize with Testdata
+    asyncTasks.push(function(cb){
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        var user = users[users.length-1];
+        var users = [];
+        for(var i = 0; i<100; i++){
+            users.push(i);
+        }
+        async.forEach(users, function(u, cb){
+            email = u+'@tum.de';
+            u = user;
+            u.email = email;
+            User.save({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email,
+                pw: User.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                picture: u.picture,
+                conditionsofuse: true
+            }, function(){
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+
+    });

@@ -136,15 +136,14 @@ router.post('/', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
-
         if (val.allValid()) {
             var e = {
                 title: req.body.title,
-                place: val.blacklist(req.body.place, "<>;\"\'´"),
+                place: req.body.place, //val.blacklist(req.body.place, "<>;\"\'´"),
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
-                description: val.blacklist(req.body.description, "<>;\"\'´"),
+                description: req.body.description, //val.blacklist(req.body.description, "<>;\"\'´"),
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);

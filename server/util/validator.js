@@ -81,11 +81,10 @@ validator.isZip = function (zip) {
 }
 
 validator.startBeforeEndDate = function (startDate, endDate) {
-    if (new Date(startDate) <= new Date(endDate)) {
+    if (new Date(startDate) <= new Date(endDate))
         validations.push(true);
-    } else {
+    else
         validations.push(false)
-    }
 }
 
 validator.isAvailability = function (availabilities) {
@@ -95,7 +94,6 @@ validator.isAvailability = function (availabilities) {
 
     var keys = Object.keys(availabilities);
     if (arraysEqual(keys, expectedDays)) {
-
         for (var i = 0; i < expectedDays.length; i++) {
             var day = expectedDays[i];
             var availability = availabilities[day];
@@ -105,12 +103,9 @@ validator.isAvailability = function (availabilities) {
                 valid = false;
                 break;
             }
-
         }
-
-    } else {
+    } else
         valid = false;
-    }
 
     validations.push(valid);
 
@@ -121,11 +116,9 @@ validator.isAvailability = function (availabilities) {
             var element = toProve[i];
             var index = real.indexOf(element);
 
-            if (index == -1) {
+            if (index == -1)
                 return false;
-            }
         }
-
         return real.length === toProve.length;
     }
 };

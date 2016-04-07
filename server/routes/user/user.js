@@ -94,9 +94,7 @@ router.get('/:id', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    console.log('put user');
     if (User.atLeastOrganizer(req.user.role)) {
-        console.log('authenticated user IS organizer');
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -104,45 +102,38 @@ router.put('/:id', function (req, res) {
         val.isPhone(req.body.mobil);
         val.isGender(req.body.gender);
         val.isAvailability(req.body.availability);
-        console.log('after validator');
-        console.log('all valid:', val.allValid());
 
         if (val.allValid()) {
-            console.log('data mapping');
-            var uId = req.params.id;
             try {
+                var uId = req.params.id;
                 var data = {
                     gender: req.body.gender,
                     name: req.body.name,
                     tel: req.body.tel,
                     mobil: req.body.mobil,
                     email: req.body.email,
-                    notes: val.blacklist(req.body.notes, "<>;\"\'´"),
+                    notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : undefined,
                     availability: req.body.availability
                 };
-            } catch(e) {
-                console.log('thrown exception:', e);
+                Log.info(req.user, Log.actions.USER_UPDATE, data);
+                User.exists(req.body.email, uId, function (err) {
+                    if (err) {
+                        res.sendStatus(409);
+                    } else {
+                        User.update(uId, data, function () {
+                            console.log(JSON.stringify(arguments, null, 2));
+                            res.send();
+                        });
+                    }
+                });
+            } catch (e) {
+                console.error(e);
+                res.sendStatus(500);
             }
-            console.log('before Log.info');
-            Log.info(req.user, Log.actions.USER_UPDATE, data);
-            console.log('before exist check')
-            User.exists(req.body.email, uId, function (err) {
-                console.log('err content:', err);
-                if (err) {
-                    res.sendStatus(409);
-                } else {
-                    User.update(uId, data, function () {
-                        console.log('updating', arguments);
-                        res.sendStatus(200);
-                    });
-                }
-            });
         } else {
-            console.log('not valid');
             res.sendStatus(400);
         }
     } else {
-        console.log('no organizer');
         res.sendStatus(403);
     }
 });

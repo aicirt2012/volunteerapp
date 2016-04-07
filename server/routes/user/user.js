@@ -119,11 +119,14 @@ router.put('/:id', function (req, res) {
                 availability: req.body.availability
             };
             Log.info(req.user, Log.actions.USER_UPDATE, data);
+            console.log('before exist check')
             User.exists(req.body.email, uId, function (err) {
+                console.log('err content:', err);
                 if (err) {
                     res.sendStatus(409);
                 } else {
                     User.update(uId, data, function () {
+                        console.log('updating', err);
                         res.send();
                     });
                 }

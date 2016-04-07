@@ -1,3 +1,2 @@
-cd ..
-git pull
+start /WAIT git pull
 npm start

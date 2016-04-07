@@ -15,7 +15,7 @@ app.directive('userPicture', function () {
         },
         replace: true,
         template: '<div><user-avatar ng-if="!picture" size="{{size}}"></user-avatar>' +
-        '<img ng-style="getStyle()" ng-if="picture" data-ng-src="{{picture}}"/>' +
+        '<img ng-style="getStyle()" ng-if="picture" data-ng-src="{{picture}}" style="opacity: 1"/>' +
         '</div>'
     };
 });

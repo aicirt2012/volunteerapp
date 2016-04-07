@@ -129,11 +129,23 @@
                                 <div layout="row" layout-sm="column">
                                     <md-input-container flex>
                                         <label>Tel</label>
-                                        <input ng-model="user.tel">
+                                        <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel">
+                                        <div ng-messages="userForm.userTel.$error">
+                                            <div class="inputContainerMessage"
+                                                 ng-if="userForm.userTel.$error.pattern && userForm.userTel.$touched">
+                                                Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                            </div>
+                                        </div>
                                     </md-input-container>
                                     <md-input-container flex>
                                         <label>Mobil</label>
-                                        <input ng-model="user.mobil">
+                                        <input ng-model="user.mobil" name="userMobil" ng-pattern="phoneSchema">
+                                        <div ng-messages="userForm.userMobil.$error">
+                                            <div class="inputContainerMessage"
+                                                 ng-if="userForm.userMobil.$error.pattern && userForm.userMobil.$touched">
+                                                Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                            </div>
+                                        </div>
                                     </md-input-container>
                                 </div>
                                 <div layout layout-sm="column">

@@ -108,6 +108,7 @@ router.put('/:id', function (req, res) {
         console.log('all valid:', val.allValid());
 
         if (val.allValid()) {
+            console.log('data mapping');
             var uId = req.params.id;
             var data = {
                 gender: req.body.gender,
@@ -118,6 +119,7 @@ router.put('/:id', function (req, res) {
                 notes: val.blacklist(req.body.notes, "<>;\"\'´"),
                 availability: req.body.availability
             };
+            console.log('before Log.info');
             Log.info(req.user, Log.actions.USER_UPDATE, data);
             console.log('before exist check')
             User.exists(req.body.email, uId, function (err) {
@@ -126,7 +128,7 @@ router.put('/:id', function (req, res) {
                     res.sendStatus(409);
                 } else {
                     User.update(uId, data, function () {
-                        console.log('updating', err);
+                        console.log('updating', arguments);
                         res.sendStatus(200);
                     });
                 }

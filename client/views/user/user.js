@@ -89,36 +89,54 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     }
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = compressB64PNG(dataUrl);
-        User.updatePicture(me.user.id, me.user.picture, function (err) {
-            if(err)
-                console.error(err);
-            me.editMode = false;
-        });
+        me.pictureButtonsDisabled = true;
 
-        function compressB64PNG(b64Url) {
-            var size = 64;
+        User.updatePicture(me.user.id, dataUrl)
+            .$promise
+            .then(function () {
+                me.user.picture = dataUrl;
+                me.editMode = false;
+            })
+            .catch(showErrorAlert)
+            .finally(function () {
+                me.pictureButtonsDisabled = false;
+            });
+    };
 
-            var img = new Image;
-            img.src = b64Url;
+    me.askDeleteProfileImage = function ($event) {
+        var preset = $mdDialog.confirm()
+            .title('Profilbild löschen')
+            .textContent('Wollen Sie wirklich das Profilbild löschen?')
+            .ok('Ja')
+            .cancel('Nein!')
+            .targetEvent($event);
 
-            var cvs = document.createElement('canvas');
-            cvs.height = size;
-            cvs.width = size;
+        $mdDialog
+            .show(preset)
+            .then(deleteProfileImage);
+    };
 
-            var ctx = cvs.getContext('2d');
-            ctx.drawImage(img, 0, 0, size, size);
+    function deleteProfileImage() {
+        me.pictureButtonsDisabled = true;
 
-            // a png can not have a quality (png is a lossless compression)
-            // giving a compression value will return a invalid png
-            // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-            var b64UrlCompressed = cvs.toDataURL();
+        User.updatePicture(me.user.id, undefined)
+            .$promise
+            .then(function () {
+                me.user.picture = undefined;
+            })
+            .catch(showErrorAlert)
+            .finally(function () {
+                me.pictureButtonsDisabled = false;
+            });
+    }
 
-            // console.log('uncompressed size: ' + b64Url.length);
-            // console.log('compressed size: ' + b64UrlCompressed.length);
-            // console.log(b64UrlCompressed);
-            return b64UrlCompressed;
-        }
+    function showErrorAlert() {
+        var preset = $mdDialog.alert()
+            .title('Ein Fehler ist aufgetreten')
+            .textContent('Das Foto konnte nicht gelöscht werden. Bitte versuchen Sie es noch einmal.')
+            .ok('Ok');
+
+        $mdDialog.show(preset);
     }
 
 

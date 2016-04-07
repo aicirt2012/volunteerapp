@@ -10,17 +10,17 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
 
     me.breadcrumb = function () {
         return 'Meine Daten';
-    }
+    };
 
     me.abortEdit = function () {
         me.user = me.userCopy;
         me.editMode = false;
-    }
+    };
 
     me.openEdit = function () {
         me.userCopy = JSON.parse(JSON.stringify(me.user));
         me.editMode = true;
-    }
+    };
 
     me.submitPersonalData = function () {
         MyData.personal.update({
@@ -45,45 +45,63 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
                         break;
                 }
             });
-    }
+    };
 
     me.submitAvailability = function () {
         MyData.availability.update(me.user.availability);
         me.editMode = false;
-    }
+    };
 
     me.submitPhotoUpload = function (dataUrl) {
-        me.user.picture = compressB64PNG(dataUrl, 'compression_canvas');
-        MyData.photo.save({picture: me.user.picture}, function () {
-            me.editMode = false;
-        });
+        me.pictureButtonsDisabled = true;
+
+        MyData.photo.save({picture: dataUrl})
+            .$promise
+            .then(function () {
+                me.user.picture = dataUrl;
+                me.editMode = false;
+            })
+            .catch(showErrorAlert)
+            .finally(function () {
+                me.pictureButtonsDisabled = false;
+            });
+    };
+
+    me.askDeleteProfileImage = function ($event) {
+        var preset = $mdDialog.confirm()
+            .title('Profilbild löschen')
+            .textContent('Wollen Sie wirklich Ihr Profilbild löschen?')
+            .ok('Ja')
+            .cancel('Nein!')
+            .targetEvent($event);
+
+        $mdDialog
+            .show(preset)
+            .then(deleteProfileImage);
+    };
+
+    function deleteProfileImage() {
+        me.pictureButtonsDisabled = true;
+
+        MyData.photo.save({picture: undefined})
+            .$promise
+            .then(function () {
+                me.user.picture = undefined;
+            })
+            .catch(showErrorAlert)
+            .finally(function () {
+                me.pictureButtonsDisabled = false;
+            });
     }
 
-    function compressB64PNG(b64Url) {
-        var size = 64;
+    function showErrorAlert() {
+        var preset = $mdDialog.alert()
+            .title('Ein Fehler ist aufgetreten')
+            .textContent('Das Foto konnte nicht gelöscht werden. Bitte versuchen Sie es noch einmal.')
+            .ok('Ok');
 
-        var img = new Image;
-        img.src = b64Url;
-
-        var cvs = document.createElement('canvas');
-        cvs.height = size;
-        cvs.width = size;
-
-        var ctx = cvs.getContext('2d');
-        ctx.drawImage(img, 0, 0, size, size);
-
-        // a png can not have a quality (png is a lossless compression)
-        // giving a compression value will return a invalid png
-        // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-        var b64UrlCompressed = cvs.toDataURL();
-
-        // console.log('uncompressed size: ' + b64Url.length);
-        // console.log('compressed size: ' + b64UrlCompressed.length);
-        // console.log(b64UrlCompressed);
-        return b64UrlCompressed;
+        $mdDialog.show(preset);
     }
 
     $mdSidenav('left').open();
-
 }]);
-

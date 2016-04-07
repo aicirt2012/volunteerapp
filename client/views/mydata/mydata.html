@@ -181,9 +181,12 @@
                          md-swipe-right="previous()"
                          layout="row" layout-align="center center">
 
-                        <div ng-if="!editMode">
-                            <user-picture picture="{{user.picture}}" size="200"></user-picture>
-                            <md-button ng-click="openEdit()" class="md-raised md-primary">Ändern</md-button>
+                        <div ng-if="!editMode" layout="column" layout-align="center center">
+                            <user-picture picture="{{user.picture}}" size="128"></user-picture>
+                            <div>
+                                <md-button ng-click="openEdit()" class="md-raised md-primary" ng-disabled="pictureButtonsDisabled">Ändern</md-button>
+                                <md-button ng-click="askDeleteProfileImage($event)" class="md-raised" ng-disabled="!user.picture || pictureButtonsDisabled">Löschen</md-button>
+                            </div>
                         </div>
                         <div ng-if="editMode">
                             <style>
@@ -197,7 +200,13 @@
                             <div layout="row">
                                 <div>
                                     <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-                                        <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+                                        <img-crop
+                                                image="picFile | ngfDataUrl"
+                                                result-image="croppedDataUrl"
+                                                result-image-size="128"
+                                                result-image-format="image/jpeg"
+                                                result-image-quality=".8"
+                                                ng-init="croppedDataUrl=''"></img-crop>
                                     </div>
                                     <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised " ng-class="{'md-primary': null == picFile}">Foto Auswählen</md-button>
                                     <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary" ng-disabled="!picFile" >Hochladen</md-button>

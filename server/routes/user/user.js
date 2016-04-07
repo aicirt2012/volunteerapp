@@ -127,7 +127,7 @@ router.put('/:id', function (req, res) {
                 } else {
                     User.update(uId, data, function () {
                         console.log('updating', err);
-                        res.send();
+                        res.sendStatus(200);
                     });
                 }
             });

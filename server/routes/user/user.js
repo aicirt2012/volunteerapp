@@ -110,15 +110,19 @@ router.put('/:id', function (req, res) {
         if (val.allValid()) {
             console.log('data mapping');
             var uId = req.params.id;
-            var data = {
-                gender: req.body.gender,
-                name: req.body.name,
-                tel: req.body.tel,
-                mobil: req.body.mobil,
-                email: req.body.email,
-                notes: val.blacklist(req.body.notes, "<>;\"\'´"),
-                availability: req.body.availability
-            };
+            try {
+                var data = {
+                    gender: req.body.gender,
+                    name: req.body.name,
+                    tel: req.body.tel,
+                    mobil: req.body.mobil,
+                    email: req.body.email,
+                    notes: val.blacklist(req.body.notes, "<>;\"\'´"),
+                    availability: req.body.availability
+                };
+            } catch(e) {
+                console.log('thrown exception:', e);
+            }
             console.log('before Log.info');
             Log.info(req.user, Log.actions.USER_UPDATE, data);
             console.log('before exist check')

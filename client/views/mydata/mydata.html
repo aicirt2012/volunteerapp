@@ -2,66 +2,66 @@
 
 <md-content flex md-scroll-y layout-fill layout-padding>
 
-        <md-card style="padding: 0px">
-            <ng-switch on="selectedTabNr" class="tabpanel-container">
-                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
-                    <md-tab id="tab1" aria-controls="tab1-content">
-                        Persönliche Daten
-                    </md-tab>
-                    <md-tab id="tab2" aria-controls="tab2-content">
-                        Verfügbarkeit
-                    </md-tab>
-                    <md-tab id="tab3" aria-controls="tab3-content">
-                        Photo
-                    </md-tab>
-                </md-tabs>
-                <md-card-content>
-                    <div role="tabpanel"
-                         id="tab1-content"
-                         aria-labelledby="tab1"
-                         ng-switch-when="0"
-                         md-swipe-left="next()"
-                         md-swipe-right="previous()"
-                         layout="row" layout-align="center center">
-                        <div ng-if="!editMode">
-                            <md-list>
-                                <md-list-item class="md-2-line">
-                                    <md-icon class="material-icons">person</md-icon>
-                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                        <h3> {{user.genderLabel}} {{ user.name }} </h3>
-                                        <p> Name </p>
-                                    </div>
-                                </md-list-item>
-                                <md-list-item class="md-2-line">
-                                    <md-icon class="material-icons">mail</md-icon>
-                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                        <h3> {{ user.email }} </h3>
-                                        <p> E-Mail </p>
-                                    </div>
-                                </md-list-item>
-                                <md-list-item class="md-2-line">
-                                    <md-icon class="material-icons">phone</md-icon>
-                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                        <h3> {{ user.tel }} </h3>
-                                        <p> Tel </p>
-                                    </div>
-                                </md-list-item>
-                                <md-list-item class="md-2-line">
-                                    <md-icon class="material-icons">phone_iphone</md-icon>
-                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                        <h3> {{ user.mobil }}</h3>
-                                        <p> Mobil </p>
-                                    </div>
-                                </md-list-item>
-                                <md-list-item class="md-2-line">
-                                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                        <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
-                                    </div>
-                                </md-list-item>
-                            </md-list>
-                        </div>
-                        <div ng-if="editMode">
-                            <form name="userForm">
+    <md-card style="padding: 0px">
+        <ng-switch on="selectedTabNr" class="tabpanel-container">
+            <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
+                <md-tab id="tab1" aria-controls="tab1-content">
+                    Persönliche Daten
+                </md-tab>
+                <md-tab id="tab2" aria-controls="tab2-content">
+                    Verfügbarkeit
+                </md-tab>
+                <md-tab id="tab3" aria-controls="tab3-content">
+                    Photo
+                </md-tab>
+            </md-tabs>
+            <md-card-content>
+                <div role="tabpanel"
+                     id="tab1-content"
+                     aria-labelledby="tab1"
+                     ng-switch-when="0"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+                    <div ng-if="!editMode">
+                        <md-list>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">person</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{user.genderLabel}} {{ user.name }} </h3>
+                                    <p> Name </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">mail</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{ user.email }} </h3>
+                                    <p> E-Mail </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">phone</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{ user.tel }} </h3>
+                                    <p> Tel </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">phone_iphone</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{ user.mobil }}</h3>
+                                    <p> Mobil </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                    <div ng-if="editMode">
+                        <form name="userForm">
                             <div layout layout-sm="column">
                                 <md-input-container flex>
                                     <label>Anrede</label>
@@ -73,12 +73,15 @@
                                 </md-input-container>
                                 <md-input-container flex>
                                     <label>Name</label>
-                                    <input ng-model="user.name" required name="userName" ng-pattern="/^[a-zA-ZüäöÄÜÖß ]*$/">
+                                    <input ng-model="user.name" required name="userName"
+                                           ng-pattern="/^[a-zA-ZüäöÄÜÖß ]*$/">
                                     <div ng-messages="userForm.userName.$error">
-                                        <div class="inputContainerMessage" ng-if="userForm.userName.$error.required && userForm.userName.$touched">
+                                        <div class="inputContainerMessage"
+                                             ng-if="userForm.userName.$error.required && userForm.userName.$touched">
                                             Name muss ausgefüllt sein!
                                         </div>
-                                        <div class="inputContainerMessage" ng-if="userForm.userName.$error.pattern && userForm.userName.$touched">
+                                        <div class="inputContainerMessage"
+                                             ng-if="userForm.userName.$error.pattern && userForm.userName.$touched">
                                             Nur Buchstaben erlaubt!
                                         </div>
                                     </div>
@@ -89,7 +92,8 @@
                                     <label>Email</label>
                                     <input ng-model="user.email" name="userEmail" type="email" required/>
                                     <div ng-messages="userForm.userEmail.$error">
-                                        <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">
+                                        <div class="inputContainerMessage"
+                                             ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">
                                             Dies ist keine gültige E-Mail Adresse!
                                         </div>
                                     </div>
@@ -98,129 +102,219 @@
                             <div layout="row" layout-sm="column">
                                 <md-input-container flex>
                                     <label>Tel</label>
-                                    <input ng-model="user.tel">
+                                    <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel">
+                                    <div ng-messages="userForm.userTel.$error">
+                                        <div class="inputContainerMessage"
+                                             ng-if="userForm.userTel.$error.pattern && userForm.userTel.$touched">
+                                            Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                        </div>
+                                    </div>
                                 </md-input-container>
                                 <md-input-container flex>
                                     <label>Mobil</label>
-                                    <input ng-model="user.mobil">
+                                    <input ng-model="user.mobil" name="userMobil" ng-pattern="phoneSchema">
+                                    <div ng-messages="userForm.userMobil.$error">
+                                        <div class="inputContainerMessage"
+                                             ng-if="userForm.userMobil.$error.pattern && userForm.userMobil.$touched">
+                                            Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                        </div>
+                                    </div>
                                 </md-input-container>
                             </div>
                             <br/><br/>
                             <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
-                                <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
+                                <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
+                                &nbsp;
+                                <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern
+                                </md-button>
                             </section>
                         </form>
+                    </div>
+                </div>
+                <div role="tabpanel"
+                     id="tab2-content"
+                     aria-labelledby="tab1"
+                     ng-switch-when="1"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+                    <form name="userForm">
+
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td width="80">Montag</td>
+                                <td width="80">Dienstag</td>
+                                <td width="80">Mittwoch</td>
+                                <td width="80">Donnerstag</td>
+                                <td width="80">Freitag</td>
+                                <td width="80">Samsatg</td>
+                                <td width="80">Sonntag</td>
+                            </tr>
+                            <tr>
+                                <td>Vormittag</td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.mo.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.tu.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.we.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.th.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.fr.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.sa.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.su.morning" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nachmittag</td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.mo.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.tu.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.we.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.th.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.fr.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.sa.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.su.afternoon" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Abend</td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.mo.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.tu.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.we.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.th.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.fr.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.sa.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                                <td>
+                                    <md-checkbox ng-model="user.availability.su.evening" ng-disabled="!editMode"
+                                                 aria-label="ava" class="md-warn md-align-top-left"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br/><br/>
+                        <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                            <md-button ng-if="!editMode" class="md-raised md-primary" ng-click="openEdit()">Bearbeiten
+                            </md-button>
+                            &nbsp;
+                            <md-button ng-if="editMode" class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
+                            &nbsp;
+                            <md-button ng-if="editMode" class="md-raised md-primary" ng-click="submitAvailability()">
+                                Speichern
+                            </md-button>
+                        </section>
+                    </form>
+                </div>
+                <div role="tabpanel"
+                     id="tab3-content"
+                     aria-labelledby="tab1"
+                     ng-switch-when="2"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+
+                    <div ng-if="!editMode" layout="column" layout-align="center center">
+                        <user-picture picture="{{user.picture}}" size="128"></user-picture>
+                        <div>
+                            <md-button ng-click="openEdit()" class="md-raised md-primary"
+                                       ng-disabled="pictureButtonsDisabled">Ändern
+                            </md-button>
+                            <md-button ng-click="askDeleteProfileImage($event)" class="md-raised"
+                                       ng-disabled="!user.picture || pictureButtonsDisabled">Löschen
+                            </md-button>
                         </div>
                     </div>
-                    <div role="tabpanel"
-                         id="tab2-content"
-                         aria-labelledby="tab1"
-                         ng-switch-when="1"
-                         md-swipe-left="next()"
-                         md-swipe-right="previous()"
-                         layout="row" layout-align="center center">
-                        <form name="userForm">
-
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td width="80">Montag</td>
-                                    <td width="80">Dienstag</td>
-                                    <td width="80">Mittwoch</td>
-                                    <td width="80">Donnerstag</td>
-                                    <td width="80">Freitag</td>
-                                    <td width="80">Samsatg</td>
-                                    <td width="80">Sonntag</td>
-                                </tr>
-                                <tr>
-                                    <td>Vormittag</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.morning" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Nachmittag</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.afternoon" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Abend</td>
-                                    <td><md-checkbox ng-model="user.availability.mo.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.tu.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.we.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.th.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.fr.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.sa.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                    <td><md-checkbox ng-model="user.availability.su.evening" ng-disabled="!editMode" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                </tr>
-
-                            </table>
-                            <br/><br/>
-                            <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                <md-button ng-if="!editMode" class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>&nbsp;
-                                <md-button ng-if="editMode" class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
-                                <md-button ng-if="editMode" class="md-raised md-primary" ng-click="submitAvailability()">Speichern</md-button>
-                            </section>
-                        </form>
-                    </div>
-                    <div role="tabpanel"
-                         id="tab3-content"
-                         aria-labelledby="tab1"
-                         ng-switch-when="2"
-                         md-swipe-left="next()"
-                         md-swipe-right="previous()"
-                         layout="row" layout-align="center center">
-
-                        <div ng-if="!editMode" layout="column" layout-align="center center">
-                            <user-picture picture="{{user.picture}}" size="128"></user-picture>
+                    <div ng-if="editMode">
+                        <style>
+                            .cropArea {
+                                background: #E4E4E4;
+                                overflow: hidden;
+                                width: 400px;
+                                height: 400px;
+                            }
+                        </style>
+                        <div layout="row">
                             <div>
-                                <md-button ng-click="openEdit()" class="md-raised md-primary" ng-disabled="pictureButtonsDisabled">Ändern</md-button>
-                                <md-button ng-click="askDeleteProfileImage($event)" class="md-raised" ng-disabled="!user.picture || pictureButtonsDisabled">Löschen</md-button>
+                                <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                    <img-crop
+                                            image="picFile | ngfDataUrl"
+                                            result-image="croppedDataUrl"
+                                            result-image-size="128"
+                                            result-image-format="image/jpeg"
+                                            result-image-quality=".8"
+                                            ng-init="croppedDataUrl=''"></img-crop>
+                                </div>
+                                <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised "
+                                           ng-class="{'md-primary': null == picFile}">Foto Auswählen
+                                </md-button>
+                                <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary"
+                                           ng-disabled="!picFile">Hochladen
+                                </md-button>
+                                <md-button ng-click="abortEdit()" class="md-raised">Abbrechen</md-button>
+                            </div>
+                            <div style="margin-left:20px;">
+                                <b>Vorschau:</b>
+                                <img ng-src="{{croppedDataUrl}}" style="border-radius: 200px;"/>
                             </div>
                         </div>
-                        <div ng-if="editMode">
-                            <style>
-                                .cropArea {
-                                    background: #E4E4E4;
-                                    overflow: hidden;
-                                    width:400px;
-                                    height:400px;
-                                }
-                            </style>
-                            <div layout="row">
-                                <div>
-                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
-                                        <img-crop
-                                                image="picFile | ngfDataUrl"
-                                                result-image="croppedDataUrl"
-                                                result-image-size="128"
-                                                result-image-format="image/jpeg"
-                                                result-image-quality=".8"
-                                                ng-init="croppedDataUrl=''"></img-crop>
-                                    </div>
-                                    <md-button ngf-select ng-model="picFile" accept="image/*" class="md-raised " ng-class="{'md-primary': null == picFile}">Foto Auswählen</md-button>
-                                    <md-button ng-click="submitPhotoUpload(croppedDataUrl)" class="md-raised md-primary" ng-disabled="!picFile" >Hochladen</md-button>
-                                    <md-button ng-click="abortEdit()" class="md-raised">Abbrechen</md-button>
-                                </div>
-                                <div style="margin-left:20px;">
-                                    <b>Vorschau:</b>
-                                    <img ng-src="{{croppedDataUrl}}" style="border-radius: 200px;"/>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                </md-card-content>
-            </ng-switch>
-        </md-card>
+
+                </div>
+            </md-card-content>
+        </ng-switch>
+    </md-card>
 </md-content>

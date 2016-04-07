@@ -2,6 +2,9 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
 
 
     var me = $scope;
+
+    // extracted from backend modules/validator/lib/isMobilePhone.js
+    me.phoneSchema = /^(\+?49[ \.\-])?([\(]{1}[0-9]{1,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/;
     me.editMode = false;
     me.user = user;
     me.user.genderLabel = User.userGenderLabel(user);

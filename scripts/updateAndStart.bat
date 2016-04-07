@@ -1,2 +1,2 @@
-start ../git pull
-start ../npm start
+start ..\git pull
+start ..\npm start

@@ -28,8 +28,8 @@ router.post('/', function (req, res) {
         if (val.allValid()) {
             User.exists(req.body.email, '', function (err) {
                 if (err) {
-                    console.log(err);
-                    res.sendStatus(500);
+                    // 409 == Conflict
+                    res.sendStatus(409);
                 } else {
                     var plainPw = User.generatePw();
                     var hashedPw = User.hashPw(plainPw);

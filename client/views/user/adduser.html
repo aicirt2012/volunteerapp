@@ -2,138 +2,221 @@
 
 <md-content flex md-scroll-y layout-fill layout-padding>
 
-        <md-card style="padding: 0px;">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
-                        <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
-                    </md-button>
-                    <h2>
-                        <span>Neuer Benutzer</span>
-                    </h2>
-                    <span flex></span>
+    <md-card style="padding: 0px;">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
+                    <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+                </md-button>
+                <h2>
+                    <span>Neuer Benutzer</span>
+                </h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <form name="userForm" layout-padding="">
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Anrede</label>
+                        <md-select ng-model="user.gender">
+                            <md-option ng-repeat="gender in genders" value="{{gender.id}}">
+                                {{gender.label}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Name</label>
+                        <input required name="userName" ng-model="user.name" ng-pattern="/^[a-zA-ZüäöÄÜÖß ]*$/">
+                        <div ng-messages="userForm.userName.$error">
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userName.$error.required && userForm.userName.$touched">
+                                Name muss ausgefüllt sein!
+                            </div>
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userName.$error.pattern && userForm.userName.$touched">
+                                Nur Buchstaben erlaubt!
+                            </div>
+                        </div>
+                    </md-input-container>
                 </div>
-            </md-toolbar>
-            <md-card-content>
-                    <form name="userForm" layout-padding="">
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Anrede</label>
-                                <md-select ng-model="user.gender">
-                                    <md-option ng-repeat="gender in genders" value="{{gender.id}}">
-                                        {{gender.label}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Name</label>
-                                <input required name="userName" ng-model="user.name" ng-pattern="/^[a-zA-ZüäöÄÜÖß ]*$/">
-                                <div ng-messages="userForm.userName.$error">
-                                    <div class="inputContainerMessage" ng-if="userForm.userName.$error.required && userForm.userName.$touched">
-                                        Name muss ausgefüllt sein!
-                                    </div>
-                                    <div class="inputContainerMessage" ng-if="userForm.userName.$error.pattern && userForm.userName.$touched">
-                                        Nur Buchstaben erlaubt!
-                                    </div>
-                                </div>
-                            </md-input-container>
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <input ng-model="user.email" name="userEmail" type="email" required/>
+                        <div ng-messages="userForm.userEmail.$error">
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">
+                                Dies ist keine gültige E-Mail Adresse!
+                            </div>
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userEmail.$error.required && userForm.userEmail.$touched">
+                                Email muss ausgefüllt sein!
+                            </div>
                         </div>
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Email</label>
-                                <input ng-model="user.email" name="userEmail" type="email" required/>
-                                <div ng-messages="userForm.userEmail.$error">
-                                    <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.email && userForm.userEmail.$touched">
-                                        Dies ist keine gültige E-Mail Adresse!
-                                    </div>
-                                    <div class="inputContainerMessage" ng-if="userForm.userEmail.$error.required && userForm.userEmail.$touched">
-                                        Email muss ausgefüllt sein!
-                                    </div>
-                                </div>
-                            </md-input-container>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-sm="column">
+                    <md-input-container flex>
+                        <label>Tel</label>
+                        <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel">
+                        <div ng-messages="userForm.userTel.$error">
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userTel.$error.pattern && userForm.userTel.$touched">
+                                Dies scheint keine gültige deutsche Telefonnummer zu sein
+                            </div>
                         </div>
-                        <div layout="row" layout-sm="column">
-                            <md-input-container flex>
-                                <label>Tel</label>
-                                <input ng-model="user.tel">
-                            </md-input-container>
-                            <md-input-container flex>
-                                <label>Mobil</label>
-                                <input ng-model="user.mobil">
-                            </md-input-container>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Mobil</label>
+                        <input ng-model="user.mobil" name="userMobil" ng-pattern="phoneSchema">
+                        <div ng-messages="userForm.userMobil.$error">
+                            <div class="inputContainerMessage"
+                                 ng-if="userForm.userMobil.$error.pattern && userForm.userMobil.$touched">
+                                Dies scheint keine gültige deutsche Telefonnummer zu sein
+                            </div>
                         </div>
-                        <div layout layout-sm="column">
-                            <md-input-container flex>
-                                <label>Notizen</label>
-                                <textarea ng-model="user.notes" columns="3" md-maxlength="150" rows="5"></textarea>
-                            </md-input-container>
-                        </div>
+                    </md-input-container>
+                </div>
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Notizen</label>
+                        <textarea ng-model="user.notes" columns="3" md-maxlength="150" rows="5"></textarea>
+                    </md-input-container>
+                </div>
 
-                        <h3>Verfügbarkeit</h3>
-                        <table>
-                            <tr>
-                                <td></td>
-                                <td width="80" style="text-align: center;">Montag</td>
-                                <td width="80" style="text-align: center;">Dienstag</td>
-                                <td width="80" style="text-align: center;">Mittwoch</td>
-                                <td width="80" style="text-align: center;">Donnerstag</td>
-                                <td width="80" style="text-align: center;">Freitag</td>
-                                <td width="80" style="text-align: center;">Samsatg</td>
-                                <td width="80" style="text-align: center;">Sonntag</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Vormittag</td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.mo.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.tu.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.we.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.th.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.fr.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.sa.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.su.morning" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Nachmittag</td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.mo.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.tu.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.we.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.th.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.fr.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.sa.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.su.afternoon" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Abend</td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.mo.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.tu.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.we.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.th.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.fr.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.sa.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                                <td style="text-align: center;"><md-checkbox ng-model="user.availability.su.evening" aria-label="ava" class="md-warn md-align-top-left"/></td>
-                            </tr>
+                <h3>Verfügbarkeit</h3>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td width="80" style="text-align: center;">Montag</td>
+                        <td width="80" style="text-align: center;">Dienstag</td>
+                        <td width="80" style="text-align: center;">Mittwoch</td>
+                        <td width="80" style="text-align: center;">Donnerstag</td>
+                        <td width="80" style="text-align: center;">Freitag</td>
+                        <td width="80" style="text-align: center;">Samsatg</td>
+                        <td width="80" style="text-align: center;">Sonntag</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">Vormittag</td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.mo.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.tu.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.we.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.th.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.fr.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.sa.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.su.morning" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">Nachmittag</td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.mo.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.tu.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.we.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.th.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.fr.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.sa.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.su.afternoon" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">Abend</td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.mo.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.tu.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.we.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.th.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.fr.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.sa.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                        <td style="text-align: center;">
+                            <md-checkbox ng-model="user.availability.su.evening" aria-label="ava"
+                                         class="md-warn md-align-top-left"/>
+                        </td>
+                    </tr>
 
-                        </table>
-                        <br/><br/>
-                        <h3>Hinweise auf Impressum und Datenschutzrichtlinien</h3>
-                        <div layout layout-sm="column">
-                          <!--  <fieldset class="standard" ng-style="myStyle">
-                                <legend md-warn>Pflichtfeld!</legend>-->
+                </table>
+                <br/><br/>
+                <h3>Hinweise auf Impressum und Datenschutzrichtlinien</h3>
+                <div layout layout-sm="column">
+                    <!--  <fieldset class="standard" ng-style="myStyle">
+                          <legend md-warn>Pflichtfeld!</legend>-->
 
-                                <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}" ng-model="user.conditionsofuse" class="md-warn">
-                                    Der Nutzer wurde auf
-                                    <a style="color:steelblue;cursor:pointer;" ng-click="openImpressum($event)">Impressum</a>
-                                    und
-                                    <a ng-click="openDataguidelines($event)" style="color:steelblue;cursor:pointer;">Datenschutzrichtlinien</a>
-                                    hingewiesen.
-                                </md-checkbox>
-                           <!-- </fieldset>-->
-                        </div>
-                        <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                            <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>&nbsp;
-                            <md-button ng-disabled="!user.conditionsofuse" class="md-raised md-primary" ng-click="submitAddUser()">Speichern</md-button>
-                        </section>
-                    </form>
+                    <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}"
+                                 ng-model="user.conditionsofuse" class="md-warn">
+                        Der Nutzer wurde auf
+                        <a style="color:steelblue;cursor:pointer;" ng-click="openImpressum($event)">Impressum</a>
+                        und
+                        <a ng-click="openDataguidelines($event)" style="color:steelblue;cursor:pointer;">Datenschutzrichtlinien</a>
+                        hingewiesen.
+                    </md-checkbox>
+                    <!-- </fieldset>-->
+                </div>
+                <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                    <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>
+                    &nbsp;
+                    <md-button ng-disabled="!user.conditionsofuse" class="md-raised md-primary"
+                               ng-click="submitAddUser()">Speichern
+                    </md-button>
+                </section>
+            </form>
 
-            </md-card-content>
-        </md-card>
+        </md-card-content>
+    </md-card>
 </md-content>

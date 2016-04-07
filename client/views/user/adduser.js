@@ -3,6 +3,8 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', func
 
     var me = $scope;
 
+    // extracted from backend modules/validator/lib/isMobilePhone.js
+    me.phoneSchema = /^(\+?49[ \.\-])?([\(]{1}[0-9]{1,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/;
     me.genders = User.genders;
 
     me.user = {
@@ -40,10 +42,35 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', func
             me.user.mobil = null;
         if (me.user.notes == '')
             me.user.notes = null;
-        User.save(me.user, function () {
-            // console.log('user created');
-        })
-        window.location.href = '#/user';
+        User.save(me.user)
+            .$promise
+            .then(function () {
+                window.location.href = '#/user';
+            })
+            .catch(function error(err) {
+                var preset;
+                switch (err.status) {
+                    case 409:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Konflikt')
+                            .textContent('Die ausgewählte E-Mail existiert bereits für einen anderen Nutzer.')
+                            .ok('Ok');
+                        break;
+                    default:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Fehler')
+                            .textContent('Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es noch einmal.')
+                            .ok('Ok');
+
+                        console.error(err);
+                }
+
+                if (preset) {
+                    $mdDialog.show(preset);
+                }
+            });
     };
 
     me.back = function () {

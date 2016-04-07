@@ -1,2 +1,3 @@
-start ..\git pull
-start ..\npm start
+cd ..
+git pull
+npm start

@@ -94,7 +94,9 @@ router.get('/:id', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
+    console.log('put user');
     if (User.atLeastOrganizer(req.user.role)) {
+        console.log('authenticated user IS organizer');
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -102,6 +104,8 @@ router.put('/:id', function (req, res) {
         val.isPhone(req.body.mobil);
         val.isGender(req.body.gender);
         val.isAvailability(req.body.availability);
+        console.log('after validator');
+        console.log('all valid:', val.allValid());
 
         if (val.allValid()) {
             var uId = req.params.id;
@@ -125,10 +129,13 @@ router.put('/:id', function (req, res) {
                 }
             });
         } else {
+            console.log('not valid');
             res.sendStatus(400);
         }
-    } else
+    } else {
+        console.log('no organizer');
         res.sendStatus(403);
+    }
 });
 
 router.delete('/:id', function (req, res) {

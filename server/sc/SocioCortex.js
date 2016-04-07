@@ -64,6 +64,7 @@ function mxlWorkspace(workspaceId, entityTypeId, attributes, query, cb) {
     var data = {expression: 'find '+entityTypeId+' .where('+query+')'};
     http.post('/workspaces/' + workspaceId + '/mxlQuery?attributes=*&meta=', data, function (err, res, body) {
         if (err || res.statusCode != 200) {
+            console.error(arguments);
             console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
             cb(err, null);
         } else {

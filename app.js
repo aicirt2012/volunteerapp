@@ -48,7 +48,7 @@ app.use('/api',function (req, res, next) {
             if (err) {
                 console.error('JWT invalid');
                 return res.status(403).send();
-            } else {
+             } else {
                 User.findById(userid, function (err, user) {
                     if(user && !err) {
                         req.user = user;

@@ -12,6 +12,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         important: false
     };
 
+
     me.submitAddEvent = function ($event) {
         if (!validDates()) {
             var preset = $mdDialog.alert()
@@ -50,63 +51,52 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         window.location.href = '#/eventcalendar';
     };
 
-    me.pickStartTime = function (ev) {
-        $mdpTimePicker(ev, me.event.startdate).then(function (time) {
-            me.startTime = time;
-
-            // set these to 0 for hiding seconds in the frontend
-            time.setSeconds(0);
-            time.setMilliseconds(0);
-
-            // set these to 0 for hiding seconds in the backend
-            me.event.startdate.setSeconds(0);
-            me.event.startdate.setMilliseconds(0);
-
-            me.event.startdate.setHours(time.getHours());
-            me.event.startdate.setMinutes(time.getMinutes());
-        });
+    me.debug = function (time) {
+        console.log(arguments);
     }
 
-    me.pickStartDay = function (ev) {
-        $mdpDatePicker(ev, me.event.startdate).then(function (date) {
-            me.startDay = date;
-            me.event.startdate.setDate(date.getDate());
-            me.event.startdate.setMonth(date.getMonth());
-            me.event.startdate.setFullYear(date.getFullYear());
-            //Also set end day for better usability
-            me.endDay = date;
-            me.event.enddate.setDate(date.getDate());
-            me.event.enddate.setMonth(date.getMonth());
-            me.event.enddate.setFullYear(date.getFullYear());
+    me.setTime = function (source, target) {
+        if (!angular.isDate(target) || !angular.isDate(source)) {
+            console.error('not valid dates:', arguments);
+            return;
+        }
+
+        // set these to 0 for hiding seconds in the frontend
+        source.setSeconds(0);
+        source.setMilliseconds(0);
+
+        // set these to 0 for hiding seconds in the backend
+        target.setSeconds(0);
+        target.setMilliseconds(0);
+
+        target.setHours(source.getHours());
+        target.setMinutes(source.getMinutes());
+    };
+
+    me.pickDay = function(ev, source, target) {
+        $mdpDatePicker(ev, me[source]).then(function (date) {
+            me[source] = date;
+            me.setDay(me[source], target);
         });
-    }
+    };
 
-    me.pickEndTime = function (ev) {
-        $mdpTimePicker(ev, me.event.endTime).then(function (time) {
-            me.endTime = time;
+    me.setDay = function(source, target) {
+        if (!angular.isDate(target) || !angular.isDate(source)) {
+            console.error('not valid dates:', arguments);
+            return;
+        }
 
-            // set these to 0 for hiding seconds in the frontend
-            time.setSeconds(0);
-            time.setMilliseconds(0);
+        target.setDate(source.getDate());
+        target.setMonth(source.getMonth());
+        target.setFullYear(source.getFullYear());
+    };
 
-            // set these to 0 for hiding seconds in the backend
-            me.event.enddate.setSeconds(0);
-            me.event.enddate.setMilliseconds(0);
-
-            me.event.enddate.setHours(time.getHours());
-            me.event.enddate.setMinutes(time.getMinutes());
-            // console.log(me.event.enddate);
+    me.pickTime = function (ev, source, target) {
+        $mdpTimePicker(ev, me[source]).then(function (time) {
+            me[source] = time;
+            me.setTime(me[source], target);
         });
-    }
-
-    me.pickEndDay = function (ev) {
-        $mdpDatePicker(ev, me.event.endDay).then(function (date) {
-            me.endDay = date;
-            me.event.enddate.setDate(date.getDate());
-            me.event.enddate.setMonth(date.getMonth());
-            me.event.enddate.setFullYear(date.getFullYear());
-        });
-    }
+    };
 
     me.myDate = new Date();
 
@@ -131,12 +121,14 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
     function validDates() {
         var s = me.event.startdate;
         var e = me.event.enddate;
-        console.log(s, e, s <= e);
 
-        return false;
         return angular.isDate(s)
             && angular.isDate(e)
             && s <= e;
+    }
+
+    function isDateOrUndefined(sth) {
+        return angular.isUndefined(sth) || angular.isDate(sth);
     }
 }]);
 

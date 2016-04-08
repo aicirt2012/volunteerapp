@@ -58,9 +58,9 @@
                         </div>
                         <div layout="row">
                             <md-input-container flex-gt-xs>
-                                <md-icon ng-click="pickDay($event, 'startDay', event.startdate)" class="material-icons">today</md-icon>
+                                <md-icon ng-click="pickStartDay($event, 'startDay', event.startdate)" class="material-icons">today</md-icon>
                                 <label>Start Datum</label>
-                                <input type="date" ng-click="pickDay($event, 'startDay', event.startdate)" ng-model="startDay" required name="startDay" ng-change="setDay(startDay, event.startdate)"/>
+                                <input type="date" ng-click="pickStartDay($event, 'startDay', event.startdate)" ng-model="startDay" required name="startDay" ng-change="setStartDay(startDay, event.startdate)"/>
                                 <div ng-messages="eventForm.startDay.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.startDay.$error.required && eventForm.startDay.$touched">
                                         Start Datum muss ausgefüllt sein!

@@ -51,10 +51,6 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         window.location.href = '#/eventcalendar';
     };
 
-    me.debug = function (time) {
-        console.log(arguments);
-    }
-
     me.setTime = function (source, target) {
         if (!angular.isDate(target) || !angular.isDate(source)) {
             console.error('not valid dates:', arguments);
@@ -73,14 +69,16 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         target.setMinutes(source.getMinutes());
     };
 
-    me.pickDay = function(ev, source, target) {
-        $mdpDatePicker(ev, me[source]).then(function (date) {
+    me.pickDay = function (ev, source, target) {
+        return $mdpDatePicker(ev, me[source]).then(function (date) {
             me[source] = date;
             me.setDay(me[source], target);
+
+            return date;
         });
     };
 
-    me.setDay = function(source, target) {
+    me.setDay = function (source, target) {
         if (!angular.isDate(target) || !angular.isDate(source)) {
             console.error('not valid dates:', arguments);
             return;
@@ -91,8 +89,25 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         target.setFullYear(source.getFullYear());
     };
 
+    me.setStartDay = function (source, target) {
+        me.setDay(source, target);
+        if (angular.isUndefined(me.endDay)) {
+            me.endDay = new Date(source);
+            me.setDay(source, me.event.enddate);
+        }
+    }
+
+    me.pickStartDay = function (ev, source, target) {
+        me.pickDay(ev, source, target).then(function (date) {
+            if (angular.isUndefined(me.endDay)) {
+                me.endDay = date;
+                me.setDay(date, me.event.enddate);
+            }
+        })
+    };
+
     me.pickTime = function (ev, source, target) {
-        $mdpTimePicker(ev, me[source]).then(function (time) {
+        return $mdpTimePicker(ev, me[source]).then(function (time) {
             me[source] = time;
             me.setTime(me[source], target);
         });

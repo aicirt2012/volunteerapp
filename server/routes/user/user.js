@@ -112,7 +112,7 @@ router.put('/:id', function (req, res) {
                     tel: req.body.tel,
                     mobil: req.body.mobil,
                     email: req.body.email,
-                    notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : undefined,
+                    notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : null,
                     availability: req.body.availability
                 };
                 Log.info(req.user, Log.actions.USER_UPDATE, data);

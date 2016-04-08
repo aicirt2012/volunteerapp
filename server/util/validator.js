@@ -23,9 +23,19 @@ for (var key in validator) {
 
 function decorate(fun) {
     return function decoratedFunction() {
-        var isValid = fun.apply(validator, arguments);
-        validations.push(isValid);
-        return isValid;
+        try {
+            var isValid = fun.apply(validator, arguments);
+            validations.push(isValid);
+            if(!isValid) {
+                console.log('validation error: ', arguments);
+            }
+
+            return isValid;
+        } catch (e) {
+            console.error(e, fun);
+
+            return false;
+        }
     }
 }
 

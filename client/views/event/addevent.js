@@ -1,4 +1,4 @@
-app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', 'Organization', function($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker, Organization) {
+app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', 'Organization', function ($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker, Organization) {
 
     var me = $scope;
     me.event = {
@@ -6,27 +6,27 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         place: '',
         startdate: new Date(),
         enddate: new Date(),
-        nrhelpers:1,
-        description:'',
-        organization:'',
-        important:false
+        nrhelpers: 1,
+        description: '',
+        organization: '',
+        important: false
     };
 
-    me.submitAddEvent = function(){
-        if(me.event.description == '')
+    me.submitAddEvent = function () {
+        if (me.event.description == '')
             me.event.description = null;
-        Event.save(me.event, function(){
+        Event.save(me.event, function () {
             // console.log('event created');
         })
         window.location.href = '#/eventcalendar';
     }
 
-    me.showCancel = function(){
+    me.showCancel = function () {
         window.location.href = '#/eventcalendar';
     }
 
-    me.pickStartTime = function(ev) {
-        $mdpTimePicker(ev, me.event.startdate).then(function(time) {
+    me.pickStartTime = function (ev) {
+        $mdpTimePicker(ev, me.event.startdate).then(function (time) {
             time.setSeconds(0);
             time.setMilliseconds(0);
             me.startTime = time;
@@ -35,8 +35,8 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         });
     }
 
-    me.pickStartDay = function(ev) {
-        $mdpDatePicker(ev, me.event.startdate).then(function(date) {
+    me.pickStartDay = function (ev) {
+        $mdpDatePicker(ev, me.event.startdate).then(function (date) {
             me.startDay = date;
             me.event.startdate.setDate(date.getDate());
             me.event.startdate.setMonth(date.getMonth());
@@ -49,8 +49,8 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         });
     }
 
-    me.pickEndTime = function(ev) {
-        $mdpTimePicker(ev, me.event.endTime).then(function(time) {
+    me.pickEndTime = function (ev) {
+        $mdpTimePicker(ev, me.event.endTime).then(function (time) {
             time.setSeconds(0);
             time.setMilliseconds(0);
             me.endTime = time;
@@ -60,8 +60,8 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         });
     }
 
-    me.pickEndDay = function(ev) {
-        $mdpDatePicker(ev, me.event.endDay).then(function(date) {
+    me.pickEndDay = function (ev) {
+        $mdpDatePicker(ev, me.event.endDay).then(function (date) {
             me.endDay = date;
             me.event.enddate.setDate(date.getDate());
             me.event.enddate.setMonth(date.getMonth());
@@ -71,7 +71,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
 
     me.myDate = new Date();
 
-    me.back = function(){
+    me.back = function () {
         window.location.href = '#/eventcalendar';
     }
 
@@ -85,7 +85,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
     $mdSidenav('left')
         .open();
 
-    me.breadcrumb = function(){
+    me.breadcrumb = function () {
         return 'Eventverwaltung > Neues Event';
     }
 

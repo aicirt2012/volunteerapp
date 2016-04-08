@@ -62,6 +62,7 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     };
 
     me.addVisible = User.isOrganizer() || User.isAdmin();
+
     me.add = function(){
         window.location.href = '#/addevent';
     };

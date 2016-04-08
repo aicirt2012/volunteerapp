@@ -136,14 +136,15 @@ router.post('/', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
+
         if (val.allValid()) {
             var e = {
                 title: req.body.title,
-                place: val.blacklist(req.body.place, "<>;\"\'´"),
+                place: req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
-                description: val.blacklist(req.body.description, "<>;\"\'´"),
+                description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);
@@ -169,13 +170,13 @@ router.post('/', function (req, res) {
                     }
 
                 });
-                res.send();
+                res.sendStatus(201);
             });
         } else {
-            res.status(400);
+            res.sendStatus(400);
         }
     } else
-        res.status(403);
+        res.sendStatus(403);
 });
 
 router.get('/:id', function (req, res) {

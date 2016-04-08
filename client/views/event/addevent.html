@@ -18,15 +18,17 @@
             </md-toolbar>
             <ng-switch on="selectedTabNr" class="tabpanel-container">
                 <md-card-content>
-
                     <form name="eventForm" layout-padding="">
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Titel</label>
-                                <input required name="eventTitle" ng-model="event.title">
+                                <input required name="eventTitle" ng-model="event.title" ng-pattern="/^[a-zA-Z0-9öüäßÜÖÄ\- ]+$/">
                                 <div ng-messages="eventForm.eventTitle.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.required && eventForm.eventTitle.$touched">
                                         Titel muss ausgefüllt sein!
+                                    </div>
+                                    <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.pattern && eventForm.eventTitle.$touched">
+                                        Es sind nur Buchstaben, Leerzeichen und Bindestriche zulässig
                                     </div>
                                 </div>
                             </md-input-container>
@@ -112,7 +114,7 @@
                 <md-card-footer>
                     <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                         <md-button class="md-raised" ng-click="showCancel()">Abbrechen</md-button>&nbsp;
-                        <md-button class="md-raised md-primary" ng-click="submitAddEvent()">Speichern</md-button>
+                        <md-button ng-disabled="submittingInProgress || eventForm.$invalid" class="md-raised md-primary" ng-click="eventForm.setValidity(); submitAddEvent()">Speichern</md-button>
                     </section>
                 </md-card-footer>
             </ng-switch>

@@ -1,4 +1,4 @@
-app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', 'Organization', function ($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker, Organization) {
+app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker', '$mdpTimePicker', 'Organization', '$mdDialog', function ($scope, $mdSidenav, Event, $mdpDatePicker, $mdpTimePicker, Organization, $mdDialog) {
 
     var me = $scope;
     me.event = {
@@ -12,24 +12,56 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         important: false
     };
 
-    me.submitAddEvent = function () {
+    me.submitAddEvent = function ($event) {
+        if (!validDates()) {
+            var preset = $mdDialog.alert()
+                .title('Fehler')
+                .textContent('Das Startdatum muss vor dem Enddatum liegen.')
+                .ok('Ok');
+
+            $mdDialog.show(preset);
+            return;
+        }
+
+        me.submittingInProgress = true;
+
         if (me.event.description == '')
             me.event.description = null;
-        Event.save(me.event, function () {
-            // console.log('event created');
-        })
-        window.location.href = '#/eventcalendar';
-    }
+        Event.save(null, me.event)
+            .$promise
+            .then(function () {
+                window.location.href = '#/eventcalendar';
+            })
+            .catch(function () {
+                var preset = $mdDialog.alert()
+                    .title('Fehler')
+                    .textContent('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
+                    .ok('Ok')
+                    .targetEvent($event);
+
+                $mdDialog.show(preset);
+            })
+            .finally(function () {
+                me.submittingInProgress = false;
+            });
+    };
 
     me.showCancel = function () {
         window.location.href = '#/eventcalendar';
-    }
+    };
 
     me.pickStartTime = function (ev) {
         $mdpTimePicker(ev, me.event.startdate).then(function (time) {
+            me.startTime = time;
+
+            // set these to 0 for hiding seconds in the frontend
             time.setSeconds(0);
             time.setMilliseconds(0);
-            me.startTime = time;
+
+            // set these to 0 for hiding seconds in the backend
+            me.event.startdate.setSeconds(0);
+            me.event.startdate.setMilliseconds(0);
+
             me.event.startdate.setHours(time.getHours());
             me.event.startdate.setMinutes(time.getMinutes());
         });
@@ -51,9 +83,16 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
 
     me.pickEndTime = function (ev) {
         $mdpTimePicker(ev, me.event.endTime).then(function (time) {
+            me.endTime = time;
+
+            // set these to 0 for hiding seconds in the frontend
             time.setSeconds(0);
             time.setMilliseconds(0);
-            me.endTime = time;
+
+            // set these to 0 for hiding seconds in the backend
+            me.event.enddate.setSeconds(0);
+            me.event.enddate.setMilliseconds(0);
+
             me.event.enddate.setHours(time.getHours());
             me.event.enddate.setMinutes(time.getMinutes());
             // console.log(me.event.enddate);
@@ -89,6 +128,15 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         return 'Eventverwaltung > Neues Event';
     }
 
+    function validDates() {
+        var s = me.event.startdate;
+        var e = me.event.enddate;
+        console.log(s, e, s <= e);
 
+        return false;
+        return angular.isDate(s)
+            && angular.isDate(e)
+            && s <= e;
+    }
 }]);
 

@@ -92,7 +92,7 @@
                     <br/><br/>
                     <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                         <md-button class="md-raised" ng-click="back()">Abbrechen</md-button>&nbsp;
-                        <md-button class="md-raised md-primary" ng-click="submitEdit()">Speichern</md-button>
+                        <md-button class="md-raised md-primary" ng-click="submitEdit()" ng-disabled="orgaForm.$invalid">Speichern</md-button>
                     </section>
                 </form>
             </md-card-content>

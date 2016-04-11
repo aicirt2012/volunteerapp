@@ -1,4 +1,4 @@
-app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$mdDialog', 'User', function($scope, $mdSidenav, organization, Organization, $mdDialog, User) {
+app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Organization', '$mdDialog', 'User', function ($scope, $mdSidenav, organization, Organization, $mdDialog, User) {
 
 
     var me = $scope;
@@ -7,59 +7,69 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
     me.accountView = false;
     me.isAdmin = User.isAdmin();
 
-    me.breadcrumb = function(){
+    me.breadcrumb = function () {
         return 'Einrichtungsverwaltung > Einrichtung';
     }
 
-    me.back = function(){
+    me.back = function () {
         window.location.href = '#/organization';
     }
 
-    me.openEdit = function(){
+    me.openEdit = function () {
         me.organizationCopy = JSON.parse(JSON.stringify(me.organization));
         me.editMode = true;
     }
 
-    me.abortEdit = function(){
+    me.abortEdit = function () {
         me.editMode = false;
         me.organization = me.organizationCopy;
     }
 
-    me.submitEdit = function(){
-        Organization.update(me.organization.id, me.organization, function(){
-            // console.log('organization updated');
-        });
-        me.editMode = false;
+    me.submitEdit = function () {
+        Organization.update(me.organization.id, me.organization)
+            .$promise
+            .then(function () {
+                me.editMode = false;
+            })
+            .catch(function () {
+                var preset = $mdDialog.alert()
+                    .title("Fehler")
+                    .textContent("Es ist ein Fehler aufgetreten.")
+                    .ok("Ok");
+
+                $mdDialog.show(preset);
+                console.error('could not persist orga:', arguments);
+            });
     }
 
-    me.deleteOrganization = function(){
+    me.deleteOrganization = function () {
         $mdDialog.show({
             controller: function ($scope, $mdDialog, organization) {
                 $scope.organization = organization;
-                $scope.hide = function() {
+                $scope.hide = function () {
                     $mdDialog.hide();
                 };
-                $scope.cancel = function() {
+                $scope.cancel = function () {
                     $mdDialog.cancel();
                 };
-                $scope.deleteOrganization = function() {
+                $scope.deleteOrganization = function () {
                     $mdDialog.hide();
                 };
             },
             templateUrl: '/views/organization/dialogDeleteOrganization.html',
             parent: angular.element(document.body),
-            clickOutsideToClose:true,
+            clickOutsideToClose: true,
             locals: {
                 organization: me.organization
             }
-        }).then(function() {
-            Organization.del(me.organization.id, function(){
+        }).then(function () {
+            Organization.del(me.organization.id, function () {
                 window.location.href = '#/organization';
             });
-       });
+        });
     }
 
-    me.toggleSidenav = function(componentId){
+    me.toggleSidenav = function (componentId) {
         $mdSidenav(componentId).open();
     }
 

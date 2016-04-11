@@ -47,7 +47,7 @@ router.post('/', function(req, res) {
             };
             Log.info(req.user, Log.actions.ORGANIZATION_CREATE, org);
             Organization.save(org, function () {
-                res.send();
+                res.sendStatus(201);
             });
         }else{
             res.sendStatus(400);

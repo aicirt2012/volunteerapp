@@ -1,4 +1,4 @@
-app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', function($scope, $mdSidenav, Organization) {
+app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', function ($scope, $mdSidenav, Organization) {
 
 
     var me = $scope;
@@ -11,19 +11,29 @@ app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', f
         "email": ''
     };
 
-    me.breadcrumb = function(){
+    me.breadcrumb = function () {
         return 'Einrichtungsverwaltung > Einrichtung Anlegen';
     }
 
-    me.back = function(){
+    me.back = function () {
         window.location.href = '#/organization';
     }
 
-    me.submitEdit = function(){
-        Organization.save(me.organization, function(){
-            // console.log('organization created');
-        })
-        window.location.href = '#/organization';
+    me.submitEdit = function () {
+        Organization.save(me.organization)
+            .$promise
+            .then(function () {
+                window.location.href = '#/organization';
+            })
+            .catch(function () {
+                var preset = $mdDialog.alert()
+                    .title("Fehler")
+                    .textContent("Es ist ein Fehler aufgetreten.")
+                    .ok("Ok");
+
+                $mdDialog.show(preset);
+                console.error('could not persist orga:', arguments);
+            });
     }
 
     $mdSidenav('left').open();

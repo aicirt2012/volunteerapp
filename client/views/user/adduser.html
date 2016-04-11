@@ -101,93 +101,93 @@
                         <td style="text-align: right;">Vormittag</td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.mo.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.tu.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.we.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.th.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.fr.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.sa.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.su.morning" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Nachmittag</td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.mo.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.tu.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.we.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.th.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.fr.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.sa.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.su.afternoon" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Abend</td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.mo.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.tu.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.we.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.th.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.fr.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.sa.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                         <td style="text-align: center;">
                             <md-checkbox ng-model="user.availability.su.evening" aria-label="ava"
-                                         class="md-warn md-align-top-left"/>
+                                         class="md-warn md-align-top-left"></md-checkbox>
                         </td>
                     </tr>
 
@@ -211,12 +211,11 @@
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                     <md-button class="md-raised" ng-click="onCancel()">Abbrechen</md-button>
                     &nbsp;
-                    <md-button ng-disabled="!user.conditionsofuse" class="md-raised md-primary"
+                    <md-button ng-disabled="!user.conditionsofuse || userForm.$invalid" class="md-raised md-primary"
                                ng-click="submitAddUser()">Speichern
                     </md-button>
                 </section>
             </form>
-
         </md-card-content>
     </md-card>
 </md-content>

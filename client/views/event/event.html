@@ -57,7 +57,7 @@
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickStartDay($event)" class="material-icons">today</md-icon>
                                 <label>Start Datum</label>
-                                <input type="date" mdp-date-picker ng-model="startDay" required name="startDay"/>
+                                <input type="date" mdp-date-picker ng-model="startDay" required name="startDay" ng-change="setDay(startDay, event.startdate)"/>
                                 <div ng-messages="eventForm.startDay.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.startDay.$error.required && eventForm.startDay.$touched">
                                         Start Datum muss ausgefüllt sein!
@@ -68,7 +68,7 @@
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickStartTime($event)" class="material-icons">access_time</md-icon>
                                 <label>Start Uhrzeit</label>
-                                <input ng-click="pickStartTime($event)" type="time" ng-model="startTime" name="startTime" required/>
+                                <input ng-click="pickStartTime($event)" type="time" ng-model="startTime" name="startTime" required ng-change="setTime(startTime, event.startdate)" />
                                 <div ng-messages="eventForm.startTime.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.startTime.$error.required && eventForm.startTime.$touched">
                                         Start Uhrzeit muss ausgefüllt sein!
@@ -80,7 +80,7 @@
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickEndDay($event)" class="material-icons">today</md-icon>
                                 <label>End Datum</label>
-                                <input type="date" mdp-date-picker ng-model="endDay" name="endDay" required />
+                                <input type="date" mdp-date-picker ng-model="endDay" name="endDay" required ng-change="setDay(endDay, event.enddate)" />
                                 <div ng-messages="eventForm.endDay.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.endDay.$error.required && eventForm.endDay.$touched">
                                         End Datum muss ausgefüllt sein!
@@ -91,7 +91,7 @@
                             <md-input-container flex-gt-xs>
                                 <md-icon ng-click="pickEndTime($event)" class="material-icons">access_time</md-icon>
                                 <label>End Uhrzeit</label>
-                                <input ng-click="pickEndTime($event)" type="time" ng-model="endTime" name="endTime" required/>
+                                <input ng-click="pickEndTime($event)" type="time" ng-model="endTime" name="endTime" required ng-change="setTime(endTime, event.enddate)"/>
                                 <div ng-messages="eventForm.endTime.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.endTime.$error.required && eventForm.endTime.$touched">
                                         End Uhrzeit muss ausgefüllt sein!

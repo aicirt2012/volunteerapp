@@ -41,42 +41,61 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         $mdpTimePicker(ev, me.event.startdate).then(function(time) {
             time.setSeconds(0);
             time.setMilliseconds(0);
+
             me.startTime = time;
-            me.event.startdate.setHours(time.getHours());
-            me.event.startdate.setMinutes(time.getMinutes());
+            me.setTime(time, me.event.startdate);
         });
     }
+
+    me.setDay = function (source, target) {
+        if(!angular.isDate(source) || !angular.isDate(target)) {
+            return;
+        }
+
+        target.setDate(source.getDate());
+        target.setMonth(source.getMonth());
+        target.setFullYear(source.getFullYear());
+    };
 
     me.pickStartDay = function(ev) {
         $mdpDatePicker(ev, me.event.startdate).then(function(date) {
             me.startDay = date;
-            me.event.startdate.setDate(date.getDate());
-            me.event.startdate.setMonth(date.getMonth());
-            me.event.startdate.setFullYear(date.getFullYear());
-            //Also set end day for better usability
-            me.endDay = date;
-            me.event.enddate.setDate(date.getDate());
-            me.event.enddate.setMonth(date.getMonth());
-            me.event.enddate.setFullYear(date.getFullYear());
+            me.setDay(date, me.event.startdate);
+
+            //Also set end day once for better usability
+            if(!angular.isDate(me.event.enddate)) {
+                me.endDay = date;
+                me.setDay(date, me.event.enddate);
+            }
         });
-    }
+    };
 
     me.pickEndTime = function(ev) {
-        $mdpTimePicker(ev, me.event.endTime).then(function(time) {
+        $mdpTimePicker(ev, me.endTime).then(function(time) {
             time.setSeconds(0);
             time.setMilliseconds(0);
+
             me.endTime = time;
-            me.event.enddate.setHours(time.getHours());
-            me.event.enddate.setMinutes(time.getMinutes());
+            me.setTime(time, me.event.enddate);
         });
-    }
+    };
+
+    me.setTime = function(source, target) {
+        if(!angular.isDate(source) || !angular.isDate(target)) {
+            return;
+        }
+
+        target.setMilliseconds(0);
+        target.setSeconds(0);
+
+        source.setHours(target.getHours());
+        source.setMinutes(target.getMinutes());
+    };
 
     me.pickEndDay = function(ev) {
-        $mdpDatePicker(ev, me.event.endDay).then(function(date) {
+        $mdpDatePicker(ev, me.endDay).then(function(date) {
             me.endDay = date;
-            me.event.enddate.setDate(date.getDate());
-            me.event.enddate.setMonth(date.getMonth());
-            me.event.enddate.setFullYear(date.getFullYear());
+            me.setDay(date, me.event.enddate);
         });
     }
 
@@ -99,14 +118,31 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
     }
 
     me.submitEdit = function(){
-        if(me.event.description == '')
-            me.event.description = null;
-        me.editMode = false;
+        me.submitButtonsDisabled = true;
         var data = JSON.parse(JSON.stringify(me.event));
+
+        if(data.description == '')
+            data.description = null;
+
         data.organization = me.event.organization.id;
-        Event.update(me.event.id, data, function(){
-            // console.log('update executed!');
-        });
+        Event.update(me.event.id, data)
+            .$promise
+            .then(function() {
+                me.editMode = false;
+            })
+            .catch(function(){
+                var preset = $mdDialog.alert()
+                    .title('Fehler')
+                    .textContent('Es ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es noch einmal')
+                    .ok('Ok');
+
+                $mdDialog.show(preset);
+
+                console.error('update failed', arguments);
+            })
+            .finally(function() {
+                me.submitButtonsDisabled = false;
+            });
     }
 
     me.cancelEvent = function(){

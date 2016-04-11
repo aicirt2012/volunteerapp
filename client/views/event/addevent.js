@@ -95,7 +95,7 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
             me.endDay = new Date(source);
             me.setDay(source, me.event.enddate);
         }
-    }
+    };
 
     me.pickStartDay = function (ev, source, target) {
         me.pickDay(ev, source, target).then(function (date) {

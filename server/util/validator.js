@@ -87,7 +87,7 @@ validator.isGender = function (gender) {
 }
 
 validator.isTitle = function (name) {
-    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ\- ]+$/);
+    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ\- \?\(\)!]+$/);
 }
 
 validator.isCity = function (city) {

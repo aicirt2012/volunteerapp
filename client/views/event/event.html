@@ -24,10 +24,13 @@
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Titel</label>
-                                <input required name="eventTitle" ng-model="event.title">
+                                <input required name="eventTitle" ng-model="event.title" ng-pattern="/^[a-zA-Z0-9öüäßÜÖÄ\- \?\(\)!]+$/">
                                 <div ng-messages="eventForm.eventTitle.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.required && eventForm.eventTitle.$touched">
                                         Titel muss ausgefüllt sein!
+                                    </div>
+                                    <div class="inputContainerMessage" ng-if="eventForm.eventTitle.$error.pattern && eventForm.eventTitle.$touched">
+                                        Es sind nur Buchstaben, Zahlen, Leerzeichen und die folgenden Sonderzeichen zulässig: -?!()
                                     </div>
                                 </div>
                             </md-input-container>

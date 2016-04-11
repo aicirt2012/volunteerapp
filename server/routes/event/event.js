@@ -28,11 +28,11 @@ router.put('/:id', function (req, res) {
             var eId = req.params.id;
             var data = {
                 title: req.body.title,
-                place: val.blacklist(req.body.place, "<>;\"\'´"),
+                place: !!req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
-                description: val.blacklist(req.body.description, "<>;\"\'´"),
+                description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_UPDATE, data);

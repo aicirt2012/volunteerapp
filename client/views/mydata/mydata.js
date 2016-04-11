@@ -46,6 +46,13 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
                             .ok('Ok');
                         $mdDialog.show(preset);
                         break;
+                    case 400:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Validierungsfehler')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angeommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .ok('Ok');
+                        break;
                 }
             });
     };

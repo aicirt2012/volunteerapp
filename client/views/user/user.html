@@ -156,8 +156,8 @@
                                 </div>
                                 <br/><br/>
                                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                                    <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
-                                    <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern</md-button>
+                                    <md-button class="md-raised" ng-click="abortEdit()" ng-disabled="submitButtonsDisabled">Abbrechen</md-button>&nbsp;
+                                    <md-button class="md-raised md-primary" ng-click="submitPersonalData()" ng-disabled="submitButtonsDisabled || userForm.$invalid">Speichern</md-button>
                                 </section>
                             </form>
                         </div>

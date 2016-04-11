@@ -47,22 +47,36 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
     }
 
     me.submitPersonalData = function () {
+        me.submitButtonsDisabled = true;
         User.update(me.user.id, me.user)
             .$promise
             .then(function success() {
                 me.editMode = false;
             })
             .catch(function error(err) {
+                var preset;
                 switch (err.status) {
                     case 409:
-                        var preset = $mdDialog
+                        preset = $mdDialog
                             .alert()
                             .title('Konflikt')
                             .textContent('Die ausgewählte E-Mail existiert bereits für einen anderen Nutzer.')
                             .ok('Ok');
-                        $mdDialog.show(preset);
+                        break;
+                    case 400:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Validierungsfehler')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angeommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .ok('Ok');
                         break;
                 }
+                if (angular.isDefined(preset)) {
+                    $mdDialog.show(preset);
+                }
+            })
+            .finally(function () {
+                me.submitButtonsDisabled = false;
             });
     }
 

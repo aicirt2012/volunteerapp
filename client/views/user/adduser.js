@@ -57,6 +57,13 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', func
                             .textContent('Die ausgewählte E-Mail existiert bereits für einen anderen Nutzer.')
                             .ok('Ok');
                         break;
+                    case 400:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Validierungsfehler')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angeommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .ok('Ok');
+                        break;
                     default:
                         preset = $mdDialog
                             .alert()

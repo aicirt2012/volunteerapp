@@ -45,7 +45,17 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
             me.startTime = time;
             me.setTime(time, me.event.startdate);
         });
-    }
+    };
+
+    me.pickEndTime = function(ev) {
+        $mdpTimePicker(ev, me.event.enddate).then(function(time) {
+            time.setSeconds(0);
+            time.setMilliseconds(0);
+
+            me.endTime = time;
+            me.setTime(time, me.event.enddate);
+        });
+    };
 
     me.setDay = function (source, target) {
         if(!angular.isDate(source) || !angular.isDate(target)) {
@@ -70,26 +80,17 @@ app.controller('EventCtrl', ['$scope', '$mdSidenav', 'Event', 'event', 'User', '
         });
     };
 
-    me.pickEndTime = function(ev) {
-        $mdpTimePicker(ev, me.endTime).then(function(time) {
-            time.setSeconds(0);
-            time.setMilliseconds(0);
-
-            me.endTime = time;
-            me.setTime(time, me.event.enddate);
-        });
-    };
-
     me.setTime = function(source, target) {
         if(!angular.isDate(source) || !angular.isDate(target)) {
+            console.warn('at least one argument is not a date:', source, target);
             return;
         }
 
         target.setMilliseconds(0);
         target.setSeconds(0);
 
-        source.setHours(target.getHours());
-        source.setMinutes(target.getMinutes());
+        target.setHours(source.getHours());
+        target.setMinutes(source.getMinutes());
     };
 
     me.pickEndDay = function(ev) {

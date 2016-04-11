@@ -16,10 +16,22 @@ for (var key in validator) {
     }
 }
 
-// decorate the following functions
+// additionally decorate the following functions
 ['contains', 'matches', 'equals'].forEach(function (key) {
     validator[key] = decorate(validator[key]);
 });
+
+// let to several 'unfindable' errors, added more logs
+var orgBlacklist = validator.blacklist;
+validator.blacklist = function() {
+    try {
+        return orgBlacklist.apply(validator, arguments);
+    } catch(e) {
+        // convert arguments to a real array for better readability
+        console.error('could not blacklist because:', e, '; arguments:', Array.prototype.slice.call(arguments));
+        throw e;
+    }
+};
 
 function decorate(fun) {
     return function decoratedFunction() {

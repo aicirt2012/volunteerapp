@@ -106,8 +106,8 @@
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
-                            <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
-                            <md-button class="md-raised md-primary" ng-click="submitEdit()">Änderungen übernehmen</md-button>
+                            <md-button class="md-raised" ng-click="abortEdit()" ng-disabled="submitButtonsDisabled">Abbrechen</md-button>
+                            <md-button class="md-raised md-primary" ng-click="submitEdit()" ng-disabled="submitButtonsDisabled">Änderungen übernehmen</md-button>
                         </div>
                     </form>
                 </div>

@@ -50,7 +50,7 @@ app.controller('MyDataCtrl', ['$scope', '$mdSidenav', 'user', 'User', 'MyData', 
                         preset = $mdDialog
                             .alert()
                             .title('Validierungsfehler')
-                            .textContent('Die Daten des Formulars wurden vom Server nicht angeommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angenommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
                             .ok('Ok');
                         break;
                 }

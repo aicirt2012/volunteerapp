@@ -77,7 +77,7 @@ router.put('/:id', function(req, res) {
             };
             Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, org);
             Organization.update(req.params.id, org, function () {
-                res.send();
+                res.sendStatus(200);
             });
         }else{
             res.sendStatus(400);

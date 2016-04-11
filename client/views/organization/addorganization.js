@@ -1,4 +1,4 @@
-app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', function ($scope, $mdSidenav, Organization) {
+app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', '$mdDialog', function ($scope, $mdSidenav, Organization, $mdDialog) {
 
 
     var me = $scope;
@@ -25,14 +25,29 @@ app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', f
             .then(function () {
                 window.location.href = '#/organization';
             })
-            .catch(function () {
-                var preset = $mdDialog.alert()
-                    .title("Fehler")
-                    .textContent("Es ist ein Fehler aufgetreten.")
-                    .ok("Ok");
+            .catch(function (err) {
+                var preset;
+                switch (err.status) {
+                    case 400:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Validierungsfehler')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angenommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .ok('Ok');
+                        break;
+                    default:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Fehler')
+                            .textContent('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
+                            .ok('Ok');
+                        break;
+                }
 
-                $mdDialog.show(preset);
-                console.error('could not persist orga:', arguments);
+                if (angular.isDefined(preset)) {
+                    $mdDialog.show(preset);
+                }
+                console.error('could not create orga:', arguments)
             });
     }
 

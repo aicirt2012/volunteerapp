@@ -67,7 +67,14 @@ app.controller('UserCtrl', ['$scope', '$mdSidenav', 'User', '$routeParams', 'use
                         preset = $mdDialog
                             .alert()
                             .title('Validierungsfehler')
-                            .textContent('Die Daten des Formulars wurden vom Server nicht angeommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .textContent('Die Daten des Formulars wurden vom Server nicht angenommen. Bitte überprüfen Sie alle Daten und versuchen Sie es dann erneut.')
+                            .ok('Ok');
+                        break;
+                    default:
+                        preset = $mdDialog
+                            .alert()
+                            .title('Fehler')
+                            .textContent('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
                             .ok('Ok');
                         break;
                 }

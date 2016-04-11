@@ -14,7 +14,7 @@
             <md-card-content style="padding: 0px">
                 <md-list ng-if="futureevents.length!=0">
                     <md-list-item class="md-3-line" ng-repeat="e in futureevents" ng-click="selectEvent(e.id)">
-                        <div class="md-tile-left inset" hide-sm >
+                        <div class="md-avatar" hide-sm >
                             <ng-md-icon icon="event_available" size="48"></ng-md-icon>
                         </div>
                         <div class="md-list-item-text">
@@ -41,7 +41,7 @@
             <md-card-content style="padding: 0px">
                 <md-list ng-if="pastevents.length!=0">
                     <md-list-item class="md-3-line" ng-repeat="e in pastevents" ng-click="selectEvent(e.id)">
-                        <div class="md-tile-left inset" hide-sm >
+                        <div class="md-avatar" hide-sm >
                             <ng-md-icon icon="event_available" size="48"></ng-md-icon>
                         </div>
                         <div class="md-list-item-text">

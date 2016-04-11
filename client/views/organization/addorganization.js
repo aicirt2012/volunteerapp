@@ -20,7 +20,7 @@ app.controller('AddOrganizationCtrl', ['$scope', '$mdSidenav', 'Organization', f
     }
 
     me.submitEdit = function () {
-        Organization.save(me.organization)
+        Organization.save(null, me.organization)
             .$promise
             .then(function () {
                 window.location.href = '#/organization';

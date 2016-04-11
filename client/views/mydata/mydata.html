@@ -102,11 +102,11 @@
                             <div layout="row" layout-sm="column">
                                 <md-input-container flex>
                                     <label>Tel</label>
-                                    <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel">
+                                    <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel" required>
                                     <div ng-messages="userForm.userTel.$error">
                                         <div class="inputContainerMessage"
                                              ng-if="userForm.userTel.$error.pattern && userForm.userTel.$touched">
-                                            Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                            Dies scheint keine gültige deutsche Telefonnummer zu sein. Beispiel: 089 1234567
                                         </div>
                                     </div>
                                 </md-input-container>
@@ -116,7 +116,7 @@
                                     <div ng-messages="userForm.userMobil.$error">
                                         <div class="inputContainerMessage"
                                              ng-if="userForm.userMobil.$error.pattern && userForm.userMobil.$touched">
-                                            Dies scheint keine gültige deutsche Telefonnummer zu sein
+                                            Dies scheint keine gültige deutsche Telefonnummer zu sein. Beispiel: 0160 1234567
                                         </div>
                                     </div>
                                 </md-input-container>
@@ -125,7 +125,7 @@
                             <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                                 <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
                                 &nbsp;
-                                <md-button class="md-raised md-primary" ng-click="submitPersonalData()">Speichern
+                                <md-button class="md-raised md-primary" ng-click="submitPersonalData()" ng-disabled="userForm.$invalid">Speichern
                                 </md-button>
                             </section>
                         </form>

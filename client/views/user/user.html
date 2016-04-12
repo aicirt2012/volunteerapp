@@ -6,8 +6,9 @@
         <a href="#/user/{{user.role | lowercase}}">Personalverwaltung</a>&nbsp;&gt;&nbsp;
         <a href="#/user/{{user.role | lowercase}}">{{user.roleLabel}} &gt; &nbsp; </a>
         <div style="display: inline-block;"> <user-picture  picture="{{user.picture}}" size="40"/></div> &nbsp; {{user.name}} &nbsp;
-        <ng-md-icon  ng-show="isAdmin" ng-click="accountView = !accountView" icon="settings" size="20" flex></ng-md-icon>
-
+        <md-icon ng-click="accountView = !accountView" ng-show="isAdmin" style="margin-left: 0; margin-right: 0;">
+            settings
+        </md-icon>
     </div>
 </md-toolbar>
 

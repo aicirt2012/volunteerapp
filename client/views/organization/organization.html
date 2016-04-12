@@ -5,69 +5,72 @@
         </md-button>
         <a href="#/user/{{user.role | lowercase}}">Einrichtungsverwaltung</a>&nbsp;&gt;&nbsp;
         <a href="#/user/{{user.role | lowercase}}">Einrichtung&nbsp; </a>
-        <ng-md-icon ng-click="accountView = !accountView" flex icon="settings" size="20" ng-show="isAdmin"></ng-md-icon>
+        <md-icon ng-click="accountView = !accountView" ng-show="isAdmin" style="margin-left: 0; margin-right: 0;">
+            settings
+        </md-icon>
     </div>
 </md-toolbar>
 
 <md-content flex md-scroll-y layout-fill layout-padding>
-        <md-card ng-if="!accountView" style="padding:0px">
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
-                        <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
-                    </md-button>
-                    <h2>
-                        <span>{{organization.name}}</span>
-                    </h2>
-                    <span flex></span>
-                </div>
-            </md-toolbar>
-            <md-card-content>
-                <div ng-if="!editMode">
-                    <md-list>
-                        <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">person</md-icon>
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ organization.name }} </h3>
-                                <p> Name </p>
-                            </div>
-                        </md-list-item>
-                        <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">place</md-icon>
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{organization.street}} <br/> {{ organization.zip }} {{organization.city}}  </h3>
-                                <p> Addresse </p>
-                            </div>
-                        </md-list-item>
-                        <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">mail</md-icon>
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ organization.email }}</h3>
-                                <p> Email </p>
-                            </div>
-                        </md-list-item>
-                        <md-list-item class="md-2-line">
-                            <md-icon class="material-icons">phone</md-icon>
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ organization.tel }} </h3>
-                                <p> Tel </p>
-                            </div>
-                        </md-list-item>
-                        <md-list-item class="md-2-line">
-                            <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </div>
-                <div ng-if="editMode">
-                    <form name="orgaForm">
+    <md-card ng-if="!accountView" style="padding:0px">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-fab md-mini md-primary" aria-label="Settings" ng-click="back()">
+                    <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+                </md-button>
+                <h2>
+                    <span>{{organization.name}}</span>
+                </h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <div ng-if="!editMode">
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <md-icon class="material-icons">person</md-icon>
+                        <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                            <h3> {{ organization.name }} </h3>
+                            <p> Name </p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon class="material-icons">place</md-icon>
+                        <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                            <h3> {{organization.street}} <br/> {{ organization.zip }} {{organization.city}} </h3>
+                            <p> Addresse </p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon class="material-icons">mail</md-icon>
+                        <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                            <h3> {{ organization.email }}</h3>
+                            <p> Email </p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon class="material-icons">phone</md-icon>
+                        <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                            <h3> {{ organization.tel }} </h3>
+                            <p> Tel </p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                            <md-button class="md-raised md-primary" ng-click="openEdit()">Bearbeiten</md-button>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <div ng-if="editMode">
+                <form name="orgaForm">
                     <div layout layout-sm="column">
                         <md-input-container flex>
                             <label>Name</label>
                             <input required name="orgaName" ng-model="organization.name">
                             <div ng-messages="orgaForm.orgaName.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaName.$error.required && orgaForm.orgaName.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaName.$error.required && orgaForm.orgaName.$touched">
                                     Name muss ausgefüllt sein!
                                 </div>
                             </div>
@@ -76,12 +79,15 @@
                     <div layout layout-sm="column">
                         <md-input-container flex>
                             <label>PLZ</label>
-                            <input ng-model="organization.zip" name="orgaZip" ng-pattern="/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/" required>
+                            <input ng-model="organization.zip" name="orgaZip"
+                                   ng-pattern="/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/" required>
                             <div ng-messages="orgaForm.orgaZip.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaZip.$error.required && orgaForm.orgaZip.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaZip.$error.required && orgaForm.orgaZip.$touched">
                                     PLZ muss ausgefüllt sein!
                                 </div>
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaZip.$error.pattern && orgaForm.orgaZip.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaZip.$error.pattern && orgaForm.orgaZip.$touched">
                                     Keine gültige PLZ!
                                 </div>
                             </div>
@@ -90,7 +96,8 @@
                             <label>Stadt</label>
                             <input ng-model="organization.city" name="orgaCity" required>
                             <div ng-messages="orgaForm.orgaCity.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaCity.$error.required && orgaForm.orgaCity.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaCity.$error.required && orgaForm.orgaCity.$touched">
                                     Stadt muss ausgefüllt sein!
                                 </div>
                             </div>
@@ -99,12 +106,15 @@
                     <div layout="row" layout-sm="column">
                         <md-input-container flex>
                             <label>Straße</label>
-                            <input ng-model="organization.street" name="orgaStreet" ng-pattern="/^[a-zA-Z0-9öüäßÜÖÄ\.\- ]+$/" required>
+                            <input ng-model="organization.street" name="orgaStreet"
+                                   ng-pattern="/^[a-zA-Z0-9öüäßÜÖÄ\.\- ]+$/" required>
                             <div ng-messages="orgaForm.orgaCity.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaStreet.$error.required && orgaForm.orgaStreet.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaStreet.$error.required && orgaForm.orgaStreet.$touched">
                                     Straße muss ausgefüllt sein!
                                 </div>
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaStreet.$error.pattern && orgaForm.orgaStreet.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaStreet.$error.pattern && orgaForm.orgaStreet.$touched">
                                     Keine gültige Straße!
                                 </div>
                             </div>
@@ -115,10 +125,12 @@
                             <label>Email</label>
                             <input ng-model="organization.email" name="orgaEmail" type="email" required>
                             <div ng-messages="orgaForm.orgaEmail.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaEmail.$error.email && orgaForm.orgaEmail.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaEmail.$error.email && orgaForm.orgaEmail.$touched">
                                     Dies ist keine gültige E-Mail Adresse!
                                 </div>
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaEmail.$error.required && orgaForm.orgaEmail.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaEmail.$error.required && orgaForm.orgaEmail.$touched">
                                     Email muss ausgefüllt sein!
                                 </div>
                             </div>
@@ -129,7 +141,8 @@
                             <label>Tel</label>
                             <input ng-model="organization.tel" name="orgaTel" required>
                             <div ng-messages="orgaForm.orgaTel.$error">
-                                <div class="inputContainerMessage" ng-if="orgaForm.orgaTel.$error.required && orgaForm.orgaTel.$touched">
+                                <div class="inputContainerMessage"
+                                     ng-if="orgaForm.orgaTel.$error.required && orgaForm.orgaTel.$touched">
                                     Telefonnummer muss ausgefüllt sein!
                                 </div>
                             </div>
@@ -137,34 +150,38 @@
                     </div>
                     <br/><br/>
                     <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>&nbsp;
-                        <md-button class="md-raised md-primary" ng-click="submitEdit()" ng-disabled="orgaForm.$invalid">Speichern</md-button>
+                        <md-button class="md-raised" ng-click="abortEdit()">Abbrechen</md-button>
+                        &nbsp;
+                        <md-button class="md-raised md-primary" ng-click="submitEdit()" ng-disabled="orgaForm.$invalid">
+                            Speichern
+                        </md-button>
                     </section>
                 </form>
+            </div>
+        </md-card-content>
+    </md-card>
+    <md-card ng-if="accountView" style="padding:0px">
+        <ng-switch on="selectedAccountTabNr" class="tabpanel-container">
+            <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedAccountTabNr">
+                <md-tab id="tab10" aria-controls="tab10-content">
+                    Einrichtung Löschen
+                </md-tab>
+            </md-tabs>
+            <md-card-content>
+                <div role="tabpanel0"
+                     id="tab10-content"
+                     aria-labelledby="tab1"
+                     ng-switch-when="0"
+                     md-swipe-left="next()"
+                     md-swipe-right="previous()"
+                     layout="row" layout-align="center center">
+
+                    <md-button class="md-raised md-primary" ng-click="deleteOrganization()">Einrichtung löschen
+                    </md-button>
+
                 </div>
+
             </md-card-content>
-        </md-card>
-        <md-card ng-if="accountView" style="padding:0px">
-            <ng-switch on="selectedAccountTabNr" class="tabpanel-container">
-                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedAccountTabNr">
-                    <md-tab id="tab10" aria-controls="tab10-content">
-                        Einrichtung Löschen
-                    </md-tab>
-                </md-tabs>
-                <md-card-content>
-                    <div role="tabpanel0"
-                         id="tab10-content"
-                         aria-labelledby="tab1"
-                         ng-switch-when="0"
-                         md-swipe-left="next()"
-                         md-swipe-right="previous()"
-                         layout="row" layout-align="center center">
-
-                        <md-button class="md-raised md-primary" ng-click="deleteOrganization()">Einrichtung löschen</md-button>
-
-                    </div>
-
-                </md-card-content>
-            </ng-switch>
-        </md-card>
+        </ng-switch>
+    </md-card>
 </md-content>

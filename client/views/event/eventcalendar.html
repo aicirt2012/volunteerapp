@@ -4,12 +4,8 @@
             <ng-md-icon icon="menu"></ng-md-icon>
         </md-button>
         <h3>{{breadcrumb()}}</h3>&nbsp;&nbsp;
-        <p>
-            <ng-md-icon ng-if="isCalendarView" ng-click="toggleView()" icon="view_list" size="32"/>
-        </p>
-        <p>
-            <ng-md-icon ng-if="!isCalendarView" ng-click="toggleView()" icon="view_module" size="32"/>
-        </p>
+        <md-icon ng-if="isCalendarView" ng-click="toggleView()" style="margin: 0; font-size: 36px; height: 36px;" class="material-icons">view_list</md-icon>
+        <md-icon ng-if="!isCalendarView" ng-click="toggleView()" style="margin: 0; font-size: 36px; height: 36px;" class="material-icons">view_module</md-icon>
     </div>
 </md-toolbar>
 
@@ -52,7 +48,8 @@
                     </div>
                     <div class="md-list-item-text">
                         <h3><b>{{e.title}} </b></h3>
-                        <h4>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.startdate | date: 'HH:mm'}}Uhr {{e.duration - .5 | number:0}}h&nbsp;<span ng-if="(e.duration % 1) * 60 > 0">{{(e.duration % 1) * 60 | number:0}}min</span>
+                        <h4>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.startdate | date: 'HH:mm'}}Uhr {{e.duration - .5 |
+                            number:0}}h&nbsp;<span ng-if="(e.duration % 1) * 60 > 0">{{(e.duration % 1) * 60 | number:0}}min</span>
                         </h4>
                         <p>{{e.description}}</p>
                     </div>

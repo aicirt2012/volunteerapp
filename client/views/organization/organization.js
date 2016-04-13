@@ -31,7 +31,7 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
             .then(function () {
                 me.editMode = false;
             })
-            .catch(function () {
+            .catch(function (err) {
                 var preset;
                 switch (err.status) {
                     case 400:
@@ -52,7 +52,7 @@ app.controller('OrganizationCtrl', ['$scope', '$mdSidenav', 'organization', 'Org
                 if (angular.isDefined(preset)) {
                     $mdDialog.show(preset);
                 }
-                console.error('could not persist orga:', arguments);
+                console.error('could not persist orga:', {error: err, request: angular.copy(me.organization)});
             });
     }
 

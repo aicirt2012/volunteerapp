@@ -1,5 +1,4 @@
-
-app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil', '$mdDialog', 'User', '$mdMedia', function($scope, $mdBottomSheet, $mdSidenav, $mdUtil, $mdDialog, User, $mdMedia){
+app.controller('IndexCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdUtil', '$mdDialog', 'User', '$mdMedia', function ($scope, $mdBottomSheet, $mdSidenav, $mdUtil, $mdDialog, User, $mdMedia) {
     var me = $scope;
 
     me.menu = [];
@@ -7,54 +6,56 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
 
     // if the window is going to be smaller than md hide sidenav
     // and vice versa
-    $scope.$watch(function() { return $mdMedia('gt-md')}, function(newVal, oldVal, scope) {
-        if(newVal === false && oldVal === true) {
+    $scope.$watch(function () {
+        return $mdMedia('gt-md')
+    }, function (newVal, oldVal, scope) {
+        if (newVal === false && oldVal === true) {
             $mdSidenav('left').close();
-        } else if(newVal === true && oldVal === false) {
+        } else if (newVal === true && oldVal === false) {
             $mdSidenav('left').open();
         }
     });
 
-    me.initMenu = function(){
-        User.me().then(function(data){
+    me.initMenu = function () {
+        User.me().then(function (data) {
             me.user = data;
             me.user.roleLabel = User.roleLabel();
             me.menu = [];
-            if(User.isAdmin() || User.isOrganizer() || User.isTeam() || User.isHelper())
+            if (User.isAdmin() || User.isOrganizer() || User.isTeam() || User.isHelper())
                 me.menu.push({
-                    link : 'eventcalendar',
+                    link: 'eventcalendar',
                     title: 'Eventkalender',
                     icon: 'event'
                 });
 
-            if(User.isAdmin() || User.isOrganizer() || User.isTeam())
+            if (User.isAdmin() || User.isOrganizer() || User.isTeam())
                 me.menu.push({
-                    link : 'user',
+                    link: 'user',
                     title: 'Personalverwaltung',
                     icon: 'group'
                 });
 
-            if(User.isAdmin() || User.isOrganizer() || User.isTeam())
+            if (User.isAdmin() || User.isOrganizer() || User.isTeam())
                 me.menu.push({
-                    link : 'organization',
+                    link: 'organization',
                     title: 'Einrichtungsverwaltung',
                     icon: 'home'
                 });
-            if(User.isAdmin())
+            if (User.isAdmin())
                 me.menu.push({
-                    link : 'log',
+                    link: 'log',
                     title: 'Systemlog',
                     icon: 'rotate_right'
                 });
         });
         me.mymenu = [
             {
-                link : 'myevents',
+                link: 'myevents',
                 title: 'Meine Events',
                 icon: 'event_available'
             },
             {
-                link : 'mydata',
+                link: 'mydata',
                 title: 'Meine Daten',
                 icon: 'settings'
             },
@@ -66,20 +67,20 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil',
         ];
     }
 
-    if(User.isLoggedIn()){
+    if (User.isLoggedIn()) {
         me.initMenu();
     }
 
     me.leftOpen = false;
 
 
-    me.openView = function(url){
-        if(url == 'logout'){
+    me.openView = function (url) {
+        if (url == 'logout') {
             User.logout();
             window.location.href = '#/login';
             me.leftOpen = false;
-        }else
-            window.location.href = '#/'+url;
+        } else
+            window.location.href = '#/' + url;
         me.leftOpen = true;
     };
 

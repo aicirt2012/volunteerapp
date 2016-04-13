@@ -1,10 +1,19 @@
 
-app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil', '$mdDialog', 'User', function($scope, $mdBottomSheet, $mdSidenav, $mdUtil, $mdDialog, User){
+app.controller('IndexCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdUtil', '$mdDialog', 'User', '$mdMedia', function($scope, $mdBottomSheet, $mdSidenav, $mdUtil, $mdDialog, User, $mdMedia){
     var me = $scope;
-
 
     me.menu = [];
     me.mymenu = [];
+
+    // if the window is going to be smaller than md hide sidenav
+    // and vice versa
+    $scope.$watch(function() { return $mdMedia('gt-md')}, function(newVal, oldVal, scope) {
+        if(newVal === false && oldVal === true) {
+            $mdSidenav('left').close();
+        } else if(newVal === true && oldVal === false) {
+            $mdSidenav('left').open();
+        }
+    });
 
     me.initMenu = function(){
         User.me().then(function(data){

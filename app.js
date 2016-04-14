@@ -104,5 +104,14 @@ app.use(function(err, req, res, next) {
   });
 });
 
+process.on('uncaughtException', function (err) {
+    console.error('uncaughtException', err.stack);
+
+    // catching this event prevents from exiting the process,
+    // which would be the normal reaction on an uncaught exception
+    // check the discussion on
+    // https://github.com/nodejs/node-v0.x-archive/issues/2582
+    process.exit(1);
+});
 
 module.exports = app;

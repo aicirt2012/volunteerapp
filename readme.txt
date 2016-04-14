@@ -29,3 +29,14 @@ cd C:\dev\repo\bin
 setx NODE_ENV production || set NODE_ENV=production || $env:NODE_ENV="production" (for power shell)
 node www
 
+# Write error stream to file #
+Start the server and redirect the stderr stream by using the '2>' flag
+```
+npm start 2> err.log
+```
+or
+```
+cd bin
+node www 2> err.log
+```
+The path of the log file is relative to the current working directory.

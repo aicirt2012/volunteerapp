@@ -5,8 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
-var compression = require('compression')
-var config = require('./config')
+var compression = require('compression');
+var connectDomain = require('connect-domain');
+var config = require('./config');
 
 var setup = require('./server/routes/setup/setup');
 var login = require('./server/routes/login/login');
@@ -18,7 +19,7 @@ var log = require('./server/routes/log/log');
 
 var User = require('./server/sc/User');
 
-var app = express();
+var app = express().use(connectDomain());
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -85,23 +86,27 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.status('error').json( {
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        console.error('caught error:', err.stack);
+        console.error('request:', req);
+        res.status(err.status || 500);
+        res.status('error').json({
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.status('error').json({
-    message: err.message,
-    error: {}
-  });
+app.use(function (err, req, res, next) {
+    console.error('caught error:', err.stack);
+    console.error('request:', req);
+    res.status(err.status || 500);
+    res.status('error').json({
+        message: err.message,
+        error: {}
+    });
 });
 
 process.on('uncaughtException', function (err) {

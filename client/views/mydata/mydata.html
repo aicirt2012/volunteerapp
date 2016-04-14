@@ -102,7 +102,7 @@
                             <div layout="row" layout-sm="column">
                                 <md-input-container flex>
                                     <label>Tel</label>
-                                    <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel" required>
+                                    <input ng-model="user.tel" ng-pattern="phoneSchema" name="userTel">
                                     <div ng-messages="userForm.userTel.$error">
                                         <div class="inputContainerMessage"
                                              ng-if="userForm.userTel.$error.pattern && userForm.userTel.$touched">

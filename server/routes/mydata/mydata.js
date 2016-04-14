@@ -16,8 +16,8 @@ router.put('/personal', function(req, res) {
     val.init();
     val.isEmail(req.body.email);
     val.isName(req.body.name);
-    val.isPhone(req.body.tel);
-    val.isPhone(req.body.mobil);
+    val.isPhone(req.body.tel, false);
+    val.isPhone(req.body.mobil, false);
     val.isGender(req.body.gender);
 
     if(val.allValid()) {

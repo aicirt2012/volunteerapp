@@ -8,11 +8,9 @@ var val = require('../../util/validator');
 var Log = require('../../sc/Log');
 var Event = require('../../sc/Event');
 
-
 router.get('/me', function (req, res) {
     res.json(User.toMe(req.user));
 });
-
 
 router.post('/', function (req, res) {
     if (User.atLeastOrganizer(req.user.role)) {

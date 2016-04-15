@@ -86,10 +86,7 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
-        console.error('caught error:', err.stack);
-        console.error('request:', req);
-        res.status(err.status || 500);
-        res.status('error').json({
+        handleError(err.status, {
             message: err.message,
             error: err
         });
@@ -99,14 +96,18 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    console.error('caught error:', err.stack);
-    console.error('request:', req);
-    res.status(err.status || 500);
-    res.status('error').json({
+    handleError(err.status, {
         message: err.message,
         error: {}
     });
 });
+
+function handleError(status, errJson) {
+    console.error('caught error:', err.stack);
+    console.error('request:', req);
+    res.status(status || 500);
+    res.json(errJson);
+}
 
 process.on('uncaughtException', function (err) {
     console.error('uncaughtException', err.stack);

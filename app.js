@@ -19,7 +19,7 @@ var log = require('./server/routes/log/log');
 
 var User = require('./server/sc/User');
 
-var app = express().use(connectDomain());
+var app = express();//.use(connectDomain());
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

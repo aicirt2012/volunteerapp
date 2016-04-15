@@ -11,7 +11,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdUtil'
     }, function (newVal, oldVal, scope) {
         if (newVal === false && oldVal === true) {
             $mdSidenav('left').close();
-        } else if (newVal === true && oldVal === false) {
+        } else if (newVal === true && oldVal === false && User.isLoggedIn()) {
             $mdSidenav('left').open();
         }
     });

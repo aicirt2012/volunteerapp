@@ -125,7 +125,7 @@ router.put('/:id', function (req, res) {
                     }
                 });
             } catch (e) {
-                console.error(e);
+                console.error((e || {}).stack || 'error in [PUT] user/:id, not valid');
                 res.sendStatus(500);
             }
         } else {

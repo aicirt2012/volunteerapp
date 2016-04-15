@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var compression = require('compression');
-var connectDomain = require('connect-domain');
+var domainMiddleware = require('express-domain-middleware');
 var config = require('./config');
 
 var setup = require('./server/routes/setup/setup');
@@ -19,7 +19,7 @@ var log = require('./server/routes/log/log');
 
 var User = require('./server/sc/User');
 
-var app = express();//.use(connectDomain());
+var app = express().use(domainMiddleware);
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -81,33 +81,36 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        handleError(err.status, {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
+// partially adapted from https://github.com/brianc/node-domain-middleware
 app.use(function (err, req, res, next) {
-    handleError(err.status, {
-        message: err.message,
-        error: {}
-    });
-});
+    var body;
+    if (app.get('env') == 'development') {
+        // development error handler
+        // will print stacktrace
+        body = {
+            message: err.message,
+            error: err.stack
+        };
+    } else {
+        // production error handler
+        // no stacktraces leaked to user
+        body = {
+            message: err.message,
+            error: {}
+        }
+    }
 
-function handleError(status, errJson) {
-    console.error('caught error:', err.stack);
-    console.error('request:', req);
-    res.status(status || 500);
-    res.json(errJson);
-}
+    console.error('error on request %d %s %s', process.domain.id, req.method, req.url);
+    console.error(err.stack);
+    //console.error('request:', req);
+    res.status(err.status || 500);
+    res.json(body);
+
+    if(err.domain) {
+        //you should think about gracefully stopping & respawning your server
+        //since an unhandled error might put your application into an unknown state
+    }
+});
 
 process.on('uncaughtException', function (err) {
     console.error('uncaughtException', err.stack);

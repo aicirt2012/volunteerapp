@@ -54,12 +54,6 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 ## Organisator: Event Registrierung ##
 ![OrganizerEventregistration](/readme/organizer_eventregistration.png?raw=true "Organizer EventRegistration")
 
-## Organisator: Personalverwaltung ##
-![OrganizerUsers](/readme/organizer_users.png?raw=true "Organizer Users")
-
-## Organisator: Neuen Helfer anlegen ##
-![OrganizerCreateuser](/readme/organizer_createuser.png?raw=true "Organizer CreateUser")
-
 ## Organisator: Helfer Bearbeiten ##
 ![Organizeredithelper](/readme/organizer_edithelper.png?raw=true "Organizer EditHelper")
 ![Organizeredithelper2](/readme/organizer_edithelper2.png?raw=true "Organizer EditHelper2")
@@ -72,6 +66,12 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 
 ## Organisator: Einrichtung ##
 ![Organizer organization](/readme/organizer_organization.png?raw=true "Organizer Orgnization")
+
+## Admin: Personalverwaltung ##
+![AdminUsers](/readme/admin_users.png?raw=true "Admin Users")
+
+## Admin: Neuen Helfer anlegen ##
+![AdminCreateuser](/readme/admin_createuser.png?raw=true "Admin CreateUser")
 
 ## Admin: Log ##
 ![Admin Log](/readme/admin_log.png?raw=true "Admin Log")

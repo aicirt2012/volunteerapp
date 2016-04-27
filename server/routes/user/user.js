@@ -194,7 +194,7 @@ router.post('/:id/resetpw', function (req, res) {
                         subject: 'Ihr Passwort wurde zurückgesetzt!',
                         html: '<h3>Hallo ' + user.name + '!</h3>' +
                         '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
-                        'Ihr neues Passwort lautet: "' + plainPw + '"!<br/></p>' +
+                        'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>' +
                         '<p>Viele Grüße, <br/>' +
                         'Ihr Volunteer App Team</p>'
                     });

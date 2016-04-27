@@ -4,7 +4,7 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdUtil'
     me.menu = [];
     me.mymenu = [];
 
-    // if the window is going to be smaller than md hide sidenav
+    // if the window is going to be smaller than 'md' hide sidenav
     // and vice versa
     $scope.$watch(function () {
         return $mdMedia('gt-md')

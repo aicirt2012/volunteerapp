@@ -52,7 +52,7 @@ router.post('/', function (req, res) {
                             subject: 'Willkommen bei der Volunteer App',
                             html: '<h3>Hallo ' + data.name + '!</h3>' +
                             '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
-                            'Ihr Passwort lautet: "' + plainPw + '"!<br/>' +
+                            'Ihr Passwort lautet: ' + plainPw + '<br/>' +
                             'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
                             '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>' +
                             '<p>Viele Grüße, <br/>' +

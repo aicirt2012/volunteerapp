@@ -6,7 +6,7 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 ## Terminologie ##
 <b>Helfer:</b> Ein Helfer ist eine freiwillige Person welche sich bereiterklärt ein Event zu unterstützen. Helfer haben nur zugriff auf Ihre eigenen Daten und eingeschränkt auf alle Events. 
 
-<b>Teammitglied:</b> Alle angestellten der Organisation werden als Teammitglied bezeichnet und haben eingeschränkten lesenden zugriff auf alle Daten.Organisator: Ein Organisator erstellt und verwaltet alle Events und hat zugriff auf alle existierenden Daten.
+<b>Teammitglied:</b> Alle angestellten der Organisation werden als Teammitglied bezeichnet und haben eingeschränkten lesenden zugriff auf alle Daten. Koordinator: Ein Koordinator erstellt und verwaltet alle Events und hat zugriff auf alle existierenden Daten.
 
 <b>Administrator:</b> Hat Einsicht in Anwendungslogs der User.
 
@@ -39,32 +39,32 @@ Within the last year many foreigners arrived in the city of Munich. The coordina
 ## Helfer: Meine Daten, Foto ##
 ![HelperMydataph](/readme/helper_mydataph.png?raw=true "Helper Mydataph")
 
-## Organisator: Event erstellen ##
+## Koordinator: Event erstellen ##
 ![OrganizerCreateEvent](/readme/organizer_createevent.png?raw=true "Organizer CreateEvent")
 
-## Organisator: Event erstellen, Datum wählen ##
+## Koordinator: Event erstellen, Datum wählen ##
 ![OrganizerCreateEvent2](/readme/organizer_createevent2.png?raw=true "Organizer CreateEvent2")
 
-## Organisator: Event erstellen, Uhrzeit wählen ##
+## Koordinator: Event erstellen, Uhrzeit wählen ##
 ![OrganizerCreateEvent3](/readme/organizer_createevent3.png?raw=true "Organizer CreateEvent3")
 
-## Organisator: Eventansicht ##
+## Koordinator: Eventansicht ##
 ![OrganizerEvent](/readme/organizer_event.png?raw=true "Organizer Event")
 
-## Organisator: Event Registrierung ##
+## Koordinator: Event Registrierung ##
 ![OrganizerEventregistration](/readme/organizer_eventregistration.png?raw=true "Organizer EventRegistration")
 
-## Organisator: Helfer Bearbeiten ##
+## Koordinator: Helfer Bearbeiten ##
 ![Organizeredithelper](/readme/organizer_edithelper.png?raw=true "Organizer EditHelper")
 ![Organizeredithelper2](/readme/organizer_edithelper2.png?raw=true "Organizer EditHelper2")
 
-## Organisator: Benutzer Events ##
+## Koordinator: Benutzer Events ##
 ![OrganizeruserEvents](/readme/organizer_userevents.png?raw=true "Organizer UserEvents")
 
-## Organisator: Einrichtungsverwaltung ##
+## Koordinator: Einrichtungsverwaltung ##
 ![Organizer organizations](/readme/organizer_organizations.png?raw=true "Organizer Orgnizations")
 
-## Organisator: Einrichtung ##
+## Koordinator: Einrichtung ##
 ![Organizer organization](/readme/organizer_organization.png?raw=true "Organizer Orgnization")
 
 ## Admin: Personalverwaltung ##

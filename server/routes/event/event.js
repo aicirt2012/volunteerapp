@@ -53,7 +53,7 @@ router.put('/:id', function (req, res) {
                                     'Das Event <b>' + event.title + '</b>' +
                                     ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
                                     ' statt.<br/></p>' +
-                                    'Um alle Informationen über das Event einzusehen klicken Sie auf flogenden Link: ' +
+                                    'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
                                     '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>' +
                                     '<p>Viele Grüße, <br>' +
                                     'Ihr VolunterApp Team</p>'

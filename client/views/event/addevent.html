@@ -47,11 +47,11 @@
                                 <input type="number" min="0" ng-model="event.nrhelpers"/>
                             </md-input-container>
                             <md-input-container flex>
-                                <label>Ort</label>
+                                <label>Treffpunkt</label>
                                 <input ng-model="event.place" name="eventPlace" required>
                                 <div ng-messages="eventForm.eventPlace.$error">
                                     <div class="inputContainerMessage" ng-if="eventForm.eventPlace.$error.required && eventForm.eventPlace.$touched">
-                                        Ort muss ausgefüllt sein!
+                                        Treffpunkt muss ausgefüllt sein!
                                     </div>
                                 </div>
                             </md-input-container>

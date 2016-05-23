@@ -49,7 +49,7 @@
                                 <input type="number" min="0" ng-model="event.nrhelpers"/>
                             </md-input-container>
                             <md-input-container flex>
-                                <label>Ort</label>
+                                <label>Treffpunkt</label>
                                 <input ng-model="event.place">
                             </md-input-container>
                         </div>
@@ -145,7 +145,7 @@
                             <md-icon class="material-icons">place</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.place }} </h3>
-                                <p> Ort </p>
+                                <p> Treffpunkt </p>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="!event.isoneday" class="md-2-line">

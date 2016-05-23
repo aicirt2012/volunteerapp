@@ -73,6 +73,10 @@ validator.isName = function (name) {
     validator.matches(name, /^[a-zA-ZöüäßÜÖÄ.\- ]+$/);
 }
 
+validator.isOrgaName = function (name) {
+    validator.matches(name, /^[a-zA-Z0-9öüäßÜÖÄ.\- \(\)]+$/);
+}
+
 validator.isPhone = function (phone, required) {
     if (phone || required !== false)
         validator.isMobilePhone(phone, 'de-DE');

@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt-nodejs");
+var generator = require('generate-password');
 
 var Roles = {
     HELPER: 'HELPER',

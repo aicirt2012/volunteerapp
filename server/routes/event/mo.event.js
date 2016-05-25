@@ -141,7 +141,7 @@ router.post('/', function (req, res) {
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
                 description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
-                organization: {id: req.body.organization}
+                organization: req.body.organization
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);
             Event.create(e, function (err) {

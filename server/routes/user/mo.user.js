@@ -180,16 +180,13 @@ router.post('/:id/resetpw', function (req, res) {
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
         Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
-        User.findById(uId, function (err, user) {
+        User.findById(uId, function (err, u) {
             if (err)
                 res.sendStatus(500);
             else
-                User.update(uId, {
-                    pw: hashedPw
-                }, function () {
-                    mailer.sendToUser(
-                        user.email,
-                        user.name,
+                u.pw = hashedPw;
+                u.save(function (err) {
+                    mailer.sendToUser(u.email, u.name,
                         'Ihr Passwort wurde zurückgesetzt!',
                         '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
                         'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>'

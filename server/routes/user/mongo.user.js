@@ -5,15 +5,15 @@ var mailer = require('../../util/mailer');
 var http = require('../../util/http');
 var User = require('../../m/User');
 var val = require('../../util/validator');
-var Log = require('../../sc/Log');
-var Event = require('../../sc/Event');
+var Log = require('../../m/Log');
+var Event = require('../../m/Event');
 
 router.get('/me', function (req, res) {
     res.json(req.user.toMe());
 });
 
 router.post('/', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
                         name: req.body.name,
                         tel: req.body.tel,
                         mobil: req.body.mobil,
-                        email: req.body.email.toLocaleLowerCase(),
+                        email: req.body.email.toLowerCase(),
                         pw: hashedPw,
                         notes: validatedNotes,
                         role: User.roles.HELPER,
@@ -46,7 +46,7 @@ router.post('/', function (req, res) {
                         conditionsofuse: req.body.conditionsofuse
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
-                    User.save(data, function () {
+                    User.create(data, function () {
                         mailer.sendToUser(
                             data.email,
                             data.name,

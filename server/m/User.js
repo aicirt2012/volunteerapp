@@ -178,6 +178,13 @@ User.generatePw = function(){
     });
 }
 
+User.exists = function(email, uId, cb){
+    User.findByEmail(email, function(err, user){
+        cb(err || user == null)
+    });
+}
+
+
 
 User.findByEmail = function(email, callback){
     // TODO: sanitize email

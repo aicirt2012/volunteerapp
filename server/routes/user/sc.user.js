@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
                         name: req.body.name,
                         tel: req.body.tel,
                         mobil: req.body.mobil,
-                        email: req.body.email.toLocaleLowerCase(),
+                        email: req.body.email.toLowerCase(),
                         pw: hashedPw,
                         notes: validatedNotes,
                         role: User.roles.HELPER,

@@ -16,10 +16,18 @@ var eventSchema = new mongoose.Schema({
     organization: SObjectId
 });
 
+eventSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+eventSchema.set('toJSON', {
+    virtuals: true
+});
+
 var Event = mongoose.model('event', eventSchema);
 
 Event.findByUserId = function(userId, cb){
-    Event.find({helpers: {$in: arr}}, function(err, events){
+    Event.find({helpers: {$in: userId}}, function(err, events){
         if(!err){
             cb(false, events)
         }else

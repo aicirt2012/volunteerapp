@@ -8,7 +8,7 @@ var val = require('../../util/validator');
 var Log = require('../../model/mo/Log');
 
 router.get('/', function(req, res) {
-    Organization.findAll(function(err, organizations){
+    Organization.find(function(err, organizations){
         res.json(organizations);
     });
 });
@@ -46,7 +46,7 @@ router.post('/', function(req, res) {
                 email: req.body.email
             };
             Log.info(req.user, Log.actions.ORGANIZATION_CREATE, org);
-            Organization.save(org, function () {
+            Organization.create(org, function () {
                 res.sendStatus(201);
             });
         }else{

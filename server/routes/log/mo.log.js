@@ -5,8 +5,8 @@ var User = require('../../model/mo/User');
 
 
 router.get('/', function(req, res) {
-    if(User.atLeastAdmin(req.user.role)){
-        Log.findAll(function(err, logs){
+    if(req.user.atLeastAdmin()){
+        Log.find(function(err, logs){
             res.json(logs);
         });
     }else

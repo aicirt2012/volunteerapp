@@ -12,8 +12,15 @@ var logSchema = new mongoose.Schema({
     description: String,
 });
 
-var Log = mongoose.model('log', logSchema);
+logSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
 
+logSchema.set('toJSON', {
+    virtuals: true
+});
+
+var Log = mongoose.model('log', logSchema);
 
 
 Log.level = {

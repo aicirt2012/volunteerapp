@@ -10,8 +10,15 @@ var organizationSchema = new mongoose.Schema({
     email: String
 });
 
-var Organization = mongoose.model('organization', organizationSchema);
+organizationSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
 
+organizationSchema.set('toJSON', {
+    virtuals: true
+});
+
+var Organization = mongoose.model('organization', organizationSchema);
 
 
 module.exports = Organization;

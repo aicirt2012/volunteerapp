@@ -67,18 +67,19 @@ router.put('/:id', function(req, res) {
         val.isEmail(req.body.email);
 
         if(val.allValid()){
-            var org = {
-                name: req.body.name,
-                zip: req.body.zip,
-                city: req.body.city,
-                street: req.body.street,
-                tel: req.body.tel,
-                email: req.body.email
-            };
-            Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, org);
-            Organization.update(req.params.id, org, function () {
+            Organization.findById(req.params.id, function(err, o){
+                console.log(JSON.stringify(o));
+                o.name = req.body.name;
+                o.zip = req.body.zip;
+                o.city = req.body.city;
+                o.street = req.body.street;
+                o.tel = req.body.tel;
+                o.email = req.body.email;
+                o.save();
+                Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, o);
                 res.sendStatus(200);
             });
+
         }else{
             res.sendStatus(400);
         }

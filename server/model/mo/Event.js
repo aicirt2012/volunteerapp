@@ -2,7 +2,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var SObjectId = mongoose.Schema.Types.ObjectId;
-var ObjectId = mongoose.Types.ObjectId;
 
 var eventSchema = new mongoose.Schema({
     title: String, 

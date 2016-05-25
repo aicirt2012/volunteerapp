@@ -144,7 +144,7 @@ router.post('/', function (req, res) {
                 organization: {id: req.body.organization}
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);
-            Event.save(e, function (err) {
+            Event.create(e, function (err) {
                 var start = new Date(e.startdate);
                 var end = new Date(e.enddate);
 

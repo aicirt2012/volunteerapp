@@ -138,6 +138,60 @@ userSchema.methods.toMe = function(){
 
 var User = mongoose.model('user', userSchema);
 
+User.findAvailableUsers = function(start, end, cb){
+    //TODO change to mongo
+    /*
+    var matches = [];
+    do{
+        matches['availability.'+dayOfWeekLabel(start)+'.'+timeSlotLabel(start)]=true;
+        start = new Date(start.getTime()+3600*1000);
+    }while(start.getTime() < end.getTime())
+
+    matches = Object.keys(matches);
+
+    //find user.where(availability.mo.morning or availability.mo.afternoon)
+    query = '';
+    for(var i=0; i<matches.length; i++){
+        query += matches[i];
+        if(i<matches.length-1)
+            query += ' or ';
+    }
+
+    User.find(query, function(err, users){
+        if(!err){
+            console.log(JSON.stringify(users));
+            cb(false, users);
+        }else
+            cb(new Error('User not found'), null);
+    });
+
+    function timeSlotLabel(date){
+        //morning: 00:00 -> 11:59
+        //afternoon: 12:00 -> 17:59
+        //evening: 18:00 -> 23:59
+        var hour = moment(date).format('H');
+        if(hour<12)
+            return 'morning';
+        if(hour<18)
+            return 'afternoon';
+        else
+            return 'evening';
+    }
+
+    function dayOfWeekLabel(date){
+        var dayOfWeek = parseInt(moment(date).format('e'));
+        switch(dayOfWeek){
+            case(0): return 'mo';
+            case(1): return 'tu';
+            case(2): return 'we';
+            case(3): return 'th';
+            case(4): return 'fr';
+            case(5): return 'sa';
+            case(6): return 'su';
+        }
+    }
+    */
+}
 
 
 

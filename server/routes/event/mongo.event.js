@@ -2,21 +2,21 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var moment = require('moment');
-var User = require('../../sc/User');
-var Event = require('../../sc/Event');
-var Log = require('../../sc/Log');
+var User = require('../../m/User');
+var Event = require('../../m/Event');
+var Log = require('../../m/Log');
 var mailer = require('../../util/mailer');
 var val = require('../../util/validator');
 
 
 router.get('/', function (req, res) {
-    Event.findAll(function (err, events) {
+    Event.find(function (err, events) {
         res.json(events);
     });
 });
 
 router.put('/:id', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         val.init();
         val.isTitle(req.body.title);
         val.isDate(req.body.startdate);
@@ -72,7 +72,7 @@ router.put('/:id', function (req, res) {
 router.post('/:id/message', function (req, res) {
     var eId = req.params.id;
     var msg = req.body.message;
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
         Event.findWithHelperById(eId, function (err, event) {
             if (err)
@@ -94,7 +94,7 @@ router.post('/:id/message', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         var eId = req.params.id;
         Event.findWithHelperById(eId, function (err, event) {
             for (var i = 0; i < event.helpers.length; i++) {
@@ -125,7 +125,7 @@ router.delete('/:id', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         val.init();
         val.isTitle(req.body.title);
         val.isDate(req.body.startdate);
@@ -204,7 +204,7 @@ function findEvent(eId, user, cb) {
 router.post('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    if (User.atLeastOrganizer(req.user.role) || req.user.id == helperId) {
+    if (req.user.atLeastOrganizer() || req.user.id == helperId) {
         Event.isRegistered(eventId, helperId, function (err, isRegistered) {
             if (!isRegistered) {
                 Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
@@ -264,7 +264,7 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
 router.delete('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    if (User.atLeastOrganizer(req.user.role) || req.user.id == helperId) {
+    if (req.user.atLeastOrganizer() || req.user.id == helperId) {
         Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
         Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
             if (err)

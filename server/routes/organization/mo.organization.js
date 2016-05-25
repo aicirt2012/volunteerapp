@@ -37,16 +37,15 @@ router.post('/', function(req, res) {
         val.isEmail(req.body.email);
 
         if(val.allValid()){
-            var org = {
+            Organization.create({
                 name: req.body.name,
                 zip: req.body.zip,
                 city: req.body.city,
                 street: req.body.street,
                 tel: req.body.tel,
                 email: req.body.email
-            };
-            Log.info(req.user, Log.actions.ORGANIZATION_CREATE, org);
-            Organization.create(org, function () {
+            }, function (o) {
+                Log.info(req.user, Log.actions.ORGANIZATION_CREATE, o);
                 res.sendStatus(201);
             });
         }else{
@@ -66,7 +65,7 @@ router.put('/:id', function(req, res) {
         val.isPhone(req.body.tel, true);
         val.isEmail(req.body.email);
 
-        if(val.allValid()){
+        if(val.allValid())
             Organization.findById(req.params.id, function(err, o){
                 console.log(JSON.stringify(o));
                 o.name = req.body.name;
@@ -79,10 +78,8 @@ router.put('/:id', function(req, res) {
                 Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, o);
                 res.sendStatus(200);
             });
-
-        }else{
+        else
             res.sendStatus(400);
-        }
     }else
         res.sendStatus(403);
 });

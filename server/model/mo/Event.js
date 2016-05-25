@@ -7,12 +7,12 @@ var eventSchema = new mongoose.Schema({
     title: String, 
     description: String,
     nrhelpers: String,
-    helpers: [SObjectId],
+    helpers: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
     emails: String,
     startdate: Date,
     enddate: Date,
     place: String,
-    organization: SObjectId
+    organization: {type: mongoose.Schema.Types.ObjectId, ref: 'organization'}
 });
 
 eventSchema.virtual('id').get(function(){

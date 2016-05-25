@@ -19,7 +19,7 @@ var userSchema = new mongoose.Schema({
     name: String,
     tel: String,
     mobil: String,
-    email: String,
+    email: {type: String, unique : true},
     pw: String,
     notes: String,
     role: {type: String, enum: [Roles.HELPER, Roles.TEAM, Roles.ORGANIZER, Roles.ADMIN]},
@@ -134,7 +134,17 @@ User.toMe = function(user){
 
 
 
-
+User.canLogin = function(email, plainPw, cb){
+    User.findOne({email: email.toLowerCase()}, function(err, user){
+        if(user != null){
+            if(bcrypt.compareSync(plainPw, user.pw))
+                cb(false, user);
+            else
+                cb(new Error('Invalid Pw'), null);
+        }else
+            cb(new Error('User not found'), null);
+    });
+}
 
 
 

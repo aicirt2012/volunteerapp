@@ -15,5 +15,6 @@ module.exports = {
         user: 'muc.refugees',
         pass: 'FD37hZJL8z3eyBUbBcho'
     },
-    database: 'mongodb://volunteerappuser:123@localhost:27017/volunteerapp'
+    database: 'mongodb://volunteerappuser:123@localhost:27017/volunteerapp',
+    usemongo: true
 };

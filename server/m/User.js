@@ -64,6 +64,14 @@ var userSchema = new mongoose.Schema({
     conditionsofuse: Boolean
 });
 
+userSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+userSchema.set('toJSON', {
+    virtuals: true
+});
+
 
 userSchema.methods.toMe = function(callback) {
     return {
@@ -136,7 +144,7 @@ User.toMe = function(user){
 
 User.canLogin = function(email, plainPw, cb){
     User.findOne({email: email.toLowerCase()}, function(err, user){
-        if(user != null){
+        if(user != null && !err){
             if(bcrypt.compareSync(plainPw, user.pw))
                 cb(false, user);
             else

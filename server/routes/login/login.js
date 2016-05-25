@@ -17,33 +17,21 @@ router.post('/', function(req, res, next) {
     var email = req.body.email;
     var pw = req.body.pw;
 
-    if(true){
-        UserMongo.canLogin(email, pw, function(err, user){
-            if(err) {
-                console.log(err);
-                console.log('could not login');
-                return res.sendStatus(403);
-            }else {
-                return res.json({
-                    token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
-                    user: User.toMe(user)
-                });
-            }
-        });
-    }else{
-        User.canLogin(email, pw, function(err, user){
-            if(err) {
-                console.log(err);
-                console.log('could not login');
-                return res.sendStatus(403);
-            }else {
-                return res.json({
-                    token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
-                    user: User.toMe(user)
-                });
-            }
-        });
-    }
+    if(config.usemongo)
+        User = UserMongo;
+
+    User.canLogin(email, pw, function(err, user){
+        if(err) {
+            console.log(err);
+            console.log('could not login');
+            return res.sendStatus(403);
+        }else {
+            return res.json({
+                token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
+                user: User.toMe(user)
+            });
+        }
+    });
 });
 
 module.exports = router;

@@ -121,24 +121,24 @@ userSchema.methods.atLeastHelper = function(callback) {
     return this.atLeastTeam || this.role && role == Roles.HELPER;
 };
 
-
+userSchema.methods.toMe = function(){
+    return {
+        id: this.id,
+        gender: this.gender,
+        name: this.name,
+        tel: this.tel,
+        mobil: this.mobil,
+        email: this.email,
+        role: this.role,
+        availability: this.availability,
+        picture: this.picture
+    }
+}
 
 
 var User = mongoose.model('user', userSchema);
 
-User.toMe = function(user){
-    return {
-        id: user.id,
-        gender: user.gender,
-        name: user.name,
-        tel: user.tel,
-        mobil: user.mobil,
-        email: user.email,
-        role: user.role,
-        availability: user.availability,
-        picture: user.picture
-    }
-}
+
 
 
 

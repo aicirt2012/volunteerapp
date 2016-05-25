@@ -17,7 +17,10 @@ app.set('port', port);
 //app.set('env', config.env);
 //process.env['NODE_ENV'] = config.env;
 console.log('Starting '+config.name+' in '+app.get('env')+' mode on port '+port);
-console.log('Using SocioCortex API URL "'+config.sc.url+'" and user "'+config.sc.user+'"');
+if(config.usemongo)
+  console.log('Using MongoDB '+config.database);
+else
+  console.log('Using SocioCortex API URL "'+config.sc.url+'" and user "'+config.sc.user+'"');
 
 /**
  * Create HTTP server.

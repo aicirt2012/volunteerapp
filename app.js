@@ -10,15 +10,30 @@ var compression = require('compression');
 var domainMiddleware = require('express-domain-middleware');
 var config = require('./config');
 
-var setup = require('./server/routes/setup/setup');
-var login = require('./server/routes/login/login');
-var user = require('./server/routes/user/user');
-var event = require('./server/routes/event/event');
-var mydata = require('./server/routes/mydata/mydata');
-var organization = require('./server/routes/organization/organization');
-var log = require('./server/routes/log/log');
 
-var User = require('./server/sc/User');
+if(config.usemongo){
+    var User = require('./server/m/User');
+    var setup = require('./server/routes/setup/mongo.setup');
+    var login = require('./server/routes/login/mongo.login');
+    var user = require('./server/routes/user/mongo.user');
+    var event = require('./server/routes/event/mongo.event');
+    var mydata = require('./server/routes/mydata/mongo.mydata');
+    var organization = require('./server/routes/organization/mongo.organization');
+    var log = require('./server/routes/log/mongo.log');
+}else{
+    var User = require('./server/sc/User');
+    var setup = require('./server/routes/setup/sc.setup');
+    var login = require('./server/routes/login/sc.login');
+    var user = require('./server/routes/user/sc.user');
+    var event = require('./server/routes/event/sc.event');
+    var mydata = require('./server/routes/mydata/sc.mydata');
+    var organization = require('./server/routes/organization/sc.organization');
+    var log = require('./server/routes/log/sc.log');
+}
+
+
+
+
 
 var app = express().use(domainMiddleware);
 mongoose.connect(config.database);

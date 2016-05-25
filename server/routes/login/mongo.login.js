@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../sc/User');
-var UserMongo = require('../../m/User');
+var User = require('../../m/User');
 var Log = require('../../sc/Log');
 var config = require('../../../config');
 var jwt = require('jsonwebtoken');
@@ -17,9 +16,6 @@ router.post('/', function(req, res, next) {
     var email = req.body.email;
     var pw = req.body.pw;
 
-    if(config.usemongo)
-        User = UserMongo;
-
     User.canLogin(email, pw, function(err, user){
         if(err) {
             console.log(err);
@@ -28,7 +24,7 @@ router.post('/', function(req, res, next) {
         }else {
             return res.json({
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
-                user: User.toMe(user)
+                user: user.toMe()
             });
         }
     });

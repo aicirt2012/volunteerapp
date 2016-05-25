@@ -45,19 +45,17 @@ router.put('/:id', function (req, res) {
                             if (err) {
                                 res.sendStatus(500);
                             } else {
-                                mailer.send({
-                                    to: event.helpers[i].email,
-                                    subject: event.title + ' wurde geändert',
-                                    html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
+                                mailer.sendToUser(
+                                    event.helpers[i].email,
+                                    event.helpers[i].name,
+                                    event.title + ' wurde geändert',
                                     '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
                                     'Das Event <b>' + event.title + '</b>' +
                                     ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
                                     ' statt.<br/></p>' +
                                     'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
-                                    '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>' +
-                                    '<p>Viele Grüße, <br>' +
-                                    'Ihr VolunterApp Team</p>'
-                                });
+                                    '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'
+                                );
                             }
                         }
                         res.json(event);
@@ -103,16 +101,14 @@ router.delete('/:id', function (req, res) {
                 if (err) {
                     res.sendStatus(500);
                 } else {
-                    mailer.send({
-                        to: event.helpers[i].email,
-                        subject: event.title + ' wurde abgesagt',
-                        html: '<h3>Hallo ' + event.helpers[i].name + '!</h3>' +
+                    mailer.sendToUser(
+                        event.helpers[i].email,
+                        event.helpers[i].name,
+                        event.title + ' wurde abgesagt',
                         '<p>Das Event ' + '<b>' + event.title + '</b>' +
                         ' am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
-                        ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>' +
-                        '<p>Viele Grüße, <br>' +
-                        'Ihr VolunterApp Team</p>'
-                    });
+                        ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>'
+                    );
                 }
             }
         });
@@ -154,19 +150,17 @@ router.post('/', function (req, res) {
 
                 User.findAvailableUsers(start, end, function (err, users) {
                     for (var i = 0; i < users.length; i++) {
-                        mailer.send({
-                            to: users[i].email,
-                            subject: 'Neues Event: ' + e.title,
-                            html: '<h3>Hallo ' + users[i].name + '!</h3>' +
+                        mailer.sendToUser(
+                            users[i].email,
+                            users[i].name,
+                            'Neues Event: ' + e.title,
                             '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
                             '<b>' + req.body.title + '</b>' +
                             '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
                             'Ort: ' + req.body.place + '<br>' +
                             'Beschreibung: ' + e.description + '<br>' +
-                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>' +
-                            '<p>Viele Grüße, <br>' +
-                            'Ihr VolunterApp Team</p>'
-                        });
+                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
+                        );
                     }
 
                 });

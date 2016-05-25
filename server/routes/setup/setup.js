@@ -41,7 +41,7 @@ router.post('/mongo', function(req, res) {
                 tel: u.tel,
                 mobil: u.mobil,
                 email: u.email,
-                pw: User.hashPw(u.pw),
+                pw: UserMongo.hashPw(u.pw),
                 notes: u.notes,
                 role: u.role,
                 availability: u.availability,

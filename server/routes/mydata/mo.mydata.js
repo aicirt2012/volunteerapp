@@ -47,10 +47,14 @@ router.put('/personal', function(req, res) {
 
 router.put('/availability', function(req, res) {
     val.init();
-    val.isAvailability(req.body.availability);
+   // val.isAvailability(req.body.availability);
+    //TODO check validator
 
-    User.update(req.user.id, {availability:req.body}, function(){
-        res.send();
+    User.findById(req.user.id, function(err, u){
+        u.availability = req.body;
+        u.save(function(err){
+            res.send();
+        });
     });
 });
 

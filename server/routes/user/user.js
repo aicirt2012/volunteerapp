@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
                         name: req.body.name,
                         tel: req.body.tel,
                         mobil: req.body.mobil,
-                        email: req.body.email,
+                        email: req.body.email.toLocaleLowerCase(),
                         pw: hashedPw,
                         notes: validatedNotes,
                         role: User.roles.HELPER,
@@ -109,7 +109,7 @@ router.put('/:id', function (req, res) {
                     name: req.body.name,
                     tel: req.body.tel,
                     mobil: req.body.mobil,
-                    email: req.body.email,
+                    email: req.body.email.toLowerCase(),
                     notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : null,
                     availability: req.body.availability
                 };

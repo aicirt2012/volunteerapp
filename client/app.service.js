@@ -131,7 +131,7 @@ app.service('User', function($resource, $base64) {
     var roles = [
         {id: 'HELPER', label: 'Helfer'},
         {id: 'TEAM', label: 'Team'},
-        {id: 'ORGANIZER', label: 'Organisator'},
+        {id: 'ORGANIZER', label: 'Koordinator'},
         {id: 'ADMIN', label: 'Admin'}
     ];
 

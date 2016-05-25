@@ -49,7 +49,7 @@
                                 <input type="number" min="0" ng-model="event.nrhelpers"/>
                             </md-input-container>
                             <md-input-container flex>
-                                <label>Ort</label>
+                                <label>Treffpunkt</label>
                                 <input ng-model="event.place">
                             </md-input-container>
                         </div>
@@ -102,7 +102,7 @@
                         <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Beschreibung</label>
-                                <textarea ng-model="event.description" columns="3" md-maxlength="2000" rows="5"></textarea>
+                                <textarea ng-model="event.description" columns="3" md-maxlength="1500" rows="5"></textarea>
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
@@ -145,7 +145,7 @@
                             <md-icon class="material-icons">place</md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
                                 <h3> {{ event.place }} </h3>
-                                <p> Ort </p>
+                                <p> Treffpunkt </p>
                             </div>
                         </md-list-item>
                         <md-list-item ng-if="!event.isoneday" class="md-2-line">
@@ -194,7 +194,8 @@
                         <md-list-item ng-if="isHelper || isTeam" class="md-2-line">
                             <md-icon class="material-icons"></md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <md-button ng-if="!event.imregistered" class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
+                                <md-button ng-if="!event.imregistered && event.nrhelpersregistered != event.nrhelpers" class="md-primary md-raised" ng-click="meRegister($event)">Mich Anmelden</md-button>
+                                <md-button ng-disabled="true" ng-if="!event.imregistered && event.nrhelpersregistered == event.nrhelpers" class="md-primary md-raised" ng-click="meRegister($event)">Event bereits voll</md-button>
                                 <md-button ng-if="event.imregistered" class="md-raised md-primary" ng-click="meUnregister()">Mich Abmelden</md-button>
                             </div>
                         </md-list-item>
@@ -203,7 +204,9 @@
 
                 <div ng-if="isAdmin || isOrganizer || isTeam" style="background-color: #E6E6E6;">
                     <md-list>
-                        <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):</md-subheader>
+                        <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):
+                            <div style="font-style: italic" ng-if="event.nrhelpersregistered == event.nrhelpers">Event bereits voll, weitere <br/> Anmeldungen nicht mehr möglich.</div>
+                        </md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers | orderBy: helper" ng-click="helperUnregister(helper)">
                             <div class="md-tile-left inset" hide-sm>
                                 <user-picture picture="{{helper.picture}}" size="64"></user-picture>
@@ -211,15 +214,23 @@
                             <div class="md-list-item-text">
                                 <h3>{{helper.name}}</h3>
                                 <p>{{helper.email}}</p>
-                                <p>{{helper.tel}}</p>
+                                <p ng-if="helper.tel && helper.mobil">{{helper.tel}}/{{helper.mobil}}</p>
+                                <p ng-if="helper.tel && !helper.mobil">{{helper.tel}}</p>
+                                <p ng-if="!helper.tel && helper.mobil">{{helper.mobil}}</p>
                             </div>
                         </md-list-item>
                     </md-list>
                     <div layout="row">
-                        <md-button class="md-primary md-raised" ng-click="helperRegister()">
+                        <md-button ng-if="event.nrhelpersregistered != event.nrhelpers" class="md-primary md-raised" ng-click="helperRegister()">
                             Helfer Anmelden
                             <md-tooltip>
                                 Weitere Helfer zu diesem Event hinzufügen
+                            </md-tooltip>
+                        </md-button>
+                        <md-button ng-disabled="true" ng-if="event.nrhelpersregistered == event.nrhelpers" class="md-primary md-raised">
+                            Event bereits voll
+                            <md-tooltip>
+                                Event bereits voll, weitere <br/> Anmeldungen nicht mehr möglich.
                             </md-tooltip>
                         </md-button>
                         <md-button class="md-primary md-raised" ng-disabled="event.nrhelpersregistered == 0" ng-click="sendMessage()">

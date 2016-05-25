@@ -34,9 +34,13 @@
                                       <md-icon  class="material-icons">mail</md-icon>
                                       <span>{{user.email}}</span>
                                   </span>
-                                  <span class="item-metastat">
+                                  <span ng-if="user.tel" class="item-metastat">
                                       <md-icon  class="material-icons">phone</md-icon>
                                       <span>{{user.tel}}</span>
+                                  </span>
+                                  <span ng-if="user.mobil" class="item-metastat">
+                                      <md-icon  class="material-icons">phone_iphone</md-icon>
+                                      <span>{{user.mobil}}</span>
                                   </span>
                                </span>
                            </md-item-template>

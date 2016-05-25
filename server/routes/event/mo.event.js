@@ -186,10 +186,12 @@ router.get('/:id', function (req, res) {
 function findEvent(eId, user, cb) {
     
     Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
+        console.log(err);
         if (err)
             cb(err, null);
         else {
-            var e = JSON.parse(JSON.stringify(e));
+            e = JSON.parse(JSON.stringify(e));
+            //e.helpers = [];
             e.nrhelpersregistered = e.helpers.length;
             e.imregistered = false;
             for (var i = 0; i < e.helpers.length; i++)

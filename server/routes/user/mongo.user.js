@@ -68,8 +68,8 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    if (User.atLeastTeam(req.user.role)) {
-        User.findAll(function (err, users) {
+    if (req.user.atLeastTeam()) {
+        User.find(function (err, users) {
             res.json(users);
         });
     } else
@@ -77,7 +77,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-    if (User.atLeastTeam(req.user.role)) {
+    if (req.user.atLeastTeam()) {
         var uId = req.params.id;
         User.findById(uId, function (err, user) {
             if (err)
@@ -90,7 +90,7 @@ router.get('/:id', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         val.init();
         val.isEmail(req.body.email);
         val.isName(req.body.name);
@@ -135,7 +135,7 @@ router.put('/:id', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-    if (User.atLeastAdmin(req.user.role)) {
+    if (req.user.atLeastAdmin()) {
         var uId = req.params.id;
         Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
         Event.findByUserId(uId, function (err, events) {
@@ -161,7 +161,7 @@ router.delete('/:id', function (req, res) {
 });
 
 router.put('/:id/picture', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         var uId = req.params.id;
         User.update(uId, {picture: req.body.picture}, function (err, updated) {
             if (err) {
@@ -175,7 +175,7 @@ router.put('/:id/picture', function (req, res) {
 });
 
 router.post('/:id/resetpw', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         var uId = req.params.id;
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
@@ -203,7 +203,7 @@ router.post('/:id/resetpw', function (req, res) {
 });
 
 router.put('/:id/role', function (req, res) {
-    if (User.atLeastOrganizer(req.user.role)) {
+    if (req.user.atLeastOrganizer()) {
         val.init();
         val.isRole(req.body.role);
 

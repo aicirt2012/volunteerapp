@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
@@ -20,6 +21,9 @@ var log = require('./server/routes/log/log');
 var User = require('./server/sc/User');
 
 var app = express().use(domainMiddleware);
+mongoose.connect(config.database);
+mongoose.set('debug', true);
+
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

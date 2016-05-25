@@ -8,6 +8,24 @@ var User = require('../../sc/User');
 var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
 var Log = require('../../sc/Log');
+var mongoose = require('mongoose');
+var Organization = require('../../m/Organization');
+
+router.post('/mongo', function(req, res) {
+    console.log('setup monog');
+    var o = {
+        name: 'home e.v.',
+        zip: '80805',
+        city: 'München',
+        street: 'Bergkieferwg 4',
+        tel: '0892374',
+        email: 'text@tum.de'
+    };
+    Organization.create(o, function (err, email) {
+        console.log('created');
+        res.send(200);
+    });
+});
 
 router.post('/', function(req, res, next) {
     var asyncTasks = [];

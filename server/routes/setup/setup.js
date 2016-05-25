@@ -9,16 +9,16 @@ var Organization = require('../../sc/Organisation');
 var Event = require('../../sc/Event');
 var Log = require('../../sc/Log');
 var mongoose = require('mongoose');
-var Organization = require('../../m/Organization');
-var User = require('../../m/User');
+var OrganizationMongo = require('../../m/Organization');
+var UserMongo = require('../../m/User');
 
 router.post('/mongo', function(req, res) {
-    
+
     var asyncTasks = [];
     asyncTasks.push(function(cb){
         var organizations = JSON.parse(fs.readFileSync(__dirname+ '/organization.list.json'));
         async.forEach(organizations, function(o, cb){
-            Organization.create({
+            OrganizationMongo.create({
                 name: o.name,
                 zip: o.zip,
                 city: o.city,
@@ -35,7 +35,7 @@ router.post('/mongo', function(req, res) {
     asyncTasks.push(function(cb) {
         var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
         async.forEach(users, function (u, cb) {
-            User.create({
+            UserMongo.create({
                 gender: u.gender,
                 name: u.name,
                 tel: u.tel,
@@ -61,7 +61,7 @@ router.post('/mongo', function(req, res) {
 
 });
 
-/*
+
 router.post('/', function(req, res, next) {
     var asyncTasks = [];
 
@@ -161,7 +161,7 @@ router.post('/', function(req, res, next) {
     });
 
 });
-*/
+
 
 
 module.exports = router;

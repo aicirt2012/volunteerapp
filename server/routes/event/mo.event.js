@@ -184,6 +184,24 @@ router.get('/:id', function (req, res) {
 });
 
 function findEvent(eId, user, cb) {
+
+    Event.findOne({_id: eId}).populate('organization').exec(function(err, e) {
+        console.log(JSON.stringify(e));
+        if (err)
+            cb(err, null);
+        else {
+            e.nrhelpersregistered = e.helpers.length;
+            e.imregistered = false;
+            for (var i = 0; i < e.helpers.length; i++)
+                if (e.helpers[i].id == user.id)
+                    e.imregistered = true;
+
+            if (user.isHelper())
+                delete e.helpers;
+            cb(false, e);
+        }
+    });
+    /*
     Event.findWithHelperById(eId, function (err, event) {
         if (err)
             cb(err, null);
@@ -198,7 +216,7 @@ function findEvent(eId, user, cb) {
                 delete event.helpers;
             cb(false, event);
         }
-    });
+    });*/
 }
 
 router.post('/:eventId/helpers/:helperId', function (req, res) {

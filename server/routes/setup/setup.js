@@ -13,39 +13,51 @@ var Organization = require('../../m/Organization');
 var User = require('../../m/User');
 
 router.post('/mongo', function(req, res) {
-    console.log('setup monog');
-    var o = {
-        name: 'home e.v.',
-        zip: '80805',
-        city: 'München',
-        street: 'Bergkieferwg 4',
-        tel: '0892374',
-        email: 'text@tum.de'
-    };
-    Organization.create(o, function (err, email) {
-        console.log('created');
-        res.send(200);
+    
+    var asyncTasks = [];
+    asyncTasks.push(function(cb){
+        var organizations = JSON.parse(fs.readFileSync(__dirname+ '/organization.list.json'));
+        async.forEach(organizations, function(o, cb){
+            Organization.create({
+                name: o.name,
+                zip: o.zip,
+                city: o.city,
+                street: o.street,
+                tel: o.tel,
+                email: o.email
+            }, function(){
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
     });
-
-    var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
-    async.forEach(users, function(u, cb){
-        User.create({
-            gender: u.gender,
-            name: u.name,
-            tel: u.tel,
-            mobil: u.mobil,
-            email: u.email,
-            pw: User.hashPw(u.pw),
-            notes: u.notes,
-            role: u.role,
-            availability: u.availability,
-            picture: u.picture,
-            conditionsofuse: true
-        }, function(){
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            User.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email,
+                pw: User.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                picture: u.picture,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
             cb();
         });
     });
 
+    async.series(asyncTasks, function(err){
+        res.json({success:true});
+    });
 
 });
 

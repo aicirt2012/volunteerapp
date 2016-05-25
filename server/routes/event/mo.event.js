@@ -184,12 +184,12 @@ router.get('/:id', function (req, res) {
 });
 
 function findEvent(eId, user, cb) {
-
+    
     Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
-        console.log(JSON.stringify(e));
         if (err)
             cb(err, null);
         else {
+            var e = JSON.parse(JSON.stringify(e));
             e.nrhelpersregistered = e.helpers.length;
             e.imregistered = false;
             for (var i = 0; i < e.helpers.length; i++)
@@ -201,22 +201,6 @@ function findEvent(eId, user, cb) {
             cb(false, e);
         }
     });
-    /*
-    Event.findWithHelperById(eId, function (err, event) {
-        if (err)
-            cb(err, null);
-        else {
-            event.nrhelpersregistered = event.helpers.length;
-            event.imregistered = false;
-            for (var i = 0; i < event.helpers.length; i++)
-                if (event.helpers[i].id == user.id)
-                    event.imregistered = true;
-
-            if (User.isHelper(user.role))
-                delete event.helpers;
-            cb(false, event);
-        }
-    });*/
 }
 
 router.post('/:eventId/helpers/:helperId', function (req, res) {

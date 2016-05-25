@@ -1,10 +1,6 @@
-/*
 var express = require('express');
 var mongoose = require('mongoose');
-var SObjectId = mongoose.Schema.Types.ObjectId;
-var ObjectId = mongoose.Types.ObjectId;
 var bcrypt = require("bcrypt-nodejs");
-var S = require('string');
 
 var Roles = {
     HELPER: 'HELPER',
@@ -64,7 +60,6 @@ var userSchema = new mongoose.Schema({
             evening:Boolean
         }
     },
-    organization: ObjectId,
     picture: String,
     conditionsofuse: Boolean
 });
@@ -168,6 +163,7 @@ User.generatePw = function(){
 
 User.findByEmail = function(email, callback){
     // TODO: sanitize email
+    var email = email.toLowerCase();
 
     if (!email)
         return callback(new Error("No email set!"), undefined);
@@ -185,4 +181,3 @@ User.findByEmail = function(email, callback){
 
 module.exports = User;
 
-    */

@@ -10,6 +10,7 @@ var Event = require('../../sc/Event');
 var Log = require('../../sc/Log');
 var mongoose = require('mongoose');
 var Organization = require('../../m/Organization');
+var User = require('../../m/User');
 
 router.post('/mongo', function(req, res) {
     console.log('setup monog');
@@ -25,8 +26,30 @@ router.post('/mongo', function(req, res) {
         console.log('created');
         res.send(200);
     });
+
+    var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+    async.forEach(users, function(u, cb){
+        User.create({
+            gender: u.gender,
+            name: u.name,
+            tel: u.tel,
+            mobil: u.mobil,
+            email: u.email,
+            pw: User.hashPw(u.pw),
+            notes: u.notes,
+            role: u.role,
+            availability: u.availability,
+            picture: u.picture,
+            conditionsofuse: true
+        }, function(){
+            cb();
+        });
+    });
+
+
 });
 
+/*
 router.post('/', function(req, res, next) {
     var asyncTasks = [];
 
@@ -126,6 +149,7 @@ router.post('/', function(req, res, next) {
     });
 
 });
+*/
 
 
 module.exports = router;

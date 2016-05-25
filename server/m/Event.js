@@ -1,11 +1,11 @@
-/*
+
 var express = require('express');
 var mongoose = require('mongoose');
 var SObjectId = mongoose.Schema.Types.ObjectId;
 var ObjectId = mongoose.Types.ObjectId;
 
 var eventSchema = new mongoose.Schema({
-    title: String,
+    title: String, 
     description: String,
     nrhelpers: String,
     helpers: [SObjectId],
@@ -28,4 +28,3 @@ Event.findByUserId = function(userId, cb){
 }
 
 module.exports = Event;
-    */

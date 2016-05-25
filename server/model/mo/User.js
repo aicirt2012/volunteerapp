@@ -106,7 +106,7 @@ userSchema.methods.isAdmin = function(callback) {
 
 
 userSchema.methods.atLeastAdmin = function(callback) {
-    return this.role && role == Roles.ADMIN;
+    return this.role && this.role == Roles.ADMIN;
 };
 
 userSchema.methods.atLeastOrganizer = function(callback) {

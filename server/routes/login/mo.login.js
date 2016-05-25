@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../m/User');
-var Log = require('../../sc/Log');
+var User = require('../../model/mo/User');
+var Log = require('../../model/mo/Log');
 var config = require('../../../config');
 var jwt = require('jsonwebtoken');
 

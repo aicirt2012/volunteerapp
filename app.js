@@ -12,16 +12,16 @@ var config = require('./config');
 
 
 if(config.usemongo){
-    var User = require('./server/m/User');
-    var setup = require('./server/routes/setup/mongo.setup');
-    var login = require('./server/routes/login/mongo.login');
-    var user = require('./server/routes/user/mongo.user');
-    var event = require('./server/routes/event/mongo.event');
-    var mydata = require('./server/routes/mydata/mongo.mydata');
-    var organization = require('./server/routes/organization/mongo.organization');
-    var log = require('./server/routes/log/mongo.log');
+    var User = require('./server/model/mo/User');
+    var setup = require('./server/routes/setup/mo.setup');
+    var login = require('./server/routes/login/mo.login');
+    var user = require('./server/routes/user/mo.user');
+    var event = require('./server/routes/event/mo.event');
+    var mydata = require('./server/routes/mydata/mo.mydata');
+    var organization = require('./server/routes/organization/mo.organization');
+    var log = require('./server/routes/log/mo.log');
 }else{
-    var User = require('./server/sc/User');
+    var User = require('./server/model/sc/User');
     var setup = require('./server/routes/setup/sc.setup');
     var login = require('./server/routes/login/sc.login');
     var user = require('./server/routes/user/sc.user');

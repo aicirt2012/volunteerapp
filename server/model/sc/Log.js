@@ -1,5 +1,5 @@
 var express = require('express');
-var EntityType = require('../sc/EntityType');
+var EntityType = require('../model/sc/EntityType');
 
 
 var Log = EntityType.define({

@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
-var Organization = require('../../sc/Organisation');
-var User = require('../../sc/User');
-var Event = require('../../sc/Event');
+var Organization = require('../../model/mo/Organization');
+var User = require('../../model/mo/User');
+var Event = require('../../model/mo/Event');
 var val = require('../../util/validator');
-var Log = require('../../sc/Log');
+var Log = require('../../model/mo/Log');
 
 router.get('/', function(req, res) {
     Organization.findAll(function(err, organizations){
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    if(User.atLeastTeam(req.user.role )){
+    if(req.user.atLeastTeam()){
         var oId = req.params.id;
         Organization.findById(oId, function(err, organization){
             if(err)
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+    if(req.user.atLeastOrganizer()){
         val.init();
         val.isOrgaName(req.body.name);
         val.isZip(req.body.zip);
@@ -57,7 +57,7 @@ router.post('/', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    if(User.atLeastOrganizer(req.user.role )){
+    if(req.user.atLeastOrganizer()){
         val.init();
         val.isOrgaName(req.body.name);
         val.isZip(req.body.zip);
@@ -87,7 +87,7 @@ router.put('/:id', function(req, res) {
 });
 
 router.delete('/:id', function(req, res) {
-    if(User.atLeastAdmin(req.user.role )){
+    if(req.user.atLeastAdmin()){
         var oId = req.params.id;
         Log.info(req.user, Log.actions.ORGANIZATION_DELETE, {organizationId: oId});
         Event.findByOrganizationId(oId, function(err, events){

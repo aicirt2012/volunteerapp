@@ -3,10 +3,10 @@ var router = express.Router();
 var async = require('async');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-var User = require('../../m/User');
+var User = require('../../model/mo/User');
 var val = require('../../util/validator');
-var Log = require('../../m/Log');
-var Event = require('../../m/Event');
+var Log = require('../../model/mo/Log');
+var Event = require('../../model/mo/Event');
 
 router.get('/me', function (req, res) {
     res.json(req.user.toMe());

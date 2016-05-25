@@ -7,8 +7,11 @@ var val = require('../../util/validator');
 var Log = require('../../model/mo/Log');
 
 router.post('/photo', function(req, res){
-    User.update(req.user.id, {picture:req.body.picture}, function(){
-        res.send();
+    User.findById(req.user.id, function(err, u){
+        u.picture = req.body.picture;
+        u.save(function(){
+            res.send();
+        });
     });
 });
 
@@ -22,22 +25,20 @@ router.put('/personal', function(req, res) {
 
     if(val.allValid()) {
         var uId = req.user.id;
-        User.exists(req.body.email, uId, function (err) {
-            if (err) {
-                res.sendStatus(409);
-            } else {
-                var data = {
-                    gender: req.body.gender,
-                    name: req.body.name,
-                    tel: req.body.tel,
-                    mobil: req.body.mobil,
-                    email: req.body.email
-                };
-                Log.info(req.user, Log.actions.USER_UPDATE, data);
-                User.update(uId, data, function () {
-                    res.send();
-                });
-            }
+        User.findById(uId, function(err, u){
+            if(err) throw err;
+            u.gender = req.body.gender;
+            u.name = req.body.name;
+            u.tel = req.body.tel;
+            u.mobil = req.body.mobil;
+            u.email = req.body.email;
+            u.save(function(err){
+                if(err)
+                    res.sendStatus(409);
+                else
+                    Log.info(req.user, Log.actions.USER_UPDATE, u);
+            });
+            res.send();
         });
     }else{
         res.sendStatus(400);

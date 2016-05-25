@@ -185,7 +185,7 @@ router.get('/:id', function (req, res) {
 
 function findEvent(eId, user, cb) {
 
-    Event.findOne({_id: eId}).populate('organization').exec(function(err, e) {
+    Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
         console.log(JSON.stringify(e));
         if (err)
             cb(err, null);
@@ -223,6 +223,14 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
     if (req.user.atLeastOrganizer() || req.user.id == helperId) {
+        Event.findById(eventId, function(err, e){
+            if(err) throw err;
+            if(e.helpers.indexOf(helperId) == -1) {
+                e.helpers.push(helperId);
+                e.save();
+            }
+        });
+        /*
         Event.isRegistered(eventId, helperId, function (err, isRegistered) {
             if (!isRegistered) {
                 Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
@@ -241,7 +249,7 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
                     }
                 });
             }
-        });
+        });*/
     } else
         res.sendStatus(403);
 

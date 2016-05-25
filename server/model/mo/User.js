@@ -20,7 +20,7 @@ var userSchema = new mongoose.Schema({
     name: String,
     tel: String,
     mobil: String,
-    email: {type: String, unique : true},
+    email: {type: String, index: { unique: true }, lowercase: true },
     pw: String,
     notes: String,
     role: {type: String, enum: [Roles.HELPER, Roles.TEAM, Roles.ORGANIZER, Roles.ADMIN]},

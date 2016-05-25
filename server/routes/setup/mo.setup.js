@@ -11,6 +11,24 @@ router.post('/', function(req, res) {
 
     var asyncTasks = [];
     asyncTasks.push(function(cb){
+        mongoose.connection.collections['events'].drop( function(err) {
+            console.log('collection dropped');
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb){
+        mongoose.connection.collections['organizations'].drop( function(err) {
+            console.log('collection dropped');
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb){
+        mongoose.connection.collections['users'].drop( function(err) {
+            console.log('collection dropped');
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb){
         var organizations = JSON.parse(fs.readFileSync(__dirname+ '/organization.list.json'));
         async.forEach(organizations, function(o, cb){
             OrganizationMongo.create({

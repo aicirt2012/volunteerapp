@@ -203,13 +203,14 @@ router.put('/:id/role', function (req, res) {
     if (req.user.atLeastOrganizer()) {
         val.init();
         val.isRole(req.body.role);
-
         if (val.allValid()) {
             var uId = req.params.id;
-            var data = {role: req.body.role};
-            Log.info(req.user, Log.actions.USER_ROLECHANGE, data);
-            User.update(uId, data, function () {
-                res.send();
+            User.findById(uId,function(err, u) {
+                u.role = req.body.role;
+                u.save(function(err){
+                    Log.info(req.user, Log.actions.USER_ROLECHANGE, u);
+                    res.send();
+                });
             });
         } else {
             res.sendStatus(400);

@@ -141,7 +141,7 @@ var User = mongoose.model('user', userSchema);
 
 User.findAvailableUsers = function(start, end, cb){
     //TODO change to mongo
-    /*
+
     var matches = [];
     do{
         matches['availability.'+dayOfWeekLabel(start)+'.'+timeSlotLabel(start)]=true;
@@ -151,11 +151,12 @@ User.findAvailableUsers = function(start, end, cb){
     matches = Object.keys(matches);
 
     //find user.where(availability.mo.morning or availability.mo.afternoon)
-    query = '';
+    query = {
+        $or:[]
+    };
     for(var i=0; i<matches.length; i++){
-        query += matches[i];
-        if(i<matches.length-1)
-            query += ' or ';
+        var m = "'"+matches[i]+"'";
+        query.$or.push({m: true}); //+= matches[i];
     }
 
     User.find(query, function(err, users){
@@ -191,7 +192,6 @@ User.findAvailableUsers = function(start, end, cb){
             case(6): return 'su';
         }
     }
-    */
 }
 
 

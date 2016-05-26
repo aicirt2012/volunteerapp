@@ -162,12 +162,14 @@ router.delete('/:id', function (req, res) {
 
 router.put('/:id/picture', function (req, res) {
     if (req.user.atLeastOrganizer()) {
-        var uId = req.params.id;
-        User.update(uId, {picture: req.body.picture}, function (err, updated) {
+        User.findById(req.params.id, function (err, u){
             if (err) {
                 res.status(500).send(err);
             } else {
-                res.send();
+                u.picture = req.body.picture;
+                u.save(function () {
+                    res.send();
+                });
             }
         });
     } else
@@ -179,13 +181,13 @@ router.post('/:id/resetpw', function (req, res) {
         var uId = req.params.id;
         var plainPw = User.generatePw();
         var hashedPw = User.hashPw(plainPw);
-        Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
         User.findById(uId, function (err, u) {
             if (err)
                 res.sendStatus(500);
             else
                 u.pw = hashedPw;
                 u.save(function (err) {
+                    Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
                     mailer.sendToUser(u.email, u.name,
                         'Ihr Passwort wurde zurückgesetzt!',
                         '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +

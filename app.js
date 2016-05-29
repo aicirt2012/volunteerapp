@@ -20,6 +20,7 @@ if(config.usemongo){
     var mydata = require('./server/routes/mydata/mo.mydata');
     var organization = require('./server/routes/organization/mo.organization');
     var log = require('./server/routes/log/mo.log');
+    var migration = require('./server/routes/migration/mo.import');
 }else{
     var User = require('./server/model/sc/User');
     var setup = require('./server/routes/setup/sc.setup');

@@ -178,28 +178,27 @@ router.put('/:id/picture', function (req, res) {
 });
 
 router.post('/:id/resetpw', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        var uId = req.params.id;
-        var plainPw = User.generatePw();
-        var hashedPw = User.hashPw(plainPw);
-        User.findById(uId, function (err, u) {
-            if (err)
-                res.sendStatus(500);
-            else
-                u.pw = hashedPw;
-                u.save(function (err) {
-                    Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
-                    mailer.sendToUser(u.email, u.name,
-                        'Ihr Passwort wurde zurückgesetzt!',
-                        '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
-                        'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>'
-                    );
-                    res.send();
-                });
-        });
-    } else
-        res.sendStatus(403);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
+    var uId = req.params.id;
+    var plainPw = User.generatePw();
+    var hashedPw = User.hashPw(plainPw);
+    User.findById(uId, function (err, u) {
+        if(err)
+            return res.status(500).send();
+
+        u.pw = hashedPw;
+        u.save(function (err) {
+            Log.info(req.user, Log.actions.USER_RESETPW, {userId: uId});
+            mailer.sendToUser(u.email, u.name,
+                'Ihr Passwort wurde zurückgesetzt!',
+                '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
+                'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>'
+            );
+            res.send();
+        });
+    });
 });
 
 router.put('/:id/role', function (req, res) {

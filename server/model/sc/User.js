@@ -1,6 +1,6 @@
 var express = require('express');
 var moment = require('moment');
-var http = require('../util/http');
+var http = require('../../util/http');
 var bcrypt = require("bcrypt-nodejs");
 var generator = require('generate-password');
 var EntityType = require('../sc/EntityType');

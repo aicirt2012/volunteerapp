@@ -29,6 +29,7 @@ if(config.usemongo){
     var mydata = require('./server/routes/mydata/sc.mydata');
     var organization = require('./server/routes/organization/sc.organization');
     var log = require('./server/routes/log/sc.log');
+    var migration = require('./server/routes/migration/sc.export');
 }
 
 
@@ -51,6 +52,7 @@ app.use(compression());
 
 if (app.get('env') === 'development') {
     app.use('/api/setup', setup);
+    app.use('/api/migration', migration);
 }
 
 app.use('/api/login', login);

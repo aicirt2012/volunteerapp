@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../sc/User');
-var UserMongo = require('../../model/User');
-var Log = require('../../sc/Log');
+var User = require('../../model/sc/User');
+var UserMongo = require('../../model/sc/User');
+var Log = require('../../model/sc/Log');
 var config = require('../../../config');
 var jwt = require('jsonwebtoken');
 

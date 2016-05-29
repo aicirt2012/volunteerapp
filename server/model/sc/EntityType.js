@@ -1,8 +1,8 @@
 var express = require('express');
-var http = require('../util/http');
+var http = require('../../util/http');
 var async = require('async');
-var config = require('../../config');
-var SocioCortex = require('../model/sc/SocioCortex');
+var config = require('../../../config');
+var SocioCortex = require('../sc/SocioCortex');
 
 
 /** Note: EntityTypeId is similar with EntityTypeName etc.  */

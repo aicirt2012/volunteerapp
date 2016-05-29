@@ -3,11 +3,11 @@ var router = express.Router();
 var async = require('async');
 var fs = require('fs');
 var config = require('../../../config');
-var SocioCortex = require('../../sc/SocioCortex');
-var User = require('../../sc/User');
-var Organization = require('../../sc/Organisation');
-var Event = require('../../sc/Event');
-var Log = require('../../sc/Log');
+var SocioCortex = require('../../model/sc/SocioCortex');
+var User = require('../../model/sc/User');
+var Organization = require('../../model/sc/Organisation');
+var Event = require('../../model/sc/Event');
+var Log = require('../../model/sc/Log');
 var mongoose = require('mongoose');
 
 

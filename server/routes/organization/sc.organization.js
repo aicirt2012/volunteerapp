@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
-var Organization = require('../../sc/Organisation');
-var User = require('../../sc/User');
-var Event = require('../../sc/Event');
+var Organization = require('../../model/sc/Organisation');
+var User = require('../../model/sc/User');
+var Event = require('../../model/sc/Event');
 var val = require('../../util/validator');
-var Log = require('../../sc/Log');
+var Log = require('../../model/sc/Log');
 
 router.get('/', function(req, res) {
     Organization.findAll(function(err, organizations){

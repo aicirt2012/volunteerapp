@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var moment = require('moment');
-var User = require('../../sc/User');
-var Event = require('../../sc/Event');
-var Log = require('../../sc/Log');
+var User = require('../../model/sc/User');
+var Event = require('../../model/sc/Event');
+var Log = require('../../model/sc/Log');
 var mailer = require('../../util/mailer');
 var val = require('../../util/validator');
 

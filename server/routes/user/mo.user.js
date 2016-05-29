@@ -13,58 +13,58 @@ router.get('/me', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        val.init();
-        val.isEmail(req.body.email);
-        val.isName(req.body.name);
-        val.isPhone(req.body.tel, false);
-        val.isPhone(req.body.mobil, false);
-        val.isGender(req.body.gender);
-        val.isAvailability(req.body.availability);
-        val.conditionsofuseIsTrue(req.body.conditionsofuse);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        if (val.allValid()) {
-            User.exists(req.body.email, '', function (err) {
-                if (err) {
-                    // 409 == Conflict
-                    res.sendStatus(409);
-                } else {
-                    var plainPw = User.generatePw();
-                    var hashedPw = User.hashPw(plainPw);
-                    if (req.body.notes)
-                        var validatedNotes = val.blacklist(req.body.notes, "<>;\"\'´");
-                    var data = {
-                        gender: req.body.gender,
-                        name: req.body.name,
-                        tel: req.body.tel,
-                        mobil: req.body.mobil,
-                        email: req.body.email.toLowerCase(),
-                        pw: hashedPw,
-                        notes: validatedNotes,
-                        role: User.roles.HELPER,
-                        availability: req.body.availability,
-                        conditionsofuse: req.body.conditionsofuse
-                    };
-                    Log.info(req.user, Log.actions.USER_CREATE, data);
-                    User.create(data, function () {
-                        mailer.sendToUser(
-                            data.email,
-                            data.name,
-                            'Willkommen bei der Volunteer App',
-                            '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
-                            'Ihr Passwort lautet: ' + plainPw + '<br/>' +
-                            'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
-                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>'
-                        );
-                        res.send();
-                    });
-                }
-            });
-        } else {
-            res.sendStatus(400);
-        }
-    } else
-        res.sendStatus(403);
+    val.init();
+    val.isEmail(req.body.email);
+    val.isName(req.body.name);
+    val.isPhone(req.body.tel, false);
+    val.isPhone(req.body.mobil, false);
+    val.isGender(req.body.gender);
+    val.isAvailability(req.body.availability);
+    val.conditionsofuseIsTrue(req.body.conditionsofuse);
+
+    if(!val.allValid())
+        return res.status(400).send();
+
+    User.exists(req.body.email, '', function (err) {
+        if(err)
+            return res.status(409).send();
+        
+        var plainPw = User.generatePw();
+        var hashedPw = User.hashPw(plainPw);
+        if (req.body.notes)
+            var validatedNotes = val.blacklist(req.body.notes, "<>;\"\'´");
+        var data = {
+            gender: req.body.gender,
+            name: req.body.name,
+            tel: req.body.tel,
+            mobil: req.body.mobil,
+            email: req.body.email.toLowerCase(),
+            pw: hashedPw,
+            notes: validatedNotes,
+            role: User.roles.HELPER,
+            availability: req.body.availability,
+            conditionsofuse: req.body.conditionsofuse
+        };
+        User.create(data, function () {
+            Log.info(req.user, Log.actions.USER_CREATE, data);
+            mailer.sendToUser(
+                data.email,
+                data.name,
+                'Willkommen bei der Volunteer App',
+                '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
+                'Ihr Passwort lautet: ' + plainPw + '<br/>' +
+                'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
+                '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>'
+            );
+            res.send();
+        });
+
+    });
+
+
 });
 
 router.get('/', function (req, res) {
@@ -156,7 +156,7 @@ router.delete('/:id', function (req, res) {
                 u.remove(function(err){
                     Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
                     res.send();
-                })                
+                })
             });
         });
     });

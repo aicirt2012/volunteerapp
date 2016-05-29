@@ -140,6 +140,9 @@ userSchema.methods.toMe = function(){
 
 var User = mongoose.model('user', userSchema);
 
+User.roles = Roles;
+User.genders = Genders;
+
 User.findAvailableUsers = function(start, end, cb){
 
     var matches = [];
@@ -234,22 +237,20 @@ User.generatePw = function(){
 
 User.exists = function(email, uId, cb){
     User.findByEmail(email, function(err, user){
-        cb(err || user == null)
+        console.log(err, user);
+        cb(err || user != null)
     });
 }
 
 
 
 User.findByEmail = function(email, cb){
-    // TODO: sanitize email
     var email = email.toLowerCase();
 
     if (!email)
         return cb(new Error("No email set!"), undefined);
 
     User.findOne({email: email}, function(err, user){
-        if (err) console.log("error@User.findByEmail:", err);
-        if(!user) err = new Error("no user found");
         return cb(err, user);
     });
 };

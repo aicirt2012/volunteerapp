@@ -202,23 +202,20 @@ router.post('/:id/resetpw', function (req, res) {
 
 });
 
-router.put('/:id/role', function (req, res, next) {
-    if(!req.user.atLeastOrganizer()){ res.sendStatus(403); return;}
+router.put('/:id/role', function (req, res) {
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
     User.findById(req.params.id, function(err, u) {
-        console.log(err, u);
+        if(err)
+            return res.status(500).send();
         u.role = req.body.role;
-
-        //u.validateSync([]);
-        //res.sendStatus(400);
-
         u.save(function(err){
-            //Log.info(req.user, Log.actions.USER_ROLECHANGE, u);
-            console.log(err);
+            if(err)
+                return res.status(500).send();
             res.send();
         });
     });
-
 });
 
 

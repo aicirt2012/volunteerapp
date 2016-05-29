@@ -67,6 +67,321 @@ router.post('/', function(req, res) {
             cb();
         });
     });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+2,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+3,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+4,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+5,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+6,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+7,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+8,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+9,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+10,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+11,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+12,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+13,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+14,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+15,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
+    asyncTasks.push(function(cb) {
+        var users = JSON.parse(fs.readFileSync(__dirname + '/user.list.json'));
+        async.forEach(users, function (u, cb) {
+            UserMongo.create({
+                gender: u.gender,
+                name: u.name,
+                tel: u.tel,
+                mobil: u.mobil,
+                email: u.email+16,
+                pw: UserMongo.hashPw(u.pw),
+                notes: u.notes,
+                role: u.role,
+                availability: u.availability,
+                conditionsofuse: true
+            }, function () {
+                cb();
+            });
+        }, function(err){
+            cb();
+        });
+    });
 
     async.series(asyncTasks, function(err){
         res.json({success:true});

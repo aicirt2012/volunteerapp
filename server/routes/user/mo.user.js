@@ -136,29 +136,30 @@ router.put('/:id', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-    if (req.user.atLeastAdmin()) {
-        var uId = req.params.id;
-        Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
-        Event.findByUserId(uId, function (err, events) {
-            if (err) {
-                console.log(err);
-            } else {
-                async.forEach(events, function (e, cb) {
-                    Event.delAttributeValue(e.id, 'helpers', {id: uId}, function (err) {
-                        cb();
-                    });
-                }, function (err) {
-                    if (err)
-                        res.sendStatus(500);
-                    else
-                        User.delete(uId, function (err) {
-                            res.send();
-                        });
-                });
-            }
+    if(!req.user.atLeastAdmin())
+        return res.status(403).send();
+
+    var uId = req.params.id;
+    Event.findByUserId(uId, function (err, events) {
+        if(err)
+            return res.status(500).send();
+
+        async.forEach(events, function (e, cb) {
+            e.helpers.pull(uId);
+            e.save(function(err){
+                cb();
+            });
+        }, function (err) {
+            if(err)
+                return res.status(500).send();
+            User.findById(uId, function(err, u) {
+                u.remove(function(err){
+                    Log.info(req.user, Log.actions.USER_DELETE, {userId: uId});
+                    res.send();
+                })                
+            });
         });
-    } else
-        res.sendStatus(403);
+    });
 });
 
 router.put('/:id/picture', function (req, res) {

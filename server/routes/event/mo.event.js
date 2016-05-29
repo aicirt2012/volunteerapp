@@ -186,7 +186,6 @@ router.get('/:id', function (req, res) {
 function findEvent(eId, user, cb) {
     
     Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
-        console.log(err);
         if (err)
             cb(err, null);
         else {
@@ -278,18 +277,25 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
     var helperId = req.params.helperId;
     if (req.user.atLeastOrganizer() || req.user.id == helperId) {
         Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
-        Event.delAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
+
+
+        Event.findById(eventId, function(err, e) {
             if (err)
-                res.sendStatus(500);
-            else
-                findEvent(eventId, req.user, function (err, event) {
-                    if (err)
-                        res.sendStatus(500);
-                    else {
-                        res.json(event);
-                    }
+                cb(err, null);
+            else {
+                e.helpers.remove(helperId);
+                e.save(function(){
+                    findEvent(eventId, req.user, function (err, event) {
+                        if (err)
+                            res.sendStatus(500);
+                        else {
+                            res.json(event);
+                        }
+                    });
                 });
+            }
         });
+
     } else
         res.sendStatus(403);
 });

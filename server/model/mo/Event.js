@@ -34,4 +34,23 @@ Event.findByUserId = function(userId, cb){
     });
 }
 
+Event.findByIdPopulated =function findEvent(eId, user, cb) {
+    Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
+        if (err)
+            cb(err, null);
+        else {
+            e = JSON.parse(JSON.stringify(e));
+            e.nrhelpersregistered = e.helpers.length;
+            e.imregistered = false;
+            for (var i = 0; i < e.helpers.length; i++)
+                if (e.helpers[i].id == user.id)
+                    e.imregistered = true;
+
+            if (user.isHelper())
+                delete e.helpers;
+            cb(false, e);
+        }
+    });
+}
+
 module.exports = Event;

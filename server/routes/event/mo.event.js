@@ -28,7 +28,7 @@ router.put('/:id', function (req, res) {
     val.startBeforeEndDate(req.body.startdate, req.body.enddate);
 
     if(!val.allValid())
-        res.sendStatus(400);
+        return res.sendStatus(400);
 
     var eId = req.params.id;
     var data = {
@@ -43,73 +43,76 @@ router.put('/:id', function (req, res) {
     Log.info(req.user, Log.actions.EVENT_UPDATE, data);
 
     Event.findById(eId, function(err, e){
-        if (err)
-            res.sendStatus(500);
-        else {
-            e.title = data.title;
-            e.place = data.place;
-            e.startdate = data.startdate;
-            e.enddate = data.enddate;
-            e.nrhelpers = data.nrhelpers;
-            e.description = data.description;
-            e.organization = data.organization;
-            console.log(JSON.stringify(e));
-            e.save(function(err){
+        if(err)
+            return res.sendStatus(500);
 
-                findEvent(eId, req.user, function (err, event) {
-                    if (err)
-                        res.sendStatus(500);
-                    else {
-                        for (var i = 0; i < event.helpers.length; i++) {
-                            if (err) {
-                                res.sendStatus(500);
-                            } else {
-                                mailer.sendToUser(
-                                    event.helpers[i].email,
-                                    event.helpers[i].name,
-                                    event.title + ' wurde geändert',
-                                    '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
-                                    'Das Event <b>' + event.title + '</b>' +
-                                    ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
-                                    ' statt.<br/></p>' +
-                                    'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
-                                    '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'
-                                );
-                            }
+        e.title = data.title;
+        e.place = data.place;
+        e.startdate = data.startdate;
+        e.enddate = data.enddate;
+        e.nrhelpers = data.nrhelpers;
+        e.description = data.description;
+        e.organization = data.organization;
+        console.log(JSON.stringify(e));
+        e.save(function(err){
+
+            Event.findByIdPopulated(eId, req.user, function (err, event) {
+                if (err)
+                    res.sendStatus(500);
+                else {
+                    for (var i = 0; i < event.helpers.length; i++) {
+                        if (err) {
+                            res.sendStatus(500);
+                        } else {
+                            mailer.sendToUser(
+                                event.helpers[i].email,
+                                event.helpers[i].name,
+                                event.title + ' wurde geändert',
+                                '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
+                                'Das Event <b>' + event.title + '</b>' +
+                                ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
+                                ' statt.<br/></p>' +
+                                'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
+                                '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'
+                            );
                         }
-                        res.json(event);
                     }
-                });
-
+                    res.json(event);
+                }
             });
-        }
+
+        });
+
     });
 
 
 });
 
 router.post('/:id/message', function (req, res) {
+    if(!req.user.atLeastOrganizer())
+        return res.sendStatus(403);
+
     var eId = req.params.id;
     var msg = req.body.message;
-    if (req.user.atLeastOrganizer()) {
-        Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
-        Event.findWithHelperById(eId, function (err, event) {
-            if (err)
-                res.sendStatus(500);
-            else {
-                for (var i = 0; i < event.helpers.length; i++) {
-                    var h = event.helpers[i];
-                    mailer.send({
-                        to: h.email,
-                        subject: event.title,
-                        text: msg
-                    });
-                }
-                res.send()
+
+    Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
+    Event.findWithHelperById(eId, function (err, event) {
+        if (err)
+            res.sendStatus(500);
+        else {
+            for (var i = 0; i < event.helpers.length; i++) {
+                var h = event.helpers[i];
+                mailer.send({
+                    to: h.email,
+                    subject: event.title,
+                    text: msg
+                });
             }
-        });
-    } else
-        res.sendStatus(403);
+            res.send()
+        }
+    });
+
+
 });
 
 router.delete('/:id', function (req, res) {
@@ -194,7 +197,7 @@ router.post('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
     var eId = req.params.id;
-    findEvent(eId, req.user, function (err, event) {
+    Event.findByIdPopulated(eId, req.user, function (err, event) {
         if (err)
             res.sendStatus(500);
         else
@@ -202,25 +205,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-function findEvent(eId, user, cb) {
-    
-    Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
-        if (err)
-            cb(err, null);
-        else {
-            e = JSON.parse(JSON.stringify(e));
-            e.nrhelpersregistered = e.helpers.length;
-            e.imregistered = false;
-            for (var i = 0; i < e.helpers.length; i++)
-                if (e.helpers[i].id == user.id)
-                    e.imregistered = true;
 
-            if (user.isHelper())
-                delete e.helpers;
-            cb(false, e);
-        }
-    });
-}
 
 router.post('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
@@ -231,7 +216,7 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
             if(e.helpers.indexOf(helperId) == -1) {
                 e.helpers.push(helperId);
                 e.save();
-                findEvent(eventId, req.user, function (err, event) {
+                Event.findByIdPopulated(eventId, req.user, function (err, event) {
                     if (err)
                         res.sendStatus(500);
                     else {
@@ -291,7 +276,7 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
             else {
                 e.helpers.remove(helperId);
                 e.save(function(){
-                    findEvent(eventId, req.user, function (err, event) {
+                    Event.findByIdPopulated(eventId, req.user, function (err, event) {
                         if (err)
                             res.sendStatus(500);
                         else {

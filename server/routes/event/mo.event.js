@@ -190,7 +190,6 @@ function findEvent(eId, user, cb) {
             cb(err, null);
         else {
             e = JSON.parse(JSON.stringify(e));
-            //e.helpers = [];
             e.nrhelpersregistered = e.helpers.length;
             e.imregistered = false;
             for (var i = 0; i < e.helpers.length; i++)
@@ -213,28 +212,16 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
             if(e.helpers.indexOf(helperId) == -1) {
                 e.helpers.push(helperId);
                 e.save();
-            }
-        });
-        /*
-        Event.isRegistered(eventId, helperId, function (err, isRegistered) {
-            if (!isRegistered) {
-                Log.info(req.user, Log.actions.EVENT_REGISTER, {eventId: eventId, helperId: helperId});
-                Event.addAttributeValue(eventId, 'helpers', {id: helperId}, function (err) {
+                findEvent(eventId, req.user, function (err, event) {
                     if (err)
                         res.sendStatus(500);
                     else {
-                        findEvent(eventId, req.user, function (err, event) {
-                            if (err)
-                                res.sendStatus(500);
-                            else {
-                                res.json(event);
-                                sendRegistrationMail(event, helperId);
-                            }
-                        });
+                        res.json(event);
+                        sendRegistrationMail(event, helperId);
                     }
                 });
             }
-        });*/
+        });
     } else
         res.sendStatus(403);
 

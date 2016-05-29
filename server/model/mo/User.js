@@ -89,37 +89,37 @@ userSchema.methods.toMe = function(callback) {
 };
 
 
-userSchema.methods.isHelper = function(callback) {
+userSchema.methods.isHelper = function() {
+    return this.role == Roles.HELPER;
+};
+
+userSchema.methods.isTeam = function() {
+    return this.role == Roles.TEAM;
+};
+
+userSchema.methods.isOrganizer = function() {
+    return this.role == Roles.ORGANIZER;
+};
+
+userSchema.methods.isAdmin = function() {
     return this.role == Roles.ADMIN;
 };
 
-userSchema.methods.isTeam = function(callback) {
-    return this.role == Roles.ADMIN;
-};
 
-userSchema.methods.isOrganizer = function(callback) {
-    return this.role == Roles.ADMIN;
-};
-
-userSchema.methods.isAdmin = function(callback) {
-    return this.role == Roles.ADMIN;
-};
-
-
-userSchema.methods.atLeastAdmin = function(callback) {
+userSchema.methods.atLeastAdmin = function() {
     return this.role && this.role == Roles.ADMIN;
 };
 
-userSchema.methods.atLeastOrganizer = function(callback) {
+userSchema.methods.atLeastOrganizer = function() {
     return this.atLeastAdmin() || this.role && role == Roles.ORGANIZER;
 };
 
-userSchema.methods.atLeastTeam = function(callback) {
+userSchema.methods.atLeastTeam = function() {
     return this.atLeastOrganizer() || this.role && role == Roles.TEAM;
 };
 
-userSchema.methods.atLeastHelper = function(callback) {
-    return this.atLeastTeam || this.role && role == Roles.HELPER;
+userSchema.methods.atLeastHelper = function() {
+    return this.atLeastTeam() || this.role && role == Roles.HELPER;
 };
 
 userSchema.methods.toMe = function(){

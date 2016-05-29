@@ -261,29 +261,25 @@ router.post('/:eventId/helpers/:helperId', function (req, res) {
 router.delete('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    if (req.user.atLeastOrganizer() || req.user.id == helperId) {
-        Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
+    if(!(req.user.atLeastOrganizer() || req.user.id == helperId))
+        return res.status(403).send();
 
+    Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
 
-        Event.findById(eventId, function(err, e) {
-            if (err)
-                cb(err, null);
-            else {
-                e.helpers.pull(helperId);
-                e.save(function(){
-                    Event.findByIdPopulated(eventId, req.user, function (err, event) {
-                        if (err)
-                            res.sendStatus(500);
-                        else {
-                            res.json(event);
-                        }
-                    });
-                });
-            }
+    Event.findById(eventId, function(err, e) {
+        if(err)
+            return res.status(500).send()
+
+        e.helpers.pull(helperId);
+        e.save(function(){
+            Event.findByIdPopulated(eventId, req.user, function (err, event) {
+                if(err)
+                    res.status(500).send();
+                else
+                    res.json(event);
+            });
         });
-
-    } else
-        res.sendStatus(403);
+    });
 });
 
 

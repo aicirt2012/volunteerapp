@@ -110,38 +110,34 @@ router.post('/:id/message', function (req, res) {
         Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
         res.send();
     });
-
 });
 
 router.delete('/:id', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        var eId = req.params.id;
-        Event.findWithHelperById(eId, function (err, event) {
-            for (var i = 0; i < event.helpers.length; i++) {
-                if (err) {
-                    res.sendStatus(500);
-                } else {
-                    mailer.sendToUser(
-                        event.helpers[i].email,
-                        event.helpers[i].name,
-                        event.title + ' wurde abgesagt',
-                        '<p>Das Event ' + '<b>' + event.title + '</b>' +
-                        ' am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
-                        ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>'
-                    );
-                }
-            }
-        });
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        Log.info(req.user, Log.actions.EVENT_DELETE, {eventId: eId});
-        Event.delete(eId, function (err) {
-            if (err)
-                res.sendStatus(500);
-            else
-                res.sendStatus(200);
+    var eId = req.params.id;
+    Event.findByIdPopulated(eId, req.user, function (err, e) {
+        if(err)
+            return res.status(500).send();
+        e.helpers.forEach(function(h){
+            mailer.sendToUser(
+                h.email,
+                h.name,
+                e.title + ' wurde abgesagt',
+                '<p>Das Event ' + '<b>' + e.title + '</b>' +
+                ' am ' + moment(e.startdate).format('DD.MM.YYYY') + ' von ' + moment(e.startdate).format('HH:mm') + ' Uhr bis ' + moment(e.enddate).format('DD.MM.YYYY') + ' ' + moment(e.enddate).format('HH:mm') + ' Uhr' +
+                ' wurde abgesagt und findet somit <u>nicht</u> statt.<br></p>'
+            );
         });
-    } else
-        res.sendStatus(403);
+        Event.findById(eId, function(err, e){
+            if(err)
+                return res.status(500).send();
+            e.remove();
+            Log.info(req.user, Log.actions.EVENT_DELETE, {eventId: eId});
+            res.send();
+        });
+    });
 });
 
 router.post('/', function (req, res) {
@@ -272,7 +268,7 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
             if (err)
                 cb(err, null);
             else {
-                e.helpers.remove(helperId);
+                e.helpers.pull(helperId);
                 e.save(function(){
                     Event.findByIdPopulated(eventId, req.user, function (err, event) {
                         if (err)

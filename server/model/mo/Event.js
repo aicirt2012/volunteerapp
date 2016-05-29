@@ -34,6 +34,15 @@ Event.findByUserId = function(userId, cb){
     });
 }
 
+Event.findByOrganizationId = function(oId, cb){
+    Event.find({organization: oId}, function(err, events){
+        if(!err){
+            cb(false, events)
+        }else
+            cb(new Error('No Events for Organization found'), null);
+    });
+}
+
 Event.findByIdPopulated =function findEvent(eId, user, cb) {
     Event.findOne({_id: eId}).populate('organization').populate('helpers').exec(function(err, e) {
         if (err)

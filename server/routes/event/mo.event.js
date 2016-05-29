@@ -90,28 +90,26 @@ router.put('/:id', function (req, res) {
 
 router.post('/:id/message', function (req, res) {
     if(!req.user.atLeastOrganizer())
-        return res.sendStatus(403);
+        return res.status(403).send();
 
     var eId = req.params.id;
     var msg = req.body.message;
 
-    Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
-    Event.findWithHelperById(eId, function (err, event) {
-        if (err)
-            res.sendStatus(500);
-        else {
-            for (var i = 0; i < event.helpers.length; i++) {
-                var h = event.helpers[i];
-                mailer.send({
-                    to: h.email,
-                    subject: event.title,
-                    text: msg
-                });
-            }
-            res.send()
-        }
-    });
+    Event.findByIdPopulated(eId, req.user, function (err, e) {
+        if(err)
+            return res.status(500).send();
 
+        e.helpers.forEach(function(h){
+            mailer.send({
+                to: h.email,
+                subject: e.title,
+                text: msg
+            });
+        });
+
+        Log.info(req.user, Log.actions.EVENT_SENDMESSAGE, {eventId: eId, message: msg});
+        res.send();
+    });
 
 });
 

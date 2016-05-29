@@ -7,6 +7,7 @@ var Event = require('../../model/mo/Event');
 var Log = require('../../model/mo/Log');
 var mailer = require('../../util/mailer');
 var val = require('../../util/validator');
+var mongoose = require('mongoose');
 
 
 router.get('/', function (req, res) {
@@ -16,72 +17,75 @@ router.get('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        val.init();
-        val.isTitle(req.body.title);
-        val.isDate(req.body.startdate);
-        val.isDate(req.body.enddate);
-        val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
-        val.startBeforeEndDate(req.body.startdate, req.body.enddate);
+    if(!req.user.atLeastOrganizer())
+        return res.send(403);
 
-        if (val.allValid()) {
-            var eId = req.params.id;
-            var data = {
-                title: req.body.title,
-                place: !!req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
-                startdate: req.body.startdate,
-                enddate: req.body.enddate,
-                nrhelpers: req.body.nrhelpers,
-                description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
-                organization: {id: req.body.organization}
-            };
-            Log.info(req.user, Log.actions.EVENT_UPDATE, data);
+    val.init();
+    val.isTitle(req.body.title);
+    val.isDate(req.body.startdate);
+    val.isDate(req.body.enddate);
+    val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
+    val.startBeforeEndDate(req.body.startdate, req.body.enddate);
 
-            Event.findById(eId, function(err, e){
-                if (err)
-                    res.sendStatus(500);
-                else {
-                    e.title = data.title;
-                    e.place = data.place;
-                    e.startdate = data.startdate;
-                    e.enddate = data.enddate;
-                    e.nrhelpers = data.nrhelpers;
-                    e.description = data.description;
-                    e.organization = data.organization;
-                    e.save(function(err){
-                        findEvent(eId, req.user, function (err, event) {
-                            if (err)
+    if(!val.allValid())
+        res.sendStatus(400);
+
+    var eId = req.params.id;
+    var data = {
+        title: req.body.title,
+        place: !!req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        nrhelpers: req.body.nrhelpers,
+        description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
+        organization: req.body.organization
+    };
+    Log.info(req.user, Log.actions.EVENT_UPDATE, data);
+
+    Event.findById(eId, function(err, e){
+        if (err)
+            res.sendStatus(500);
+        else {
+            e.title = data.title;
+            e.place = data.place;
+            e.startdate = data.startdate;
+            e.enddate = data.enddate;
+            e.nrhelpers = data.nrhelpers;
+            e.description = data.description;
+            e.organization = data.organization;
+            console.log(JSON.stringify(e));
+            e.save(function(err){
+
+                findEvent(eId, req.user, function (err, event) {
+                    if (err)
+                        res.sendStatus(500);
+                    else {
+                        for (var i = 0; i < event.helpers.length; i++) {
+                            if (err) {
                                 res.sendStatus(500);
-                            else {
-                                for (var i = 0; i < event.helpers.length; i++) {
-                                    if (err) {
-                                        res.sendStatus(500);
-                                    } else {
-                                        mailer.sendToUser(
-                                            event.helpers[i].email,
-                                            event.helpers[i].name,
-                                            event.title + ' wurde geändert',
-                                            '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
-                                            'Das Event <b>' + event.title + '</b>' +
-                                            ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
-                                            ' statt.<br/></p>' +
-                                            'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
-                                            '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'
-                                        );
-                                    }
-                                }
-                                res.json(event);
+                            } else {
+                                mailer.sendToUser(
+                                    event.helpers[i].email,
+                                    event.helpers[i].name,
+                                    event.title + ' wurde geändert',
+                                    '<p>Es gab Änderungen bezüglich eines Events. <br/>' +
+                                    'Das Event <b>' + event.title + '</b>' +
+                                    ' findet am ' + moment(event.startdate).format('DD.MM.YYYY') + ' von ' + moment(event.startdate).format('HH:mm') + ' Uhr bis ' + moment(event.enddate).format('DD.MM.YYYY') + ' ' + moment(event.enddate).format('HH:mm') + ' Uhr' +
+                                    ' statt.<br/></p>' +
+                                    'Um alle Informationen über das Event einzusehen klicken Sie auf folgenden Link: ' +
+                                    '<a href="http://volunteers.in.tum.de/#/event/' + event.id + '">http://volunteers.in.tum.de/#/event/' + event.id + '</a>'
+                                );
                             }
-                        });
+                        }
+                        res.json(event);
+                    }
+                });
 
-                    });
-                }
             });
-        } else {
-            res.sendStatus(400);
         }
-    } else
-        res.sendStatus(403);
+    });
+
+
 });
 
 router.post('/:id/message', function (req, res) {

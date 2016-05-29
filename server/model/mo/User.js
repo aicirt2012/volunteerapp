@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt-nodejs");
 var generator = require('generate-password');
+var moment = require('moment');
 
 var Roles = {
     HELPER: 'HELPER',
@@ -140,7 +141,6 @@ userSchema.methods.toMe = function(){
 var User = mongoose.model('user', userSchema);
 
 User.findAvailableUsers = function(start, end, cb){
-    //TODO change to mongo
 
     var matches = [];
     do{
@@ -150,14 +150,13 @@ User.findAvailableUsers = function(start, end, cb){
 
     matches = Object.keys(matches);
 
-    //find user.where(availability.mo.morning or availability.mo.afternoon)
+    //find($or[{'availability.mo.morning':true}, {'availability.mo.afternoon':true}])
     query = {
         $or:[]
     };
-    for(var i=0; i<matches.length; i++){
-        var m = "'"+matches[i]+"'";
-        query.$or.push({m: true}); //+= matches[i];
-    }
+
+    for(var i=0; i<matches.length; i++)
+        query.$or.push(JSON.parse('{"'+matches[i]+'": '+'true}'));
 
     User.find(query, function(err, users){
         if(!err){

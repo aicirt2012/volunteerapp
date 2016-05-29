@@ -68,25 +68,24 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    if (req.user.atLeastTeam()) {
-        User.find(function (err, users) {
-            res.json(users);
-        });
-    } else
-        res.sendStatus(403);
+    if(!req.user.atLeastTeam())
+        return res.sendStatus(403);
+
+    User.find(function (err, users) {
+        res.json(users);
+    });
 });
 
 router.get('/:id', function (req, res) {
-    if (req.user.atLeastTeam()) {
-        var uId = req.params.id;
-        User.findById(uId, function (err, user) {
-            if (err)
-                res.sendStatus(500);
-            else
-                res.json(user);
-        });
-    } else
-        res.sendStatus(403);
+    if(!req.user.atLeastTeam())
+        return res.status(403).send();
+
+    User.findById(req.params.id, function (err, user) {
+        if (err)
+            res.status(500).send();
+        else
+            res.json(user);
+    });
 });
 
 router.put('/:id', function (req, res) {

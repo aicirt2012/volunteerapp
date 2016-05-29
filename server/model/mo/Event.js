@@ -6,7 +6,7 @@ var SObjectId = mongoose.Schema.Types.ObjectId;
 var eventSchema = new mongoose.Schema({
     title: String, 
     description: String,
-    nrhelpers: String,
+    nrhelpers: Number,
     helpers: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
     emails: String,
     startdate: Date,

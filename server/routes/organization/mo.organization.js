@@ -14,100 +14,104 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    if(req.user.atLeastTeam()){
-        var oId = req.params.id;
-        Organization.findById(oId, function(err, organization){
-            if(err)
-                res.sendStatus(500);
-            else
-                res.json(organization);
-        });
-    }else
-        res.sendStatus(403);
+    if(!req.user.atLeastTeam())
+        return res.status(403).send();
+
+    Organization.findById(req.params.id, function(err, o){
+        if(err)
+            return res.status(500).send();
+        res.json(o);
+    });
 });
 
 router.post('/', function(req, res) {
-    if(req.user.atLeastOrganizer()){
-        val.init();
-        val.isOrgaName(req.body.name);
-        val.isZip(req.body.zip);
-        val.isCity(req.body.city);
-        val.isStreet(req.body.street);
-        val.isPhone(req.body.tel, true);
-        val.isEmail(req.body.email);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        if(val.allValid()){
-            Organization.create({
-                name: req.body.name,
-                zip: req.body.zip,
-                city: req.body.city,
-                street: req.body.street,
-                tel: req.body.tel,
-                email: req.body.email
-            }, function (o) {
-                Log.info(req.user, Log.actions.ORGANIZATION_CREATE, o);
-                res.sendStatus(201);
-            });
-        }else{
-            res.sendStatus(400);
-        }
-    }else
-        res.sendStatus(403);
+    val.init();
+    val.isOrgaName(req.body.name);
+    val.isZip(req.body.zip);
+    val.isCity(req.body.city);
+    val.isStreet(req.body.street);
+    val.isPhone(req.body.tel, true);
+    val.isEmail(req.body.email);
+
+    if(!val.allValid())
+        return res.status(400).send();
+
+    Organization.create({
+        name: req.body.name,
+        zip: req.body.zip,
+        city: req.body.city,
+        street: req.body.street,
+        tel: req.body.tel,
+        email: req.body.email
+    }, function (o) {
+        Log.info(req.user, Log.actions.ORGANIZATION_CREATE, o);
+        res.status(201).send();
+    });
+
 });
 
 router.put('/:id', function(req, res) {
-    if(req.user.atLeastOrganizer()){
-        val.init();
-        val.isOrgaName(req.body.name);
-        val.isZip(req.body.zip);
-        val.isCity(req.body.city);
-        val.isStreet(req.body.street);
-        val.isPhone(req.body.tel, true);
-        val.isEmail(req.body.email);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        if(val.allValid())
-            Organization.findById(req.params.id, function(err, o){
-                console.log(JSON.stringify(o));
-                o.name = req.body.name;
-                o.zip = req.body.zip;
-                o.city = req.body.city;
-                o.street = req.body.street;
-                o.tel = req.body.tel;
-                o.email = req.body.email;
-                o.save();
-                Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, o);
-                res.sendStatus(200);
-            });
-        else
-            res.sendStatus(400);
-    }else
-        res.sendStatus(403);
+    val.init();
+    val.isOrgaName(req.body.name);
+    val.isZip(req.body.zip);
+    val.isCity(req.body.city);
+    val.isStreet(req.body.street);
+    val.isPhone(req.body.tel, true);
+    val.isEmail(req.body.email);
+
+    if(!val.allValid())
+        return res.status(400).send();
+
+    Organization.findById(req.params.id, function(err, o){
+        o.name = req.body.name;
+        o.zip = req.body.zip;
+        o.city = req.body.city;
+        o.street = req.body.street;
+        o.tel = req.body.tel;
+        o.email = req.body.email;
+        o.save(function(err){
+            if(err)
+                return res.status(500).send();
+            Log.info(req.user, Log.actions.ORGANIZATION_UPDATE, o);
+            res.send();
+        });
+    });
+
 });
 
 router.delete('/:id', function(req, res) {
-    if(req.user.atLeastAdmin()){
-        var oId = req.params.id;
-        Log.info(req.user, Log.actions.ORGANIZATION_DELETE, {organizationId: oId});
-        Event.findByOrganizationId(oId, function(err, events){
-            if(err) {
-                console.log(err);
-            }else{
-                async.forEach(events, function(e, cb){
-                    Event.delete(e.id, function(err){
-                        cb();
-                    });
-                }, function(err){
-                    if(err)
-                        res.sendStatus(500);
-                    else
-                        Organization.delete(oId, function(err){
-                            res.send();
-                        });
+    if(!req.user.atLeastAdmin())
+        return res.status(403).send();
+
+    var oId = req.params.id;
+    Log.info(req.user, Log.actions.ORGANIZATION_DELETE, {organizationId: oId});
+    Event.findByOrganizationId(oId, function(err, events){
+        if(err)
+            return res.status(500).send();
+
+        async.forEach(events, function(e, cb){
+            e.remove(function(err){
+                cb();
+            });
+
+        }, function(err){
+            if(err)
+                return res.status(500).send();
+
+            Organization.findById(oId, function(err, o){
+                o.remove(function(err){
+                    res.send();
                 });
-            }
+            });
         });
-    }else
-        res.sendStatus(403);
+
+    });
 });
 
 module.exports = router;

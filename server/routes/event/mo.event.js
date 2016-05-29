@@ -286,11 +286,12 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
         res.sendStatus(403);
 });
 
-router.get('/user/:id/', function (req, res) {
-    var uId = req.params.id;
-    Event.findByUserId(uId, function (err, events) {
-        res.send(events);
 
+router.get('/user/:id/', function (req, res) {
+    Event.findByUserId(req.params.id, function (err, events) {
+        if(err)
+            return res.status(500).send();
+        res.send(events);
     });
 });
 

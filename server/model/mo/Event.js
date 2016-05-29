@@ -26,7 +26,7 @@ eventSchema.set('toJSON', {
 var Event = mongoose.model('event', eventSchema);
 
 Event.findByUserId = function(userId, cb){
-    Event.find({helpers: {$in: userId}}, function(err, events){
+    Event.find({helpers: userId}, function(err, events){
         if(!err){
             cb(false, events)
         }else

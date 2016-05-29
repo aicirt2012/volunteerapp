@@ -205,24 +205,25 @@ router.get('/:id', function (req, res) {
 router.post('/:eventId/helpers/:helperId', function (req, res) {
     var eventId = req.params.eventId;
     var helperId = req.params.helperId;
-    if (req.user.atLeastOrganizer() || req.user.id == helperId) {
-        Event.findById(eventId, function(err, e){
-            if(err) throw err;
-            if(e.helpers.indexOf(helperId) == -1) {
-                e.helpers.push(helperId);
-                e.save();
-                Event.findByIdPopulated(eventId, req.user, function (err, event) {
-                    if (err)
-                        res.sendStatus(500);
-                    else {
-                        res.json(event);
-                        sendRegistrationMail(event, helperId);
-                    }
-                });
-            }
-        });
-    } else
-        res.sendStatus(403);
+
+    if (!(req.user.atLeastOrganizer() || req.user.id == helperId))
+        return res.status(403).send();
+
+    Event.findById(eventId, function(err, e){
+        if(err) throw err;
+        if(e.helpers.indexOf(helperId) == -1) {
+            e.helpers.push(helperId);
+            e.save();
+            Event.findByIdPopulated(eventId, req.user, function (err, event) {
+                if (err)
+                    res.sendStatus(500);
+                else {
+                    res.json(event);
+                    sendRegistrationMail(event, helperId);
+                }
+            });
+        }
+    });
 
     function sendRegistrationMail(event, helperId) {
         User.findById(helperId, function (err, helper) {
@@ -264,7 +265,6 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
     if(!(req.user.atLeastOrganizer() || req.user.id == helperId))
         return res.status(403).send();
 
-    Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
 
     Event.findById(eventId, function(err, e) {
         if(err)
@@ -272,6 +272,7 @@ router.delete('/:eventId/helpers/:helperId', function (req, res) {
 
         e.helpers.pull(helperId);
         e.save(function(){
+            Log.info(req.user, Log.actions.EVENT_UNREGISTER, {eventId: eventId, helperId: helperId});
             Event.findByIdPopulated(eventId, req.user, function (err, event) {
                 if(err)
                     res.status(500).send();

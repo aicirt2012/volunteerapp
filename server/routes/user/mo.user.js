@@ -162,19 +162,18 @@ router.delete('/:id', function (req, res) {
 });
 
 router.put('/:id/picture', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        User.findById(req.params.id, function (err, u){
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                u.picture = req.body.picture;
-                u.save(function () {
-                    res.send();
-                });
-            }
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
+
+    User.findById(req.params.id, function (err, u){
+        if(err)
+            return res.status(500).send(err);
+
+        u.picture = req.body.picture;
+        u.save(function () {
+            res.send();
         });
-    } else
-        res.sendStatus(403);
+    });
 });
 
 router.post('/:id/resetpw', function (req, res) {

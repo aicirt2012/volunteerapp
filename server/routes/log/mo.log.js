@@ -5,12 +5,12 @@ var User = require('../../model/mo/User');
 
 
 router.get('/', function(req, res) {
-    if(req.user.atLeastAdmin()){
-        Log.find(function(err, logs){
-            res.json(logs);
-        });
-    }else
-        res.sendStatus(403);
+    if(!req.user.atLeastAdmin())
+        return res.status(403).send();
+    
+    Log.find(function(err, logs){
+        res.json(logs);
+    });
 });
 
 

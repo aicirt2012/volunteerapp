@@ -90,48 +90,50 @@ router.get('/:id', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        val.init();
-        val.isEmail(req.body.email);
-        val.isName(req.body.name);
-        val.isPhone(req.body.tel, false);
-        val.isPhone(req.body.mobil, false);
-        val.isGender(req.body.gender);
-        val.isAvailability(req.body.availability);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        if (val.allValid()) {
-            try {
-                var uId = req.params.id;
-                var data = {
-                    gender: req.body.gender,
-                    name: req.body.name,
-                    tel: req.body.tel,
-                    mobil: req.body.mobil,
-                    email: req.body.email.toLowerCase(),
-                    notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : null,
-                    availability: req.body.availability
-                };
-                Log.info(req.user, Log.actions.USER_UPDATE, data);
-                User.exists(req.body.email, uId, function (err) {
-                    if (err) {
-                        res.sendStatus(409);
-                    } else {
-                        User.update(uId, data, function () {
-                            console.log(JSON.stringify(arguments, null, 2));
-                            res.send();
-                        });
-                    }
-                });
-            } catch (e) {
-                console.error((e || {}).stack || 'error in [PUT] user/:id, not valid');
-                res.sendStatus(500);
-            }
-        } else {
-            res.sendStatus(400);
-        }
-    } else {
-        res.sendStatus(403);
-    }
+    val.init();
+    val.isEmail(req.body.email);
+    val.isName(req.body.name);
+    val.isPhone(req.body.tel, false);
+    val.isPhone(req.body.mobil, false);
+    val.isGender(req.body.gender);
+    val.isAvailability(req.body.availability);
+
+    if(!val.allValid())
+        return res.status(400).send();
+
+
+    var uId = req.params.id;
+    var data = {
+        gender: req.body.gender,
+        name: req.body.name,
+        tel: req.body.tel,
+        mobil: req.body.mobil,
+        email: req.body.email.toLowerCase(),
+        notes: req.body.notes ? val.blacklist(req.body.notes, "<>;\"\'´") : null,
+        availability: req.body.availability
+    };
+
+    User.findById(uId, function(err, u){
+        u.gender = data.gender;
+        u.name = data.name;
+        u.tel = data.tel;
+        u.mobil = data.mobil;
+        u.email = data.email;
+        u.notes = data.notes;
+        u.availability = data.availability;
+        u.save(function(err){
+            if(err)
+                return res.status(500).send();
+                //TODO check if email cause error
+            Log.info(req.user, Log.actions.USER_UPDATE, data);
+            res.send();
+        });
+    });
+
+
 });
 
 router.delete('/:id', function (req, res) {
@@ -201,24 +203,23 @@ router.post('/:id/resetpw', function (req, res) {
 
 });
 
-router.put('/:id/role', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        val.init();
-        val.isRole(req.body.role);
-        if (val.allValid()) {
-            var uId = req.params.id;
-            User.findById(uId,function(err, u) {
-                u.role = req.body.role;
-                u.save(function(err){
-                    Log.info(req.user, Log.actions.USER_ROLECHANGE, u);
-                    res.send();
-                });
-            });
-        } else {
-            res.sendStatus(400);
-        }
-    } else
-        res.sendStatus(403);
+router.put('/:id/role', function (req, res, next) {
+    if(!req.user.atLeastOrganizer()){ res.sendStatus(403); return;}
+
+    User.findById(req.params.id, function(err, u) {
+        console.log(err, u);
+        u.role = req.body.role;
+
+        //u.validateSync([]);
+        //res.sendStatus(400);
+
+        u.save(function(err){
+            //Log.info(req.user, Log.actions.USER_ROLECHANGE, u);
+            console.log(err);
+            res.send();
+        });
+    });
+
 });
 
 

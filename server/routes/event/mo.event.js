@@ -112,6 +112,7 @@ router.post('/:id/message', function (req, res) {
     });
 });
 
+
 router.delete('/:id', function (req, res) {
     if(!req.user.atLeastOrganizer())
         return res.status(403).send();
@@ -141,59 +142,59 @@ router.delete('/:id', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    if (req.user.atLeastOrganizer()) {
-        val.init();
-        val.isTitle(req.body.title);
-        val.isDate(req.body.startdate);
-        val.isDate(req.body.enddate);
-        val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
-        val.startBeforeEndDate(req.body.startdate, req.body.enddate);
+    if(!req.user.atLeastOrganizer())
+        return res.status(403).send();
 
-        if (val.allValid()) {
-            var e = {
-                title: req.body.title,
-                place: req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
-                startdate: req.body.startdate,
-                enddate: req.body.enddate,
-                nrhelpers: req.body.nrhelpers,
-                description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
-                organization: req.body.organization
-            };
-            Log.info(req.user, Log.actions.EVENT_CREATE, e);
-            Event.create(e, function (err) {
-                var start = new Date(e.startdate);
-                var end = new Date(e.enddate);
+    val.init();
+    val.isTitle(req.body.title);
+    val.isDate(req.body.startdate);
+    val.isDate(req.body.enddate);
+    val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
+    val.startBeforeEndDate(req.body.startdate, req.body.enddate);
 
-                User.findAvailableUsers(start, end, function (err, users) {
-                    for (var i = 0; i < users.length; i++) {
-                        mailer.sendToUser(
-                            users[i].email,
-                            users[i].name,
-                            'Neues Event: ' + e.title,
-                            '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
-                            '<b>' + req.body.title + '</b>' +
-                            '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
-                            'Ort: ' + req.body.place + '<br>' +
-                            'Beschreibung: ' + e.description + '<br>' +
-                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
-                        );
-                    }
+    if(!val.allValid())
+        return res.status(400).send();
 
-                });
-                res.sendStatus(201);
+    var e = {
+        title: req.body.title,
+        place: req.body.place ? val.blacklist(req.body.place, "<>;\"\'´") : null,
+        startdate: req.body.startdate,
+        enddate: req.body.enddate,
+        nrhelpers: req.body.nrhelpers,
+        description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
+        organization: req.body.organization
+    };
+    Log.info(req.user, Log.actions.EVENT_CREATE, e);
+    Event.create(e, function (err) {
+        var start = new Date(e.startdate);
+        var end = new Date(e.enddate);
+
+        User.findAvailableUsers(start, end, function (err, users) {
+            users.forEach(function(u){
+                mailer.sendToUser(
+                    u.email,
+                    u.name,
+                    'Neues Event: ' + e.title,
+                    '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
+                    '<b>' + req.body.title + '</b>' +
+                    '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
+                    'Ort: ' + req.body.place + '<br>' +
+                    'Beschreibung: ' + e.description + '<br>' +
+                    'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
+                );
             });
-        } else {
-            res.sendStatus(400);
-        }
-    } else
-        res.sendStatus(403);
+        });
+        res.status(201).send();
+    });
+
+
 });
 
+
 router.get('/:id', function (req, res) {
-    var eId = req.params.id;
-    Event.findByIdPopulated(eId, req.user, function (err, event) {
-        if (err)
-            res.sendStatus(500);
+    Event.findByIdPopulated(req.params.id, req.user, function (err, event) {
+        if(err)
+            res.status(500).send();
         else
             res.send(event);
     });

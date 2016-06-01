@@ -15,7 +15,8 @@ var Event = EntityType.define({
     startdate: {type:'String'},
     enddate: {type:'String'},
     place: {type:'String'},
-    organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' }
+    organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' },
+    isSeries: {type: 'Boolean'}
 }, 'event');
 
 Event.findByOrganizationId = function(organizationId, cb){

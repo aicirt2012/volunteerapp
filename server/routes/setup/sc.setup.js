@@ -95,10 +95,10 @@ router.post('/', function(req, res, next) {
                 startdate: e.startdate,
                 enddate: e.enddate,
                 nrhelpers: e.nrhelpers,
-               // helpers: {},
                 description: e.description,
                 important: e.important,
-                organization: {id: organization.id}
+                organization: {id: organization.id},
+                isSeries: e.isSeries
             }, function(){
                 cb();
             });
@@ -111,7 +111,5 @@ router.post('/', function(req, res, next) {
     });
 
 });
-
-
 
 module.exports = router;

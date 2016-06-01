@@ -103,6 +103,12 @@
                             </md-input-container>
                         </div>
                         <div layout layout-sm="column">
+                            <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}"
+                                         ng-model="event.isSeries" class="md-warn">
+                                Serientermin (wöchentliche Wiederholung)
+                            </md-checkbox>
+                        </div>
+                        <div layout layout-sm="column">
                             <md-input-container flex>
                                 <label>Beschreibung</label>
                                 <textarea ng-model="event.description" columns="3" md-maxlength="1500" rows="5"></textarea>

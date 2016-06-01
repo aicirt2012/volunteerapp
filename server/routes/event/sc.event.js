@@ -23,6 +23,7 @@ router.put('/:id', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
+        val.isBoolean(req.body.isSeries);
 
         if (val.allValid()) {
             var eId = req.params.id;
@@ -33,7 +34,8 @@ router.put('/:id', function (req, res) {
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
                 description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
-                organization: {id: req.body.organization}
+                organization: {id: req.body.organization},
+                isSeries: req.body.isSeries
             };
             Log.info(req.user, Log.actions.EVENT_UPDATE, data);
             Event.update(eId, data, function () {
@@ -132,6 +134,7 @@ router.post('/', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
+        val.isBoolean(req.body.isSeries);
 
         if (val.allValid()) {
             var e = {
@@ -141,7 +144,8 @@ router.post('/', function (req, res) {
                 enddate: req.body.enddate,
                 nrhelpers: req.body.nrhelpers,
                 description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
-                organization: {id: req.body.organization}
+                organization: {id: req.body.organization},
+                isSeries: req.body.isSeries
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);
             Event.save(e, function (err) {

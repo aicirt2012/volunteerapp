@@ -12,6 +12,7 @@ var eventSchema = new mongoose.Schema({
     startdate: Date,
     enddate: Date,
     place: String,
+    isSeries: Boolean,
     organization: {type: mongoose.Schema.Types.ObjectId, ref: 'organization'}
 });
 

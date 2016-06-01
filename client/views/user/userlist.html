@@ -38,9 +38,11 @@
                             <user-picture picture="{{user.picture}}" size="64"></user-picture>
                         </div>
                         <div class="md-list-item-text">
-                            <h3>{{user.name}}</h3>
-                            <h4>{{user.email}}</h4>
-                            <p>{{user.tel}}</p>
+                            <h3 ng-bind-html="highlight(searchText, user.name)"></h3>
+                            <h4 ng-bind-html="highlight(searchText, user.email)"></h4>
+                            <p ng-if="user.tel && user.mobil"><a ng-bind-html="highlight(searchText, user.tel)"></a>/<a ng-bind-html="highlight(searchText, user.mobil)"></a></p>
+                            <p ng-if="user.tel && !user.mobil" ng-bind-html="highlight(searchText, user.tel)"></p>
+                            <p ng-if="!user.tel && user.mobil" ng-bind-html="highlight(searchText, user.mobil)"></p>
                         </div>
                     </md-list-item>
                 </md-list>

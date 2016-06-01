@@ -22,8 +22,18 @@
                 </md-tab>
             </md-tabs>
             <md-card-content style="padding: 0px;">
+                    <md-autocomplete
+                            ng-disabled="isDisabled"
+                            md-no-cache="noCache"
+                            md-search-text="searchText"
+                            md-items=""
+                            md-item-text="user.name"
+                            md-min-length="0"
+                            placeholder="Suche nach Namen oder Telefonnummer..."
+                            md-menu-class="autocomplete-custom-template">
+                    </md-autocomplete>
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="user in userlist | filter: isSelectedRole" ng-click="selectUser(user.id)">
+                    <md-list-item class="md-3-line" ng-repeat="user in userlist | filter: filterUser" ng-click="selectUser(user.id)">
                         <div class="md-tile-left inset" hide-sm>
                             <user-picture picture="{{user.picture}}" size="64"></user-picture>
                         </div>

@@ -5,6 +5,7 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
     me.userlist = userlist;
     me.roles = User.roles;
     me.isAdmin = User.isAdmin();
+    me.searchText = "";
 
     me.selectedTabNr = 0;
     me.$watch('selectedTabNr', function(newValue) {
@@ -12,8 +13,25 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
         me.breadcrumb = 'Personalverwaltung > '+ me.selectedRole.label;
     });
 
-    me.isSelectedRole = function(user){
-        return me.selectedRole.id == user.role;
+    me.filterUser = function(user){
+        var roleBool = me.selectedRole.id == user.role;
+        var nameBool = true;
+        var telBool = true;
+        var mobilBool = true;
+        var emailBool = true;
+        if(me.searchText != "") {
+            nameBool = user.name.toLowerCase().indexOf(me.searchText.toLowerCase()) > -1;
+            emailBool = user.email.indexOf(me.searchText.toLowerCase()) > -1;
+            if(user.tel)
+                telBool = user.tel.indexOf(me.searchText) > -1;
+            else
+                telBool = false;
+            if(user.mobil)
+                mobilBool = user.mobil.indexOf(me.searchText) > -1;
+            else
+                mobilBool = false;
+        }
+        return roleBool && (nameBool || emailBool || telBool || mobilBool);
     }
 
     me.selectUser = function(id){
@@ -29,6 +47,10 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
 
     me.addUser = function(){
         window.location.href = '#/adduser';
+    }
+
+    me.updateUserList = function(searchText){
+        console.log(searchText)
     }
 
     $mdSidenav('left').open();

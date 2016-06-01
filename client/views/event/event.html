@@ -102,7 +102,7 @@
                         <div layout layout-sm="column">
                             <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}"
                                          ng-model="event.isSeries" class="md-warn">
-                                Serientermin (wöchentliche Wiederholung)
+                                Serientermin
                             </md-checkbox>
                         </div>
                         <div layout layout-sm="column">
@@ -158,7 +158,7 @@
                             <md-icon class="material-icons">today
                             </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin)</i></h3>
+                                <h3> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin, siehe Beschreibung)</i></h3>
                                 <p> Begin </p>
                             </div>
                         </md-list-item>
@@ -173,8 +173,8 @@
                             <md-icon class="material-icons">today
                             </md-icon>
                             <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
-                                <h3 ng-if="event.startdate.getDate() == event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin)</i></h3>
-                                <h3 ng-if="event.startdate.getDate() != event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin)</i></h3>
+                                <h3 ng-if="event.startdate.getDate() == event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin, siehe Beschreibung)</i></h3>
+                                <h3 ng-if="event.startdate.getDate() != event.enddate.getDate()"> {{ event.startdate | date: 'dd. MMM yyyy   HH:mm'}} bis {{ event.enddate | date: 'dd. MMM yyyy   HH:mm'}} Uhr <i ng-if="event.isSeries">(Serientermin, siehe Beschreibung)</i></h3>
                                 <p> Datum </p>
                             </div>
                         </md-list-item>

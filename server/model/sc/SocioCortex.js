@@ -81,8 +81,7 @@ function mxlWorkspace2(workspaceId, query, attributes, cb) {
             console.error('Error during mxl Query "' + JSON.stringify(data) + '"!');
             cb(err, null);
         } else {
-            console.log(JSON.stringify(body));
-            cb(err, convertEntitiesToFlatJSON(attributes, body.value));
+            cb(err, body.value);//
         }
     });
 }

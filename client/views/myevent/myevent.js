@@ -1,9 +1,10 @@
-app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', function($scope, $mdSidenav, myevents, MyData) {
+app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', 'Util', function($scope, $mdSidenav, myevents, MyData, Util) {
 
 
     var me = $scope;
     me.futureevents = [];
     me.pastevents = [];
+    me.shortenDescription = Util.shortenDescription;
 
     for(var i=0; i< myevents.length; i++){
         var e = myevents[i];

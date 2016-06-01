@@ -14,6 +14,8 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     me.firstDayOfWeek = 0; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     me.tooltips = true;
     me.isCalendarView = false;
+    me.shortenDescription = Util.shortenDescription;
+
 
     me.toggleView = function(){
         me.isCalendarView = !me.isCalendarView;

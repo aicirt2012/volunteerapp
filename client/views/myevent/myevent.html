@@ -20,7 +20,7 @@
                         <div class="md-list-item-text">
                             <h3><b>{{e.title}}</b></h3>
                             <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
-                            <p>{{e.description}}</p>
+                            <p ng-bind-html="shortenDescription(e.description)"></p>
                         </div>
                     </md-list-item>
                 </md-list>
@@ -47,7 +47,7 @@
                         <div class="md-list-item-text">
                             <h3><b>{{e.title}}</b></h3>
                             <h4>{{e.startdate | date: 'dd.MM.yyyy HH:mm'}} Uhr</h4>
-                            <p>{{e.description}}</p>
+                            <p ng-bind-html="shortenDescription(e.description)"></p>
                         </div>
                     </md-list-item>
                 </md-list>

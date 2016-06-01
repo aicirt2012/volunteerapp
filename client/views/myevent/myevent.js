@@ -4,12 +4,12 @@ app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', 'Ut
     var me = $scope;
     me.futureevents = [];
     me.pastevents = [];
-    me.shortenDescription = Util.shortenDescription;
 
     for(var i=0; i< myevents.length; i++){
         var e = myevents[i];
         var now = new Date().getTime();
         var eDate = new Date(e.startdate).getTime();
+        e.description = Util.shortenDescription(e.description);
         if(now> eDate)
             me.pastevents.push(e);
         else

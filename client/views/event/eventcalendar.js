@@ -6,6 +6,7 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     for(var i=0; i<me.events.length; i++){
         var e = me.events[i];
         me.events[i].duration = Util.diffInH(e.startdate, e.enddate);
+        me.events[i].description = Util.shortenDescription(me.events[i].description);
     }
 
     me.selectedDate = null;
@@ -14,7 +15,6 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     me.firstDayOfWeek = 0; // First day of the week, 0 for Sunday, 1 for Monday, etc.
     me.tooltips = true;
     me.isCalendarView = false;
-    me.shortenDescription = Util.shortenDescription;
 
 
     me.toggleView = function(){

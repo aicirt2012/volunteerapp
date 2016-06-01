@@ -15,15 +15,25 @@
                 </div>
             </md-toolbar>
             <md-card-content style="padding: 0px;">
+                <md-autocomplete
+                        ng-disabled="isDisabled"
+                        md-no-cache="noCache"
+                        md-search-text="searchText"
+                        md-items=""
+                        md-item-text="organization.name"
+                        md-min-length="0"
+                        placeholder="Suche nach Namen, Telefonnummer oder E-Mail Adresse..."
+                        md-menu-class="autocomplete-custom-template">
+                </md-autocomplete>
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="organization in organizationlist" ng-click="selectOrganization(organization.id)">
+                    <md-list-item class="md-3-line" ng-repeat="organization in organizationlist | filter: filterOrganization" ng-click="selectOrganization(organization.id)">
                         <div class="md-tile-left inset" hide-sm>
                             <organization-avatar></organization-avatar>
                         </div>
                         <div class="md-list-item-text">
-                            <h3>{{organization.name}}</h3>
-                            <h4>{{organization.email}}</h4>
-                            <p>{{organization.tel}}</p>
+                            <h3 ng-bind-html="highlight(searchText, organization.name)"></h3>
+                            <h4 ng-bind-html="highlight(searchText, organization.email)"></h4>
+                            <p ng-bind-html="highlight(searchText, organization.tel)"></p>
                         </div>
                     </md-list-item>
                 </md-list>

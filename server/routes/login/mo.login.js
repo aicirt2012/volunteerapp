@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../sc/User');
-var Log = require('../../sc/Log');
+var User = require('../../model/mo/User');
+var Log = require('../../model/mo/Log');
 var config = require('../../../config');
 var jwt = require('jsonwebtoken');
 
@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
         }else {
             return res.json({
                 token: jwt.sign(user.id, config.jwt.secret, {expiresIn: config.jwt.expiresInSeconds}),
-                user: User.toMe(user)
+                user: user.toMe()
             });
         }
     });

@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
@@ -9,17 +10,39 @@ var compression = require('compression');
 var domainMiddleware = require('express-domain-middleware');
 var config = require('./config');
 
-var setup = require('./server/routes/setup/setup');
-var login = require('./server/routes/login/login');
-var user = require('./server/routes/user/user');
-var event = require('./server/routes/event/event');
-var mydata = require('./server/routes/mydata/mydata');
-var organization = require('./server/routes/organization/organization');
-var log = require('./server/routes/log/log');
 
-var User = require('./server/sc/User');
+if(config.usemongo){
+    var User = require('./server/model/mo/User');
+    var setup = require('./server/routes/setup/mo.setup');
+    var login = require('./server/routes/login/mo.login');
+    var user = require('./server/routes/user/mo.user');
+    var event = require('./server/routes/event/mo.event');
+    var mydata = require('./server/routes/mydata/mo.mydata');
+    var organization = require('./server/routes/organization/mo.organization');
+    var log = require('./server/routes/log/mo.log');
+    var migration = require('./server/routes/migration/mo.import');
+}else{
+    var User = require('./server/model/sc/User');
+    var setup = require('./server/routes/setup/sc.setup');
+    var login = require('./server/routes/login/sc.login');
+    var user = require('./server/routes/user/sc.user');
+    var event = require('./server/routes/event/sc.event');
+    var mydata = require('./server/routes/mydata/sc.mydata');
+    var organization = require('./server/routes/organization/sc.organization');
+    var log = require('./server/routes/log/sc.log');
+    var migration = require('./server/routes/migration/sc.export');
+}
+
+
+
+
 
 var app = express().use(domainMiddleware);
+if(config.usemongo) {
+    mongoose.connect(config.database);
+    mongoose.set('debug', true);
+}
+
 
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -32,6 +55,7 @@ app.use(compression());
 
 if (app.get('env') === 'development') {
     app.use('/api/setup', setup);
+    app.use('/api/migration', migration);
 }
 
 app.use('/api/login', login);

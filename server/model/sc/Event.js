@@ -1,6 +1,6 @@
 var express = require('express');
 var async = require('async');
-var http = require('../util/http');
+var http = require('../../util/http');
 var EntityType = require('../sc/EntityType');
 var User = require('../sc/User');
 var Organisation = require('../sc/Organisation');
@@ -15,7 +15,8 @@ var Event = EntityType.define({
     startdate: {type:'String'},
     enddate: {type:'String'},
     place: {type:'String'},
-    organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' }
+    organization: {type: 'link', options:{entityType: {id:'organization'}}, multiplicity: 'exactlyOne' },
+    isSeries: {type: 'Boolean'}
 }, 'event');
 
 Event.findByOrganizationId = function(organizationId, cb){

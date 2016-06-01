@@ -1,7 +1,7 @@
 var express = require('express');
-var http = require('../util/http');
+var http = require('../../util/http');
 
-var config = require('../../config');
+var config = require('../../../config');
 
 function deleteWorkspace(workspaceId, cb){
     http.del('/workspaces/'+workspaceId,{}, function(err, res, body){

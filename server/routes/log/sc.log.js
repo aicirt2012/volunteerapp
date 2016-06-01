@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Log = require('../../sc/Log');
-var User = require('../../sc/User');
+var Log = require('../../model/sc/Log');
+var User = require('../../model/sc/User');
 
 
 router.get('/', function(req, res) {

@@ -3,10 +3,10 @@ var router = express.Router();
 var async = require('async');
 var mailer = require('../../util/mailer');
 var http = require('../../util/http');
-var User = require('../../sc/User');
+var User = require('../../model/sc/User');
 var val = require('../../util/validator');
-var Log = require('../../sc/Log');
-var Event = require('../../sc/Event');
+var Log = require('../../model/sc/Log');
+var Event = require('../../model/sc/Event');
 
 router.get('/me', function (req, res) {
     res.json(User.toMe(req.user));
@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
                         name: req.body.name,
                         tel: req.body.tel,
                         mobil: req.body.mobil,
-                        email: req.body.email.toLocaleLowerCase(),
+                        email: req.body.email.toLowerCase(),
                         pw: hashedPw,
                         notes: validatedNotes,
                         role: User.roles.HELPER,
@@ -47,17 +47,15 @@ router.post('/', function (req, res) {
                     };
                     Log.info(req.user, Log.actions.USER_CREATE, data);
                     User.save(data, function () {
-                        mailer.send({
-                            to: data.email,
-                            subject: 'Willkommen bei der Volunteer App',
-                            html: '<h3>Hallo ' + data.name + '!</h3>' +
+                        mailer.sendToUser(
+                            data.email,
+                            data.name,
+                            'Willkommen bei der Volunteer App',
                             '<p>Es wurde ein Volunteer App Account für Sie erstellt. <br/>' +
                             'Ihr Passwort lautet: ' + plainPw + '<br/>' +
                             'Melden Sie sich mit Ihrer Email Adresse und Ihrem Passwort über folgenden Link an: <br/>' +
-                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>' +
-                            '<p>Viele Grüße, <br/>' +
-                            'Ihr Volunteer App Team</p>'
-                        });
+                            '<a href="http://volunteers.in.tum.de">volunteers.in.tum.de</a></p>'
+                        );
                         res.send();
                     });
                 }
@@ -189,15 +187,13 @@ router.post('/:id/resetpw', function (req, res) {
                 User.update(uId, {
                     pw: hashedPw
                 }, function () {
-                    mailer.send({
-                        to: user.email,
-                        subject: 'Ihr Passwort wurde zurückgesetzt!',
-                        html: '<h3>Hallo ' + user.name + '!</h3>' +
+                    mailer.sendToUser(
+                        user.email,
+                        user.name,
+                        'Ihr Passwort wurde zurückgesetzt!',
                         '<p>Ihr Passwort wurde erfolgreich zurück gesetzt. <br/>' +
-                        'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>' +
-                        '<p>Viele Grüße, <br/>' +
-                        'Ihr Volunteer App Team</p>'
-                    });
+                        'Ihr neues Passwort lautet: ' + plainPw + '<br/></p>'
+                    );
                     res.send();
                 });
         });

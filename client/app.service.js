@@ -349,14 +349,20 @@ app.service('Util', function() {
 });
 
 
-app.service('Log', function($resource) {
-    var Log = $resource('/api/log');
+app.service('Dashboard', function($resource) {
+    var Log = $resource('/api/dashboard/log');
+    var Overview = $resource('/api/dashboard/overview');
 
-    function list(cb){
+    function logs(cb){
         return Log.query(cb);
     }
 
+    function overview(cb){
+        return Overview.get(cb);
+    }
+
     return {
-        list: list
+        overview: overview,
+        logs: logs
     }
 });

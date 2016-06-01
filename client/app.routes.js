@@ -96,12 +96,12 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'views/organization/addorganization.html',
             controller: 'AddOrganizationCtrl'
         })
-        .when('/log', {
-            templateUrl: 'views/log/log.html',
-            controller: 'LogCtrl',
+        .when('/dashboard', {
+            templateUrl: 'views/dashboard/dashboard.html',
+            controller: 'DashboardCtrl',
             resolve: {
-                logs: function(Log) {
-                    return Log.list().$promise;
+                overview: function(Dashboard) {
+                    return Dashboard.overview().$promise;
                 }
             }
         })

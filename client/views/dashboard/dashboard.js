@@ -1,8 +1,8 @@
-app.controller('LogCtrl', ['$scope', '$mdSidenav', 'logs', function($scope, $mdSidenav, logs) {
+app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', function($scope, $mdSidenav, overview) {
 
 
     var me = $scope;
-    me.logs = logs;
+    me.overview = overview;
     me.description = false;
 
     me.breadcrumb = function(){

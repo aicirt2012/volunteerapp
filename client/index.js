@@ -43,8 +43,8 @@ app.controller('IndexCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdUtil'
                 });
             if (User.isAdmin())
                 me.menu.push({
-                    link: 'log',
-                    title: 'Systemlog',
+                    link: 'dashboard',
+                    title: 'Dashboard',
                     icon: 'rotate_right'
                 });
         });

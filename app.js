@@ -19,7 +19,7 @@ if(config.usemongo){
     var event = require('./server/routes/event/mo.event');
     var mydata = require('./server/routes/mydata/mo.mydata');
     var organization = require('./server/routes/organization/mo.organization');
-    var log = require('./server/routes/log/mo.log');
+    var dashboard = require('./server/routes/dashboard/mo.log');
     var migration = require('./server/routes/migration/mo.import');
 }else{
     var User = require('./server/model/sc/User');
@@ -29,7 +29,7 @@ if(config.usemongo){
     var event = require('./server/routes/event/sc.event');
     var mydata = require('./server/routes/mydata/sc.mydata');
     var organization = require('./server/routes/organization/sc.organization');
-    var log = require('./server/routes/log/sc.log');
+    var dashboard = require('./server/routes/dashboard/sc.dashboard');
     var migration = require('./server/routes/migration/sc.export');
 }
 
@@ -95,7 +95,7 @@ app.use('/api/user', user);
 app.use('/api/mydata', mydata);
 app.use('/api/event', event);
 app.use('/api/organization', organization);
-app.use('/api/log', log);
+app.use('/api/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

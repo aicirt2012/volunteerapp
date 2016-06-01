@@ -51,7 +51,11 @@
                         <h4>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.startdate | date: 'HH:mm'}}Uhr {{e.duration - .5 |
                             number:0}}h&nbsp;<span ng-if="(e.duration % 1) * 60 > 0">{{(e.duration % 1) * 60 | number:0}}min</span>
                         </h4>
-                        <p>{{e.description}}</p>
+                        <!--<p>{{e.description}}</p>-->
+                        <p>{{e.organization.name}} |
+                            <span style="color:red" ng-if="e.nrhelpers-e.nrhelpersregistered>=0"> {{e.nrhelpersregistered}}/{{e.nrhelpers}} Helfer angemeldet</span>
+                            <span ng-if="e.nrhelpers-e.nrhelpersregistered<0"> {{e.nrhelpersregistered}}/{{e.nrhelpers}} Helfer angemeldet</span>
+                        </p>
                     </div>
                 </md-list-item>
             </md-list>

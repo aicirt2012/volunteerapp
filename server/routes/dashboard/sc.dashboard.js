@@ -20,23 +20,23 @@ router.get('/overview', function(req, res) {
     if(!User.atLeastAdmin(req.user.role))
         return res.status(403).send();
 
-    var result = {};
+    var result = {count:{}};
     var asyncTasks = [];
     asyncTasks.push(function(cb){
         User.find2('find(user).count()',function(err, ucount){
-            result.usercount = ucount;
+            result.count.user = ucount;
             cb();
         });
     });
     asyncTasks.push(function(cb){
         Event.find2('find(event).count()',function(err, ecount){
-            result.eventcount = ecount;
+            result.count.event = ecount;
             cb();
         });
     });
     asyncTasks.push(function(cb){
         Organisation.find2('find(organization).count()',function(err, ocount){
-            result.organisationcount = ocount;
+            result.count.organisation = ocount;
             cb();
         });
     });

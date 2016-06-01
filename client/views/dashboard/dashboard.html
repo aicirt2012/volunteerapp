@@ -2,25 +2,79 @@
 
 <md-content flex md-scroll-y layout-fill layout-padding>
 
-        <md-card style="padding:0px; overflow-y: hidden">
-            <md-card-content style="padding:0px">
-                <table ng-click="description = !description" style="width:100%" cellpadding="4" cellspacing="0">
-                    <tr style="background-color:rgb(3,169,244); color:white; font-weight:bold;">
-                        <td>Datum</td>
-                        <td>Aktion</td>
-                        <td>User</td>
-                        <td>Role</td>
-                        <td ng-if="description">Beschreibug</td>
-                    </tr>
-                    <tr ng-repeat="log in logs | orderBy: '-date'">
-                        <td>{{log.date | date: 'dd.MM.yyyy HH:mm'}}</td>
-                        <td>{{log.action}}</td>
-                        <td>{{log.username}}</td>
-                        <td>{{log.userrole}}</td>
-                        <td ng-if="description">{{log.description}}</td>
-                    </tr>
-                </table>
-            </md-card-content>
+
+        <md-card style="padding: 0px; overflow-y: hidden">
+            <ng-switch on="selectedTabNr" class="tabpanel-container">
+                <md-tabs md-stretch-tabs="always" class="md-primary" md-selected="selectedTabNr">
+                    <md-tab id="tab1" aria-controls="tab1-content">
+                        Übersicht
+                    </md-tab>
+                    <md-tab id="tab2" aria-controls="tab2-content">
+                        Log
+                    </md-tab>
+                </md-tabs>
+
+                <md-card-content style="padding:0px">
+                    <div role="tabpanel"
+                         id="tab1-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <md-list>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">home</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{overview.count.organisation}} </h3>
+                                    <p> Einrichtungen </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">group</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{overview.count.user}} </h3>
+                                    <p> Registierte User </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <md-icon class="material-icons">event</md-icon>
+                                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                                    <h3> {{overview.count.event}} </h3>
+                                    <p> Angebotene Events </p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </md-card-content>
+
+                <md-card-content style="padding:0px">
+                    <div role="tabpanel"
+                         id="tab2-content"
+                         aria-labelledby="tab2"
+                         ng-switch-when="11"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <table ng-click="description = !description" style="width:100%" cellpadding="4" cellspacing="0">
+                            <tr style="background-color:rgb(3,169,244); color:white; font-weight:bold;">
+                                <td>Datum</td>
+                                <td>Aktion</td>
+                                <td>User</td>
+                                <td>Role</td>
+                                <td ng-if="description">Beschreibug</td>
+                            </tr>
+                            <tr ng-repeat="log in logs | orderBy: '-date'">
+                                <td>{{log.date | date: 'dd.MM.yyyy HH:mm'}}</td>
+                                <td>{{log.action}}</td>
+                                <td>{{log.username}}</td>
+                                <td>{{log.userrole}}</td>
+                                <td ng-if="description">{{log.description}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </md-card-content>
+            </ng-switch>
         </md-card>
 
 </md-content>

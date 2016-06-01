@@ -6,7 +6,7 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', function($s
     me.description = false;
 
     me.breadcrumb = function(){
-        return 'Systemlog';
+        return 'Dashboard';
     };
 
     $mdSidenav('left').open();

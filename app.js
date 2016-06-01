@@ -38,8 +38,10 @@ if(config.usemongo){
 
 
 var app = express().use(domainMiddleware);
-mongoose.connect(config.database);
-mongoose.set('debug', true);
+if(config.usemongo) {
+    mongoose.connect(config.database);
+    mongoose.set('debug', true);
+}
 
 
 

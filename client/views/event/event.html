@@ -210,7 +210,7 @@
                 <div ng-if="isAdmin || isOrganizer || isTeam" style="background-color: #E6E6E6;">
                     <md-list>
                         <md-subheader style="background-color: #E6E6E6;" class="md-no-sticky">Angemeldete Helfer ({{event.nrhelpersregistered}}/{{event.nrhelpers}}):
-                            <div style="font-style: italic" ng-if="event.nrhelpersregistered == event.nrhelpers">Event bereits voll, weitere <br/> Anmeldungen nicht mehr möglich.</div>
+                            <div style="font-style: italic; color:red;" ng-if="event.nrhelpersregistered >= event.nrhelpers">Event bereits voll, weitere <br/> Anmeldungen nicht mehr möglich.</div>
                         </md-subheader>
                         <md-list-item class="md-3-line" ng-repeat="helper in event.helpers | orderBy: helper" ng-click="helperUnregister(helper)">
                             <div class="md-tile-left inset" hide-sm>

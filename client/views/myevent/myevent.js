@@ -1,4 +1,4 @@
-app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', function($scope, $mdSidenav, myevents, MyData) {
+app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', 'Util', function($scope, $mdSidenav, myevents, MyData, Util) {
 
 
     var me = $scope;
@@ -9,6 +9,7 @@ app.controller('MyEventCtrl', ['$scope', '$mdSidenav', 'myevents', 'MyData', fun
         var e = myevents[i];
         var now = new Date().getTime();
         var eDate = new Date(e.startdate).getTime();
+        e.description = Util.shortenDescription(e.description);
         if(now> eDate)
             me.pastevents.push(e);
         else

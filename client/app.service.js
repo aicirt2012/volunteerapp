@@ -329,10 +329,22 @@ app.service('Util', function() {
         return moment(startDate,"DD-MM-YYYY")+'' == moment(endDate,"DD-MM-YYYY")+'';
     }
 
+    function shortenDescription(description){
+        if(description.length > 100){
+            var str = description.substr(0,99);
+            var wordIndex = str.lastIndexOf(" ");
+
+            return str.substr(0, wordIndex) + ' ...';
+        }else{
+            return description;
+        }
+    }
+
     return {
         initDateFromJSON: initDateFromJSON,
         diffInH: diffInH,
-        isOneDay: isOneDay
+        isOneDay: isOneDay,
+        shortenDescription: shortenDescription
     };
 });
 

@@ -23,7 +23,7 @@ router.put('/:id', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
-        val.isBoolean(req.body.isseries);
+        val.isSeriesEventFlag(req.body.isseries);
 
         if (val.allValid()) {
             var eId = req.params.id;
@@ -134,7 +134,7 @@ router.post('/', function (req, res) {
         val.isDate(req.body.enddate);
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
-        val.isBoolean(req.body.isseries);
+        val.isSeriesEventFlag(req.body.isseries);
 
         if (val.allValid()) {
             var e = {

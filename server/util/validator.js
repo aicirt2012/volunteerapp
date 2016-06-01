@@ -113,6 +113,15 @@ validator.startBeforeEndDate = function (startDate, endDate) {
         validations.push(false)
 }
 
+validator.isSeriesEventFlag = function (isseries){
+    if(typeof isseries == "boolean")
+        return true;
+    else if(typeof isseries == "string")
+        return validator.isBoolean();
+    else
+        return false;
+}
+
 validator.isAvailability = function (availabilities) {
     var valid = true;
     var expectedDays = ["mo", "tu", "we", "th", "fr", "sa", "su"];

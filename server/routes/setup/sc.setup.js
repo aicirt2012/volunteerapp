@@ -98,7 +98,7 @@ router.post('/', function(req, res, next) {
                 description: e.description,
                 important: e.important,
                 organization: {id: organization.id},
-                isSeries: e.isSeries
+                isseries: e.isseries
             }, function(){
                 cb();
             });

@@ -7,7 +7,7 @@
     "enddate": "2016-01-22T19:00:44.476Z",
     "nrhelpers": 3,
     "description": "Wir planen eine Kinobesuch im Kino um den Film Ice Age 2 zu schauen.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -18,7 +18,7 @@
     "enddate": "2016-01-04T21:00:44.476Z",
     "nrhelpers": 2,
     "description": "Wir planen einen Kochabend um traditionelle Gerichte zu kochen.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -29,7 +29,7 @@
     "enddate": "2016-02-07T19:00:44.476Z",
     "nrhelpers": 6,
     "description": "Wir planen ein Fussballtunier ...",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -40,7 +40,7 @@
     "enddate": "2016-02-23T13:00:44.476Z",
     "nrhelpers": 2,
     "description": "Wir planen ein Museumsbesuch in der Pinakothek der Moderne.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -51,7 +51,7 @@
     "enddate": "2016-02-18T16:00:44.476Z",
     "nrhelpers": 5,
     "description": "Wir planen eine Wandertour in den Alpen.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -62,7 +62,7 @@
     "enddate": "2016-03-17T21:00:44.476Z",
     "nrhelpers": 3,
     "description": "Wir planen einen gemeinschaftliches Essen im Giesinger Brauhaus.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -73,7 +73,7 @@
     "enddate": "2016-03-07T21:00:44.476Z",
     "nrhelpers": 2,
     "description": "Nach dem der letzte Kochabend so ein Erfolg war, planen wir erneut einen Kochabend.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -93,7 +93,7 @@
       "tel": "012378495",
       "email": "helper@com"
     },
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -104,7 +104,7 @@
     "enddate": "2016-02-28T14:00:44.476Z",
     "nrhelpers": 3,
     "description": "Wir planen eine Fahrradtour endlang der Isar.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   },
   {
@@ -115,7 +115,7 @@
     "enddate": "2016-03-22T17:00:44.476Z",
     "nrhelpers": 2,
     "description": "Wir planen einen Besuch in der BMW Welt am Olympiapark.",
-    "isSeries": false,
+    "isseries": false,
     "important": false
   }
 ]

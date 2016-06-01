@@ -50,6 +50,7 @@
                         <h3><b>{{e.title}} </b></h3>
                         <h4>{{e.startdate | date: 'dd.MM.yyyy'}} {{e.startdate | date: 'HH:mm'}}Uhr {{e.duration - .5 |
                             number:0}}h&nbsp;<span ng-if="(e.duration % 1) * 60 > 0">{{(e.duration % 1) * 60 | number:0}}min</span>
+                            <span ng-if="e.isseries">| Serientermin</span>
                             <span ng-if="e.nrhelpers-e.nrhelpersregistered>0">| <span style="color:red;">Noch {{e.nrhelpers-e.nrhelpersregistered}} Helfer benötigt</span></span>
                         </h4>
                         <p>{{e.organization.name}} | {{e.organization.street}} | {{e.organization.zip}} </p>

@@ -86,3 +86,4 @@ fieldset.standard {
     border-width: 1px;
     border-color: #ff6400;
 }
+md-autocomplete > md-autocomplete-wrap > md-progress-linear { display: none; }

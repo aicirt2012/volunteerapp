@@ -49,8 +49,11 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
         window.location.href = '#/adduser';
     }
 
-    me.updateUserList = function(searchText){
-        console.log(searchText)
+    me.highlight = function(search, text){
+        if (search)
+            return text.replace(new RegExp('('+search+')', 'gi'),'<b>$1</b>');
+        else
+            return text;
     }
 
     $mdSidenav('left').open();

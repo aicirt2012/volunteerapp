@@ -23,11 +23,24 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
             content: [
                 {text: 'This is an sample PDF printed with pdfMake', style: 'header'}
             ],
+            footer: [
+                {text: 'VolunteerApp | www.volunteers.in.tum.de | '+moment().format('MMMM Do YYYY, h:mm:ss a'), style: 'footer'}
+            ],
             styles: {
                 header: {
                     fontSize: 12,
-                    color: '#03A9F4',
+                    color: '#0277BD',
                     margin: [0,5,0,2]
+                },
+                headline: {
+                    fontSize: 12,
+                    color: '#0277BD',
+                    margin: [0,5,0,2]
+                },
+                footer: {
+                    fontSize: 10,
+                    color: 'gray',
+                    margin: [45,0,0,0]
                 },
                 content: {
                     fontSize: 10,
@@ -43,7 +56,7 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
 
         events.forEach(function(e){
             console.log(JSON.stringify(e));
-            doc.content.push({text: e.title, style: 'header'});
+            doc.content.push({text: e.title, style: 'headline'});
 
             var org = e.organization.name + ' | ' + e.organization.street + ' | ' + e.organization.zip + ' | ' + e.organization.city;
             doc.content.push({text: org, style: ['content', 'separator']});

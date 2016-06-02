@@ -69,7 +69,7 @@ router.post('/', function (req, res) {
 
 router.get('/', function (req, res) {
     if (User.atLeastTeam(req.user.role)) {
-        User.find2('find(user).select({id:id, name:name, email:email, tel:tel, mobil:mobil, picture:picture})', function (err, users) {
+        User.findAll(function (err, users) {
             res.json(users);
         });
     } else

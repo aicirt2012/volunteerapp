@@ -33,7 +33,7 @@
                         md-menu-class="autocomplete-custom-template">
                 </md-autocomplete>
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="user in userlist | orderBy: 'name' |filter: filterUser" ng-click="selectUser(user.id)">
+                    <md-list-item aria-label="userlistItem" class="md-3-line" ng-repeat="user in userlist | orderBy: 'name' |filter: filterUser" ng-click="selectUser(user.id)">
                         <div class="md-tile-left inset" hide-sm>
                             <user-picture picture="{{user.picture}}" size="64"></user-picture>
                         </div>

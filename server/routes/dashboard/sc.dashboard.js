@@ -16,6 +16,16 @@ router.get('/log', function(req, res) {
         res.sendStatus(403);
 });
 
+router.get('/eventreport', function(req, res) {
+    if(!User.atLeastAdmin(req.user.role))
+        return res.status(403).send();
+
+    Event.find2('find(event).select({id:id, startdate:startdate, enddate:enddate, helpers:helpers.select({id:id, name:name}), organization: {name: organization.name, zip:organization.zip, street:organization.street, email:organization.email, tel:organization.tel}})',function(err, events){
+        res.send(events);
+    });
+});
+
+
 router.get('/overview', function(req, res) {
     if(!User.atLeastAdmin(req.user.role))
         return res.status(403).send();

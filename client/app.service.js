@@ -352,6 +352,7 @@ app.service('Util', function() {
 app.service('Dashboard', function($resource) {
     var Log = $resource('/api/dashboard/log');
     var Overview = $resource('/api/dashboard/overview');
+    var EventReport = $resource('/api/dashboard/eventreport');
 
     function logs(cb){
         return Log.query(cb);
@@ -361,8 +362,13 @@ app.service('Dashboard', function($resource) {
         return Overview.get(cb);
     }
 
+    function eventReport(cb){
+        return EventReport.query(cb)
+    }
+
     return {
         overview: overview,
-        logs: logs
+        logs: logs,
+        eventReport: eventReport
     }
 });

@@ -1,4 +1,20 @@
-<md-content flex md-scroll-y flex md-scroll-y layout-fill layout-padding>
+<md-content flex md-scroll-y flex md-scroll-y layout-fill layout-padding style="padding: 0%;">
+    <md-toolbar style="padding: 0%;"  ng-show="!hideBrowserInfo" ng-if="data.browser != 'chrome' && !hideBrowserInfo" class="md-hue-2 md-primary">
+        <div class="md-toolbar-tools" layout="row" layout-align="center center">
+            <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+                <md-icon class="material-icons">warning</md-icon>
+            </md-button>
+            <h2 ng-if="data.browser != 'unknown'">
+                <span>Sie benutzen den Browser <b>{{data.browser}}</b>, voller Support wird nur für <b>chrome</b> gewährleistet.</span>
+            </h2>
+            <h2 ng-if="data.browser == 'unknown'">
+                Voller Support wird nur für den Browser <b>chrome</b> gewährleistet.</span>
+            </h2>
+            <md-button class="md-icon-button" ng-click="hideBrowserInfo = true">
+                <md-icon class="material-icons">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
         <div layout="column" layout-align="center center" layout-fill>
             <div layout="row" layout-align="center center">
                 <md-card >

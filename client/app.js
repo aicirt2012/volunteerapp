@@ -1,4 +1,4 @@
-var app = angular.module('VolunteerApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'materialCalendar', 'ngSanitize', 'ngResource', 'angular-jwt', 'base64', 'ngFileUpload', 'ngImgCrop', 'mdPickers', 'ngMessages', 'angulartics', 'angulartics.google.analytics']);
+var app = angular.module('VolunteerApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'materialCalendar', 'ngSanitize', 'ngResource', 'angular-jwt', 'base64', 'ngFileUpload', 'ngImgCrop', 'mdPickers', 'ngMessages', 'angulartics', 'angulartics.google.analytics', 'ng.deviceDetector']);
 
 app.config(function ($mdThemingProvider) {
     var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {

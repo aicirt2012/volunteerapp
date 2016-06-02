@@ -1,7 +1,9 @@
-app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', function($scope, User, $mdSidenav, $mdDialog) {
+app.controller('LoginCtrl', ['$scope', 'User', '$mdSidenav', '$mdDialog', 'deviceDetector', function($scope, User, $mdSidenav, $mdDialog, deviceDetector) {
 
     var me = $scope;
     me.inAction = false;
+    me.data = deviceDetector;
+    me.hideBrowserInfo = false;
 
     me.login = function(email, pw){
         me.inAction = true;

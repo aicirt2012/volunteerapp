@@ -10,7 +10,7 @@ var val = require('../../util/validator');
 
 
 router.get('/', function (req, res) {
-    Event.find2('find(event).select({id:id, title: title, nrhelpers:nrhelpers, nrhelpersregistered: helpers.count(), startdate:startdate, enddate:enddate, place:place, description: description, isseries:isseries, organization: {name: organization.name, street: organization.street, zip:organization.zip}})', function (err, events) {
+    Event.find2('find(event).select({id:id, title: title, nrhelpers:nrhelpers, nrhelpersregistered: helpers.count(), startdate:startdate, enddate:enddate, place:place, isseries:isseries, organization: {name: organization.name, street: organization.street, zip:organization.zip}})', function (err, events) {
         res.json(events);
     });
 });

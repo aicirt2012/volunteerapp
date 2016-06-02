@@ -6,7 +6,6 @@ app.controller('EventCalendarCtrl', ['$scope', '$mdSidenav', 'eventlist', 'User'
     for(var i=0; i<me.events.length; i++){
         var e = me.events[i];
         me.events[i].duration = Util.diffInH(e.startdate, e.enddate);
-        me.events[i].description = Util.shortenDescription(me.events[i].description);
     }
 
     me.selectedDate = null;

@@ -7,6 +7,11 @@ app.controller('UserListCtrl', ['$scope', '$mdSidenav', 'userlist', 'User', func
     me.isAdmin = User.isAdmin();
     me.searchText = "";
 
+    var start = new Date();
+    setTimeout( function () {
+        console.log('Process time: ' + (new Date() - start));
+    });
+
     me.selectedTabNr = 0;
     me.$watch('selectedTabNr', function(newValue) {
         me.selectedRole = me.roles[me.selectedTabNr];

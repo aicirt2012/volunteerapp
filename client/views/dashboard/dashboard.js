@@ -19,10 +19,7 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
 
     me.createReport = function() {
         Dashboard.eventReport(function (events) {
-            events.forEach(function(e){
-               events.push(e);
-            });
-
+            
             var doc = {
                 pageSize: 'A4',
                 pageMargins: [ 60, 80, 60, 40 ],

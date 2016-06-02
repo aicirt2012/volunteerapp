@@ -26,7 +26,7 @@
                         md-menu-class="autocomplete-custom-template">
                 </md-autocomplete>
                 <md-list>
-                    <md-list-item class="md-3-line" ng-repeat="organization in organizationlist | orderBy: 'name' | filter: filterOrganization" ng-click="selectOrganization(organization.id)">
+                    <md-list-item aria-label="organizationlistItem" class="md-3-line" ng-repeat="organization in organizationlist | orderBy: 'name' | filter: filterOrganization" ng-click="selectOrganization(organization.id)">
                         <div class="md-tile-left inset" hide-sm>
                             <organization-avatar></organization-avatar>
                         </div>

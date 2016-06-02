@@ -41,7 +41,7 @@
         <md-card-content style="padding: 0px;">
             <md-list>
                 <md-list-item class="md-3-line"
-                              ng-repeat="e in events | orderBy: startdate"
+                              ng-repeat="e in events | orderBy: 'startdate': true"
                               ng-click="selectEvent(e.id)">
                     <div class="md-avatar" hide-sm>
                         <ng-md-icon icon="event_available" size="48"></ng-md-icon>

@@ -51,9 +51,22 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
                 footer: function(page){
                     return [
                         {
+                            table: {
+                                headerRows: 1,
+                                widths: [ 55, '*', 'auto', 55 ],
+                                body:  [[
+                                    {text: '', style: 'footercell'},
+                                    {text:'VolunteerApp | www.volunteers.in.tum.de  | Erstellt am: ' + moment().format('DD.MM.YYYY, HH:mm:ss'), style: 'footercell'},
+                                    {text: 'Seite '+page, style: 'footercell'},
+                                    {text: '', style: 'footercell'}]]
+                            },
+                            layout: 'noBorders'
+                        }
+                        /*
+                        {
                             text: 'VolunteerApp  |  www.volunteers.in.tum.de  | Seite '+page+' |  Dokument erstellt am: ' + moment().format('DD.MM.YYYY, HH:mm:ss'),
                             style: 'footer'
-                        }
+                        }*/
                     ];
                 },
                 styles: {
@@ -77,6 +90,12 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
                         fontSize: 12,
                         color: '#0277BD',
                         margin: [0, 7, 0, 2]
+                    },
+                    footercell: {
+                        fontSize: 8,
+                        fillColor:'#0277BD',
+                        margin: [0,5,0,5],
+                        color: 'white'
                     },
                     footer: {
                         fontSize: 8,

@@ -67,7 +67,7 @@ app.controller('DashboardCtrl', ['$scope', '$mdSidenav', 'overview', 'Dashboard'
                         color: 'white',
                         fillColor:'#0277BD',
                         bold: true,
-                        margin: [10,10,10,10]
+                        margin: [0,20,0,20]
                     },
                     title: {
                         color: 'white',

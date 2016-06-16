@@ -87,3 +87,13 @@ fieldset.standard {
     border-color: #ff6400;
 }
 md-autocomplete > md-autocomplete-wrap > md-progress-linear { display: none; }
+
+.priority-tag{
+    border-radius: 16px;
+    background-color: #E53935;
+    line-height: 18px;
+    padding: 0 10px;
+    margin: 0 8px 0 8px;
+    font-size: 10px;
+    font-weight: bold;
+}

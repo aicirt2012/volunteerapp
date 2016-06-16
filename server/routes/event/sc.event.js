@@ -24,6 +24,7 @@ router.put('/:id', function (req, res) {
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
         val.isSeriesEventFlag(req.body.isseries);
+        val.isHighPriorityFlag(req.body.highpriority);
 
         if (val.allValid()) {
             var eId = req.params.id;
@@ -35,7 +36,8 @@ router.put('/:id', function (req, res) {
                 nrhelpers: req.body.nrhelpers,
                 description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
                 organization: {id: req.body.organization},
-                isseries: req.body.isseries
+                isseries: req.body.isseries,
+                highpriority: req.body.highpriority
             };
             Log.info(req.user, Log.actions.EVENT_UPDATE, data);
             Event.update(eId, data, function () {
@@ -135,6 +137,7 @@ router.post('/', function (req, res) {
         val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
         val.startBeforeEndDate(req.body.startdate, req.body.enddate);
         val.isSeriesEventFlag(req.body.isseries);
+        val.isHighPriorityFlag(req.body.highpriority);
 
         if (val.allValid()) {
             var e = {
@@ -145,29 +148,50 @@ router.post('/', function (req, res) {
                 nrhelpers: req.body.nrhelpers,
                 description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
                 organization: {id: req.body.organization},
-                isseries: req.body.isseries
+                isseries: req.body.isseries,
+                highpriority: req.body.highpriority
             };
             Log.info(req.user, Log.actions.EVENT_CREATE, e);
             Event.save(e, function (err) {
                 var start = new Date(e.startdate);
                 var end = new Date(e.enddate);
 
-                User.findAvailableUsers(start, end, function (err, users) {
-                    for (var i = 0; i < users.length; i++) {
-                        mailer.sendToUser(
-                            users[i].email,
-                            users[i].name,
-                            'Neues Event: ' + e.title,
-                            '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
-                            '<b>' + req.body.title + '</b>' +
-                            '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
-                            'Ort: ' + req.body.place + '<br>' +
-                            'Beschreibung: ' + e.description + '<br>' +
-                            'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
-                        );
-                    }
+                //If event has high priority send email out to all users
+                //otherwise just send to available users
+                if(req.body.highpriority){
+                    User.findAll(function (err, users) {
+                        for (var i = 0; i < users.length; i++) {
+                            mailer.sendToUser(
+                                users[i].email,
+                                users[i].name,
+                                'Neues Event: ' + e.title,
+                                '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
+                                '<b>' + req.body.title + '</b>' +
+                                '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
+                                'Ort: ' + req.body.place + '<br>' +
+                                'Beschreibung: ' + e.description + '<br>' +
+                                'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
+                            );
+                        }
+                    });
+                }else {
+                    User.findAvailableUsers(start, end, function (err, users) {
+                        for (var i = 0; i < users.length; i++) {
+                            mailer.sendToUser(
+                                users[i].email,
+                                users[i].name,
+                                'Neues Event: ' + e.title,
+                                '<p> Es wurde ein Event erstellt, dass Sie interessieren könnte.</p>' +
+                                '<b>' + req.body.title + '</b>' +
+                                '<p>Am ' + moment(start).format('DD.MM.YYYY') + ' von ' + moment(start).format('HH:mm') + ' Uhr bis ' + moment(end).format('DD.MM.YYYY') + ' ' + moment(end).format('HH:mm') + ' Uhr. <br>' +
+                                'Ort: ' + req.body.place + '<br>' +
+                                'Beschreibung: ' + e.description + '<br>' +
+                                'Es werden ' + e.nrhelpers + ' Helfer benötigt.<br></p>'
+                            );
+                        }
 
-                });
+                    });
+                }
                 res.sendStatus(201);
             });
         } else {

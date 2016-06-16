@@ -122,6 +122,15 @@ validator.isSeriesEventFlag = function (isseries){
         return false;
 }
 
+validator.isHighPriorityFlag = function (highpriority){
+    if(typeof highpriority == "boolean")
+        return true;
+    else if(typeof highpriority == "string")
+        return validator.isBoolean();
+    else
+        return false;
+}
+
 validator.isAvailability = function (availabilities) {
     var valid = true;
     var expectedDays = ["mo", "tu", "we", "th", "fr", "sa", "su"];

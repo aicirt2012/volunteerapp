@@ -105,6 +105,18 @@
                         <div layout layout-sm="column">
                             <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}" ng-model="event.isseries" class="md-warn">
                                 Serientermin
+                                <md-tooltip>
+                                    Ein Serientermin ist ein Termin <br/>
+                                    der nicht nur einmalig stattfindet.
+                                </md-tooltip>
+                            </md-checkbox>
+                            <md-checkbox ng-click="myStyle={'border-color':'rgb(192, 192, 192)'}" ng-model="event.highpriority" class="md-warn">
+                                Priorität hoch
+                                <md-tooltip>
+                                    Bei hoher Priorität werden E-Mails an <u>alle</u> Helfer <br/>
+                                    verschickt, egal ob die Verfügbarkeit des Nutzers <br/>
+                                    mit der Uhrzeit des Events übereinstimmt oder nicht.
+                                </md-tooltip>
                             </md-checkbox>
                         </div>
                         <div layout layout-sm="column">

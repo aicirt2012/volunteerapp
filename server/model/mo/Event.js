@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var SObjectId = mongoose.Schema.Types.ObjectId;
 
 var eventSchema = new mongoose.Schema({
-    title: String, 
+    title: String,
     description: String,
     nrhelpers: Number,
     helpers: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
@@ -13,6 +13,7 @@ var eventSchema = new mongoose.Schema({
     enddate: Date,
     place: String,
     isseries: Boolean,
+    highpriority: Boolean,
     organization: {type: mongoose.Schema.Types.ObjectId, ref: 'organization'}
 });
 

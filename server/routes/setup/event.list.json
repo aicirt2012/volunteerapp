@@ -8,7 +8,7 @@
     "nrhelpers": 3,
     "description": "Wir planen eine Kinobesuch im Kino um den Film Ice Age 2 zu schauen.",
     "isseries": false,
-    "important": false
+    "highpriority": true
   },
   {
     "id": "kochen",
@@ -19,7 +19,7 @@
     "nrhelpers": 2,
     "description": "Wir planen einen Kochabend um traditionelle Gerichte zu kochen.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "fussball",
@@ -30,7 +30,7 @@
     "nrhelpers": 6,
     "description": "Wir planen ein Fussballtunier ...",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "museum",
@@ -41,7 +41,7 @@
     "nrhelpers": 2,
     "description": "Wir planen ein Museumsbesuch in der Pinakothek der Moderne.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "wandern",
@@ -52,7 +52,7 @@
     "nrhelpers": 5,
     "description": "Wir planen eine Wandertour in den Alpen.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "brauhaus",
@@ -63,7 +63,7 @@
     "nrhelpers": 3,
     "description": "Wir planen einen gemeinschaftliches Essen im Giesinger Brauhaus.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "kochen2",
@@ -74,7 +74,7 @@
     "nrhelpers": 2,
     "description": "Nach dem der letzte Kochabend so ein Erfolg war, planen wir erneut einen Kochabend.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "fest",
@@ -94,7 +94,7 @@
       "email": "helper@com"
     },
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "radeln",
@@ -105,7 +105,7 @@
     "nrhelpers": 3,
     "description": "Wir planen eine Fahrradtour endlang der Isar.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   },
   {
     "id": "bmw",
@@ -116,6 +116,6 @@
     "nrhelpers": 2,
     "description": "Wir planen einen Besuch in der BMW Welt am Olympiapark.",
     "isseries": false,
-    "important": false
+    "highpriority": false
   }
 ]

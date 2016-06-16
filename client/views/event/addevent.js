@@ -10,7 +10,8 @@ app.controller('AddEventCtrl', ['$scope', '$mdSidenav', 'Event', '$mdpDatePicker
         description: '',
         organization: '',
         important: false,
-        isseries: false
+        isseries: false,
+        highpriority: false
     };
 
 

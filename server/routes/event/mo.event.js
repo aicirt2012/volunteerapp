@@ -27,6 +27,7 @@ router.put('/:id', function (req, res) {
     val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
     val.startBeforeEndDate(req.body.startdate, req.body.enddate);
     val.isSeriesEventFlag(req.body.isseries);
+    val.isHighPriorityFlag(req.body.highpriority);
 
     if(!val.allValid())
         return res.sendStatus(400);
@@ -40,7 +41,8 @@ router.put('/:id', function (req, res) {
         nrhelpers: req.body.nrhelpers,
         description: !!req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
         organization: req.body.organization,
-        isseries: req.body.isseries
+        isseries: req.body.isseries,
+        highpriority: req.body.highpriority
     };
     Log.info(req.user, Log.actions.EVENT_UPDATE, data);
 
@@ -155,6 +157,7 @@ router.post('/', function (req, res) {
     val.isInt(JSON.stringify(req.body.nrhelpers), {min: 0});
     val.startBeforeEndDate(req.body.startdate, req.body.enddate);
     val.isSeriesEventFlag(req.body.isseries);
+    val.isHighPriorityFlag(req.body.highpriority)
 
     if(!val.allValid())
         return res.status(400).send();
@@ -167,7 +170,8 @@ router.post('/', function (req, res) {
         nrhelpers: req.body.nrhelpers,
         description: req.body.description ? val.blacklist(req.body.description, "<>;\"\'´") : null,
         organization: req.body.organization,
-        isseries: req.body.isseries
+        isseries: req.body.isseries,
+        highpriority: req.body.highpriority
     };
     Log.info(req.user, Log.actions.EVENT_CREATE, e);
     Event.create(e, function (err) {

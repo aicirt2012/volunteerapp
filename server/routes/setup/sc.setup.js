@@ -98,7 +98,8 @@ router.post('/', function(req, res, next) {
                 description: e.description,
                 important: e.important,
                 organization: {id: organization.id},
-                isseries: e.isseries
+                isseries: e.isseries,
+                highpriority: e.highpriority
             }, function(){
                 cb();
             });

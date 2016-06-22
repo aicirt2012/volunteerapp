@@ -16,13 +16,13 @@ app.controller('AddUserCtrl', ['$scope', '$mdSidenav', 'User', '$mdDialog', func
         notes: '',
         role: 'helper',
         availability: {
-            "mo": {"morning": false, "afternoon": false, "evening": false},
-            "tu": {"morning": false, "afternoon": false, "evening": false},
-            "we": {"morning": false, "afternoon": false, "evening": false},
-            "th": {"morning": false, "afternoon": false, "evening": false},
-            "fr": {"morning": false, "afternoon": false, "evening": false},
-            "sa": {"morning": false, "afternoon": false, "evening": false},
-            "su": {"morning": false, "afternoon": false, "evening": false}
+            "mo": {"morning": true, "afternoon": true, "evening": true},
+            "tu": {"morning": true, "afternoon": true, "evening": true},
+            "we": {"morning": true, "afternoon": true, "evening": true},
+            "th": {"morning": true, "afternoon": true, "evening": true},
+            "fr": {"morning": true, "afternoon": true, "evening": true},
+            "sa": {"morning": true, "afternoon": true, "evening": true},
+            "su": {"morning": true, "afternoon": true, "evening": true}
         },
         conditionsofuse: false
     };

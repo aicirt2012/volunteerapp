@@ -46,7 +46,7 @@ router.put('/personal', function(req, res) {
 
 router.put('/availability', function(req, res) {
     val.init();
-    val.isAvailability(req.body.availability);
+    val.isAvailability(req.body);
 
     User.update(req.user.id, {availability:req.body}, function(){
         res.send();
